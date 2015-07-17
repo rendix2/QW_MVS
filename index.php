@@ -25,8 +25,9 @@ $quickWeb = new \QW\Libs\Bootstrap();
 
 $z = new FormCreator('POST', '');
 $z->createSelect('Select')->addList()->addChoice();
-$z->addSelect()
+$z->addSelect();
 
+echo 'zz';
 ?>
 
 

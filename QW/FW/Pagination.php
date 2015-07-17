@@ -11,5 +11,4 @@ final class Pagination extends Object
     {
         parent::__construct();
     }
-
 }

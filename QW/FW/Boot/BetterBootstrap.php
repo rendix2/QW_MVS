@@ -2,7 +2,7 @@
 
 namespace QW\FW\Boot;
 
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot;
 use QW\FW\Config;
 
 class BetterBootstrap extends AbstractRouter

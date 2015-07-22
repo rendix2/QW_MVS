@@ -2,9 +2,9 @@
 
 namespace QW\FW\IP;
 
-use QW\FW\Basic\IllegalArgumentException;
-use QW\FW\Basic\NullPointerException;
 use QW\FW\Basic\Object;
+use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\NullPointerException;
 use QW\FW\Interfaces\IP;
 use QW\FW\Validator;
 
@@ -31,11 +31,6 @@ abstract class AbstractIP extends Object implements IP
         $this->ipCountPart = count($this->ipParted);
     }
 
-    protected final function getIpCountPart()
-    {
-        return $this->ipCountPart;
-    }
-
     public final function getIp()
     {
         return long2ip($this->ipCoded);
@@ -50,5 +45,10 @@ abstract class AbstractIP extends Object implements IP
     {
         if (!is_numeric($part))
             throw new IllegalArgumentException();
+    }
+
+    protected final function getIpCountPart()
+    {
+        return $this->ipCountPart;
     }
 }

@@ -2,7 +2,8 @@
 
 namespace QW\FW\IP;
 
-use QW\FW\Basic\IllegalArgumentException;
+
+use QW\FW\Boot\IllegalArgumentException;
 
 final class IPv4 extends AbstractIP
 {

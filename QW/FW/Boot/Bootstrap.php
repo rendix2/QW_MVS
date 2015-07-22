@@ -3,7 +3,6 @@
 namespace QW\FW\Boot;
 
 use QW\Controllers\IndexController;
-use QW\FW\Basic\Object;
 use QW\FW\Config;
 
 final class BootstrapException extends \Exception

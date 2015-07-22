@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tomáš
- * Date: 22. 7. 2015
- * Time: 17:22
- */
 
 namespace QW\FW\Boot;
 

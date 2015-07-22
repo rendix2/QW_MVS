@@ -2,9 +2,7 @@
 
 namespace QW\FW\Boot;
 
-use QW\FW\Basic\Object;
-
-class Router extends Object
+class Router extends AbstractRouter
 {
 
     protected $controller;
@@ -24,6 +22,8 @@ class Router extends Object
 
         // class autoloader
         $this->loadClass();
+
+        require_once('./Exception.php');
     }
 
     private function loadMvc()

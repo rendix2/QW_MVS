@@ -2,10 +2,13 @@
 
 namespace QW\FW;
 
+use QW\FW\Boot\PrivateConstructException;
+
 final class Validator
 {
-    private static function __construct()
+    public function __construct()
     {
+        throw new PrivateConstructException();
     }
 
     public static function validateIpUsingFilter($ip)

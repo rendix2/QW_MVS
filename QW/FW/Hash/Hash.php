@@ -2,12 +2,14 @@
 
 namespace QW\FW;
 
+use QW\FW\Boot\PrivateConstructException;
 use QW\FW\Math\Math;
 
 final class Hash
 {
-    private function __construct()
+    public function __construct()
     {
+        throw new PrivateConstructException();
     }
 
     public static function r()

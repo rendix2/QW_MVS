@@ -10,7 +10,7 @@ final class BootstrapException extends \Exception
 {
 }
 
-class Bootstrap extends Object
+class Bootstrap extends AbstractRouter
 {
     protected $url, $params, $controller;
 

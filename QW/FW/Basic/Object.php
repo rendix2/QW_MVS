@@ -2,30 +2,7 @@
 
 namespace QW\FW\Basic;
 
-final class IllegalArgumentException extends \Exception
-{
-
-}
-
-final class RuntimeException extends \Exception
-{
-
-}
-
-final class NullPointerException extends \Exception
-{
-
-}
-
-final class UnsupportedOperationException extends \Exception
-{
-
-}
-
-final class MemberAccessException extends \Exception
-{
-
-}
+use QW\FW\Boot\MemberAccessException;
 
 class Object
 {

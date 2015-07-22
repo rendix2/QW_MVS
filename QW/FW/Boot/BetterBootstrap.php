@@ -5,7 +5,7 @@ namespace QW\FW\Boot;
 use QW\FW\Basic\IllegalArgumentException;
 use QW\FW\Config;
 
-class BetterBootstrap extends Bootstrap
+class BetterBootstrap extends AbstractRouter
 {
     private $enabledRoutes;
     private $urlDelimiter;

@@ -1,4 +1,4 @@
-<?php
+a<?php
 include('./autoLoader.php');
 
 $img = new \QW\FW\Images\ImageTextGenerate(200, 40);

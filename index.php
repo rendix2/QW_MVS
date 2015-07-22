@@ -7,6 +7,3 @@ include('./debug.php');
 $quickWeb = new \QW\Libs\Bootstrap();
 
 ?>
-
-
-

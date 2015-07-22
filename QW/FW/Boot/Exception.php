@@ -22,7 +22,6 @@ class RuntimeException extends \Exception {}
 
         final class UnderMinException extends IllegalArgumentException {}
 
-        final class NotIntegerException extends IllegalArgumentException {}
 
     class IOException extends RuntimeException {}
 

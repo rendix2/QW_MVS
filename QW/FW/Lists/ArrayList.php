@@ -8,7 +8,7 @@
 
 namespace QW\FW\Lists;
 
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\IllegalArgumentException;
 
 class ArrayList extends AbstractList implements IList
 {

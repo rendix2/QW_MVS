@@ -2,7 +2,12 @@
 
 namespace QW\FW\Basic;
 
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Validator;
+
+
+$g = new String("kjk");
+echo $g->charAt(2);
 
 class String extends Object
 {
@@ -57,9 +62,9 @@ class String extends Object
     }
 
     public function concatPost($string)
-{
-    return new String($this->string . (string)$string);
-}
+    {
+        return new String($this->string . (string)$string);
+    }
 
     public function concatPostString(String $string)
     {
@@ -197,8 +202,14 @@ class String extends Object
         return new String(mb_strtoupper($this->string, 'UTF-8'));
     }
 
+    public function printf($args = null){
+        return new String(printf($this->string, $args,));
+    }
+
     public function sprintf($format)
     {
+        $format = new String($format);
+
         return new String(sprintf($this->string, $format));
     }
 
@@ -207,9 +218,9 @@ class String extends Object
         return new String(trim($this->string, $chars));
     }
 
-    public final function removeHTMLTags()
+    public final function removeHTMLTags($allowable_tags = null)
     {
-        return new String(strip_tags($this->string));
+        return new String(strip_tags($this->string, $allowable_tags));
     }
 
     public function rtrim($chars = '\t\n\r\0\x0B')

@@ -2,7 +2,7 @@
 
 namespace QW\FW\IP;
 
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\IllegalArgumentException;
 
 class IPvU extends AbstractIP
 {

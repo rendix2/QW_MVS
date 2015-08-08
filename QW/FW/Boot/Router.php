@@ -4,29 +4,21 @@ namespace QW\FW\Boot;
 
 class Router extends AbstractRouter
 {
-
-    protected $controller;
-    protected $method;
-    protected $params;
+    private $controller;
+    private $method;
+    private $params;
 
     public function __construct()
     {
-        parent::__construct();
         // init
         $this->controller = 'Index';
         $this->method = 'index';
         $this->params = [];
 
-        // load MVC components
-        $this->loadMvc();
-
-        // class autoloader
-        $this->loadClass();
-
-        require_once('./Exception.php');
+        parent::__construct();
     }
 
-    private function loadMvc()
+    protected final function loadMvc()
     {
         $url = $this->parseUrl();
 
@@ -51,43 +43,18 @@ class Router extends AbstractRouter
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
+    protected function loadMVP()
+    {
+    }
+
+    protected function loadMy()
+    {
+    }
+
     private function parseUrl()
     {
         if (isset($_GET['url'])) {
             return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
-        }
-    }
-
-    private function loadClass()
-    {
-        $load = function ($class) {
-
-            // don't load Controller or Model by this
-            if (preg_match('#Controller|Model$#', $class))
-                return 2;
-
-            // manual Smarty load
-            if (strpos('Smarty', $class)) {
-                require('/Smarty/Libs/Smarty.class.php');
-                return 2;
-            }
-
-            // parse namespace
-            $c = explode('\\', $class);
-            $path = './' . implode('/', $c) . '.php';
-
-            // load class in namespace
-            if (file_exists($path))
-                require_once($path);
-            else
-                die('File: ' . $path . ' doesn\'t exists<br>');
-            return 0;
-        };
-
-        try {
-            spl_autoload_register($load);
-        } catch (\Exception $e) {
-            echo $e->getMessage() . 'adw';
         }
     }
 }

@@ -202,14 +202,15 @@ class String extends Object
         return new String(mb_strtoupper($this->string, 'UTF-8'));
     }
 
-    public function printf($args = null){
-        return new String(printf($this->string, $args,));
+    public function printf($args = null)
+    {
+        $args = new String($args);
+        return new String(printf($this->string, $args));
     }
 
     public function sprintf($format)
     {
         $format = new String($format);
-
         return new String(sprintf($this->string, $format));
     }
 

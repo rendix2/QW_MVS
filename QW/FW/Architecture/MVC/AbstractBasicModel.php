@@ -12,7 +12,7 @@ final class ModelException extends \Exception
 
 abstract class AbstractBasicModel extends Object
 {
-    private $db, $language, $template;
+    private $db; //, $language, $template;
 
     final function __construct()
     {

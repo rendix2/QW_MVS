@@ -5,10 +5,6 @@ namespace QW\FW\Basic;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Validator;
 
-
-$g = new String("kjk");
-echo $g->charAt(2);
-
 class String extends Object
 {
     protected static $separators;

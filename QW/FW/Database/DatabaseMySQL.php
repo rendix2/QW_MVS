@@ -14,13 +14,13 @@ final class DatabaseMySQL extends AbstractDatabase
             $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $pdoEx) {
             if ($pdoEx->getCode() == 1045)
-                echo 'Nesprávné údaje pro přihlášení k Database serveru: <b>' . $host . '</b>';
+                echo 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $host . '</b><br>';
             else if ($pdoEx->getCode() == 2002)
-                echo 'Nepodařilo se připojit k Database serveru: <b>' . $host . '</b>';
+                echo 'Nepodařilo se připojit k databázovému serveru: <b>' . $host . '</b><br>';
             else if ($pdoEx->getCode() == 1044)
-                echo 'Nepodařilo se vybrat databázi na Database serveru: <b>' . $host . '</b>';
+                echo 'Nepodařilo se vybrat databázi na databázovému serveru: <b>' . $host . '</b><br>';
             else
-                echo 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení Database serveru: <b>' . $host . '</b>';
+                echo 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $host . '</b><br>';
         }
     }
 }

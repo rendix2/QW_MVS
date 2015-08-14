@@ -18,7 +18,7 @@ final class DatabaseMySQL extends AbstractDatabase
             else if ($pdoEx->getCode() == 2002)
                 echo 'Nepodařilo se připojit k databázovému serveru: <b>' . $host . '</b><br>';
             else if ($pdoEx->getCode() == 1044)
-                echo 'Nepodařilo se vybrat databázi na databázovému serveru: <b>' . $host . '</b><br>';
+                echo 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $host . '</b><br>';
             else
                 echo 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $host . '</b><br>';
         }

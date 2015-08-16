@@ -1,7 +1,6 @@
 <?php
 namespace QW\FW\Interfaces;
 
-interface ITemplate
-{
+interface ITemplate {
 
 }

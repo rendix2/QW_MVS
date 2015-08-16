@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_CompileBase {
 	/**
 	 * Attribute definition: Overwrites base class.
 	 *
@@ -35,10 +34,9 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler, $parameter, $tag, $method )
-	{
+	public function compile($args, $compiler, $parameter, $tag, $method) {
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 		if ( $_attr[ 'nocache' ] === TRUE ) {
 			$compiler->tag_nocache = TRUE;
 		}
@@ -49,24 +47,27 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
 			unset( $_attr[ 'assign' ] );
 		}
 		// method or property ?
-		if ( method_exists( $compiler->smarty->registered_objects[ $tag ][ 0 ], $method ) ) {
+		if ( method_exists($compiler->smarty->registered_objects[ $tag ][ 0 ], $method) ) {
 			// convert attributes into parameter array string
 			if ( $compiler->smarty->registered_objects[ $tag ][ 2 ] ) {
 				$_paramsArray = [ ];
 				foreach ( $_attr as $_key => $_value ) {
-					if ( is_int( $_key ) ) {
+					if ( is_int($_key) ) {
 						$_paramsArray[] = "$_key=>$_value";
-					} else {
+					}
+					else {
 						$_paramsArray[] = "'$_key'=>$_value";
 					}
 				}
-				$_params = 'array(' . implode( ",", $_paramsArray ) . ')';
-				$return = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params},\$_smarty_tpl)";
-			} else {
-				$_params = implode( ",", $_attr );
-				$return = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params})";
+				$_params = 'array(' . implode(",", $_paramsArray) . ')';
+				$return  = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params},\$_smarty_tpl)";
 			}
-		} else {
+			else {
+				$_params = implode(",", $_attr);
+				$return  = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params})";
+			}
+		}
+		else {
 			// object property
 			$return = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}";
 		}
@@ -74,8 +75,9 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
 		if ( empty( $_assign ) ) {
 			// This tag does create output
 			$compiler->has_output = TRUE;
-			$output = "<?php echo {$return};?>\n";
-		} else {
+			$output               = "<?php echo {$return};?>\n";
+		}
+		else {
 			$output = "<?php \$_smarty_tpl->assign({$_assign},{$return});?>\n";
 		}
 

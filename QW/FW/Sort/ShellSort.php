@@ -9,16 +9,14 @@
 namespace QW\FW\Sort;
 
 
-class ShellSort extends AbstractSort
-{
+class ShellSort extends AbstractSort {
 
-	protected function sort( AbstractSort $sort )
-	{
+	protected function sort(AbstractSort $sort) {
 		$gap = $this->length / 2;
 
 		while ( $gap > 0 ) {
 			for ( $i = 0; $i < $this->length - $gap; $i++ ) {
-				$j = $i + $gap;
+				$j   = $i + $gap;
 				$tmp = $this->data[ $j ];
 
 				while ( $j >= $gap && $tmp > $this->data[ $j - $gap ] ) {
@@ -27,8 +25,12 @@ class ShellSort extends AbstractSort
 				}
 				$this->data[ $j ] = $tmp;
 			}
-			if ( $gap == 2 ) $gap = 1; else
+			if ( $gap == 2 ) {
+				$gap = 1;
+			}
+			else {
 				$gap /= 2.2;
+			}
 		}
 
 		return $this->data;

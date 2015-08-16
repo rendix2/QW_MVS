@@ -3,11 +3,9 @@ namespace QW\Models;
 
 use QW\FW\Architecture\MVC\AbstractBasicModel;
 
-final class ErrorModel extends AbstractBasicModel
-{
+final class ErrorModel extends AbstractBasicModel {
 
-	public function index()
-	{
+	public function index() {
 
 	}
 

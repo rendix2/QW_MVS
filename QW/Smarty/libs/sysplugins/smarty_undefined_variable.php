@@ -7,8 +7,7 @@
  * @package    Smarty
  * @subpackage Template
  */
-class Smarty_Undefined_Variable
-{
+class Smarty_Undefined_Variable {
 	/**
 	 * Returns FALSE for 'nocache' and NULL otherwise.
 	 *
@@ -16,11 +15,11 @@ class Smarty_Undefined_Variable
 	 *
 	 * @return bool
 	 */
-	public function __get( $name )
-	{
+	public function __get($name) {
 		if ( $name == 'nocache' ) {
 			return FALSE;
-		} else {
+		}
+		else {
 			return NULL;
 		}
 	}
@@ -30,8 +29,7 @@ class Smarty_Undefined_Variable
 	 *
 	 * @return string
 	 */
-	public function __toString()
-	{
+	public function __toString() {
 		return "";
 	}
 }

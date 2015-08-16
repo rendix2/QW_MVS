@@ -11,12 +11,10 @@ namespace QW\FW\DP\Strategy;
 
 use QW\FW\Math\Math;
 
-class PlusStrategy implements Strategy
-{
+class PlusStrategy implements Strategy {
 
-	public function multiply( $a, $b )
-	{
-		$times = Math::absoluteValue( $b );
+	public function multiply($a, $b) {
+		$times = Math::absoluteValue($b);
 
 		for ( $i = 0; $i < $times; $i++ ) {
 			$a += $a;

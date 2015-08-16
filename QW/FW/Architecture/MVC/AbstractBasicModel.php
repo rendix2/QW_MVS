@@ -6,20 +6,17 @@ use QW\FW\Database\DatabaseMySQL;
 use QW\Libs\Config;
 
 
-final class ModelException extends \Exception
-{
+final class ModelException extends \Exception {
 }
 
-abstract class AbstractBasicModel extends Object
-{
+abstract class AbstractBasicModel extends Object {
 	private $db; //, $language, $template;
 
-	final function __construct()
-	{
+	final function __construct() {
 		parent::__construct();
 		//$z = DatabaseMySQL::getSingleton();
 
-		$this->db = new DatabaseMySQL( Config::$dbConfig[ 'dbHost' ], Config::$dbConfig[ 'dbUser' ], Config::$dbConfig[ 'dbPassword' ], Config::$dbConfig[ 'dbName' ], [ ] );
+		$this->db = new DatabaseMySQL(Config::$dbConfig[ 'dbHost' ], Config::$dbConfig[ 'dbUser' ], Config::$dbConfig[ 'dbPassword' ], Config::$dbConfig[ 'dbName' ], [ ]);
 		//    $this->db = DatabaseMySQL::getSingleton();
 		//   $this->d
 
@@ -33,8 +30,7 @@ abstract class AbstractBasicModel extends Object
 	*/
 	}
 
-	protected final function getDB()
-	{
+	protected final function getDB() {
 		return $this->db;
 	}
 }

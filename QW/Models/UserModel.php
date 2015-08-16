@@ -11,11 +11,9 @@ namespace QW\Models;
 
 use QW\FW\Architecture\MVC\AbstractBasicModel;
 
-class UserModel extends AbstractBasicModel
-{
+class UserModel extends AbstractBasicModel {
 
-	public function index()
-	{
+	public function index() {
 
 	}
 }

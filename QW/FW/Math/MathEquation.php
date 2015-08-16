@@ -9,10 +9,23 @@
 namespace QW\FW\Math;
 
 
-final class MathEquation
-{
-	private static function __construct()
-	{
+final class MathEquation {
+	public static function solve_quadratic_equation($a, $b, $c) {
+		$d = $b * $b - 4 * $a * $c; // diskriminant
+
+		if ( $d < 0 ) {
+			return NULL;
+		}
+		else if ( $d == 0 ) {
+			$result = ( -$b / 2 * $a );
+
+			return $result;
+		}
+		else {
+			$result = ( ( -$b + sqrt($d) ) / ( 2 * $a ) . ( -$b - sqrt($d) ) / ( 2 * $a ) );
+
+			return $result;
+		}
 	}
 
 	/*
@@ -24,20 +37,7 @@ final class MathEquation
 	* @author Thomas (www.adamjak.net)
 	* http://www.algoritmy.net/article/1538/Kvadraticka-rovnice
 	*/
-	public static function solve_quadratic_equation( $a, $b, $c )
-	{
-		$d = $b * $b - 4 * $a * $c; // diskriminant
 
-		if ( $d < 0 ) {
-			return NULL;
-		} else if ( $d == 0 ) {
-			$result = ( -$b / 2 * $a );
-
-			return $result;
-		} else {
-			$result = ( ( -$b + sqrt( $d ) ) / ( 2 * $a ) . ( -$b - sqrt( $d ) ) / ( 2 * $a ) );
-
-			return $result;
-		}
+	private static function __construct() {
 	}
 }

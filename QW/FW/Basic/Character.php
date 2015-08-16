@@ -4,37 +4,33 @@ namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
 
-class Character extends Object
-{
+class Character extends Object {
 
 	private $char;
 
-	public function __construct( $char = '' )
-	{
+	public function __construct($char = '') {
 		parent::__construct();
 
-		if ( mb_strlen( $char ) != 1 ) throw new IllegalArgumentException();
+		if ( mb_strlen($char) != 1 ) {
+			throw new IllegalArgumentException();
+		}
 
 		$this->char = $char;
 	}
 
-	public function __toString()
-	{
+	public function __toString() {
 		return $this->char;
 	}
 
-	public function equals( $char )
-	{
+	public function equals($char) {
 		return $this->char == $char;
 	}
 
-	public function equalsCharacter( Character $character )
-	{
+	public function equalsCharacter(Character $character) {
 		return $this->char == $character->char;
 	}
 
-	public function toASCII()
-	{
-		return ord( $this->char );
+	public function toASCII() {
+		return ord($this->char);
 	}
 }

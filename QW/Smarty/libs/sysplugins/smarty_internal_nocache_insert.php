@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Nocache_Insert
-{
+class Smarty_Internal_Nocache_Insert {
 	/**
 	 * Compiles code for the {insert} tag into cache file
 	 *
@@ -27,8 +26,7 @@ class Smarty_Internal_Nocache_Insert
 	 *
 	 * @return string                   compiled code
 	 */
-	public static function compile( $_function, $_attr, $_template, $_script, $_assign = NULL )
-	{
+	public static function compile($_function, $_attr, $_template, $_script, $_assign = NULL) {
 		$_output = '<?php ';
 		if ( $_script != 'null' ) {
 			// script which must be included
@@ -37,9 +35,10 @@ class Smarty_Internal_Nocache_Insert
 		}
 		// call insert
 		if ( isset( $_assign ) ) {
-			$_output .= "\$_smarty_tpl->assign('{$_assign}' , {$_function} (" . var_export( $_attr, TRUE ) . ",\$_smarty_tpl), true);?>";
-		} else {
-			$_output .= "echo {$_function}(" . var_export( $_attr, TRUE ) . ",\$_smarty_tpl);?>";
+			$_output .= "\$_smarty_tpl->assign('{$_assign}' , {$_function} (" . var_export($_attr, TRUE) . ",\$_smarty_tpl), true);?>";
+		}
+		else {
+			$_output .= "echo {$_function}(" . var_export($_attr, TRUE) . ",\$_smarty_tpl);?>";
 		}
 		$_tpl = $_template;
 		while ( $_tpl->parent instanceof Smarty_Internal_Template ) {

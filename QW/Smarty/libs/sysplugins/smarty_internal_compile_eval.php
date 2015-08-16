@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase {
 	/**
 	 * Attribute definition: Overwrites base class.
 	 *
@@ -46,12 +45,11 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler )
-	{
+	public function compile($args, $compiler) {
 		$this->required_attributes = [ 'var' ];
 		$this->optional_attributes = [ 'assign' ];
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 		if ( isset( $_attr[ 'assign' ] ) ) {
 			// output will be stored in a smarty variable instead of being displayed
 			$_assign = $_attr[ 'assign' ];
@@ -62,7 +60,8 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase
 		//was there an assign attribute?
 		if ( isset( $_assign ) ) {
 			$_output .= "\$_smarty_tpl->assign($_assign,\$_template->fetch());";
-		} else {
+		}
+		else {
 			$_output .= "echo \$_template->fetch();";
 		}
 

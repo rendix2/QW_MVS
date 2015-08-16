@@ -9,7 +9,6 @@
 namespace QW\FW\DP\AbstractFactory;
 
 
-interface Vehicle
-{
+interface Vehicle {
 
 }

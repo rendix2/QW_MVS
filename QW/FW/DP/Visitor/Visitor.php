@@ -2,13 +2,12 @@
 
 namespace QW\FW\DP\Visitor;
 
-interface Visitor
-{
+interface Visitor {
 
 	public function __toString();
 
-	public function visitMuseum( Museum $museum );
+	public function visitCinema(Cinema $cinema);
 
-	public function visitCinema( Cinema $cinema );
+	public function visitMuseum(Museum $museum);
 
 }

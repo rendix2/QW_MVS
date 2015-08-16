@@ -33,20 +33,19 @@
  * @return string content re-formatted
  * @author Monte Ohrt <monte at ohrt dot com>
  */
-function smarty_block_textformat( $params, $content, $template, &$repeat )
-{
-	if ( is_null( $content ) ) {
+function smarty_block_textformat($params, $content, $template, &$repeat) {
+	if ( is_null($content) ) {
 		return;
 	}
 
-	$style = NULL;
-	$indent = 0;
+	$style        = NULL;
+	$indent       = 0;
 	$indent_first = 0;
-	$indent_char = ' ';
-	$wrap = 80;
-	$wrap_char = "\n";
-	$wrap_cut = FALSE;
-	$assign = NULL;
+	$indent_char  = ' ';
+	$wrap         = 80;
+	$wrap_char    = "\n";
+	$wrap_cut     = FALSE;
+	$assign       = NULL;
 
 	foreach ( $params as $_key => $_val ) {
 		switch ( $_key ) {
@@ -68,7 +67,7 @@ function smarty_block_textformat( $params, $content, $template, &$repeat )
 				break;
 
 			default:
-				trigger_error( "textformat: unknown attribute '$_key'" );
+				trigger_error("textformat: unknown attribute '$_key'");
 		}
 	}
 
@@ -76,35 +75,37 @@ function smarty_block_textformat( $params, $content, $template, &$repeat )
 		$wrap = 72;
 	}
 	// split into paragraphs
-	$_paragraphs = preg_split( '![\r\n]{2}!', $content );
+	$_paragraphs = preg_split('![\r\n]{2}!', $content);
 
 	foreach ( $_paragraphs as &$_paragraph ) {
 		if ( !$_paragraph ) {
 			continue;
 		}
 		// convert mult. spaces & special chars to single space
-		$_paragraph = preg_replace( [ '!\s+!' . Smarty::$_UTF8_MODIFIER, '!(^\s+)|(\s+$)!' . Smarty::$_UTF8_MODIFIER ], [ ' ', '' ], $_paragraph );
+		$_paragraph = preg_replace([ '!\s+!' . Smarty::$_UTF8_MODIFIER, '!(^\s+)|(\s+$)!' . Smarty::$_UTF8_MODIFIER ], [ ' ', '' ], $_paragraph);
 		// indent first line
 		if ( $indent_first > 0 ) {
-			$_paragraph = str_repeat( $indent_char, $indent_first ) . $_paragraph;
+			$_paragraph = str_repeat($indent_char, $indent_first) . $_paragraph;
 		}
 		// wordwrap sentences
 		if ( Smarty::$_MBSTRING ) {
 			require_once( SMARTY_PLUGINS_DIR . 'shared.mb_wordwrap.php' );
-			$_paragraph = smarty_mb_wordwrap( $_paragraph, $wrap - $indent, $wrap_char, $wrap_cut );
-		} else {
-			$_paragraph = wordwrap( $_paragraph, $wrap - $indent, $wrap_char, $wrap_cut );
+			$_paragraph = smarty_mb_wordwrap($_paragraph, $wrap - $indent, $wrap_char, $wrap_cut);
+		}
+		else {
+			$_paragraph = wordwrap($_paragraph, $wrap - $indent, $wrap_char, $wrap_cut);
 		}
 		// indent lines
 		if ( $indent > 0 ) {
-			$_paragraph = preg_replace( '!^!m', str_repeat( $indent_char, $indent ), $_paragraph );
+			$_paragraph = preg_replace('!^!m', str_repeat($indent_char, $indent), $_paragraph);
 		}
 	}
-	$_output = implode( $wrap_char . $wrap_char, $_paragraphs );
+	$_output = implode($wrap_char . $wrap_char, $_paragraphs);
 
 	if ( $assign ) {
-		$template->assign( $assign, $_output );
-	} else {
+		$template->assign($assign, $_output);
+	}
+	else {
 		return $_output;
 	}
 }

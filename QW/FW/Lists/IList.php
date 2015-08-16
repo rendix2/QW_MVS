@@ -2,21 +2,20 @@
 
 namespace QW\FW\Lists;
 
-interface IList
-{
+interface IList {
 
-	public function get( $index );
+	public function __toString();
 
-	public function getLast();
+	public function add($data);
+
+	public function contains($data);
+
+	public function get($index);
 
 	public function getFirst();
 
-	public function add( $data );
+	public function getLast();
 
-	public function contains( $data );
-
-	public function remove( $index );
-
-	public function __toString();
+	public function remove($index);
 
 }

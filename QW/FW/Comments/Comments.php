@@ -9,12 +9,10 @@
 namespace QW\FW\Comments;
 
 
-class Comments
-{
+class Comments {
 
 
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
 	}
 }

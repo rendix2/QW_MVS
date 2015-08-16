@@ -9,14 +9,12 @@
 namespace QW\FW;
 
 
-class Redirect
-{
+class Redirect {
 
 	// maybe it could be Singleton :)
 
 
-	private function __construct()
-	{
+	private function __construct() {
 	}
 
 }

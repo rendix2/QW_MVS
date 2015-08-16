@@ -9,8 +9,7 @@
 namespace QW\FW\Interfaces;
 
 
-interface Iterable
-{
+interface Iterable {
 
 	public function hasNext();
 

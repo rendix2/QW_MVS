@@ -2,16 +2,19 @@
 
 namespace QW\FW\Sort;
 
-class CountingSort extends AbstractSort
-{
+class CountingSort extends AbstractSort {
 
-	protected function sort( AbstractSort $sort )
-	{
+	protected function sort(AbstractSort $sort) {
 		$min = $this->data[ 0 ];
 		$max = $this->data[ 0 ];
 
 		for ( $i = 1; $i < $this->length; $i++ ) {
-			if ( $this->data[ $i ] < $min ) $min = $this->data[ $i ]; elseif ( $this->data[ $i ] > $max ) $max = $this->data[ $i ];
+			if ( $this->data[ $i ] < $min ) {
+				$min = $this->data[ $i ];
+			}
+			elseif ( $this->data[ $i ] > $max ) {
+				$max = $this->data[ $i ];
+			}
 		}
 
 		$count = [ ];
@@ -21,7 +24,7 @@ class CountingSort extends AbstractSort
 		}
 
 		$count[ 0 ]--;
-		for ( $i = 1; $i < count( $count ); $i++ ) {
+		for ( $i = 1; $i < count($count); $i++ ) {
 			$count[ $i ] = $count[ $i ] + $count[ $i - 1 ];
 		}
 

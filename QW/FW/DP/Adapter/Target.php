@@ -9,8 +9,7 @@
 namespace QW\FW\DP\Adapter;
 
 
-interface Target
-{
+interface Target {
 
 	public function newRequest();
 

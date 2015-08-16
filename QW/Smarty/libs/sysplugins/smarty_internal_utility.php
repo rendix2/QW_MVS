@@ -33,81 +33,105 @@
  * @package    Smarty
  * @subpackage Security
  */
-class Smarty_Internal_Utility
-{
+class Smarty_Internal_Utility {
 	/**
-	 * private constructor to prevent calls creation of new instances
-	 */
-	final private function __construct()
-	{
-		// intentionally left blank
-	}
-
-	/**
-	 * Compile all template files
+	 * Delete compiled template file
 	 *
-	 * @param  string $extension     template file name extension
-	 * @param  bool   $force_compile force all to recompile
-	 * @param  int    $time_limit    add maximum execution time
-	 * @param  int    $max_errors    add maximum allowed errors
-	 * @param  Smarty $smarty        Smarty instance
+	 * @param  string  $resource_name template name
+	 * @param  string  $compile_id    compile id
+	 * @param  integer $exp_time      expiration time
+	 * @param  Smarty  $smarty        Smarty instance
 	 *
-	 * @return integer number of template files compiled
+	 * @return integer number of template files deleted
 	 */
-	public static function compileAllTemplates( $extension, $force_compile, $time_limit, $max_errors, Smarty $smarty )
-	{
-		// switch off time limit
-		if ( function_exists( 'set_time_limit' ) ) {
-			@set_time_limit( $time_limit );
+	public static function clearCompiledTemplate($resource_name, $compile_id, $exp_time, Smarty $smarty) {
+		$_compile_dir = realpath($smarty->getCompileDir()) . '/';
+		if ( $_compile_dir == '/' ) { //We should never want to delete this!
+			return 0;
 		}
-		$smarty->force_compile = $force_compile;
+		$_compile_id = isset( $compile_id ) ? preg_replace('![^\w\|]+!', '_', $compile_id) : NULL;
+		$_dir_sep    = $smarty->use_sub_dirs ? '/' : '^';
+		if ( isset( $resource_name ) ) {
+			$_save_stat      = $smarty->caching;
+			$smarty->caching = FALSE;
+			$tpl             = new $smarty->template_class($resource_name, $smarty);
+			$smarty->caching = $_save_stat;
+
+			// remove from template cache
+			$tpl->source; // have the template registered before unset()
+			if ( $smarty->allow_ambiguous_resources ) {
+				$_templateId = $tpl->source->unique_resource . $tpl->cache_id . $tpl->compile_id;
+			}
+			else {
+				$_templateId = $smarty->joined_template_dir . '#' . $resource_name . $tpl->cache_id . $tpl->compile_id;
+			}
+			if ( isset( $_templateId[ 150 ] ) ) {
+				$_templateId = sha1($_templateId);
+			}
+			unset( $smarty->template_objects[ $_templateId ] );
+
+			if ( $tpl->source->exists ) {
+				$_resource_part_1        = basename(str_replace('^', '/', $tpl->compiled->filepath));
+				$_resource_part_1_length = strlen($_resource_part_1);
+			}
+			else {
+				return 0;
+			}
+
+			$_resource_part_2        = str_replace('.php', '.cache.php', $_resource_part_1);
+			$_resource_part_2_length = strlen($_resource_part_2);
+		}
+		$_dir = $_compile_dir;
+		if ( $smarty->use_sub_dirs && isset( $_compile_id ) ) {
+			$_dir .= $_compile_id . $_dir_sep;
+		}
+		if ( isset( $_compile_id ) ) {
+			$_compile_id_part        = str_replace('\\', '/', $_compile_dir . $_compile_id . $_dir_sep);
+			$_compile_id_part_length = strlen($_compile_id_part);
+		}
 		$_count = 0;
-		$_error_count = 0;
-		// loop over array of template directories
-		foreach ( $smarty->getTemplateDir() as $_dir ) {
-			$_compileDirs = new RecursiveDirectoryIterator( $_dir );
-			$_compile = new RecursiveIteratorIterator( $_compileDirs );
-			foreach ( $_compile as $_fileinfo ) {
-				$_file = $_fileinfo->getFilename();
-				if ( substr( basename( $_fileinfo->getPathname() ), 0, 1 ) == '.' || strpos( $_file, '.svn' ) !== FALSE ) {
-					continue;
+		try {
+			$_compileDirs = new RecursiveDirectoryIterator($_dir);
+			// NOTE: UnexpectedValueException thrown for PHP >= 5.3
+		}
+		catch ( Exception $e ) {
+			return 0;
+		}
+		$_compile = new RecursiveIteratorIterator($_compileDirs, RecursiveIteratorIterator::CHILD_FIRST);
+		foreach ( $_compile as $_file ) {
+			if ( substr(basename($_file->getPathname()), 0, 1) == '.' || strpos($_file, '.svn') !== FALSE ) {
+				continue;
+			}
+
+			$_filepath = str_replace('\\', '/', (string) $_file);
+
+			if ( $_file->isDir() ) {
+				if ( !$_compile->isDot() ) {
+					// delete folder if empty
+					@rmdir($_file->getPathname());
 				}
-				if ( !substr_compare( $_file, $extension, -strlen( $extension ) ) == 0 ) {
-					continue;
-				}
-				if ( $_fileinfo->getPath() == substr( $_dir, 0, -1 ) ) {
-					$_template_file = $_file;
-				} else {
-					$_template_file = substr( $_fileinfo->getPath(), strlen( $_dir ) ) . DS . $_file;
-				}
-				echo '<br>', $_dir, '---', $_template_file;
-				flush();
-				$_start_time = microtime( TRUE );
-				try {
-					$_tpl = $smarty->createTemplate( $_template_file, NULL, NULL, NULL, FALSE );
-					if ( $_tpl->mustCompile() ) {
-						$_tpl->compileTemplateSource();
-						$_count++;
-						echo ' compiled in  ', microtime( TRUE ) - $_start_time, ' seconds';
-						flush();
-					} else {
-						echo ' is up to date';
-						flush();
+			}
+			else {
+				$unlink = FALSE;
+				if ( ( !isset( $_compile_id ) || ( isset( $_filepath[ $_compile_id_part_length ] ) && $a = !strncmp($_filepath, $_compile_id_part, $_compile_id_part_length) ) ) && ( !isset( $resource_name ) || ( isset( $_filepath[ $_resource_part_1_length ] ) && substr_compare($_filepath, $_resource_part_1, -$_resource_part_1_length, $_resource_part_1_length) == 0 ) || ( isset( $_filepath[ $_resource_part_2_length ] ) && substr_compare($_filepath, $_resource_part_2, -$_resource_part_2_length, $_resource_part_2_length) == 0 ) ) ) {
+					if ( isset( $exp_time ) ) {
+						if ( time() - @filemtime($_filepath) >= $exp_time ) {
+							$unlink = TRUE;
+						}
 					}
-				} catch ( Exception $e ) {
-					echo 'Error: ', $e->getMessage(), "<br><br>";
-					$_error_count++;
+					else {
+						$unlink = TRUE;
+					}
 				}
-				// free memory
-				$smarty->template_objects = [ ];
-				$_tpl->smarty->template_objects = [ ];
-				$_tpl = NULL;
-				if ( $max_errors !== NULL && $_error_count == $max_errors ) {
-					echo '<br><br>too many errors';
-					exit();
+
+				if ( $unlink && @unlink($_filepath) ) {
+					$_count++;
 				}
 			}
 		}
+		// clear compiled cache
+		Smarty_Resource::$sources   = [ ];
+		Smarty_Resource::$compileds = [ ];
 
 		return $_count;
 	}
@@ -123,47 +147,49 @@ class Smarty_Internal_Utility
 	 *
 	 * @return integer number of config files compiled
 	 */
-	public static function compileAllConfig( $extension, $force_compile, $time_limit, $max_errors, Smarty $smarty )
-	{
+	public static function compileAllConfig($extension, $force_compile, $time_limit, $max_errors, Smarty $smarty) {
 		// switch off time limit
-		if ( function_exists( 'set_time_limit' ) ) {
-			@set_time_limit( $time_limit );
+		if ( function_exists('set_time_limit') ) {
+			@set_time_limit($time_limit);
 		}
 		$smarty->force_compile = $force_compile;
-		$_count = 0;
-		$_error_count = 0;
+		$_count                = 0;
+		$_error_count          = 0;
 		// loop over array of template directories
 		foreach ( $smarty->getConfigDir() as $_dir ) {
-			$_compileDirs = new RecursiveDirectoryIterator( $_dir );
-			$_compile = new RecursiveIteratorIterator( $_compileDirs );
+			$_compileDirs = new RecursiveDirectoryIterator($_dir);
+			$_compile     = new RecursiveIteratorIterator($_compileDirs);
 			foreach ( $_compile as $_fileinfo ) {
 				$_file = $_fileinfo->getFilename();
-				if ( substr( basename( $_fileinfo->getPathname() ), 0, 1 ) == '.' || strpos( $_file, '.svn' ) !== FALSE ) {
+				if ( substr(basename($_fileinfo->getPathname()), 0, 1) == '.' || strpos($_file, '.svn') !== FALSE ) {
 					continue;
 				}
-				if ( !substr_compare( $_file, $extension, -strlen( $extension ) ) == 0 ) {
+				if ( !substr_compare($_file, $extension, -strlen($extension)) == 0 ) {
 					continue;
 				}
-				if ( $_fileinfo->getPath() == substr( $_dir, 0, -1 ) ) {
+				if ( $_fileinfo->getPath() == substr($_dir, 0, -1) ) {
 					$_config_file = $_file;
-				} else {
-					$_config_file = substr( $_fileinfo->getPath(), strlen( $_dir ) ) . DS . $_file;
+				}
+				else {
+					$_config_file = substr($_fileinfo->getPath(), strlen($_dir)) . DS . $_file;
 				}
 				echo '<br>', $_dir, '---', $_config_file;
 				flush();
-				$_start_time = microtime( TRUE );
+				$_start_time = microtime(TRUE);
 				try {
-					$_config = new Smarty_Internal_Config( $_config_file, $smarty );
+					$_config = new Smarty_Internal_Config($_config_file, $smarty);
 					if ( $_config->mustCompile() ) {
 						$_config->compileConfigSource();
 						$_count++;
-						echo ' compiled in  ', microtime( TRUE ) - $_start_time, ' seconds';
+						echo ' compiled in  ', microtime(TRUE) - $_start_time, ' seconds';
 						flush();
-					} else {
+					}
+					else {
 						echo ' is up to date';
 						flush();
 					}
-				} catch ( Exception $e ) {
+				}
+				catch ( Exception $e ) {
 					echo 'Error: ', $e->getMessage(), "<br><br>";
 					$_error_count++;
 				}
@@ -178,99 +204,72 @@ class Smarty_Internal_Utility
 	}
 
 	/**
-	 * Delete compiled template file
+	 * Compile all template files
 	 *
-	 * @param  string  $resource_name template name
-	 * @param  string  $compile_id    compile id
-	 * @param  integer $exp_time      expiration time
-	 * @param  Smarty  $smarty        Smarty instance
+	 * @param  string $extension     template file name extension
+	 * @param  bool   $force_compile force all to recompile
+	 * @param  int    $time_limit    add maximum execution time
+	 * @param  int    $max_errors    add maximum allowed errors
+	 * @param  Smarty $smarty        Smarty instance
 	 *
-	 * @return integer number of template files deleted
+	 * @return integer number of template files compiled
 	 */
-	public static function clearCompiledTemplate( $resource_name, $compile_id, $exp_time, Smarty $smarty )
-	{
-		$_compile_dir = realpath( $smarty->getCompileDir() ) . '/';
-		if ( $_compile_dir == '/' ) { //We should never want to delete this!
-			return 0;
+	public static function compileAllTemplates($extension, $force_compile, $time_limit, $max_errors, Smarty $smarty) {
+		// switch off time limit
+		if ( function_exists('set_time_limit') ) {
+			@set_time_limit($time_limit);
 		}
-		$_compile_id = isset( $compile_id ) ? preg_replace( '![^\w\|]+!', '_', $compile_id ) : NULL;
-		$_dir_sep = $smarty->use_sub_dirs ? '/' : '^';
-		if ( isset( $resource_name ) ) {
-			$_save_stat = $smarty->caching;
-			$smarty->caching = FALSE;
-			$tpl = new $smarty->template_class( $resource_name, $smarty );
-			$smarty->caching = $_save_stat;
-
-			// remove from template cache
-			$tpl->source; // have the template registered before unset()
-			if ( $smarty->allow_ambiguous_resources ) {
-				$_templateId = $tpl->source->unique_resource . $tpl->cache_id . $tpl->compile_id;
-			} else {
-				$_templateId = $smarty->joined_template_dir . '#' . $resource_name . $tpl->cache_id . $tpl->compile_id;
-			}
-			if ( isset( $_templateId[ 150 ] ) ) {
-				$_templateId = sha1( $_templateId );
-			}
-			unset( $smarty->template_objects[ $_templateId ] );
-
-			if ( $tpl->source->exists ) {
-				$_resource_part_1 = basename( str_replace( '^', '/', $tpl->compiled->filepath ) );
-				$_resource_part_1_length = strlen( $_resource_part_1 );
-			} else {
-				return 0;
-			}
-
-			$_resource_part_2 = str_replace( '.php', '.cache.php', $_resource_part_1 );
-			$_resource_part_2_length = strlen( $_resource_part_2 );
-		}
-		$_dir = $_compile_dir;
-		if ( $smarty->use_sub_dirs && isset( $_compile_id ) ) {
-			$_dir .= $_compile_id . $_dir_sep;
-		}
-		if ( isset( $_compile_id ) ) {
-			$_compile_id_part = str_replace( '\\', '/', $_compile_dir . $_compile_id . $_dir_sep );
-			$_compile_id_part_length = strlen( $_compile_id_part );
-		}
-		$_count = 0;
-		try {
-			$_compileDirs = new RecursiveDirectoryIterator( $_dir );
-			// NOTE: UnexpectedValueException thrown for PHP >= 5.3
-		} catch ( Exception $e ) {
-			return 0;
-		}
-		$_compile = new RecursiveIteratorIterator( $_compileDirs, RecursiveIteratorIterator::CHILD_FIRST );
-		foreach ( $_compile as $_file ) {
-			if ( substr( basename( $_file->getPathname() ), 0, 1 ) == '.' || strpos( $_file, '.svn' ) !== FALSE ) {
-				continue;
-			}
-
-			$_filepath = str_replace( '\\', '/', (string) $_file );
-
-			if ( $_file->isDir() ) {
-				if ( !$_compile->isDot() ) {
-					// delete folder if empty
-					@rmdir( $_file->getPathname() );
+		$smarty->force_compile = $force_compile;
+		$_count                = 0;
+		$_error_count          = 0;
+		// loop over array of template directories
+		foreach ( $smarty->getTemplateDir() as $_dir ) {
+			$_compileDirs = new RecursiveDirectoryIterator($_dir);
+			$_compile     = new RecursiveIteratorIterator($_compileDirs);
+			foreach ( $_compile as $_fileinfo ) {
+				$_file = $_fileinfo->getFilename();
+				if ( substr(basename($_fileinfo->getPathname()), 0, 1) == '.' || strpos($_file, '.svn') !== FALSE ) {
+					continue;
 				}
-			} else {
-				$unlink = FALSE;
-				if ( ( !isset( $_compile_id ) || ( isset( $_filepath[ $_compile_id_part_length ] ) && $a = !strncmp( $_filepath, $_compile_id_part, $_compile_id_part_length ) ) ) && ( !isset( $resource_name ) || ( isset( $_filepath[ $_resource_part_1_length ] ) && substr_compare( $_filepath, $_resource_part_1, -$_resource_part_1_length, $_resource_part_1_length ) == 0 ) || ( isset( $_filepath[ $_resource_part_2_length ] ) && substr_compare( $_filepath, $_resource_part_2, -$_resource_part_2_length, $_resource_part_2_length ) == 0 ) ) ) {
-					if ( isset( $exp_time ) ) {
-						if ( time() - @filemtime( $_filepath ) >= $exp_time ) {
-							$unlink = TRUE;
-						}
-					} else {
-						$unlink = TRUE;
+				if ( !substr_compare($_file, $extension, -strlen($extension)) == 0 ) {
+					continue;
+				}
+				if ( $_fileinfo->getPath() == substr($_dir, 0, -1) ) {
+					$_template_file = $_file;
+				}
+				else {
+					$_template_file = substr($_fileinfo->getPath(), strlen($_dir)) . DS . $_file;
+				}
+				echo '<br>', $_dir, '---', $_template_file;
+				flush();
+				$_start_time = microtime(TRUE);
+				try {
+					$_tpl = $smarty->createTemplate($_template_file, NULL, NULL, NULL, FALSE);
+					if ( $_tpl->mustCompile() ) {
+						$_tpl->compileTemplateSource();
+						$_count++;
+						echo ' compiled in  ', microtime(TRUE) - $_start_time, ' seconds';
+						flush();
+					}
+					else {
+						echo ' is up to date';
+						flush();
 					}
 				}
-
-				if ( $unlink && @unlink( $_filepath ) ) {
-					$_count++;
+				catch ( Exception $e ) {
+					echo 'Error: ', $e->getMessage(), "<br><br>";
+					$_error_count++;
+				}
+				// free memory
+				$smarty->template_objects       = [ ];
+				$_tpl->smarty->template_objects = [ ];
+				$_tpl                           = NULL;
+				if ( $max_errors !== NULL && $_error_count == $max_errors ) {
+					echo '<br><br>too many errors';
+					exit();
 				}
 			}
 		}
-		// clear compiled cache
-		Smarty_Resource::$sources = [ ];
-		Smarty_Resource::$compileds = [ ];
 
 		return $_count;
 	}
@@ -284,11 +283,17 @@ class Smarty_Internal_Utility
 	 * @throws SmartyException
 	 * @return array                    of tag/attributes
 	 */
-	public static function getTags( Smarty_Internal_Template $template )
-	{
+	public static function getTags(Smarty_Internal_Template $template) {
 		$template->smarty->get_used_tags = TRUE;
 		$template->compileTemplateSource();
 
 		return $template->used_tags;
+	}
+
+	/**
+	 * private constructor to prevent calls creation of new instances
+	 */
+	final private function __construct() {
+		// intentionally left blank
 	}
 }

@@ -9,7 +9,6 @@
 namespace QW\FW\DP\AbstractFactory;
 
 
-class Ferry implements Vehicle
-{
+class Ferry implements Vehicle {
 
 }

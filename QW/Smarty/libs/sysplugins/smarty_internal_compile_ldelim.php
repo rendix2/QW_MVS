@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Ldelim extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Ldelim extends Smarty_Internal_CompileBase {
 	/**
 	 * Compiles code for the {ldelim} tag
 	 * This tag does output the left delimiter
@@ -25,11 +24,10 @@ class Smarty_Internal_Compile_Ldelim extends Smarty_Internal_CompileBase
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler )
-	{
-		$_attr = $this->getAttributes( $compiler, $args );
+	public function compile($args, $compiler) {
+		$_attr = $this->getAttributes($compiler, $args);
 		if ( $_attr[ 'nocache' ] === TRUE ) {
-			$compiler->trigger_template_error( 'nocache option not allowed', $compiler->lex->taglineno );
+			$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
 		}
 		// this tag does not return compiled code
 		$compiler->has_code = TRUE;

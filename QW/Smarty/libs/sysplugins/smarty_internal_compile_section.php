@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase {
 	/**
 	 * Attribute definition: Overwrites base class.
 	 *
@@ -46,12 +45,11 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler )
-	{
+	public function compile($args, $compiler) {
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 
-		$this->openTag( $compiler, 'section', [ 'section', $compiler->nocache ] );
+		$this->openTag($compiler, 'section', [ 'section', $compiler->nocache ]);
 		// maybe nocache because of nocache variables
 		$compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
 
@@ -69,9 +67,10 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
 					break;
 
 				case 'show':
-					if ( is_bool( $attr_value ) ) {
+					if ( is_bool($attr_value) ) {
 						$show_attr_value = $attr_value ? 'true' : 'false';
-					} else {
+					}
+					else {
 						$show_attr_value = "(bool) $attr_value";
 					}
 					$output .= "{$section_props}['show'] = $show_attr_value;\n";
@@ -102,7 +101,8 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
 
 		if ( !isset( $_attr[ 'max' ] ) ) {
 			$output .= "{$section_props}['max'] = {$section_props}['loop'];\n";
-		} else {
+		}
+		else {
 			$output .= "if ({$section_props}['max'] < 0)\n" . "    {$section_props}['max'] = {$section_props}['loop'];\n";
 		}
 
@@ -112,14 +112,16 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
 
 		if ( !isset( $_attr[ 'start' ] ) ) {
 			$output .= "{$section_props}['start'] = {$section_props}['step'] > 0 ? 0 : {$section_props}['loop']-1;\n";
-		} else {
+		}
+		else {
 			$output .= "if ({$section_props}['start'] < 0)\n" . "    {$section_props}['start'] = max({$section_props}['step'] > 0 ? 0 : -1, {$section_props}['loop'] + {$section_props}['start']);\n" . "else\n" . "    {$section_props}['start'] = min({$section_props}['start'], {$section_props}['step'] > 0 ? {$section_props}['loop'] : {$section_props}['loop']-1);\n";
 		}
 
 		$output .= "if ({$section_props}['show']) {\n";
 		if ( !isset( $_attr[ 'start' ] ) && !isset( $_attr[ 'step' ] ) && !isset( $_attr[ 'max' ] ) ) {
 			$output .= "    {$section_props}['total'] = {$section_props}['loop'];\n";
-		} else {
+		}
+		else {
 			$output .= "    {$section_props}['total'] = min(ceil(({$section_props}['step'] > 0 ? {$section_props}['loop'] - {$section_props}['start'] : {$section_props}['start']+1)/abs({$section_props}['step'])), {$section_props}['max']);\n";
 		}
 		$output .= "    if ({$section_props}['total'] == 0)\n" . "        {$section_props}['show'] = false;\n" . "} else\n" . "    {$section_props}['total'] = 0;\n";
@@ -147,8 +149,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase {
 	/**
 	 * Compiles code for the {sectionelse} tag
 	 *
@@ -157,13 +158,12 @@ class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler )
-	{
+	public function compile($args, $compiler) {
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 
-		list( $openTag, $nocache ) = $this->closeTag( $compiler, [ 'section' ] );
-		$this->openTag( $compiler, 'sectionelse', [ 'sectionelse', $nocache ] );
+		list( $openTag, $nocache ) = $this->closeTag($compiler, [ 'section' ]);
+		$this->openTag($compiler, 'sectionelse', [ 'sectionelse', $nocache ]);
 
 		return "<?php endfor; else: ?>";
 	}
@@ -175,8 +175,7 @@ class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase {
 	/**
 	 * Compiles code for the {/section} tag
 	 *
@@ -185,21 +184,21 @@ class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler )
-	{
+	public function compile($args, $compiler) {
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 
 		// must endblock be nocache?
 		if ( $compiler->nocache ) {
 			$compiler->tag_nocache = TRUE;
 		}
 
-		list( $openTag, $compiler->nocache ) = $this->closeTag( $compiler, [ 'section', 'sectionelse' ] );
+		list( $openTag, $compiler->nocache ) = $this->closeTag($compiler, [ 'section', 'sectionelse' ]);
 
 		if ( $openTag == 'sectionelse' ) {
 			return "<?php endif; ?>";
-		} else {
+		}
+		else {
 			return "<?php endfor; endif; ?>";
 		}
 	}

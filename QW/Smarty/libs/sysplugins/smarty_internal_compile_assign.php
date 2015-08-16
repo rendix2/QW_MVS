@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
 	/**
 	 * Compiles code for the {assign} tag
 	 *
@@ -25,55 +24,61 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler, $parameter )
-	{
+	public function compile($args, $compiler, $parameter) {
 		// the following must be assigned at runtime because it will be overwritten in Smarty_Internal_Compile_Append
 		$this->required_attributes = [ 'var', 'value' ];
-		$this->shorttag_order = [ 'var', 'value' ];
+		$this->shorttag_order      = [ 'var', 'value' ];
 		$this->optional_attributes = [ 'scope' ];
-		$_nocache = 'null';
-		$_scope = Smarty::SCOPE_LOCAL;
+		$_nocache                  = 'null';
+		$_scope                    = Smarty::SCOPE_LOCAL;
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 		// nocache ?
 		if ( $compiler->tag_nocache || $compiler->nocache ) {
 			$_nocache = 'true';
 			// create nocache var to make it know for further compiling
-			if ( isset( $compiler->template->tpl_vars[ trim( $_attr[ 'var' ], "'" ) ] ) ) {
-				$compiler->template->tpl_vars[ trim( $_attr[ 'var' ], "'" ) ]->nocache = TRUE;
-			} else {
-				$compiler->template->tpl_vars[ trim( $_attr[ 'var' ], "'" ) ] = new Smarty_Variable( NULL, TRUE );
+			if ( isset( $compiler->template->tpl_vars[ trim($_attr[ 'var' ], "'") ] ) ) {
+				$compiler->template->tpl_vars[ trim($_attr[ 'var' ], "'") ]->nocache = TRUE;
+			}
+			else {
+				$compiler->template->tpl_vars[ trim($_attr[ 'var' ], "'") ] = new Smarty_Variable(NULL, TRUE);
 			}
 		}
 		// scope setup
 		if ( isset( $_attr[ 'scope' ] ) ) {
-			$_attr[ 'scope' ] = trim( $_attr[ 'scope' ], "'\"" );
+			$_attr[ 'scope' ] = trim($_attr[ 'scope' ], "'\"");
 			if ( $_attr[ 'scope' ] == 'parent' ) {
 				$_scope = Smarty::SCOPE_PARENT;
-			} elseif ( $_attr[ 'scope' ] == 'root' ) {
+			}
+			elseif ( $_attr[ 'scope' ] == 'root' ) {
 				$_scope = Smarty::SCOPE_ROOT;
-			} elseif ( $_attr[ 'scope' ] == 'global' ) {
+			}
+			elseif ( $_attr[ 'scope' ] == 'global' ) {
 				$_scope = Smarty::SCOPE_GLOBAL;
-			} else {
-				$compiler->trigger_template_error( 'illegal value for "scope" attribute', $compiler->lex->taglineno );
+			}
+			else {
+				$compiler->trigger_template_error('illegal value for "scope" attribute', $compiler->lex->taglineno);
 			}
 		}
 		// compiled output
 		if ( isset( $parameter[ 'smarty_internal_index' ] ) ) {
 			$output = "<?php \$_smarty_tpl->createLocalArrayVariable($_attr[var], $_nocache, $_scope);\n\$_smarty_tpl->tpl_vars[$_attr[var]]->value$parameter[smarty_internal_index] = $_attr[value];";
-		} else {
+		}
+		else {
 			// implement Smarty2's behaviour of variables assigned by reference
 			if ( $compiler->template->smarty instanceof SmartyBC ) {
 				$output = "<?php if (isset(\$_smarty_tpl->tpl_vars[$_attr[var]])) {\$_smarty_tpl->tpl_vars[$_attr[var]] = clone \$_smarty_tpl->tpl_vars[$_attr[var]];";
 				$output .= "\n\$_smarty_tpl->tpl_vars[$_attr[var]]->value = $_attr[value]; \$_smarty_tpl->tpl_vars[$_attr[var]]->nocache = $_nocache; \$_smarty_tpl->tpl_vars[$_attr[var]]->scope = $_scope;";
 				$output .= "\n} else \$_smarty_tpl->tpl_vars[$_attr[var]] = new Smarty_Variable($_attr[value], $_nocache, $_scope);";
-			} else {
+			}
+			else {
 				$output = "<?php \$_smarty_tpl->tpl_vars[$_attr[var]] = new Smarty_Variable($_attr[value], $_nocache, $_scope);";
 			}
 		}
 		if ( $_scope == Smarty::SCOPE_PARENT ) {
 			$output .= "\nif (\$_smarty_tpl->parent != null) \$_smarty_tpl->parent->tpl_vars[$_attr[var]] = clone \$_smarty_tpl->tpl_vars[$_attr[var]];";
-		} elseif ( $_scope == Smarty::SCOPE_ROOT || $_scope == Smarty::SCOPE_GLOBAL ) {
+		}
+		elseif ( $_scope == Smarty::SCOPE_ROOT || $_scope == Smarty::SCOPE_GLOBAL ) {
 			$output .= "\n\$_ptr = \$_smarty_tpl->parent; while (\$_ptr != null) {\$_ptr->tpl_vars[$_attr[var]] = clone \$_smarty_tpl->tpl_vars[$_attr[var]]; \$_ptr = \$_ptr->parent; }";
 		}
 		if ( $_scope == Smarty::SCOPE_GLOBAL ) {

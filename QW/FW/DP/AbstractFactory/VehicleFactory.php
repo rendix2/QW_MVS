@@ -9,11 +9,10 @@
 namespace QW\FW\DP\AbstractFactory;
 
 
-interface VehicleFactory
-{
-
-	public function createSmallVehicle();
+interface VehicleFactory {
 
 	public function createBigVehicle();
+
+	public function createSmallVehicle();
 
 }

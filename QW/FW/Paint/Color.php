@@ -6,45 +6,45 @@ use QW\FW\Basic\IllegalArgumentException;
 use QW\FW\Basic\Object;
 use QW\FW\Math\Math;
 
-final class Color extends Object
-{
+final class Color extends Object {
 	const BLUE = 0x0000FF;
 	const RED = 0xFF0000;
 	const GREEN = 0x00FF00;
 
 	private $red, $green, $blue;
 
-	public function __construct( $red, $green, $blue )
-	{
+	public function __construct($red, $green, $blue) {
 
-		if ( $red < -1 || $red >= 256 ) throw new IllegalArgumentException( 'Červená je mimo rozsah.' );
+		if ( $red < -1 || $red >= 256 ) {
+			throw new IllegalArgumentException('Červená je mimo rozsah.');
+		}
 
-		if ( $green < -1 || $green >= 256 ) throw new IllegalArgumentException( 'Zelená je mimo rozsah.' );
+		if ( $green < -1 || $green >= 256 ) {
+			throw new IllegalArgumentException('Zelená je mimo rozsah.');
+		}
 
-		if ( $blue < -1 || $blue >= 256 ) throw new IllegalArgumentException( 'modrá je mimo rozsah.' );
+		if ( $blue < -1 || $blue >= 256 ) {
+			throw new IllegalArgumentException('modrá je mimo rozsah.');
+		}
 
-		$this->red = $red;
+		$this->red   = $red;
 		$this->green = $green;
-		$this->blue = $blue;
+		$this->blue  = $blue;
 	}
 
-	public function getRed()
-	{
+	public function getRed() {
 		return $this->red;
 	}
 
-	public function getGreen()
-	{
+	public function getGreen() {
 		return $this->green;
 	}
 
-	public function getBlue()
-	{
+	public function getBlue() {
 		return $this->blue;
 	}
 
-	public function getRGB()
-	{
-		return (int) Math::decimalToHexadecimal( $this->red ) . Math::decimalToHexadecimal( $this->green ) . Math::decimalToHexadecimal( $this->blue );
+	public function getRGB() {
+		return (int) Math::decimalToHexadecimal($this->red) . Math::decimalToHexadecimal($this->green) . Math::decimalToHexadecimal($this->blue);
 	}
 }

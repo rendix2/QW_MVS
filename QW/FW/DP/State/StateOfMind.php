@@ -9,8 +9,7 @@
 namespace QW\FW\DP\State;
 
 
-interface StateOfMind
-{
+interface StateOfMind {
 
 	public function express();
 

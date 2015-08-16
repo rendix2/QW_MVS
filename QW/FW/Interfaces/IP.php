@@ -2,12 +2,11 @@
 
 namespace QW\FW\Interfaces;
 
-interface IP
-{
+interface IP {
 	public function getIP();
 
-	public function getPart( $part );
-
 	public function getLong();
+
+	public function getPart($part);
 
 }

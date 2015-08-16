@@ -16,21 +16,50 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled
-{
+class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
 	/**
-	 * populate Source Object with meta data from Resource
+	 * modify resource_name according to resource handlers specifications
 	 *
-	 * @param  Smarty_Template_Source   $source    source object
-	 * @param  Smarty_Internal_Template $_template template object
+	 * @param  Smarty  $smarty        Smarty instance
+	 * @param  string  $resource_name resource_name to make unique
+	 * @param  boolean $isConfig      flag for config resource
 	 *
-	 * @return void
+	 * @return string unique resource name
 	 */
-	public function populate( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL )
-	{
-		$source->uid = $source->filepath = sha1( $source->name );
-		$source->timestamp = FALSE;
-		$source->exists = TRUE;
+	public function buildUniqueResourceName(Smarty $smarty, $resource_name, $isConfig = FALSE) {
+		return get_class($this) . '#' . $this->decode($resource_name);
+	}
+
+	/**
+	 * decode base64 and urlencode
+	 *
+	 * @param  string $string template_resource to decode
+	 *
+	 * @return string decoded template_resource
+	 */
+	protected function decode($string) {
+		// decode if specified
+		if ( ( $pos = strpos($string, ':') ) !== FALSE ) {
+			if ( !strncmp($string, 'base64', 6) ) {
+				return base64_decode(substr($string, 7));
+			}
+			elseif ( !strncmp($string, 'urlencode', 9) ) {
+				return urldecode(substr($string, 10));
+			}
+		}
+
+		return $string;
+	}
+
+	/**
+	 * Determine basename for compiled filename
+	 *
+	 * @param  Smarty_Template_Source $source source object
+	 *
+	 * @return string                 resource's basename
+	 */
+	public function getBasename(Smarty_Template_Source $source) {
+		return '';
 	}
 
 	/**
@@ -42,55 +71,21 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled
 	 *
 	 * @return string                 template source
 	 */
-	public function getContent( Smarty_Template_Source $source )
-	{
-		return $this->decode( $source->name );
+	public function getContent(Smarty_Template_Source $source) {
+		return $this->decode($source->name);
 	}
 
 	/**
-	 * decode base64 and urlencode
+	 * populate Source Object with meta data from Resource
 	 *
-	 * @param  string $string template_resource to decode
+	 * @param  Smarty_Template_Source   $source    source object
+	 * @param  Smarty_Internal_Template $_template template object
 	 *
-	 * @return string decoded template_resource
+	 * @return void
 	 */
-	protected function decode( $string )
-	{
-		// decode if specified
-		if ( ( $pos = strpos( $string, ':' ) ) !== FALSE ) {
-			if ( !strncmp( $string, 'base64', 6 ) ) {
-				return base64_decode( substr( $string, 7 ) );
-			} elseif ( !strncmp( $string, 'urlencode', 9 ) ) {
-				return urldecode( substr( $string, 10 ) );
-			}
-		}
-
-		return $string;
-	}
-
-	/**
-	 * modify resource_name according to resource handlers specifications
-	 *
-	 * @param  Smarty  $smarty        Smarty instance
-	 * @param  string  $resource_name resource_name to make unique
-	 * @param  boolean $isConfig      flag for config resource
-	 *
-	 * @return string unique resource name
-	 */
-	public function buildUniqueResourceName( Smarty $smarty, $resource_name, $isConfig = FALSE )
-	{
-		return get_class( $this ) . '#' . $this->decode( $resource_name );
-	}
-
-	/**
-	 * Determine basename for compiled filename
-	 *
-	 * @param  Smarty_Template_Source $source source object
-	 *
-	 * @return string                 resource's basename
-	 */
-	public function getBasename( Smarty_Template_Source $source )
-	{
-		return '';
+	public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL) {
+		$source->uid       = $source->filepath = sha1($source->name);
+		$source->timestamp = FALSE;
+		$source->exists    = TRUE;
 	}
 }

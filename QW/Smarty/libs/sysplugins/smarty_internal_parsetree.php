@@ -14,8 +14,7 @@
  * @subpackage Compiler
  * @ignore
  */
-abstract class Smarty_Internal_ParseTree
-{
+abstract class Smarty_Internal_ParseTree {
 
 	/**
 	 * Parser object
@@ -23,14 +22,12 @@ abstract class Smarty_Internal_ParseTree
 	 * @var object
 	 */
 	public $parser;
-
 	/**
 	 * Buffer content
 	 *
 	 * @var mixed
 	 */
 	public $data;
-
 	/**
 	 * Subtree array
 	 *

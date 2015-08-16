@@ -2,7 +2,6 @@
 
 namespace QW\FW\Boot;
 
-class LanguageBootstrap extends Bootstrap
-{
+class LanguageBootstrap extends Bootstrap {
 
 }

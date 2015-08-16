@@ -9,10 +9,7 @@
 namespace QW\FW\DP\Builder;
 
 
-interface Builder
-{
-
-	public function __construct();
+interface Builder {
 
 	public function buildFloor();
 
@@ -21,5 +18,7 @@ interface Builder
 	public function buildWalls();
 
 	public function getResult();
+
+	public function __construct();
 
 }

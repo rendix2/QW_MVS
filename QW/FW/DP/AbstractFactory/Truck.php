@@ -9,7 +9,6 @@
 namespace QW\FW\DP\AbstractFactory;
 
 
-class Truck implements Vehicle
-{
+class Truck implements Vehicle {
 
 }

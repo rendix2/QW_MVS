@@ -21,8 +21,7 @@
  *
  * @return string|null
  */
-function smarty_function_counter( $params, $template )
-{
+function smarty_function_counter($params, $template) {
 	static $counters = [ ];
 
 	$name = ( isset( $params[ 'name' ] ) ) ? $params[ 'name' ] : 'default';
@@ -40,18 +39,20 @@ function smarty_function_counter( $params, $template )
 	}
 
 	if ( isset( $counter[ 'assign' ] ) ) {
-		$template->assign( $counter[ 'assign' ], $counter[ 'count' ] );
+		$template->assign($counter[ 'assign' ], $counter[ 'count' ]);
 	}
 
 	if ( isset( $params[ 'print' ] ) ) {
 		$print = (bool) $params[ 'print' ];
-	} else {
+	}
+	else {
 		$print = empty( $counter[ 'assign' ] );
 	}
 
 	if ( $print ) {
 		$retval = $counter[ 'count' ];
-	} else {
+	}
+	else {
 		$retval = NULL;
 	}
 
@@ -65,7 +66,8 @@ function smarty_function_counter( $params, $template )
 
 	if ( $counter[ 'direction' ] == "down" ) {
 		$counter[ 'count' ] -= $counter[ 'skip' ];
-	} else {
+	}
+	else {
 		$counter[ 'count' ] += $counter[ 'skip' ];
 	}
 

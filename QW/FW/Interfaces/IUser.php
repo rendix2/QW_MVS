@@ -1,19 +1,18 @@
 <?php
 namespace QW\FW\Interfaces;
 
-interface IUser
-{
+interface IUser {
 
-	const USER = 'user';
 	const ADMIN = 'admin';
+	const USER = 'user';
 
-	public function getUserName();
-
-	public function getUserId();
+	public function getIP();
 
 	public function getTemplate();
 
-	public function getIP();
+	public function getUserId();
+
+	public function getUserName();
 
 	public function isLogged();
 }

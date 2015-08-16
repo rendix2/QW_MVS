@@ -2,7 +2,6 @@
 
 namespace QW\FW\Interfaces;
 
-interface Immutable
-{
+interface Immutable {
 	public function getImmutable();
 }

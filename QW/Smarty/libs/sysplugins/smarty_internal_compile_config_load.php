@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase {
 	/**
 	 * Attribute definition: Overwrites base class.
 	 *
@@ -46,31 +45,32 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase
 	 *
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler )
-	{
+	public function compile($args, $compiler) {
 		static $_is_legal_scope = [ 'local' => TRUE, 'parent' => TRUE, 'root' => TRUE, 'global' => TRUE ];
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 
 		if ( $_attr[ 'nocache' ] === TRUE ) {
-			$compiler->trigger_template_error( 'nocache option not allowed', $compiler->lex->taglineno );
+			$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
 		}
 
 		// save possible attributes
 		$conf_file = $_attr[ 'file' ];
 		if ( isset( $_attr[ 'section' ] ) ) {
 			$section = $_attr[ 'section' ];
-		} else {
+		}
+		else {
 			$section = 'null';
 		}
 		$scope = 'local';
 		// scope setup
 		if ( isset( $_attr[ 'scope' ] ) ) {
-			$_attr[ 'scope' ] = trim( $_attr[ 'scope' ], "'\"" );
+			$_attr[ 'scope' ] = trim($_attr[ 'scope' ], "'\"");
 			if ( isset( $_is_legal_scope[ $_attr[ 'scope' ] ] ) ) {
 				$scope = $_attr[ 'scope' ];
-			} else {
-				$compiler->trigger_template_error( 'illegal value for "scope" attribute', $compiler->lex->taglineno );
+			}
+			else {
+				$compiler->trigger_template_error('illegal value for "scope" attribute', $compiler->lex->taglineno);
 			}
 		}
 		// create config object

@@ -12,27 +12,25 @@ namespace QW\FW\Trees\Binary\Iterators;
 use QW\FW\Trees\AbstractIterators\AbstractBinaryTreeIterator;
 use QW\FW\Trees\Binary\BinaryTree;
 
-class InOrderIterativeIterator extends AbstractBinaryTreeIterator
-{
+class InOrderIterativeIterator extends AbstractBinaryTreeIterator {
 
 	private $stack;
 
-	public function __construct( BinaryTree $root )
-	{
+	public function __construct(BinaryTree $root) {
 		$this->stack = new \SplStack();
-		parent::__construct( $root );
+		parent::__construct($root);
 	}
 
-	protected function order( BinaryTree $root )
-	{
+	protected function order(BinaryTree $root) {
 		while ( !$this->stack->isEmpty() || $root != NULL ) {
 			if ( $root != NULL ) {
-				$this->stack->push( $root );
+				$this->stack->push($root);
 				$root = $root->getLeftChild();
-			} else {
-				$root = $this->stack->pop();
+			}
+			else {
+				$root              = $this->stack->pop();
 				$this->finalData[] = $root->getData();
-				$root = $root->getRight();
+				$root              = $root->getRight();
 			}
 		}
 	}

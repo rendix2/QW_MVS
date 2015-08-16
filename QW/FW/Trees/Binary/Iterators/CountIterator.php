@@ -5,29 +5,27 @@ namespace QW\FW\Trees\Binary\Iterators;
 use QW\FW\Trees\AbstractIterators\AbstractBinaryTreeIterator;
 use QW\FW\Trees\Binary\BinaryTree;
 
-final class CountIterator extends AbstractBinaryTreeIterator
-{
+final class CountIterator extends AbstractBinaryTreeIterator {
 
 	private $countChildren;
 
-	public function __construct( BinaryTree $root )
-	{
+	public function __construct(BinaryTree $root) {
 		$this->countChildren = 0;
 
-		parent::__construct( $root );
+		parent::__construct($root);
 	}
 
-	protected function order( BinaryTree $root )
-	{
-		if ( $root == NULL || $this->realRoot == $root ) return;
+	protected function order(BinaryTree $root) {
+		if ( $root == NULL || $this->realRoot == $root ) {
+			return;
+		}
 
-		$this->order( $root->getLeftChild() );
-		$this->order( $root->getRightChild() );
+		$this->order($root->getLeftChild());
+		$this->order($root->getRightChild());
 		$this->countChildren++;
 	}
 
-	public function getCountChildren()
-	{
+	public function getCountChildren() {
 		return $this->countChildren;
 	}
 }

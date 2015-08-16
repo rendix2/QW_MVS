@@ -5,34 +5,27 @@ use QW\FW\Architecture\MVC\AbstractBasicController;
 use QW\FW\SuperGlobals\Session;
 use QW\Libs\Config;
 
-final class UserController extends AbstractBasicController
-{
-	public function __construct( $name )
-	{
-		parent::__construct( $name );
+final class UserController extends AbstractBasicController {
 
-		$this->getView()->setPageName( "Uživatel" );
+	public function __construct($name) {
+		parent::__construct($name);
+
+		$this->getView()
+		     ->setPageName("Uživatel");
 	}
 
-	public function login()
-	{
+	public function delete() {
 	}
 
-	public function logout()
-	{
+	public function edit() {
+	}
+
+	public function index() {
+		return $this->getView()
+		            ->render($this->getViewName() . Config::SLASH . 'index');
+	}
+
+	public function logout() {
 		Session::end();
-	}
-
-	public function edit()
-	{
-	}
-
-	public function delete()
-	{
-	}
-
-	public function index()
-	{
-		return $this->getView()->render( $this->getViewName() . Config::SLASH . 'index' );
 	}
 }

@@ -14,8 +14,7 @@
  * @package    Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_CompileBase
-{
+class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_CompileBase {
 	/**
 	 * Attribute definition: Overwrites base class.
 	 *
@@ -41,10 +40,9 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 	 * @throws SmartyException
 	 * @return string compiled code
 	 */
-	public function compile( $args, $compiler, $parameter )
-	{
+	public function compile($args, $compiler, $parameter) {
 		// check and get attributes
-		$_attr = $this->getAttributes( $compiler, $args );
+		$_attr = $this->getAttributes($compiler, $args);
 		// nocache option
 		if ( $_attr[ 'nocache' ] === TRUE ) {
 			$compiler->tag_nocache = TRUE;
@@ -52,12 +50,13 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 		if ( isset( $_attr[ 'assign' ] ) ) {
 			// assign output to variable
 			$output = "<?php \$_smarty_tpl->assign({$_attr['assign']},{$parameter['value']});?>";
-		} else {
+		}
+		else {
 			// display value
 			$output = $parameter[ 'value' ];
 			// tag modifier
 			if ( !empty( $parameter[ 'modifierlist' ] ) ) {
-				$output = $compiler->compileTag( 'private_modifier', [ ], [ 'modifierlist' => $parameter[ 'modifierlist' ], 'value' => $output ] );
+				$output = $compiler->compileTag('private_modifier', [ ], [ 'modifierlist' => $parameter[ 'modifierlist' ], 'value' => $output ]);
 			}
 			if ( !$_attr[ 'nofilter' ] ) {
 				// default modifier
@@ -65,8 +64,8 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 					if ( empty( $compiler->default_modifier_list ) ) {
 						$modifierlist = [ ];
 						foreach ( $compiler->smarty->default_modifiers as $key => $single_default_modifier ) {
-							preg_match_all( '/(\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'|"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|:|[^:]+)/', $single_default_modifier, $mod_array );
-							for ( $i = 0, $count = count( $mod_array[ 0 ] ); $i < $count; $i++ ) {
+							preg_match_all('/(\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'|"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|:|[^:]+)/', $single_default_modifier, $mod_array);
+							for ( $i = 0, $count = count($mod_array[ 0 ]); $i < $count; $i++ ) {
 								if ( $mod_array[ 0 ][ $i ] != ':' ) {
 									$modifierlist[ $key ][] = $mod_array[ 0 ][ $i ];
 								}
@@ -74,20 +73,22 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 						}
 						$compiler->default_modifier_list = $modifierlist;
 					}
-					$output = $compiler->compileTag( 'private_modifier', [ ], [ 'modifierlist' => $compiler->default_modifier_list, 'value' => $output ] );
+					$output = $compiler->compileTag('private_modifier', [ ], [ 'modifierlist' => $compiler->default_modifier_list, 'value' => $output ]);
 				}
 				// autoescape html
 				if ( $compiler->template->smarty->escape_html ) {
-					$output = "htmlspecialchars({$output}, ENT_QUOTES, '" . addslashes( Smarty::$_CHARSET ) . "')";
+					$output = "htmlspecialchars({$output}, ENT_QUOTES, '" . addslashes(Smarty::$_CHARSET) . "')";
 				}
 				// loop over registered filters
 				if ( !empty( $compiler->template->smarty->registered_filters[ Smarty::FILTER_VARIABLE ] ) ) {
 					foreach ( $compiler->template->smarty->registered_filters[ Smarty::FILTER_VARIABLE ] as $key => $function ) {
-						if ( !is_array( $function ) ) {
+						if ( !is_array($function) ) {
 							$output = "{$function}({$output},\$_smarty_tpl)";
-						} elseif ( is_object( $function[ 0 ] ) ) {
+						}
+						elseif ( is_object($function[ 0 ]) ) {
 							$output = "\$_smarty_tpl->smarty->registered_filters[Smarty::FILTER_VARIABLE]['{$key}'][0]->{$function[1]}({$output},\$_smarty_tpl)";
-						} else {
+						}
+						else {
 							$output = "{$function[0]}::{$function[1]}({$output},\$_smarty_tpl)";
 						}
 					}
@@ -95,28 +96,30 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 				// auto loaded filters
 				if ( isset( $compiler->smarty->autoload_filters[ Smarty::FILTER_VARIABLE ] ) ) {
 					foreach ( (array) $compiler->template->smarty->autoload_filters[ Smarty::FILTER_VARIABLE ] as $name ) {
-						$result = $this->compile_output_filter( $compiler, $name, $output );
+						$result = $this->compile_output_filter($compiler, $name, $output);
 						if ( $result !== FALSE ) {
 							$output = $result;
-						} else {
+						}
+						else {
 							// not found, throw exception
-							throw new SmartyException( "Unable to load filter '{$name}'" );
+							throw new SmartyException("Unable to load filter '{$name}'");
 						}
 					}
 				}
 				if ( isset( $compiler->template->variable_filters ) ) {
 					foreach ( $compiler->template->variable_filters as $filter ) {
-						if ( count( $filter ) == 1 && ( $result = $this->compile_output_filter( $compiler, $filter[ 0 ], $output ) ) !== FALSE ) {
+						if ( count($filter) == 1 && ( $result = $this->compile_output_filter($compiler, $filter[ 0 ], $output) ) !== FALSE ) {
 							$output = $result;
-						} else {
-							$output = $compiler->compileTag( 'private_modifier', [ ], [ 'modifierlist' => [ $filter ], 'value' => $output ] );
+						}
+						else {
+							$output = $compiler->compileTag('private_modifier', [ ], [ 'modifierlist' => [ $filter ], 'value' => $output ]);
 						}
 					}
 				}
 			}
 
 			$compiler->has_output = TRUE;
-			$output = "<?php echo {$output};?>";
+			$output               = "<?php echo {$output};?>";
 		}
 
 		return $output;
@@ -129,19 +132,20 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 	 *
 	 * @return string
 	 */
-	private function compile_output_filter( $compiler, $name, $output )
-	{
+	private function compile_output_filter($compiler, $name, $output) {
 		$plugin_name = "smarty_variablefilter_{$name}";
-		$path = $compiler->smarty->loadPlugin( $plugin_name, FALSE );
+		$path        = $compiler->smarty->loadPlugin($plugin_name, FALSE);
 		if ( $path ) {
 			if ( $compiler->template->caching ) {
-				$compiler->template->required_plugins[ 'nocache' ][ $name ][ Smarty::FILTER_VARIABLE ][ 'file' ] = $path;
+				$compiler->template->required_plugins[ 'nocache' ][ $name ][ Smarty::FILTER_VARIABLE ][ 'file' ]     = $path;
 				$compiler->template->required_plugins[ 'nocache' ][ $name ][ Smarty::FILTER_VARIABLE ][ 'function' ] = $plugin_name;
-			} else {
-				$compiler->template->required_plugins[ 'compiled' ][ $name ][ Smarty::FILTER_VARIABLE ][ 'file' ] = $path;
+			}
+			else {
+				$compiler->template->required_plugins[ 'compiled' ][ $name ][ Smarty::FILTER_VARIABLE ][ 'file' ]     = $path;
 				$compiler->template->required_plugins[ 'compiled' ][ $name ][ Smarty::FILTER_VARIABLE ][ 'function' ] = $plugin_name;
 			}
-		} else {
+		}
+		else {
 			// not found
 			return FALSE;
 		}

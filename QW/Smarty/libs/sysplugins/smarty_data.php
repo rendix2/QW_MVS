@@ -15,8 +15,7 @@
  * @package    Smarty
  * @subpackage Template
  */
-class Smarty_Data extends Smarty_Internal_Data
-{
+class Smarty_Data extends Smarty_Internal_Data {
 	/**
 	 * Counter
 	 *
@@ -46,21 +45,22 @@ class Smarty_Data extends Smarty_Internal_Data
 	 *
 	 * @throws SmartyException
 	 */
-	public function __construct( $_parent = NULL, $smarty = NULL, $name = NULL )
-	{
+	public function __construct($_parent = NULL, $smarty = NULL, $name = NULL) {
 		self::$count++;
 		$this->dataObjectName = 'Data_object ' . ( isset( $name ) ? "'{$name}'" : self::$count );
-		$this->smarty = $smarty;
-		if ( is_object( $_parent ) ) {
+		$this->smarty         = $smarty;
+		if ( is_object($_parent) ) {
 			// when object add up back pointer
 			$this->parent = $_parent;
-		} elseif ( is_array( $_parent ) ) {
+		}
+		elseif ( is_array($_parent) ) {
 			// add up variable values
 			foreach ( $_parent as $_key => $_val ) {
-				$this->tpl_vars[ $_key ] = new Smarty_Variable( $_val );
+				$this->tpl_vars[ $_key ] = new Smarty_Variable($_val);
 			}
-		} elseif ( $_parent != NULL ) {
-			throw new SmartyException( "Wrong type for template variables" );
+		}
+		elseif ( $_parent != NULL ) {
+			throw new SmartyException("Wrong type for template variables");
 		}
 	}
 }

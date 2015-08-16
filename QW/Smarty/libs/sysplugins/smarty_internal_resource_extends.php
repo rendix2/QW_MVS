@@ -15,8 +15,7 @@
  * @package    Smarty
  * @subpackage TemplateResources
  */
-class Smarty_Internal_Resource_Extends extends Smarty_Resource
-{
+class Smarty_Internal_Resource_Extends extends Smarty_Resource {
 	/**
 	 * mbstring.overload flag
 	 *
@@ -25,53 +24,14 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
 	public $mbstring_overload = 0;
 
 	/**
-	 * populate Source Object with meta data from Resource
-	 *
-	 * @param Smarty_Template_Source   $source    source object
-	 * @param Smarty_Internal_Template $_template template object
-	 *
-	 * @throws SmartyException
-	 */
-	public function populate( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL )
-	{
-		$uid = sha1( getcwd() );
-		$sources = [ ];
-		$components = explode( '|', $source->name );
-		$exists = TRUE;
-		foreach ( $components as $component ) {
-			$s = Smarty_Resource::source( NULL, $source->smarty, $component );
-			if ( $s->type == 'php' ) {
-				throw new SmartyException( "Resource type {$s->type} cannot be used with the extends resource type" );
-			}
-			$sources[ $s->uid ] = $s;
-			$uid .= realpath( $s->filepath );
-			if ( $_template && $_template->smarty->compile_check ) {
-				$exists = $exists && $s->exists;
-			}
-		}
-		$source->components = $sources;
-		$source->filepath = $s->filepath;
-		$source->uid = sha1( $uid );
-		if ( $_template && $_template->smarty->compile_check ) {
-			$source->timestamp = $s->timestamp;
-			$source->exists = $exists;
-		}
-		// need the template at getContent()
-		$source->template = $_template;
-	}
-
-	/**
-	 * populate Source Object with timestamp and exists from Resource
+	 * Determine basename for compiled filename
 	 *
 	 * @param Smarty_Template_Source $source source object
+	 *
+	 * @return string resource's basename
 	 */
-	public function populateTimestamp( Smarty_Template_Source $source )
-	{
-		$source->exists = TRUE;
-		foreach ( $source->components as $s ) {
-			$source->exists = $source->exists && $s->exists;
-		}
-		$source->timestamp = $s->timestamp;
+	public function getBasename(Smarty_Template_Source $source) {
+		return str_replace(':', '.', basename($source->filepath));
 	}
 
 	/**
@@ -82,13 +42,12 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
 	 * @return string template source
 	 * @throws SmartyException if source cannot be loaded
 	 */
-	public function getContent( Smarty_Template_Source $source )
-	{
+	public function getContent(Smarty_Template_Source $source) {
 		if ( !$source->exists ) {
-			throw new SmartyException( "Unable to read template {$source->type} '{$source->name}'" );
+			throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
 		}
 
-		$_components = array_reverse( $source->components );
+		$_components = array_reverse($source->components);
 
 		$_content = '';
 		foreach ( $_components as $_component ) {
@@ -100,14 +59,50 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
 	}
 
 	/**
-	 * Determine basename for compiled filename
+	 * populate Source Object with meta data from Resource
+	 *
+	 * @param Smarty_Template_Source   $source    source object
+	 * @param Smarty_Internal_Template $_template template object
+	 *
+	 * @throws SmartyException
+	 */
+	public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL) {
+		$uid        = sha1(getcwd());
+		$sources    = [ ];
+		$components = explode('|', $source->name);
+		$exists     = TRUE;
+		foreach ( $components as $component ) {
+			$s = Smarty_Resource::source(NULL, $source->smarty, $component);
+			if ( $s->type == 'php' ) {
+				throw new SmartyException("Resource type {$s->type} cannot be used with the extends resource type");
+			}
+			$sources[ $s->uid ] = $s;
+			$uid .= realpath($s->filepath);
+			if ( $_template && $_template->smarty->compile_check ) {
+				$exists = $exists && $s->exists;
+			}
+		}
+		$source->components = $sources;
+		$source->filepath   = $s->filepath;
+		$source->uid        = sha1($uid);
+		if ( $_template && $_template->smarty->compile_check ) {
+			$source->timestamp = $s->timestamp;
+			$source->exists    = $exists;
+		}
+		// need the template at getContent()
+		$source->template = $_template;
+	}
+
+	/**
+	 * populate Source Object with timestamp and exists from Resource
 	 *
 	 * @param Smarty_Template_Source $source source object
-	 *
-	 * @return string resource's basename
 	 */
-	public function getBasename( Smarty_Template_Source $source )
-	{
-		return str_replace( ':', '.', basename( $source->filepath ) );
+	public function populateTimestamp(Smarty_Template_Source $source) {
+		$source->exists = TRUE;
+		foreach ( $source->components as $s ) {
+			$source->exists = $source->exists && $s->exists;
+		}
+		$source->timestamp = $s->timestamp;
 	}
 }

@@ -16,8 +16,7 @@
  * @package    Smarty
  * @subpackage PluginsInternal
  */
-class Smarty_Internal_Function_Call_Handler
-{
+class Smarty_Internal_Function_Call_Handler {
 	/**
 	 * This function handles calls to template functions defined by {function}
 	 * It does create a PHP function at the first call
@@ -30,21 +29,20 @@ class Smarty_Internal_Function_Call_Handler
 	 *
 	 * @return bool
 	 */
-	public static function call( $_name, Smarty_Internal_Template $_smarty_tpl, $_function, $_params, $_nocache )
-	{
+	public static function call($_name, Smarty_Internal_Template $_smarty_tpl, $_function, $_params, $_nocache) {
 		$funcParam = $_smarty_tpl->properties[ 'tpl_function' ][ $_name ];
-		if ( is_file( $funcParam[ 'compiled_filepath' ] ) ) {
+		if ( is_file($funcParam[ 'compiled_filepath' ]) ) {
 			// read compiled file
-			$code = file_get_contents( $funcParam[ 'compiled_filepath' ] );
+			$code = file_get_contents($funcParam[ 'compiled_filepath' ]);
 			// grab template function
-			if ( preg_match( "/\/\* {$_function} \*\/([\S\s]*?)\/\*\/ {$_function} \*\//", $code, $match ) ) {
+			if ( preg_match("/\/\* {$_function} \*\/([\S\s]*?)\/\*\/ {$_function} \*\//", $code, $match) ) {
 				// grab source info from file dependency
-				preg_match( "/\s*'{$funcParam['uid']}'([\S\s]*?)\),/", $code, $match1 );
+				preg_match("/\s*'{$funcParam['uid']}'([\S\s]*?)\),/", $code, $match1);
 				unset( $code );
 				$output = '';
 				// make PHP function known
 				eval( $match[ 0 ] );
-				if ( function_exists( $_function ) ) {
+				if ( function_exists($_function) ) {
 					// search cache file template
 					$tplPtr = $_smarty_tpl;
 					while ( !isset( $tplPtr->cached ) && isset( $tplPtr->parent ) ) {
@@ -52,14 +50,14 @@ class Smarty_Internal_Function_Call_Handler
 					}
 					// add template function code to cache file
 					if ( isset( $tplPtr->cached ) ) {
-						$cache = $tplPtr->cached;
-						$content = $cache->read( $tplPtr );
+						$cache   = $tplPtr->cached;
+						$content = $cache->read($tplPtr);
 						if ( $content ) {
 							// check if we must update file dependency
-							if ( !preg_match( "/'{$funcParam['uid']}'([\S\s]*?)'nocache_hash'/", $content, $match2 ) ) {
-								$content = preg_replace( "/('file_dependency'([\S\s]*?)\()/", "\\1{$match1[0]}", $content );
+							if ( !preg_match("/'{$funcParam['uid']}'([\S\s]*?)'nocache_hash'/", $content, $match2) ) {
+								$content = preg_replace("/('file_dependency'([\S\s]*?)\()/", "\\1{$match1[0]}", $content);
 							}
-							$cache->write( $tplPtr, $content . "<?php " . $match[ 0 ] . "?>\n" );
+							$cache->write($tplPtr, $content . "<?php " . $match[ 0 ] . "?>\n");
 						}
 					}
 

@@ -9,21 +9,18 @@
 namespace QW\FW\DP\Builder;
 
 
-class ShowOfUse
-{
+class ShowOfUse {
 
 	private $director;
 
-	public function __construct()
-	{
+	public function __construct() {
 		$this->director = new Director();
 
-		echo $this->director->build( new CheapBuilder() );
-		echo $this->director->build( new LuxoryBuilder() );
+		echo $this->director->build(new CheapBuilder());
+		echo $this->director->build(new LuxoryBuilder());
 	}
 
-	public function __destruct()
-	{
+	public function __destruct() {
 		$this->director = NULL;
 	}
 }

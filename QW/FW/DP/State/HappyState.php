@@ -9,12 +9,10 @@
 namespace QW\FW\DP\State;
 
 
-class HappyState implements StateOfMind
-{
+class HappyState implements StateOfMind {
 
 
-	public function express()
-	{
+	public function express() {
 		echo 'Jsem veselý';
 	}
 }

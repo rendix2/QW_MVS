@@ -9,8 +9,7 @@
 namespace QW\FW\DP\Command;
 
 
-interface Command
-{
+interface Command {
 
 	public function execute();
 

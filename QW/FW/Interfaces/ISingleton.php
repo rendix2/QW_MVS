@@ -1,8 +1,7 @@
 <?php
 namespace QW\FW\Interfaces;
 
-interface ISingleton
-{
+interface ISingleton {
 	public static function getSingleton();
 }
 

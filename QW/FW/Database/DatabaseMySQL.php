@@ -25,5 +25,6 @@ final class DatabaseMySQL extends AbstractDatabase
         }
 
         $this->userPassword = null;
+        self::$AllConnectionsCount++;
     }
 }

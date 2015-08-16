@@ -8,6 +8,7 @@ use QW\FW\Interfaces\IDatabase;
 abstract class AbstractDatabase extends Object implements IDatabase
 {
     protected static $AllQueryCount;
+    protected static $AllConnectionsCount;
 
     protected $connection;
     protected $queryCount;
@@ -36,6 +37,7 @@ abstract class AbstractDatabase extends Object implements IDatabase
         $this->statement = null;
         $this->connection = null;
         self::$AllQueryCount = 0;
+        self::$AllConnectionsCount = 0;
     }
 
     public function __destruct(){
@@ -58,6 +60,10 @@ abstract class AbstractDatabase extends Object implements IDatabase
     public static function getAllQueryCount()
     {
         return self::$AllQueryCount;
+    }
+
+    public static function getAllConnectionsCount(){
+        return self::$AllConnectionsCount;
     }
 
     public function query($query, array $options)

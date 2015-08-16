@@ -27,5 +27,6 @@ final class DatabasePostgreSQL extends AbstractDatabase
         }
 
         $this->userPassword = null;
+        self::$AllConnectionsCount+;;
     }
 }

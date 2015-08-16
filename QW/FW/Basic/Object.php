@@ -13,9 +13,8 @@ class Object {
 	}
 
 	public final static function __callStatic($name, $arguments) {
-		if ( !self::methodExists($name) ) {
+		if ( !self::methodExists($name) )
 			throw new MemberAccessException('Non-existing method: ' . self::getStaticClassName() . '</b>::<b>' . $name . '</b>');
-		}
 	}
 
 	public function __construct() {
@@ -27,9 +26,8 @@ class Object {
 	}
 
 	public final function __get($name) {
-		if ( !$this->propertyExists($name) ) {
+		if ( !$this->propertyExists($name) )
 			throw new MemberAccessException('Non-existing property: <b>' . $this->getClassName() . '</b>-><b>' . $name . '</b>');
-		}
 	}
 
 	public function __toString() {

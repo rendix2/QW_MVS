@@ -10,11 +10,10 @@ final class LanguageException extends \Exception {
 }
 
 class Language extends Object implements ILanguage {
+	const EXT = '.ini';
 	const PATH = './Languages/';
 	const PREFIX_NAME = '/lang';
 	const PREFIX_NAME_META = '/langMeta';
-	const EXT = '.ini';
-
 	private $langName, $lang, $meta, $allPackages;
 
 	public function __construct($langName) {
@@ -61,15 +60,15 @@ class Language extends Object implements ILanguage {
 		$this->meta     = NULL;
 	}
 
-	public function languageGetPack() {
-		return $this->lang;
+	public function languageGetAllPackages() {
+		return $this->allPackages;
 	}
 
 	public function languageGetMetaPack() {
 		return $this->meta;
 	}
 
-	public function languageGetAllPackages() {
-		return $this->allPackages;
+	public function languageGetPack() {
+		return $this->lang;
 	}
 }

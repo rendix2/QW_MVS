@@ -6,6 +6,9 @@ use QW\FW\Basic\IllegalArgumentException;
 
 final class MathDiscreet {
 
+	private static function __construct() {
+	}
+
 	public static function gcd($a, $b) {
 		if ( $a < 1 || $b < 1 ) {
 			throw new IllegalArgumentException();
@@ -84,8 +87,5 @@ final class MathDiscreet {
 		}
 
 		return $sieve;
-	}
-
-	private static function __construct() {
 	}
 }

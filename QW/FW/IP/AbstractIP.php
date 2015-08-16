@@ -36,6 +36,10 @@ abstract class AbstractIP extends Object implements IP {
 		return long2ip($this->ipCoded);
 	}
 
+	protected final function getIpCountPart() {
+		return $this->ipCountPart;
+	}
+
 	public function getLong() {
 		return $this->ipCoded;
 	}
@@ -44,9 +48,5 @@ abstract class AbstractIP extends Object implements IP {
 		if ( !is_numeric($part) ) {
 			throw new IllegalArgumentException();
 		}
-	}
-
-	protected final function getIpCountPart() {
-		return $this->ipCountPart;
 	}
 }

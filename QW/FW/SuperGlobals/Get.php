@@ -5,6 +5,9 @@ namespace QW\FW\SuperGlobals;
 use QW\FW\Interfaces\ISG;
 
 class Get implements ISG {
+	private function __construct() {
+	}
+
 	public static function get($k) {
 		return isset( $_GET[ $k ] ) ? $_GET[ $k ] : FALSE;
 	}
@@ -17,8 +20,5 @@ class Get implements ISG {
 		$_GET[ $k ] = $v;
 
 		return ( self::get($k) == $v ) ? TRUE : FALSE;
-	}
-
-	private static function __construct() {
 	}
 }

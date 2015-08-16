@@ -7,7 +7,7 @@ final class Boolean extends Object {
 	const TRUE = TRUE;
 	private $boolean;
 
-	function __construct($boolean) {
+	public function __construct($boolean) {
 		parent::__construct();
 
 		if ( !is_bool($boolean) ) {
@@ -17,7 +17,7 @@ final class Boolean extends Object {
 		$this->boolean = $boolean;
 	}
 
-	function __toString() {
+	public function __toString() {
 		return (string) $this->boolean;
 	}
 

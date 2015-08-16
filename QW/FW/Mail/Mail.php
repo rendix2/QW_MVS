@@ -28,6 +28,25 @@ final class Mail extends Object {
 
 	// Jakub Vrána php.vrana.cz
 
+	private function createImageOfTextEmail() {
+		// fucking login to create image :))
+	}
+
+	private function deleteImageOfTextEmail() {
+	}
+
+	private function mimeHeaderEncode($text, $encoding = "utf-8") {
+		return "=?$encoding?Q?" . imap_8bit($text) . "?=";
+	}
+
+	public function sendEmail() {
+		if ( empty( $this->text ) ) {
+			throw new MailException('Prázdný text E-mailu');
+		}
+
+		return mb_send_mail($this->to, $this->subject, $this->text);
+	}
+
 	/**
 	 * @param $text
 	 *
@@ -57,24 +76,5 @@ final class Mail extends Object {
 		echo 'End of preview!';
 
 		return TRUE;
-	}
-
-	public function sendEmail() {
-		if ( empty( $this->text ) ) {
-			throw new MailException('Prázdný text E-mailu');
-		}
-
-		return mb_send_mail($this->to, $this->subject, $this->text);
-	}
-
-	private function mimeHeaderEncode($text, $encoding = "utf-8") {
-		return "=?$encoding?Q?" . imap_8bit($text) . "?=";
-	}
-
-	private function createImageOfTextEmail() {
-		// fucking login to create image :))
-	}
-
-	private function deleteImageOfTextEmail() {
 	}
 }

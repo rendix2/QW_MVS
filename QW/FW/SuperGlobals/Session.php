@@ -9,11 +9,25 @@ final class Session implements ISG {
 	private function __construct() {
 	}
 
-	public static function start() {
-		session_start();
+	public static function end() {
 		self::newId();
 
-		return self::id();
+		$_SESSION = [ ];
+		unset( $_SESSION );
+
+		return session_destroy();
+	}
+
+	public static function get($k) {
+		self::newId();
+
+		return isset( $_SESSION[ $k ] ) ? $_SESSION[ $k ] : FALSE;
+	}
+
+	public static function getAll() {
+		self::newId();
+
+		return $_SESSION;
 	}
 
 	public static function id() {
@@ -32,12 +46,6 @@ final class Session implements ISG {
 		return self::id();
 	}
 
-	public static function get($k) {
-		self::newId();
-
-		return isset( $_SESSION[ $k ] ) ? $_SESSION[ $k ] : FALSE;
-	}
-
 	public static function set($k, $v) {
 		self::newId();
 		$_SESSION[ $k ] = $v;
@@ -45,18 +53,10 @@ final class Session implements ISG {
 		return ( self::get($k) == $v ) ? TRUE : FALSE;
 	}
 
-	public static function end() {
+	public static function start() {
+		session_start();
 		self::newId();
 
-		$_SESSION = [ ];
-		unset( $_SESSION );
-
-		return session_destroy();
-	}
-
-	public static function getAll() {
-		self::newId();
-
-		return $_SESSION;
+		return self::id();
 	}
 }

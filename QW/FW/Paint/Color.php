@@ -8,9 +8,8 @@ use QW\FW\Math\Math;
 
 final class Color extends Object {
 	const BLUE = 0x0000FF;
-	const RED = 0xFF0000;
 	const GREEN = 0x00FF00;
-
+	const RED = 0xFF0000;
 	private $red, $green, $blue;
 
 	public function __construct($red, $green, $blue) {
@@ -32,19 +31,19 @@ final class Color extends Object {
 		$this->blue  = $blue;
 	}
 
-	public function getRed() {
-		return $this->red;
+	public function getBlue() {
+		return $this->blue;
 	}
 
 	public function getGreen() {
 		return $this->green;
 	}
 
-	public function getBlue() {
-		return $this->blue;
-	}
-
 	public function getRGB() {
 		return (int) Math::decimalToHexadecimal($this->red) . Math::decimalToHexadecimal($this->green) . Math::decimalToHexadecimal($this->blue);
+	}
+
+	public function getRed() {
+		return $this->red;
 	}
 }

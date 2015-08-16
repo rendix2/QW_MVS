@@ -22,21 +22,6 @@ final class Folder extends File {
 	}
 
 	// http://stackoverflow.com/questions/478121/php-get-directory-size
-	public function size() {
-		$bytesTotal = 0;
-		$path       = realpath($this->filePath);
-		if ( $path !== FALSE ) {
-			foreach ( new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->filePath, FilesystemIterator::SKIP_DOTS)) as $object ) {
-				$bytesTotal += $object->getSize();
-			}
-		}
-
-		return $bytesTotal;
-	}
-
-	public function delete() {
-		return rmdir($this->filePath);
-	}
 
 	public function content() {
 		$array = [ ];
@@ -51,5 +36,21 @@ final class Folder extends File {
 		}
 
 		return $array;
+	}
+
+	public function delete() {
+		return rmdir($this->filePath);
+	}
+
+	public function size() {
+		$bytesTotal = 0;
+		$path       = realpath($this->filePath);
+		if ( $path !== FALSE ) {
+			foreach ( new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->filePath, FilesystemIterator::SKIP_DOTS)) as $object ) {
+				$bytesTotal += $object->getSize();
+			}
+		}
+
+		return $bytesTotal;
 	}
 }

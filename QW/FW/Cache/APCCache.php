@@ -2,7 +2,8 @@
 
 namespace QW\FW\Cache;
 
-use QW\FW\Basic\IllegalArgumentException;
+
+use QW\FW\Boot\IllegalArgumentException;
 
 final class APCCache extends AbstractCache {
 	private $key;

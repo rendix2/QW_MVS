@@ -36,17 +36,15 @@ class String extends Object {
 	}
 
 	public function charAt($x) {
-		if ( !Validator::isNumber($x) || $x < 0 || $x > ( mb_strlen($this->string, 'UTF-8') - 1 ) ) {
+		if ( !Validator::isNumber($x) || $x < 0 || $x > ( mb_strlen($this->string, 'UTF-8') - 1 ) )
 			throw new IllegalArgumentException();
-		}
 
 		return $this->string{$x};
 	}
 
 	public function subString($start, $end = NULL) {
-		if ( $start < 0 || ( $end > mb_strlen($this->string, 'UTF-8') && $end != NULL ) ) {
+		if ( $start < 0 || ( $end > mb_strlen($this->string, 'UTF-8') && $end != NULL ) )
 			throw new IllegalArgumentException();
-		}
 
 		return new String(mb_substr($this->string, $start, $end, 'UTF-8'));
 	}

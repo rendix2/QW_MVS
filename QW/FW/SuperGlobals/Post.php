@@ -4,6 +4,9 @@ namespace QW\FW\SuperGlobals;
 use QW\FW\Interfaces\ISG;
 
 final class Post implements ISG {
+	private function __construct() {
+	}
+
 	public static function get($k) {
 		return isset( $_POST[ $k ] ) ? $_POST[ $k ] : FALSE;
 	}
@@ -16,8 +19,5 @@ final class Post implements ISG {
 		$_POST[ $k ] = $v;
 
 		return ( self::get($k) == $v ) ? TRUE : FALSE;
-	}
-
-	private function __construct() {
 	}
 }

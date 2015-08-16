@@ -206,7 +206,7 @@ class Smarty_Internal_Templatelexer {
 		$this->token = Smarty_Internal_Templateparser::TP_TEXT;
 	}
 
-function yy_r1_15() {
+	function yy_r1_15() {
 
 		if ( $this->smarty->auto_literal && isset( $this->value[ $this->ldel_length ] ) ? strpos(" \n\t\r", $this->value[ $this->ldel_length ]) !== FALSE : FALSE ) {
 			$this->token = Smarty_Internal_Templateparser::TP_TEXT;
@@ -245,7 +245,7 @@ function yy_r1_15() {
 		$this->token = Smarty_Internal_Templateparser::TP_TEXT;
 	}
 
-		function yy_r1_2() {
+	function yy_r1_2() {
 
 		preg_match("~[*]{$this->rdel}~", $this->data, $match, PREG_OFFSET_CAPTURE, $this->counter);
 		if ( isset( $match[ 0 ][ 1 ] ) ) {
@@ -308,7 +308,7 @@ function yy_r1_15() {
 		$this->taglineno = $this->line;
 	}
 
-function yy_r2_6() {
+	function yy_r2_6() {
 
 		$this->yypopstate();
 		$this->token     = Smarty_Internal_Templateparser::TP_SIMPLETAG;
@@ -329,7 +329,7 @@ function yy_r2_6() {
 		$this->taglineno = $this->line;
 	}
 
-		function yy_r3_1() {
+	function yy_r3_1() {
 
 		$this->token = Smarty_Internal_Templateparser::TP_RDEL;
 		$this->yypopstate();
@@ -521,7 +521,7 @@ function yy_r2_6() {
 		$this->token = Smarty_Internal_Templateparser::TP_COLON;
 	}
 
-function yy_r3_61() {
+	function yy_r3_61() {
 
 		$this->token = Smarty_Internal_Templateparser::TP_QMARK;
 	}
@@ -586,7 +586,7 @@ function yy_r3_61() {
 		}
 	}
 
-		function yy_r4_3() {
+	function yy_r4_3() {
 
 		$to = strlen($this->data);
 		preg_match("~{$this->ldel}[/]?literal{$this->rdel}~i", $this->data, $match, PREG_OFFSET_CAPTURE, $this->counter);
@@ -622,7 +622,7 @@ function yy_r3_61() {
 		$this->token = Smarty_Internal_Templateparser::TP_TEXT;
 	}
 
-		function yy_r5_3() {
+	function yy_r5_3() {
 
 		if ( $this->smarty->auto_literal && isset( $this->value[ $this->ldel_length ] ) ? strpos(" \n\t\r", $this->value[ $this->ldel_length ]) !== FALSE : FALSE ) {
 			$this->token = Smarty_Internal_Templateparser::TP_TEXT;
@@ -677,7 +677,7 @@ function yy_r3_61() {
 		$this->token = Smarty_Internal_Templateparser::TP_DOLLARID;
 	}
 
-function yy_r5_9() {
+	function yy_r5_9() {
 
 		$this->token = Smarty_Internal_Templateparser::TP_TEXT;
 	}
@@ -702,7 +702,7 @@ function yy_r5_9() {
 		}
 	}
 
-function yy_r6_3() {
+	function yy_r6_3() {
 
 		if ( $this->smarty->auto_literal && isset( $this->value[ $this->ldel_length ] ) ? strpos(" \n\t\r", $this->value[ $this->ldel_length ]) !== FALSE : FALSE ) {
 			return FALSE;
@@ -749,7 +749,7 @@ function yy_r6_3() {
 		}
 	}
 
-		function yy_r7_3() {
+	function yy_r7_3() {
 
 		if ( $this->smarty->auto_literal && isset( $this->value[ $this->ldel_length ] ) ? strpos(" \n\t\r", $this->value[ $this->ldel_length ]) !== FALSE : FALSE ) {
 			$this->token = Smarty_Internal_Templateparser::TP_BLOCKSOURCE;
@@ -773,7 +773,7 @@ function yy_r6_3() {
 		}
 	}
 
-function yy_r7_6() {
+	function yy_r7_6() {
 
 		$to = strlen($this->data);
 		preg_match("~" . $this->ldel . "\s*(literal\s*" . $this->rdel . "|([/])?block(\s|" . $this->rdel . ")|[\$]smarty\.block\.(child|parent))~i", $this->data, $match, PREG_OFFSET_CAPTURE, $this->counter);
@@ -820,7 +820,7 @@ function yy_r7_6() {
 		$this->token = Smarty_Internal_Templateparser::TP_BLOCKSOURCE;
 	}
 
-		public function yybegin($state) {
+	public function yybegin($state) {
 		$this->_yy_state = $state;
 		if ( $this->yyTraceFILE ) {
 			fprintf($this->yyTraceFILE, "%sState set %s\n", $this->yyTracePrompt, isset( $this->state_name[ $this->_yy_state ] ) ? $this->state_name[ $this->_yy_state ] : $this->_yy_state);
@@ -978,7 +978,7 @@ function yy_r7_6() {
 		while ( TRUE );
 	}
 
-public function yylex4() {
+	public function yylex4() {
 		if ( !isset( $this->yy_global_pattern4 ) ) {
 			$this->yy_global_pattern4 = "/\G(" . $this->ldel . "\\s*literal\\s*" . $this->rdel . ")|\G(" . $this->ldel . "\\s*[\/]literal\\s*" . $this->rdel . ")|\G([\S\s])/isS";
 		}
@@ -1076,7 +1076,7 @@ public function yylex4() {
 		while ( TRUE );
 	}
 
-		public function yylex6() {
+	public function yylex6() {
 		if ( !isset( $this->yy_global_pattern6 ) ) {
 			$this->yy_global_pattern6 = "/\G(" . $this->ldel . "\\s*strip\\s*" . $this->rdel . ")|\G(" . $this->ldel . "\\s*[\/]strip\\s*" . $this->rdel . ")|\G(" . $this->ldel . "\\s*block)|\G([\S\s])/isS";
 		}

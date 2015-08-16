@@ -177,7 +177,7 @@ class Smarty_Internal_Configfilelexer {
 		$this->yypushstate(self::VALUE);
 	}
 
-function yy_r1_5() {
+	function yy_r1_5() {
 
 		return FALSE;
 	}
@@ -197,7 +197,7 @@ function yy_r1_5() {
 		$this->token = Smarty_Internal_Configfileparser::TPC_OTHER;
 	}
 
-		function yy_r2_1() {
+	function yy_r2_1() {
 
 		return FALSE;
 	} // end function
@@ -226,7 +226,7 @@ function yy_r1_5() {
 		$this->yypopstate();
 	}
 
-function yy_r2_6() {
+	function yy_r2_6() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_DOUBLE_QUOTED_STRING;
 		$this->yypopstate();
@@ -252,7 +252,7 @@ function yy_r2_6() {
 		$this->yypopstate();
 	}
 
-function yy_r2_9() {
+	function yy_r2_9() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
 		$this->value = "";
@@ -324,7 +324,7 @@ function yy_r2_9() {
 		return $this->{'yylex' . $this->_yy_state}();
 	}
 
-		public function yylex1() {
+	public function yylex1() {
 		if ( !isset( $this->yy_global_pattern1 ) ) {
 			$this->yy_global_pattern1 = "/\G(#|;)|\G(\\[)|\G(\\])|\G(=)|\G([ \t\r]+)|\G(\n)|\G([0-9]*[a-zA-Z_]\\w*)|\G([\S\s])/iS";
 		}
@@ -520,7 +520,7 @@ function yy_r2_9() {
 		while ( TRUE );
 	}
 
-		public function yylex5() {
+	public function yylex5() {
 		if ( !isset( $this->yy_global_pattern5 ) ) {
 			$this->yy_global_pattern5 = "/\G(\\.)|\G(.*?(?=[\.=[\]\r\n]))/iS";
 		}

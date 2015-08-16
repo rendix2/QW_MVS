@@ -30,23 +30,23 @@ class EasyCaptcha extends Object {
 		$this->captcha->setText(Math::randomInterval(0, 6), 0, 0, $this->text);
 	}
 
-	public function getText() {
-		return $this->text;
-	}
-
-	public function getPNG() {
-		$this->captcha->toPNG();
-	}
-
 	public function getBMP() {
 		$this->captcha->toBMP();
+	}
+
+	public function getGIF() {
+		$this->captcha->toGIF();
 	}
 
 	public function getJPG() {
 		$this->captcha->toJPG();
 	}
 
-	public function getGIF() {
-		$this->captcha->toGIF();
+	public function getPNG() {
+		$this->captcha->toPNG();
+	}
+
+	public function getText() {
+		return $this->text;
 	}
 }

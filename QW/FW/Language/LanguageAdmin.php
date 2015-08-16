@@ -42,11 +42,11 @@ class LanguageAdmin extends Language {
 		$this->metaAdmin = NULL;
 	}
 
-	public function languageGetPack() {
-		return $this->langAdmin;
-	}
-
 	public function languageGetMetaPack() {
 		return $this->metaAdmin;
+	}
+
+	public function languageGetPack() {
+		return $this->langAdmin;
 	}
 }

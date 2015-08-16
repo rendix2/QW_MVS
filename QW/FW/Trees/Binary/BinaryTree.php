@@ -30,6 +30,53 @@ final class BinaryTree extends AbstractTree {
 		}
 	}
 
+	public function getChildrenCount() {
+		$itc                       = new CountIterator($this);
+		$this->directChildrenCount = $itc->getCountChildren();
+
+		parent::getChildrenCount();
+	}
+
+	public function getLeftChild() {
+		return $this->left;
+	}
+
+	public function getRightChild() {
+		return $this->right;
+	}
+
+	public function iteratorEulerTour() {
+		return new EulerTourIterator($this);
+	}
+
+	public function iteratorInOrderIterative() {
+		return new InOrderIterativeIterator($this);
+	}
+
+	public function iteratorInOrderRecourse() {
+		return new InOrderRecourseIterator($this);
+	}
+
+	public function iteratorLevelOrder() {
+		return new LevelOrderIterator($this);
+	}
+
+	public function iteratorPostOrderIterative() {
+		return new PostOrderIterativeIterator($this);
+	}
+
+	public function iteratorPostOrderRecourse() {
+		return new PostOrderRecourseIterator($this);
+	}
+
+	public function iteratorPreOrderIterative() {
+		return new PreOrderIterativeIterator($this);
+	}
+
+	public function iteratorPreOrderRecourse() {
+		return new PreOrderRecourseIterator($this);
+	}
+
 	public function setLeftChild(BinaryTree $left = NULL) {
 		if ( $this->left == NULL && $left != NULL ) {
 			$this->directChildrenCount++;
@@ -44,52 +91,5 @@ final class BinaryTree extends AbstractTree {
 		}
 
 		$this->right = $right;
-	}
-
-	public function getLeftChild() {
-		return $this->left;
-	}
-
-	public function getRightChild() {
-		return $this->right;
-	}
-
-	public function getChildrenCount() {
-		$itc                       = new CountIterator($this);
-		$this->directChildrenCount = $itc->getCountChildren();
-
-		parent::getChildrenCount();
-	}
-
-	public function iteratorPreOrderRecourse() {
-		return new PreOrderRecourseIterator($this);
-	}
-
-	public function iteratorPreOrderIterative() {
-		return new PreOrderIterativeIterator($this);
-	}
-
-	public function iteratorInOrderRecourse() {
-		return new InOrderRecourseIterator($this);
-	}
-
-	public function iteratorInOrderIterative() {
-		return new InOrderIterativeIterator($this);
-	}
-
-	public function iteratorPostOrderRecourse() {
-		return new PostOrderRecourseIterator($this);
-	}
-
-	public function iteratorPostOrderIterative() {
-		return new PostOrderIterativeIterator($this);
-	}
-
-	public function iteratorLevelOrder() {
-		return new LevelOrderIterator($this);
-	}
-
-	public function iteratorEulerTour() {
-		return new EulerTourIterator($this);
 	}
 }

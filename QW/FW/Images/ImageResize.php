@@ -6,32 +6,16 @@ use QW\FW\Config;
 use QW\FW\Math\Math;
 
 final class ImageResize {
-	private static function __construct() {
+	public static function canResize($imagePath) {
+		$pictureInfo  = getimagesize($imagePath);
+		$memoryNeeded = round(( $pictureInfo[ 0 ] * $pictureInfo[ 1 ] * $pictureInfo[ 'bits' ] * $pictureInfo[ 'channels' ] / 8 + Math::power(2, 16) ) * 1.65);
+		$memoryLimit  = str_replace('M', '', Config::getMemoryLimit()) * Math::power(2, 20);
+
+		return ( $memoryLimit > ( $memoryNeeded + memory_get_usage(TRUE) ) ) ? TRUE : FALSE;
 	}
 
 	//functions from Jakub Vrána => php.vrana.cz
-	public static function image_shrink_size($file_in, $max_x = 0, $max_y = 0) {
-		list( $width, $height ) = getimagesize($file_in);
 
-		if ( !$width || !$height ) {
-			return [ 0, 0 ];
-		}
-
-		if ( $max_x && $width > $max_x ) {
-			$height = round($height * $max_x / $width);
-			$width  = $max_x;
-		}
-
-		if ( $max_y && $height > $max_y ) {
-			$width  = round($width * $max_y / $height);
-			$height = $max_y;
-		}
-
-		return [ $width, $height ];
-	}
-
-	//functios from Jakub Vrána => php.vrana.cz
-	// my edit: check for file exists($file_in)
 	public static function image_resize($file_in, $file_out, $width, $height) {
 		if ( !file_exists($file_in) ) {
 			return FALSE;
@@ -83,14 +67,33 @@ final class ImageResize {
 		}
 	}
 
+	//functios from Jakub Vrána => php.vrana.cz
+	// my edit: check for file exists($file_in)
+
+	public static function image_shrink_size($file_in, $max_x = 0, $max_y = 0) {
+		list( $width, $height ) = getimagesize($file_in);
+
+		if ( !$width || !$height ) {
+			return [ 0, 0 ];
+		}
+
+		if ( $max_x && $width > $max_x ) {
+			$height = round($height * $max_x / $width);
+			$width  = $max_x;
+		}
+
+		if ( $max_y && $height > $max_y ) {
+			$width  = round($width * $max_y / $height);
+			$height = $max_y;
+		}
+
+		return [ $width, $height ];
+	}
+
 	// http://www.pavlatka.cz/2012/05/php-enough-memory-manage-picture/
 	// calculate with used ram - my edit
-	public static function canResize($imagePath) {
-		$pictureInfo  = getimagesize($imagePath);
-		$memoryNeeded = round(( $pictureInfo[ 0 ] * $pictureInfo[ 1 ] * $pictureInfo[ 'bits' ] * $pictureInfo[ 'channels' ] / 8 + Math::power(2, 16) ) * 1.65);
-		$memoryLimit  = str_replace('M', '', Config::getMemoryLimit()) * Math::power(2, 20);
 
-		return ( $memoryLimit > ( $memoryNeeded + memory_get_usage(TRUE) ) ) ? TRUE : FALSE;
+	private static function __construct() {
 	}
 
 }

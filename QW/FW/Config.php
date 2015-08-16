@@ -8,6 +8,9 @@ class Config {
 	const URL_DELIMITER = '/';
 	static $dbConfig = [ 'dbHost' => '', 'dbUser' => '', 'dbPassword' => '', 'dbName' => '' ];
 
+	private function __construct() {
+	}
+
 	public static function getAllPHPIni() {
 		return parse_ini_file(php_ini_loaded_file(), TRUE);
 	}
@@ -50,8 +53,5 @@ class Config {
 
 	public static function getUplaodMaxFileSize() {
 		return ini_get('upload_max_filesize');
-	}
-
-	private function __construct() {
 	}
 }

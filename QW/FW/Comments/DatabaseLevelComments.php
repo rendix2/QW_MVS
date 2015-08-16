@@ -2,8 +2,7 @@
 
 namespace QW\FW\Comments;
 
-class DatabseLevelComments extends Comments {
-
+class DatabaseLevelComments extends Comments {
 
 	public function __construct() {
 		parent::__construct();

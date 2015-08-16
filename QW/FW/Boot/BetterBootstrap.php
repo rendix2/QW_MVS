@@ -20,16 +20,16 @@ class BetterBootstrap extends AbstractRouter {
 		$this->enabledRoutes[] = $route;
 	}
 
-	protected function setParams() {
-		$this->url    = isset( $_GET[ 'URL' ] ) ? $_GET[ 'URL' ] : NULL;
-		$this->params = rtrim($this->url, $this->$urlDelimiter);
-		$this->params = explode($this->$urlDelimiter, $this->params);
-	}
-
 	protected function callControllerMethod() {
 		if ( in_array($this->params[ 0 ], $this->enabledRoutes) )
 			$this->callControllerMethod();
 		else
 			throw new IllegalArgumentException();
+	}
+
+	protected function setParams() {
+		$this->url    = isset( $_GET[ 'URL' ] ) ? $_GET[ 'URL' ] : NULL;
+		$this->params = rtrim($this->url, $this->$urlDelimiter);
+		$this->params = explode($this->$urlDelimiter, $this->params);
 	}
 }

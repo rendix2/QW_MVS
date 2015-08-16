@@ -5,6 +5,9 @@ use QW\FW\Basic\IllegalArgumentException;
 
 final class MathComb {
 
+	private static function __construct() {
+	}
+
 	public static function factorial($x) {
 		if ( $x < 0 ) {
 			throw new IllegalArgumentException();
@@ -65,9 +68,6 @@ final class MathComb {
 			return 1;
 		}
 		else return self::fibonacciRecurse($x - 1) + self::fibonacciRecurse($x - 2);
-	}
-
-	private static function __construct() {
 	}
 
 

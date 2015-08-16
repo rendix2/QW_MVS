@@ -13,27 +13,27 @@ class User extends AbstractUser implements IUser {
 		$this->admin = FALSE;
 	}
 
-	public function getUserName() {
-		return $this->userName;
+	public function getIP() {
+		return $this->userIP;
 	}
 
 	public function getTemplate() {
 		return $this->userTemplate;
 	}
 
-	public function getIP() {
-		return $this->userIP;
+	public function getUserId() {
+		return $this->userId;
 	}
 
-	public function isLogged() {
-		return Session::get('Logged');
+	public function getUserName() {
+		return $this->userName;
 	}
 
 	public function isAdmin() {
 		return Session::get('Admin');
 	}
 
-	public function getUserId() {
-		return $this->userId;
+	public function isLogged() {
+		return Session::get('Logged');
 	}
 }

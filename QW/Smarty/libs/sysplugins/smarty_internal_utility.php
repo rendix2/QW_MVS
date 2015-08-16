@@ -35,6 +35,13 @@
  */
 class Smarty_Internal_Utility {
 	/**
+	 * private constructor to prevent calls creation of new instances
+	 */
+	final private function __construct() {
+		// intentionally left blank
+	}
+
+	/**
 	 * Delete compiled template file
 	 *
 	 * @param  string  $resource_name template name
@@ -288,12 +295,5 @@ class Smarty_Internal_Utility {
 		$template->compileTemplateSource();
 
 		return $template->used_tags;
-	}
-
-	/**
-	 * private constructor to prevent calls creation of new instances
-	 */
-	final private function __construct() {
-		// intentionally left blank
 	}
 }

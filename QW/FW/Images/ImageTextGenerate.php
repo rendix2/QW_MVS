@@ -25,6 +25,17 @@ final class ImageTextGenerate extends Object {
 		$this->imageTextColor = NULL;
 	}
 
+	public function destroyImage() {
+		if ( is_resource($this->imageResource) ) {
+			imagedestroy($this->imageResource);
+
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+
 	public function setBackgroundColor($red, $green, $blue) {
 		imagecolorallocate($this->imageResource, $red, $green, $blue);
 	}
@@ -37,6 +48,10 @@ final class ImageTextGenerate extends Object {
 		imagecolorallocate($this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue());
 	}
 
+	public function setText($fontSize, $x, $y, $string) {
+		imagestring($this->imageResource, $fontSize, $x, $y, $string, $this->imageTextColor);
+	}
+
 	public function setTextColor($red, $green, $blue) {
 		$this->imageTextColor = imagecolorallocate($this->imageResource, $red, $green, $blue);
 	}
@@ -47,39 +62,6 @@ final class ImageTextGenerate extends Object {
 		}
 
 		$this->imageTextColor = imagecolorallocate($this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue());
-	}
-
-	public function setText($fontSize, $x, $y, $string) {
-		imagestring($this->imageResource, $fontSize, $x, $y, $string, $this->imageTextColor);
-	}
-
-	public function destroyImage() {
-		if ( is_resource($this->imageResource) ) {
-			imagedestroy($this->imageResource);
-
-			return TRUE;
-		}
-		else {
-			return FALSE;
-		}
-	}
-
-	public function toPNG() {
-		if ( !is_resource($this->imageResource) ) {
-			throw new RuntimeException();
-		}
-
-		imagepng($this->imageResource);
-		imagedestroy($this->imageResource);
-	}
-
-	public function toJPG() {
-		if ( !is_resource($this->imageResource) ) {
-			throw new RuntimeException();
-		}
-
-		imagejpeg($this->imageResource);
-		imagedestroy($this->imageResource);
 	}
 
 	public function toBMP() {
@@ -97,6 +79,24 @@ final class ImageTextGenerate extends Object {
 		}
 
 		imagegif($this->imageResource);
+		imagedestroy($this->imageResource);
+	}
+
+	public function toJPG() {
+		if ( !is_resource($this->imageResource) ) {
+			throw new RuntimeException();
+		}
+
+		imagejpeg($this->imageResource);
+		imagedestroy($this->imageResource);
+	}
+
+	public function toPNG() {
+		if ( !is_resource($this->imageResource) ) {
+			throw new RuntimeException();
+		}
+
+		imagepng($this->imageResource);
 		imagedestroy($this->imageResource);
 	}
 }

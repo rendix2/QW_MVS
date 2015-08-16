@@ -10,6 +10,9 @@ namespace QW\FW\Math;
 
 
 final class MathEquation {
+	private function __construct() {
+	}
+
 	public static function solve_quadratic_equation($a, $b, $c) {
 		$d = $b * $b - 4 * $a * $c; // diskriminant
 
@@ -37,7 +40,4 @@ final class MathEquation {
 	* @author Thomas (www.adamjak.net)
 	* http://www.algoritmy.net/article/1538/Kvadraticka-rovnice
 	*/
-
-	private static function __construct() {
-	}
 }

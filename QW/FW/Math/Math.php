@@ -2,6 +2,10 @@
 namespace QW\FW\Math;
 
 final class Math {
+
+	private function __construct() {
+	}
+
 	public static function absoluteValue($x) {
 		return abs($x);
 	}
@@ -328,8 +332,5 @@ final class Math {
 		}
 
 		return $a * $b;
-	}
-
-	private function __construct() {
 	}
 }

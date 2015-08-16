@@ -23,11 +23,11 @@ final class FileCache extends AbstractCache {
 		return $this->file->setContent(self::PATH . $this->file->path(), serialize($data), FILE_APPEND);
 	}
 
-	public function useCache() {
-		return unserialize($this->file->getContent());
-	}
-
 	public function removeCache() {
 		return $this->file->delete();
+	}
+
+	public function useCache() {
+		return unserialize($this->file->getContent());
 	}
 }

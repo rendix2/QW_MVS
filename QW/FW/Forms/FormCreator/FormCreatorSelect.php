@@ -31,13 +31,13 @@ class FormCreatorSelect extends Object {
 		$this->size = $size;
 	}
 
-	public function addList(array $data, array $selected, array $disabled) {
+	public function addChoice($data, $selected = FALSE, array $disabled) {
 		$this->content[] = $data;
 
 		return $this;
 	}
 
-	public function addChoice($data, $selected = FALSE, array $disabled) {
+	public function addList(array $data, array $selected, array $disabled) {
 		$this->content[] = $data;
 
 		return $this;

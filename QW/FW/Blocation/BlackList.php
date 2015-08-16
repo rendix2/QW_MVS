@@ -21,12 +21,16 @@ class BlackList extends Object {
 		$this->myIp     = new IPvU(Server::get('remote_addr'));
 	}
 
-	public function addIp(IP $ip) {
-		if ( $ip == NULL ) {
-			throw new NullPointerException();
-		}
+	public function __destruct() {
+		$this->run();
+		$this->longOfIP = NULL;
+		$this->myIp     = NULL;
+	}
 
-		$this->longOfIP[] = $ip;
+	public function addIPs(array $long) {
+		foreach ( $long as $v ) {
+			$this->longOfIP[] = new IPvU($v);
+		}
 	}
 
 	public function addIPsv4(array $long) {
@@ -41,10 +45,12 @@ class BlackList extends Object {
 		}
 	}
 
-	public function addIPs(array $long) {
-		foreach ( $long as $v ) {
-			$this->longOfIP[] = new IPvU($v);
+	public function addIp(IP $ip) {
+		if ( $ip == NULL ) {
+			throw new NullPointerException();
 		}
+
+		$this->longOfIP[] = $ip;
 	}
 
 	public function addLong(IP $ip) {
@@ -85,11 +91,5 @@ class BlackList extends Object {
 				die( 'Your IP as blacklisted.' );
 			}
 		}
-	}
-
-	public function __destruct() {
-		$this->run();
-		$this->longOfIP = NULL;
-		$this->myIp     = NULL;
 	}
 }

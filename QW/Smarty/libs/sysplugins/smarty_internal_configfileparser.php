@@ -236,7 +236,7 @@ class Smarty_Internal_Configfileparser {
 		return $instance;
 	}
 
-		/**
+	/**
 	 * parse double quoted string
 	 *
 	 * @param string $qstr
@@ -249,7 +249,7 @@ class Smarty_Internal_Configfileparser {
 		return stripcslashes($inner_str);
 	}                    /* Index of top element in stack */
 
-		/**
+	/**
 	 * parse single quoted string
 	 *  remove outer quotes
 	 *  unescape inner quotes
@@ -276,7 +276,7 @@ class Smarty_Internal_Configfileparser {
 		return $str;
 	}                 /* Shifts left before out of the error */
 
-		/**
+	/**
 	 * parse triple quoted string
 	 *
 	 * @param string $qstr
@@ -287,7 +287,7 @@ class Smarty_Internal_Configfileparser {
 		return stripcslashes($qstr);
 	}  /* The parser's stack */
 
-public static function yy_destructor($yymajor, $yypminor) {
+	public static function yy_destructor($yymajor, $yypminor) {
 		switch ( $yymajor ) {
 			default:
 				break;   /* If no destructor action specified: do nothing */
@@ -299,7 +299,7 @@ public static function yy_destructor($yymajor, $yypminor) {
 		$this->yyTracePrompt = '<br>';
 	}
 
-public function Trace($TraceFILE, $zTracePrompt) {
+	public function Trace($TraceFILE, $zTracePrompt) {
 		if ( !$TraceFILE ) {
 			$zTracePrompt = 0;
 		}
@@ -747,7 +747,7 @@ public function Trace($TraceFILE, $zTracePrompt) {
 
 	#line 280 "../smarty/lexer/smarty_internal_configfileparser.y"
 
-public function yy_pop_parser_stack() {
+	public function yy_pop_parser_stack() {
 		if ( empty( $this->yystack ) ) {
 			return;
 		}

@@ -32,19 +32,30 @@ class FormCreatorHTML4 {
 		return $finalData;
 	}
 
-
-	public function addTextArea($name, $value = '') {
-		$this->formData[] = '<textarea name="{$name}">{$value}</textarea>';
+	public function addButton($name, $value = '') {
+		$this->formData[] = '<button name="{$name}">{$value}</button>';
 
 		return $this;
 	}
 
-	public function addInputText($name, $value = '', $size = '', $maxlength = '', $autocomplete = 'off') {
-		if ( !is_numeric($maxlength) || $autocomplete != 'off' || $autocomplete != 'on' || !is_numeric($size) ) {
+	public function addInputCheckbox($name, $value = '') {
+		$this->formData[] = '<input type="checkbox" name="{$name}" value="{$value}">';
+
+		return $this;
+	}
+
+	public function addInputHidden($name, $value = '') {
+		$this->formData[] = '<input type="hidden" name="{$name}" value="{$value}">';
+
+		return $this;
+	}
+
+	public function addInputImage($name, $src) {
+		if ( !file_exists($src) ) {
 			throw new IllegalArgumentException();
 		}
 
-		$this->formData[] = '<input type="text" name="{$name}" value="{$value}" size="{$size}" maxlength="{$maxlength}" autocomplete="{$autocomplete}">';
+		$this->formData[] = '<input type="image" name="{$name}" src="{$value}">';
 
 		return $this;
 	}
@@ -55,18 +66,6 @@ class FormCreatorHTML4 {
 		}
 
 		$this->formData[] = '<input type="password" name="{$name}" value="" maxlength="{$maxlength}">';
-
-		return $this;
-	}
-
-	public function addInputSubmit($name, $value = '') {
-		$this->formData[] = '<input type="submit" name="{$name}" value="{$value}">';
-
-		return $this;
-	}
-
-	public function addInputHidden($name, $value = '') {
-		$this->formData[] = '<input type="hidden" name="{$name}" value="{$value}">';
 
 		return $this;
 	}
@@ -85,24 +84,20 @@ class FormCreatorHTML4 {
 		return $this;
 	}
 
-	public function addInputCheckbox($name, $value = '') {
-		$this->formData[] = '<input type="checkbox" name="{$name}" value="{$value}">';
+	public function addInputSubmit($name, $value = '') {
+		$this->formData[] = '<input type="submit" name="{$name}" value="{$value}">';
 
 		return $this;
 	}
 
-	public function addInputImage($name, $src) {
-		if ( !file_exists($src) ) {
+	public function addInputText($name, $value = '', $size = '', $maxlength = '', $autocomplete = 'off') {
+		if ( !is_numeric($maxlength) || $autocomplete != 'off' || $autocomplete != 'on' || !is_numeric($size) ) {
 			throw new IllegalArgumentException();
 		}
 
-		$this->formData[] = '<input type="image" name="{$name}" src="{$value}">';
+		$this->formData[] = '<input type="text" name="{$name}" value="{$value}" size="{$size}" maxlength="{$maxlength}" autocomplete="{$autocomplete}">';
 
 		return $this;
-	}
-
-	public function createSelect($name, $multiple = FALSE, $size = 5, $disabled = FALSE) {
-		return ( $this->select == NULL ) ? new FormCreatorSelect($this, $name, $multiple, $size) : $this->select;
 	}
 
 	public function addSelect() {
@@ -117,9 +112,13 @@ class FormCreatorHTML4 {
 		return $this;
 	}
 
-	public function addButton($name, $value = '') {
-		$this->formData[] = '<button name="{$name}">{$value}</button>';
+	public function addTextArea($name, $value = '') {
+		$this->formData[] = '<textarea name="{$name}">{$value}</textarea>';
 
 		return $this;
+	}
+
+	public function createSelect($name, $multiple = FALSE, $size = 5, $disabled = FALSE) {
+		return ( $this->select == NULL ) ? new FormCreatorSelect($this, $name, $multiple, $size) : $this->select;
 	}
 }

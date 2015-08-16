@@ -64,8 +64,8 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		return self::$AllQueryCount;
 	}
 
-	protected final function checkConnection($errorCode){
-		switch($errorCode){
+	protected final function checkConnection(\PDOException $pdoEx){
+		switch($pdoEx->getCode()){
 			case 1045:
 				echo 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
 				break;
@@ -76,7 +76,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 				echo 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
 				break;
 			default:
-				echo 'Neočekávaná PDO chyba číslo: <b>' . $errorCode . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
+				echo 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
 		}
 	}
 

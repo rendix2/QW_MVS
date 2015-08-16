@@ -15,7 +15,7 @@ final class DatabasePostgreSQL extends AbstractDatabase {
 			$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		}
 		catch ( \PDOException $pdoEx ) {
-			$this->checkConnection($pdoEx->getCode());
+			$this->checkConnection($pdoEx);
 		}
 
 		$this->userPassword = NULL;

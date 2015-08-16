@@ -12,9 +12,8 @@ final class FileCache extends AbstractCache {
 	public function __construct($fileName) {
 		parent::__construct();
 
-		if ( !preg_match('#^[a-zA-Z0-9-]#$', $fileName) ) {
+		if ( !preg_match('#^[a-zA-Z0-9-]#$', $fileName) )
 			throw new IllegalArgumentException();
-		}
 
 		$this->file = new File(self::PATH . $fileName);
 	}

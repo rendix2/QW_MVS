@@ -10,9 +10,8 @@ final class Double extends Object {
 	public function __construct($double) {
 		parent::__construct();
 
-		if ( !is_double($double) ) {
+		if ( !is_double($double) )
 			throw new IllegalArgumentException();
-		}
 
 		$this->double = $double;
 	}

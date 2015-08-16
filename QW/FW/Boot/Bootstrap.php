@@ -23,7 +23,6 @@ class Bootstrap extends AbstractRouter {
 
 			$this->loadController();
 			$this->callControllerMethod();
-
 		}
 		catch ( \Exception $e ) {
 			echo $e->getMessage();
@@ -38,15 +37,14 @@ class Bootstrap extends AbstractRouter {
 
 	protected function callControllerMethod() {
 		if ( isset( $this->params[ 1 ] ) ) {
-			if ( isset( $this->params[ 2 ] ) && isset( $this->params[ 1 ] ) && method_exists($this->controller, $this->params[ 1 ]) ) {
+			if ( isset( $this->params[ 2 ] ) && isset( $this->params[ 1 ] ) && method_exists($this->controller, $this->params[ 1 ]) )
 				$this->controller->{$this->params[ 1 ]}(intval($this->params[ 2 ]));
-			}
-			else if ( isset( $this->params[ 1 ] ) && method_exists($this->controller, $this->params[ 1 ]) ) {
+
+			else if ( isset( $this->params[ 1 ] ) && method_exists($this->controller, $this->params[ 1 ]) )
 				$this->controller->{$this->params[ 1 ]}();
-			}
-			else {
+
+			else
 				throw new BootstrapException('Neexistující metoda <b>' . $this->params[ 1 ] . '</b> kontroleru: <b>' . $this->params[ 0 ] . '</b>');
-			}
 		}
 		else {
 			$this->controller->index();

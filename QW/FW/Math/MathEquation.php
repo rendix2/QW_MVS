@@ -16,9 +16,8 @@ final class MathEquation {
 	public static function solve_quadratic_equation($a, $b, $c) {
 		$d = $b * $b - 4 * $a * $c; // diskriminant
 
-		if ( $d < 0 ) {
+		if ( $d < 0 )
 			return NULL;
-		}
 		else if ( $d == 0 ) {
 			$result = ( -$b / 2 * $a );
 

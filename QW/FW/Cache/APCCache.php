@@ -11,9 +11,8 @@ final class APCCache extends AbstractCache {
 	public function __construct($key) {
 		parent::__construct();
 
-		if ( apc_exists($key) ) {
+		if ( apc_exists($key) )
 			throw new IllegalArgumentException('Klíč již existuje, zvolte jiný.');
-		}
 
 		$this->key = $key;
 	}

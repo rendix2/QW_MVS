@@ -10,9 +10,8 @@ final class Integer extends Object {
 	public function __construct($integer) {
 		parent::__construct();
 
-		if ( !is_double($integer) ) {
+		if ( !is_double($integer) )
 			throw new IllegalArgumentException();
-		}
 
 		$this->integer = $integer;
 	}

@@ -22,9 +22,8 @@ final class BinaryTree extends AbstractTree {
 		$this->right = $right;
 		$this->data  = $data;
 
-		if ( $this->left != NULL ) {
+		if ( $this->left != NULL )
 			$this->directChildrenCount++;
-		}
 		if ( $this->right != NULL ) {
 			$this->directChildrenCount++;
 		}
@@ -78,17 +77,15 @@ final class BinaryTree extends AbstractTree {
 	}
 
 	public function setLeftChild(BinaryTree $left = NULL) {
-		if ( $this->left == NULL && $left != NULL ) {
+		if ( $this->left == NULL && $left != NULL )
 			$this->directChildrenCount++;
-		}
 
 		$this->left = $left;
 	}
 
 	public function setRightChild(BinaryTree $right = NULL) {
-		if ( $this->right == NULL && $right != NULL ) {
+		if ( $this->right == NULL && $right != NULL )
 			$this->directChildrenCount++;
-		}
 
 		$this->right = $right;
 	}

@@ -17,9 +17,8 @@ class SimpleLinkedList extends AbstractList {
 	public function __toString() {
 		$array = [ ];
 
-		for ( $i = 0; $i < $this->size; $i++ ) {
+		for ( $i = 0; $i < $this->size; $i++ )
 			$array[] = $this->get($i);
-		}
 
 		return '[ ' . implode(', ', $array) . ' ]';
 	}
@@ -27,9 +26,8 @@ class SimpleLinkedList extends AbstractList {
 	public function add($data) {
 		$current = $this->last;
 
-		while ( $current->getNextNode() != NULL ) {
+		while ( $current->getNextNode() != NULL )
 			$current = $current->getNextNode();
-		}
 
 		$current->setNextNode(new Node($data));
 		$this->size++;
@@ -41,9 +39,8 @@ class SimpleLinkedList extends AbstractList {
 		$current = $this->last->getNextNode();
 
 		for ( $i = 0; $i < $this->size; $i++ ) {
-			if ( $current->getData() == $data ) {
+			if ( $current->getData() == $data )
 				return TRUE;
-			}
 
 			$current = $current->getNextNode();
 		}
@@ -52,16 +49,14 @@ class SimpleLinkedList extends AbstractList {
 	}
 
 	public function get($index) {
-		if ( $index < 0 ) {
+		if ( $index < 0 )
 			throw new IllegalArgumentException();
-		}
 
 		$current = $this->last->getNextNode();
 
 		for ( $i = 0; $i < $index; $i++ ) {
-			if ( $current->getNextNode() == NULL ) {
+			if ( $current->getNextNode() == NULL )
 				return FALSE;
-			}
 
 			$current = $current->getNextNode();
 		}
@@ -77,33 +72,33 @@ class SimpleLinkedList extends AbstractList {
 		return $this->helperGetLast($this->last);
 	}
 
-	private function helperGetLast(Node $node) {
-		if ( $node->getNextNode() == NULL ) {
+	private function helperGetLast(Node $node = NULL) {
+		if ( $node == NULL )
+			throw new \QW\FW\Boot\IllegalArgumentException();
+
+		if ( $node->getNextNode() == NULL )
 			return $node->getData();
-		}
 
 		$this->helperGetLast($node->getNextNode());
 	}
 
 	public function remove($index) {
-		if ( $index < 0 || $index > $this->size ) {
+		if ( $index < 0 || $index > $this->size )
 			throw new IllegalArgumentException();
-		}
 
 		$current = $this->last;
 
 		for ( $i = 0; $i < $index; $i++ ) {
-			if ( $current->getNextNode() == NULL ) {
+			if ( $current->getNextNode() == NULL )
 				return FALSE;
-			}
 
 			$current = $current->getNextNode();
 		}
 
-		if ( $index < $this->size ) {
+		if ( $index < $this->size )
 			$current->setNextNode($current->getNextNode()
 			                              ->getNextNode());
-		}
+
 
 		$this->size--;
 

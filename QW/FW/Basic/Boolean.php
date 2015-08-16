@@ -10,9 +10,8 @@ final class Boolean extends Object {
 	public function __construct($boolean) {
 		parent::__construct();
 
-		if ( !is_bool($boolean) ) {
+		if ( !is_bool($boolean) )
 			throw new IllegalArgumentException();
-		}
 
 		$this->boolean = $boolean;
 	}
@@ -22,9 +21,8 @@ final class Boolean extends Object {
 	}
 
 	public static function compare($x, $y) {
-		if ( !is_bool($x) || !is_bool($y) ) {
+		if ( !is_bool($x) || !is_bool($y) )
 			throw new IllegalArgumentException();
-		}
 
 		return $x == $y;
 	}
@@ -34,9 +32,8 @@ final class Boolean extends Object {
 	}
 
 	public function compareTo($boolean) {
-		if ( !is_bool($boolean) ) {
+		if ( !is_bool($boolean) )
 			throw new IllegalArgumentException();
-		}
 
 		return $this->boolean == $boolean;
 	}

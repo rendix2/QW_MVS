@@ -24,9 +24,8 @@ class FormCreatorSelect extends Object {
 		$this->name     = $name;
 		$this->multiple = $multiple == TRUE ? 'multiple="multiple' : '';
 
-		if ( !is_numeric($size) ) {
+		if ( !is_numeric($size) )
 			throw new IllegalArgumentException();
-		}
 
 		$this->size = $size;
 	}

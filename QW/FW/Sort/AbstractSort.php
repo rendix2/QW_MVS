@@ -12,13 +12,11 @@ abstract class AbstractSort extends Object {
 	public function __construct(array $data) {
 		parent::__construct();
 
-		if ( $this->length <= 1 ) {
+		if ( $this->length <= 1 )
 			return $this->data;
-		}
 
-		foreach ( $data as $v ) {
+		foreach ( $data as $v )
 			$this->data[] = $v;
-		}
 
 		$this->length = count($this->data);
 	}

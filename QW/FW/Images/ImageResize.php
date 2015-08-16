@@ -6,6 +6,11 @@ use QW\FW\Config;
 use QW\FW\Math\Math;
 
 final class ImageResize {
+	private static function __construct() {
+	}
+
+	//functions from Jakub Vrána => php.vrana.cz
+
 	public static function canResize($imagePath) {
 		$pictureInfo  = getimagesize($imagePath);
 		$memoryNeeded = round(( $pictureInfo[ 0 ] * $pictureInfo[ 1 ] * $pictureInfo[ 'bits' ] * $pictureInfo[ 'channels' ] / 8 + Math::power(2, 16) ) * 1.65);
@@ -14,22 +19,20 @@ final class ImageResize {
 		return ( $memoryLimit > ( $memoryNeeded + memory_get_usage(TRUE) ) ) ? TRUE : FALSE;
 	}
 
-	//functions from Jakub Vrána => php.vrana.cz
+	//functios from Jakub Vrána => php.vrana.cz
+	// my edit: check for file exists($file_in)
 
 	public static function image_resize($file_in, $file_out, $width, $height) {
-		if ( !file_exists($file_in) ) {
+		if ( !file_exists($file_in) )
 			return FALSE;
-		}
 
 		$imagesize = getimagesize($file_in);
 
-		if ( ( !$width && !$height ) || !$imagesize[ 0 ] || !$imagesize[ 1 ] ) {
+		if ( ( !$width && !$height ) || !$imagesize[ 0 ] || !$imagesize[ 1 ] )
 			return FALSE;
-		}
 
-		if ( $imagesize[ 0 ] == $width && $imagesize[ 1 ] == $height ) {
+		if ( $imagesize[ 0 ] == $width && $imagesize[ 1 ] == $height )
 			return copy($file_in, $file_out);
-		}
 
 		switch ( $imagesize[ 2 ] ) {
 			case 1:
@@ -46,29 +49,26 @@ final class ImageResize {
 				break;
 		}
 
-		if ( !$img ) {
+		if ( !$img )
 			return FALSE;
-		}
 
 		$img2 = imagecreatetruecolor($width, $height);
 
 		imagecopyresampled($img2, $img, 0, 0, 0, 0, $width, $height, $imagesize[ 0 ], $imagesize[ 1 ]);
 
-		if ( $imagesize[ 2 ] == 2 ) {
+		if ( $imagesize[ 2 ] == 2 )
 			return imagejpeg($img2, $file_out);
-		}
 		else if ( $imagesize[ 2 ] == 1 && function_exists("imagegif") ) {
 			imagetruecolortopalette($img2, FALSE, 256);
 
 			return imagegif($img2, $file_out);
 		}
-		else {
+		else
 			return imagepng($img2, $file_out);
-		}
 	}
 
-	//functios from Jakub Vrána => php.vrana.cz
-	// my edit: check for file exists($file_in)
+	// http://www.pavlatka.cz/2012/05/php-enough-memory-manage-picture/
+	// calculate with used ram - my edit
 
 	public static function image_shrink_size($file_in, $max_x = 0, $max_y = 0) {
 		list( $width, $height ) = getimagesize($file_in);
@@ -88,12 +88,6 @@ final class ImageResize {
 		}
 
 		return [ $width, $height ];
-	}
-
-	// http://www.pavlatka.cz/2012/05/php-enough-memory-manage-picture/
-	// calculate with used ram - my edit
-
-	private static function __construct() {
 	}
 
 }

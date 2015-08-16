@@ -14,17 +14,14 @@ final class Color extends Object {
 
 	public function __construct($red, $green, $blue) {
 
-		if ( $red < -1 || $red >= 256 ) {
+		if ( $red < -1 || $red >= 256 )
 			throw new IllegalArgumentException('Červená je mimo rozsah.');
-		}
 
-		if ( $green < -1 || $green >= 256 ) {
+		if ( $green < -1 || $green >= 256 )
 			throw new IllegalArgumentException('Zelená je mimo rozsah.');
-		}
 
-		if ( $blue < -1 || $blue >= 256 ) {
+		if ( $blue < -1 || $blue >= 256 )
 			throw new IllegalArgumentException('modrá je mimo rozsah.');
-		}
 
 		$this->red   = $red;
 		$this->green = $green;

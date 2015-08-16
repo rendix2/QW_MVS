@@ -13,33 +13,30 @@ class LanguageAdmin extends Language {
 	private $langName, $langAdmin, $metaAdmin;
 
 	public function __construct($langName) {
-		if ( $langName == NULL ) {
+		if ( $langName == NULL )
 			throw new NullPointerException();
-		}
 
-		if ( !preg_match('#^[A-Z]*$#', $langName) ) {
+		if ( !preg_match('#^[A-Z]*$#', $langName) )
 			throw new IllegalArgumentException();
-		}
 
 		$this->langName = $langName;
 
-		if ( !file_exists(self::PATH . $this->langName . self::PREFIX_NAME . $this->langName . self::EXT) ) {
+		if ( !file_exists(self::PATH . $this->langName . self::PREFIX_NAME . $this->langName . self::EXT) )
 			throw new LanguageException('Neexistující jazykový balíček administrace: <strong>' . $langName . '</strong>.');
-		}
 
-		if ( !file_exists(self::PATH . $this->langName . self::PREFIX_NAME_META . $this->langName . self::EXT) ) {
+		if ( !file_exists(self::PATH . $this->langName . self::PREFIX_NAME_META . $this->langName . self::EXT) )
 			throw new LanguageException('Neexistující jazykový balíček meta dat administrace: <strong>' . $langName . '</strong>.');
-		}
 
 		$this->langAdmin = parse_ini_file(self::PATH . $this->langName . self::PREFIX_NAME . $this->langName . self::EXT);
 		$this->metaAdmin = parse_ini_file(self::PATH . $this->langName . self::PREFIX_NAME_META . $this->langName . self::EXT);
 	}
 
 	public function __destruct() {
-		parent::__destruct();
 		$this->langName  = NULL;
 		$this->langAdmin = NULL;
 		$this->metaAdmin = NULL;
+
+		parent::__destruct();
 	}
 
 	public function languageGetMetaPack() {

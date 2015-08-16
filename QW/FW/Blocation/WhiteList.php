@@ -8,11 +8,10 @@ class WhiteList extends BlackList {
 	}
 
 	public function run() {
-		foreach ( $this->longOfIP as $ip ) {
-			if ( $ip->getLong() == $this->myIp->getLong() ) {
+		foreach ( $this->longOfIP as $ip )
+			if ( $ip->getLong() == $this->myIp->getLong() )
 				return TRUE;
-			}
-		}
+
 
 		return FALSE;
 	}

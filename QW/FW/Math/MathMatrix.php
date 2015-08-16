@@ -20,9 +20,8 @@ final class MathMatrix extends Object {
 	public function determinant(array $matrix) {
 		$sum = 0;
 		$s   = 0;
-		if ( count($matrix) == 1 ) {
+		if ( count($matrix) == 1 )
 			return ( $matrix[ 0 ][ 0 ] );
-		}
 		else if ( count($matrix) == 2 ) {
 			$tmp          = $this->matrix;
 			$this->matrix = $matrix;
@@ -42,16 +41,14 @@ final class MathMatrix extends Object {
 
 		for ( $i = 0; $i < count($matrix); $i++ ) {
 			$smaller = [ ];
-			for ( $a = 1; $a < count($matrix); $a++ ) {
-				for ( $b = 0; $b < count($matrix); $b++ ) {
-					if ( $b < $i ) {
+			for ( $a = 1; $a < count($matrix); $a++ )
+				for ( $b = 0; $b < count($matrix); $b++ )
+					if ( $b < $i )
 						$smaller[ $a - 1 ][ $b ] = $matrix[ $a ][ $b ];
-					}
-					else if ( $b > $i ) {
+					else if ( $b > $i )
 						$smaller[ $a - 1 ][ $b - 1 ] = $matrix[ $a ][ $b ];
-					}
-				}
-			}
+
+
 			$s = ( $i % 2 == 0 ) ? 1 : -1;
 			$sum += $s * $matrix[ 0 ][ $i ] * ( $this->determinant($smaller) );
 		}
@@ -60,21 +57,17 @@ final class MathMatrix extends Object {
 	}
 
 	public function determinant2x2() {
-		if ( $this->isSquare() && $this->matrixSize == 2 ) {
+		if ( $this->isSquare() && $this->matrixSize == 2 )
 			return $this->matrix[ 0 ][ 0 ] * $this->matrix[ 1 ][ 1 ] - $this->matrix[ 0 ][ 1 ] * $this->matrix[ 1 ][ 0 ];
-		}
-		else {
+		else
 			return FALSE;
-		}
 	}
 
 	private function determinant3x3() {
-		if ( $this->isSquare() && $this->getMatrixSize() == 3 ) {
+		if ( $this->isSquare() && $this->getMatrixSize() == 3 )
 			return $this->matrix[ 0 ][ 0 ] * $this->matrix[ 1 ][ 1 ] * $this->matrix[ 2 ][ 2 ] + $this->matrix[ 0 ][ 1 ] * $this->matrix[ 1 ][ 2 ] * $this->matrix[ 2 ][ 0 ] + $this->matrix[ 0 ][ 2 ] * $this->matrix[ 1 ][ 0 ] * $this->matrix[ 2 ][ 1 ] - $this->matrix[ 0 ][ 1 ] * $this->matrix[ 1 ][ 0 ] * $this->matrix[ 2 ][ 2 ] - $this->matrix[ 0 ][ 0 ] * $this->matrix[ 1 ][ 2 ] * $this->matrix[ 2 ][ 1 ] - $this->matrix[ 0 ][ 2 ] * $this->matrix[ 1 ][ 1 ] * $this->matrix[ 2 ][ 0 ];
-		}
-		else {
+		else
 			return FALSE;
-		}
 	}
 
 	public function getMatrix() {
@@ -86,11 +79,9 @@ final class MathMatrix extends Object {
 	}
 
 	private function isSquare() {
-		foreach ( $this->matrix as $v ) {
-			if ( count($v) != $this->matrixSize ) {
+		foreach ( $this->matrix as $v )
+			if ( count($v) != $this->matrixSize )
 				return FALSE;
-			}
-		}
 
 		return TRUE;
 	}
@@ -101,9 +92,9 @@ final class MathMatrix extends Object {
 
 	public function printMatrix() {
 		foreach ( $this->matrix as $v ) {
-			foreach ( $v as $v2 ) {
+			foreach ( $v as $v2 )
 				echo $v2 . ' ';
-			}
+
 			echo '<br>' . "\n";
 		}
 	}

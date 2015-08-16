@@ -27,15 +27,14 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		parent::__construct();
 		self::$AllQueryCount       = 0;
 		self::$AllConnectionsCount = 0;
-
-		$this->host         = $host;
-		$this->userName     = $userName;
+		$this->host = $host;
+		$this->userName = $userName;
 		$this->userPassword = $userPassword;
-		$this->dbName       = $dbName;
-		$this->options      = $options;
-		$this->queryCount   = 0;
-		$this->statement    = NULL;
-		$this->connection   = NULL;
+		$this->dbName = $dbName;
+		$this->options = $options;
+		$this->queryCount = 0;
+		$this->statement = NULL;
+		$this->connection = NULL;
 	}
 
 	public function __destruct() {
@@ -62,8 +61,8 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		return self::$AllQueryCount;
 	}
 
-	protected final function checkConnection(\PDOException $pdoEx){
-		switch($pdoEx->getCode()){
+	protected final function checkConnection(\PDOException $pdoEx) {
+		switch ( $pdoEx->getCode() ) {
 			case 1045:
 				echo 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
 				break;

@@ -19,12 +19,10 @@ class MergeSort extends AbstractSort {
 		$auxIndex   = $left;
 
 		while ( $leftIndex <= $middle && $rightIndex <= $right ) {
-			if ( $array[ $leftIndex ] >= $array[ $rightIndex ] ) {
+			if ( $array[ $leftIndex ] >= $array[ $rightIndex ] )
 				$aux[ $auxIndex ] = $array[ $leftIndex ];
-			}
-			else {
+			else
 				$aux[ $auxIndex ] = $array[ $rightIndex ];
-			}
 
 			$auxIndex++;
 		}
@@ -41,52 +39,46 @@ class MergeSort extends AbstractSort {
 	}
 
 	public function mergeSort(array $array, array $aux, $left, $right) {
-		if ( $left == $right ) {
+		if ( $left == $right )
 			return;
-		}
 
 		$middle = ( $left + $right ) / 2;
 		$this->mergeSort($array, $aux, $left, $middle);
 		$this->mergeSort($array, $aux, $middle + 1, $right);
 		$this->merge($array, $aux, $left, $right);
 
-		for ( $i = $left; $i <= $right; $i++ ) {
+		for ( $i = $left; $i <= $right; $i++ )
 			$array[ $i ] = $aux[ $i ];
-		}
 
 		return $array;
 	}
 
 	protected function sort(AbstractSort $sort) {
-		if ( $left == $right ) {
+		if ( $left == $right )
 			return;
-		}
 
 		$middle = ( $left + $right ) / 2;
 		$this->mergeSort($array, $aux, $left, $middle);
 		$this->mergeSort($array, $aux, $middle + 1, $right);
 		$this->merge($array, $aux, $left, $right);
 
-		for ( $i = $left; $i <= $right; $i++ ) {
+		for ( $i = $left; $i <= $right; $i++ )
 			$array[ $i ] = $aux[ $i ];
-		}
 
 		return $array;
 	}
 
 	protected function sort(AbstractSort $sort) {
-		if ( $left == $right ) {
+		if ( $left == $right )
 			return;
-		}
 
 		$middle = ( $left + $right ) / 2;
 		$this->mergeSort($array, $aux, $left, $middle);
 		$this->mergeSort($array, $aux, $middle + 1, $right);
 		$this->merge($array, $aux, $left, $right);
 
-		for ( $i = $left; $i <= $right; $i++ ) {
+		for ( $i = $left; $i <= $right; $i++ )
 			$array[ $i ] = $aux[ $i ];
-		}
 
 		return $array;
 	}

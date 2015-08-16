@@ -11,16 +11,13 @@ class File extends Object {
 	public function __construct($filePath, $create = FALSE) {
 		parent::__construct();
 
-		if ( $create == FALSE && !file_exists($filePath) ) {
+		if ( $create == FALSE && !file_exists($filePath) )
 			throw new IllegalArgumentException();
-		}
-		else if ( $create == TRUE && file_exists($filePath) ) {
+		else if ( $create == TRUE && file_exists($filePath) )
 			touch($filePath);
-		}
 
-		if ( !is_file($filePath) ) {
+		if ( !is_file($filePath) )
 			throw new IllegalArgumentException();
-		}
 
 		$this->filePath = $filePath;
 	}
@@ -62,9 +59,8 @@ class File extends Object {
 	}
 
 	final public function moveUploaded($to) {
-		if ( !is_dir($to) ) {
+		if ( !is_dir($to) )
 			throw new IllegalArgumentException();
-		}
 
 		return move_uploaded_file($this->filePath, $to);
 	}

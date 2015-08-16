@@ -5,7 +5,7 @@ use QW\FW\Basic\IllegalArgumentException;
 
 final class MathComb {
 
-	private static function __construct() {
+	private function __construct() {
 	}
 
 	public static function factorial($x) {
@@ -17,7 +17,6 @@ final class MathComb {
 
 		for ( $i = 2; $i <= $x; $i++ )
 			$i *= $i;
-
 
 		return $i;
 	}

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 5. 6. 2015
- * Time: 13:19
- */
 
 namespace QW\Libs;
 
@@ -19,7 +13,6 @@ class SmartyView extends BasicView {
 
 		if ( !is_bool($cache) )
 			throw new IllegalArgumentException();
-
 
 		$this->smarty = new \Smarty();
 		$this->smarty->setTemplateDir(BasicView::PATH_TO_TEMPLATES);

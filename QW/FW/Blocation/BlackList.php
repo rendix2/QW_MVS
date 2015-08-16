@@ -39,9 +39,8 @@ class BlackList extends Object {
 	}
 
 	public function addIPsv6(array $long) {
-		foreach ( $long as $v ) {
+		foreach ( $long as $v )
 			$this->longOfIP[] = new IPv6($v);
-		}
 	}
 
 	public function addIp(IP $ip) {
@@ -63,10 +62,10 @@ class BlackList extends Object {
 			throw new NullPointerException();
 
 
-		foreach ( $this->longOfIP as $k => $v ) {
+		foreach ( $this->longOfIP as $k => $v )
 			if ( $v->getLong() == $ip->getLong() )
 				unset( $this->longOfIP[ $k ] );
-		}
+
 	}
 
 	public function deleteLong(IP $ip) {

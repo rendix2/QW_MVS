@@ -7,7 +7,6 @@ class ArrayCache extends AbstractCache {
 
 	public function __construct() {
 		parent::__construct();
-
 		$this->data = [ ];
 	}
 

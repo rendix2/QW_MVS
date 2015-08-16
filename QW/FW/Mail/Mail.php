@@ -12,16 +12,13 @@ final class Mail extends Object {
 
 	private $to, $subject, $text;
 
-
 	public function __construct($to, $subject) {
 		parent::__construct();
 
-		if ( Validator::validateEmailUsingJakubVrana($to) ) {
+		if ( Validator::validateEmailUsingJakubVrana($to) )
 			$this->to = $to;
-		}
-		else {
+		else
 			throw new IllegalArgumentException('Neplatná E-mailová adresa.');
-		}
 
 		$this->subject = $subject;
 	}
@@ -29,7 +26,7 @@ final class Mail extends Object {
 	// Jakub Vrána php.vrana.cz
 
 	private function createImageOfTextEmail() {
-		// fucking login to create image :))
+		// fucking logic to create image :))
 	}
 
 	private function deleteImageOfTextEmail() {
@@ -40,9 +37,8 @@ final class Mail extends Object {
 	}
 
 	public function sendEmail() {
-		if ( empty( $this->text ) ) {
+		if ( empty( $this->text ) )
 			throw new MailException('Prázdný text E-mailu');
-		}
 
 		return mb_send_mail($this->to, $this->subject, $this->text);
 	}
@@ -53,18 +49,15 @@ final class Mail extends Object {
 	 * @throws IllegalArgumentException
 	 */
 	public function setText($text) {
-		if ( empty( $text ) ) {
+		if ( empty( $text ) )
 			throw new IllegalArgumentException('Prázdný text E-mailu');
-		}
-		else {
-			$this->text = $text;
-		}
+
+		$this->text = $text;
 	}
 
 	public function setTextFromFile($filePath) {
-		if ( !file_exists($filePath) ) {
+		if ( !file_exists($filePath) )
 			throw new MailException('Neexistující soubor pro text E-mailu.');
-		}
 
 		$this->text = file_get_contents($filePath);
 	}

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 26. 6. 2015
- * Time: 14:34
- */
 
 namespace QW\FW\Lists;
 
@@ -16,7 +10,6 @@ class ArrayList extends AbstractList implements IList {
 
 	public function __construct() {
 		parent::__construct();
-
 		$this->data = [ ];
 		$this->size = 0;
 	}

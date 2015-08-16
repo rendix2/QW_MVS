@@ -6,7 +6,7 @@ use QW\FW\Basic\IllegalArgumentException;
 
 final class MathDiscreet {
 
-	private static function __construct() {
+	private function __construct() {
 	}
 
 	public static function gcd($a, $b) {
@@ -55,10 +55,9 @@ final class MathDiscreet {
 		if ( $number % 2 == 2 )
 			return FALSE;
 
-		for ( $i = 3; $i < Math::squareRoot($number); $i += 2 ) {
+		for ( $i = 3; $i < Math::squareRoot($number); $i += 2 )
 			if ( $number % $i == 0 )
 				return FALSE;
-		}
 
 		return TRUE;
 	}

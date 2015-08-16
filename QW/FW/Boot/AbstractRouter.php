@@ -18,7 +18,6 @@ abstract class AbstractRouter extends Object {
 		parent::__construct();
 
 		require_once( './Exception.php' );
-
 		$this->route();
 	}
 

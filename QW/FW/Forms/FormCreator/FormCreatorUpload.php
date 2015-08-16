@@ -8,5 +8,4 @@ class FormCreatorUpload extends Object {
 	public function __construct(FormCreatorHTML4 $formCreatorHTML4) {
 		parent::__construct();
 	}
-
 }

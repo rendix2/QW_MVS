@@ -17,7 +17,6 @@ final class BinaryTree extends AbstractTree {
 
 	public function __construct(BinaryTree $left = NULL, BinaryTree $right = NULL, $data) {
 		parent::__construct();
-
 		$this->left  = $left;
 		$this->right = $right;
 		$this->data  = $data;

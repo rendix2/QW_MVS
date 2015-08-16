@@ -48,12 +48,10 @@ class FormCreatorSelect extends Object {
 
 	public function getFinal() {
 
-		$final = '<select name="{$this->name}" {$this->multiple}>';
+		$final = '<select name="' . $this->name . '" ' . $this->multiple . '>';
 
-		foreach ( $this->content as $v ) {
-			$final .= "<option name="{
-				key($this->content)}">{$v}</option>\n";
-        }
+		foreach ( $this->content as $v )
+			$final .= "<option name=\"" . key($this->content) . "\">{$v}</option>\n";
 
 		return $final;
 	}

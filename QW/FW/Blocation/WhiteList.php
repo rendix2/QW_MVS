@@ -12,7 +12,6 @@ class WhiteList extends BlackList {
 			if ( $ip->getLong() == $this->myIp->getLong() )
 				return TRUE;
 
-
 		return FALSE;
 	}
 }

@@ -6,7 +6,7 @@ use QW\FW\Config;
 use QW\FW\Math\Math;
 
 final class ImageResize {
-	private static function __construct() {
+	private function __construct() {
 	}
 
 	//functions from Jakub Vrána => php.vrana.cz

@@ -10,12 +10,10 @@ class Form extends Object {
 
 	public function __construct() {
 		parent::__construct();
-
 		$this->safeForm = new SafeForm();
 	}
 
 	public function getSafeForm() {
 		return $this->safeForm;
 	}
-
 }

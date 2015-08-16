@@ -10,7 +10,6 @@ class SimpleLinkedList extends AbstractList {
 
 	public function __construct($data = NULL, $type = NULL) {
 		parent::__construct($data);
-
 		$this->last = new Node($data);
 	}
 

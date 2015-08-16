@@ -43,9 +43,8 @@ final class Folder extends File {
 		$bytesTotal = 0;
 		$path       = realpath($this->filePath);
 		if ( $path !== FALSE )
-			foreach ( new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->filePath, FilesystemIterator::SKIP_DOTS)) as $object ) {
+			foreach ( new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->filePath, FilesystemIterator::SKIP_DOTS)) as $object )
 				$bytesTotal += $object->getSize();
-			}
 
 		return $bytesTotal;
 	}

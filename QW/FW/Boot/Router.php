@@ -38,7 +38,6 @@ class Router extends AbstractRouter {
 			}
 
 		$this->params = $url ? array_values($url) : [ ];
-
 		call_user_func_array([ $this->controller, $this->method ], $this->params);
 	}
 
@@ -46,8 +45,7 @@ class Router extends AbstractRouter {
 	}
 
 	private function parseUrl() {
-		if ( isset( $_GET[ 'url' ] ) ) {
+		if ( isset( $_GET[ 'url' ] ) )
 			return explode('/', filter_var(rtrim($_GET[ 'url' ], '/'), FILTER_SANITIZE_URL));
-		}
 	}
 }

@@ -20,14 +20,6 @@ class BasicView extends Object {
 
 		$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default/';
 
-		/*
-			if ($user instanceof Admin)
-				$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::ADMIN_DIR_NAME . '/';
-			else if ($user instanceof UserController)
-				$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . $user->getTemplate() . '/';
-	*/
-
-
 		$this->pageName = "";
 	}
 
@@ -40,45 +32,37 @@ class BasicView extends Object {
 		$this->pageName = $pageName;
 	}
 
-	public function getTableData() {
+	final public function getTableData() {
 		return $this->tableData;
 	}
 
-	public function setTableData(array $table) {
+	final public function setTableData(array $table) {
 		$this->tableData = $table;
 	}
 
 	public function render($name, $include = FALSE) {
 		try {
 			if ( $include == TRUE ) {
-				if ( file_exists($this->pathToTemplate . $name . '.php') ) {
+				if ( file_exists($this->pathToTemplate . $name . '.php') )
 					include_once( $this->pathToTemplate . $name . '.php' );
-				}
-				else {
+				else
 					throw new BasicViewException('Nesprávný název view');
-				}
 			}
 			else {
-				if ( file_exists($this->pathToTemplate . 'Header.php') ) {
+				if ( file_exists($this->pathToTemplate . 'Header.php') )
 					include_once( $this->pathToTemplate . 'Header.php' );
-				}
-				else {
+				else
 					throw new BasicViewException('Neexistující Header.');
-				}
 
-				if ( file_exists($this->pathToTemplate . $name . '.php') ) {
+				if ( file_exists($this->pathToTemplate . $name . '.php') )
 					include_once( $this->pathToTemplate . $name . '.php' );
-				}
-				else {
+				else
 					throw new BasicViewException('Nesprávný název view');
-				}
 
-				if ( file_exists($this->pathToTemplate . 'Footer.php') ) {
+				if ( file_exists($this->pathToTemplate . 'Footer.php') )
 					include_once( $this->pathToTemplate . 'Footer.php' );
-				}
-				else {
+				else
 					throw new BasicViewException('Neexistující Footer.');
-				}
 			}
 
 			return TRUE;

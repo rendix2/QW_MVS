@@ -25,18 +25,17 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 	public function __construct($host, $userName, $userPassword, $dbName, array $options) {
 		parent::__construct();
+		self::$AllQueryCount       = 0;
+		self::$AllConnectionsCount = 0;
 
 		$this->host         = $host;
 		$this->userName     = $userName;
 		$this->userPassword = $userPassword;
 		$this->dbName       = $dbName;
 		$this->options      = $options;
-
-		$this->queryCount          = 0;
-		$this->statement           = NULL;
-		$this->connection          = NULL;
-		self::$AllQueryCount       = 0;
-		self::$AllConnectionsCount = 0;
+		$this->queryCount   = 0;
+		$this->statement    = NULL;
+		$this->connection   = NULL;
 	}
 
 	public function __destruct() {
@@ -44,12 +43,11 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		if ( $this->statement != NULL )
 			$this->freeStatement();
 
-		$this->queryCount = NULL;
-		$this->connection = NULL;
-		$this->dbName     = NULL;
-		$this->host       = NULL;
-		$this->options    = NULL;
-
+		$this->queryCount   = NULL;
+		$this->connection   = NULL;
+		$this->dbName       = NULL;
+		$this->host         = NULL;
+		$this->options      = NULL;
 		$this->userName     = NULL;
 		$this->userPassword = NULL;
 

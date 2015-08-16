@@ -8,5 +8,4 @@ final class ErrorModel extends AbstractBasicModel {
 	public function index() {
 
 	}
-
 }

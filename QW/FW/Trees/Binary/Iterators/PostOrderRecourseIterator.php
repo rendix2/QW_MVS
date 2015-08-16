@@ -11,9 +11,8 @@ final class PostOrderRecourseIterator extends AbstractBinaryTreeIterator {
 	}
 
 	protected function order(BinaryTree $root = NULL) {
-		if ( $root == NULL ) {
+		if ( $root == NULL )
 			return;
-		}
 
 		$this->order($root->getLeftChild());
 		$this->order($root->getRightChild());

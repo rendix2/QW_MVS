@@ -6,7 +6,7 @@ class Config {
 	const EMAIL = '';
 	const URL = '';
 	const URL_DELIMITER = '/';
-	static $dbConfig = [ 'dbHost' => '', 'dbUser' => '', 'dbPassword' => '', 'dbName' => '' ];
+	public static $dbConfig = [ 'dbHost' => '', 'dbUser' => '', 'dbPassword' => '', 'dbName' => '' ];
 
 	private function __construct() {
 	}

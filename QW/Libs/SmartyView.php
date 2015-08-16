@@ -17,9 +17,9 @@ class SmartyView extends BasicView {
 	function __construct($cache) {
 		parent::__construct();
 
-		if ( !is_bool($cache) ) {
+		if ( !is_bool($cache) )
 			throw new IllegalArgumentException();
-		}
+
 
 		$this->smarty = new \Smarty();
 		$this->smarty->setTemplateDir(BasicView::PATH_TO_TEMPLATES);

@@ -26,16 +26,13 @@ class PreOrderIterativeIterator extends AbstractBinaryTreeIterator {
 			if ( $root != NULL ) {
 				$this->finalData[] = $root->getData();
 
-				if ( $root->getRightChild() != NULL ) {
+				if ( $root->getRightChild() != NULL )
 					$this->stack->push($root->getRightChild());
-				}
 
 				$root = $root->getLeftChild();
 			}
-			else {
+			else
 				$root = $this->stack->pop();
-			}
 		}
-
 	}
 }

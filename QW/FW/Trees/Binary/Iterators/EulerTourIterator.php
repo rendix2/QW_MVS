@@ -14,15 +14,13 @@ final class EulerTourIterator extends AbstractBinaryTreeIterator {
 	protected function order(BinaryTree $root) {
 		$this->finalData[] = $root->getData();
 
-		if ( $root->getLeftChild() != NULL ) {
+		if ( $root->getLeftChild() != NULL )
 			$this->order($root->getLeftChild());
-		}
 
 		$this->finalData[] = $root->getData();
 
-		if ( $root->getRightChild() != NULL ) {
+		if ( $root->getRightChild() != NULL )
 			$this->order($root->getRightChild());
-		}
 
 		$this->finalData[] = $root->getData();
 	}

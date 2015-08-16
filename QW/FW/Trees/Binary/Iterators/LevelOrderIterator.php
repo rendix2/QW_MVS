@@ -15,23 +15,19 @@ class LevelOrderIterator extends AbstractBinaryTreeIterator {
 	}
 
 	protected function order(BinaryTree $root) {
-		if ( $root == NULL || $this->realRoot == $root ) {
+		if ( $root == NULL || $this->realRoot == $root )
 			return;
-		}
 
 		$this->queue->enqueue($root);
 
 		while ( !$this->queue->isEmpty() ) {
 			$current = $this->queue->dequeue();
-
 			$this->finalData[] = $current->getData();
 
-			if ( $current->getLeft() != NULL ) {
+			if ( $current->getLeft() != NULL )
 				$this->queue->enqueue($current->getLeft());
-			}
-			if ( $current->getRight() != NULL ) {
+			if ( $current->getRight() != NULL )
 				$this->queue->enqueue($current->getRight());
-			}
 		}
 	}
 }

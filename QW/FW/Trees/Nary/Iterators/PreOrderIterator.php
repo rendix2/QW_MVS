@@ -12,14 +12,12 @@ class PreOrderIterator extends AbstractNaryTreeIterator {
 	}
 
 	protected function order(NaryTree $root) {
-		if ( $root == NULL || $this->realRoot == $root ) {
+		if ( $root == NULL || $this->realRoot == $root )
 			return;
-		}
 
 		$this->finalData[] = $root->getData();
 
-		foreach ( $root->getChildren() as $child ) {
+		foreach ( $root->getChildren() as $child )
 			$this->order($child);
-		}
 	}
 }

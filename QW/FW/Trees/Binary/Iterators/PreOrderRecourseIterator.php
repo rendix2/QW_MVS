@@ -11,9 +11,8 @@ final class PreOrderRecourseIterator extends AbstractBinaryTreeIterator {
 	}
 
 	protected function order(BinaryTree $root = NULL) {
-		if ( $root == NULL ) {
+		if ( $root == NULL )
 			return;
-		}
 
 		$this->finalData[] = $root->getData();
 		$this->order($root->getLeftChild());

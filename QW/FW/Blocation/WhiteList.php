@@ -4,19 +4,18 @@ namespace QW\FW\Blocation;
 
 class WhiteList extends BlackList
 {
-    public function run()
-    {
-        foreach ($this->longOfIP as $ip) {
-            if ($ip->getLong() == $this->myIp->getLong())
-                return true;
-        }
+	public function run()
+	{
+		foreach ( $this->longOfIP as $ip ) {
+			if ( $ip->getLong() == $this->myIp->getLong() ) return TRUE;
+		}
 
-        return false;
-    }
+		return FALSE;
+	}
 
-    public function __destruct()
-    {
-        parent::__destruct();
-    }
+	public function __destruct()
+	{
+		parent::__destruct();
+	}
 }
 

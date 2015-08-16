@@ -16,7 +16,7 @@
 
     use QW\FW\SuperGlobals\Session;
 
-    if (Session::get('logged') == true): ?>
+    if ( Session::get( 'logged' ) == TRUE ): ?>
         <span><a href="./User/logout">Logout</a></span>
     <?php else : ?>
         <span><a href="./User/login">Login</a></span>

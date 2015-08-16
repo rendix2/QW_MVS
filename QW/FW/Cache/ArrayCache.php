@@ -4,27 +4,27 @@ namespace QW\FW\Cache;
 
 class ArrayCache extends AbstractCache
 {
-    private $data;
+	private $data;
 
-    public function __construct()
-    {
-        parent::__construct();
+	public function __construct()
+	{
+		parent::__construct();
 
-        $this->data = [];
-    }
+		$this->data = [ ];
+	}
 
-    public function addCache($data)
-    {
-        $this->data[] = $data;
-    }
+	public function addCache( $data )
+	{
+		$this->data[] = $data;
+	}
 
-    public function useCache()
-    {
-        return $this->data;
-    }
+	public function useCache()
+	{
+		return $this->data;
+	}
 
-    public function removeCache()
-    {
-        $this->data = array();
-    }
+	public function removeCache()
+	{
+		$this->data = [ ];
+	}
 }

@@ -12,6 +12,6 @@ namespace QW\FW\DP\Strategy;
 interface Strategy
 {
 
-    public function multiply($a, $b);
+	public function multiply( $a, $b );
 
 }

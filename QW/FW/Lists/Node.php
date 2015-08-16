@@ -7,34 +7,34 @@ use QW\FW\Basic\Object;
 class Node extends Object
 {
 
-    private $data;
-    private $nextNode;
+	private $data;
+	private $nextNode;
 
-    public function __construct($data, Node $nextNode = null)
-    {
-        parent::__construct();
+	public function __construct( $data, Node $nextNode = NULL )
+	{
+		parent::__construct();
 
-        $this->data = $data;
-        $this->nextNode = $nextNode;
-    }
+		$this->data = $data;
+		$this->nextNode = $nextNode;
+	}
 
-    public function getData()
-    {
-        return $this->data;
-    }
+	public function getData()
+	{
+		return $this->data;
+	}
 
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
+	public function setData( $data )
+	{
+		$this->data = $data;
+	}
 
-    public function getNextNode()
-    {
-        return $this->nextNode;
-    }
+	public function getNextNode()
+	{
+		return $this->nextNode;
+	}
 
-    public function setNextNode($nextNode)
-    {
-        $this->nextNode = $nextNode;
-    }
+	public function setNextNode( $nextNode )
+	{
+		$this->nextNode = $nextNode;
+	}
 }

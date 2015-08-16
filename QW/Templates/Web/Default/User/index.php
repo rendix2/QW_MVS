@@ -9,6 +9,6 @@
 
 use QW\FW\Forms\FormCreator\FormCreatorHTML4;
 
-$z = new FormCreatorHTML4('POST', '');
-$z->createSelect('Select')->addList()->addChoice();
-$z->addSelect()->addTextArea('text')->addInputText('ahoj', 'ahoj', 5, 50,'off');
+$z = new FormCreatorHTML4( 'POST', '' );
+$z->createSelect( 'Select' )->addList()->addChoice();
+$z->addSelect()->addTextArea( 'text' )->addInputText( 'ahoj', 'ahoj', 5, 50, 'off' );

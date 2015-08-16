@@ -12,41 +12,41 @@ namespace QW\FW\DP\Builder;
 class LuxoryBuilder implements Builder
 {
 
-    private $result;
+	private $result;
 
-    public function __construct()
-    {
-        $this->result = new Building();
-    }
+	public function __construct()
+	{
+		$this->result = new Building();
+	}
 
-    public function __destruct()
-    {
-        $this->result = null;
-    }
+	public function __destruct()
+	{
+		$this->result = NULL;
+	}
 
-    public function buildFloor()
-    {
-        $this->result->setFloor("wooden floor");
+	public function buildFloor()
+	{
+		$this->result->setFloor( "wooden floor" );
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function buildRoof()
-    {
-        $this->result->setRoof("shindel roof");
+	public function buildRoof()
+	{
+		$this->result->setRoof( "shindel roof" );
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function buildWalls()
-    {
-        $this->result->setWalls("brick wall");
+	public function buildWalls()
+	{
+		$this->result->setWalls( "brick wall" );
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getResult()
-    {
-        return $this->result;
-    }
+	public function getResult()
+	{
+		return $this->result;
+	}
 }

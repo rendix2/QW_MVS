@@ -3,10 +3,10 @@ namespace QW\Libs\User;
 
 final class Admin extends User
 {
-    private $admin;
+	private $admin;
 
-    public function __construct()
-    {
-        $this->admin = true;
-    }
+	public function __construct()
+	{
+		$this->admin = TRUE;
+	}
 }

@@ -7,62 +7,65 @@ use QW\FW\Math\Math;
 
 final class Session implements ISG
 {
-    private function __construct()
-    {
-    }
+	private function __construct()
+	{
+	}
 
-    public static function start()
-    {
-        session_start();
-        self::newId();
-        return self::id();
-    }
+	public static function start()
+	{
+		session_start();
+		self::newId();
 
-    public static function id()
-    {
-        return session_id();
-    }
+		return self::id();
+	}
 
-    public static function newId()
-    {
-        usleep(Math::randomInterval(2, 4) * 100);
-        for ($i = 0; $i < Math::randomInterval(2, 5); $i++) {
-            usleep(100);
-            session_regenerate_id(true);
-            usleep(100);
-        }
-        usleep(Math::randomInterval(2, 4) * 100);
+	public static function id()
+	{
+		return session_id();
+	}
 
-        return self::id();
-    }
+	public static function newId()
+	{
+		usleep( Math::randomInterval( 2, 4 ) * 100 );
+		for ( $i = 0; $i < Math::randomInterval( 2, 5 ); $i++ ) {
+			usleep( 100 );
+			session_regenerate_id( TRUE );
+			usleep( 100 );
+		}
+		usleep( Math::randomInterval( 2, 4 ) * 100 );
 
-    public static function get($k)
-    {
-        self::newId();
-        return isset($_SESSION[$k]) ? $_SESSION[$k] : false;
-    }
+		return self::id();
+	}
 
-    public static function set($k, $v)
-    {
-        self::newId();
-        $_SESSION[$k] = $v;
+	public static function get( $k )
+	{
+		self::newId();
 
-        return (self::get($k) == $v) ? true : false;
-    }
+		return isset( $_SESSION[ $k ] ) ? $_SESSION[ $k ] : FALSE;
+	}
 
-    public static function end()
-    {
-        self::newId();
+	public static function set( $k, $v )
+	{
+		self::newId();
+		$_SESSION[ $k ] = $v;
 
-        $_SESSION = array();
-        unset($_SESSION);
+		return ( self::get( $k ) == $v ) ? TRUE : FALSE;
+	}
 
-        return session_destroy();
-    }
+	public static function end()
+	{
+		self::newId();
 
-    public static function getAll()
-    {
-        self::newId();
-        return $_SESSION;
-    }
+		$_SESSION = [ ];
+		unset( $_SESSION );
+
+		return session_destroy();
+	}
+
+	public static function getAll()
+	{
+		self::newId();
+
+		return $_SESSION;
+	}
 }

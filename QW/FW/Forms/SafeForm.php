@@ -7,12 +7,12 @@ use QW\FW\Basic\Object;
 final class SafeForm extends Object
 {
 
-    private $hash;
+	private $hash;
 
-    public function __construct()
-    {
-        parent::__construct();
+	public function __construct()
+	{
+		parent::__construct();
 
-        $this->hash = md5(uniqid());
-    }
+		$this->hash = md5( uniqid() );
+	}
 }

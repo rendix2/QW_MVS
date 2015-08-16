@@ -14,8 +14,8 @@ use QW\FW\Architecture\MVC\AbstractBasicModel;
 class UserModel extends AbstractBasicModel
 {
 
-    public function index()
-    {
+	public function index()
+	{
 
-    }
+	}
 }

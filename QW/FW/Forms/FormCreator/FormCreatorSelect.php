@@ -8,59 +8,58 @@ use QW\FW\Forms\FormCreator\FormCreatorHTML4;
 
 class FormCreatorSelect extends Object
 {
-    private $formCreatorHTML4;
+	private $formCreatorHTML4;
 
-    private $content;
-    private $name;
-    private $multiple;
-    private $size;
-    private $disabled;
+	private $content;
+	private $name;
+	private $multiple;
+	private $size;
+	private $disabled;
 
-    public function __construct(FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled)
-    {
-        parent::__construct();
+	public function __construct( FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled )
+	{
+		parent::__construct();
 
-        $this->formCreatorHTML4 = $formCreatorHTML4;
+		$this->formCreatorHTML4 = $formCreatorHTML4;
 
-        $this->content = [];
-        $this->name = $name;
-        $this->multiple = $multiple == true ? 'multiple="multiple' : '';
+		$this->content = [ ];
+		$this->name = $name;
+		$this->multiple = $multiple == TRUE ? 'multiple="multiple' : '';
 
-        if (!is_numeric($size))
-            throw new IllegalArgumentException();
+		if ( !is_numeric( $size ) ) throw new IllegalArgumentException();
 
-        $this->size = $size;
-    }
+		$this->size = $size;
+	}
 
-    public function addList(array $data, array $selected, array $disabled)
-    {
-        $this->content[] = $data;
+	public function addList( array $data, array $selected, array $disabled )
+	{
+		$this->content[] = $data;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function addChoice($data, $selected = false, array $disabled)
-    {
-        $this->content[] = $data;
+	public function addChoice( $data, $selected = FALSE, array $disabled )
+	{
+		$this->content[] = $data;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getContent()
-    {
-        return $this->content;
-    }
+	public function getContent()
+	{
+		return $this->content;
+	}
 
-    public function getFinal()
-    {
+	public function getFinal()
+	{
 
-        $final = '<select name="{$this->name}" {$this->multiple}>';
+		$final = '<select name="{$this->name}" {$this->multiple}>';
 
-        foreach ($this->content as $v) {
-            $final .= "<option name="{
-                key($this->content)}">{$v}</option>\n";
+		foreach ( $this->content as $v ) {
+			$final .= "<option name="{
+				key( $this->content )}">{$v}</option>\n";
         }
 
-        return $final;
-    }
+		return $final;
+	}
 }

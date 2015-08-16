@@ -12,11 +12,11 @@ namespace QW\FW\DP\Adapter;
 class OldClass
 {
 
-    public function oldRequest()
-    {
-        echo 'OLD REQUEST';
+	public function oldRequest()
+	{
+		echo 'OLD REQUEST';
 
-        return true;
-    }
+		return TRUE;
+	}
 
 }

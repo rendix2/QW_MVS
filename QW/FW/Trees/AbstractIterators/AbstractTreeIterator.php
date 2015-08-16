@@ -7,17 +7,17 @@ use QW\FW\Basic\Object;
 abstract class AbstractTreeIterator extends Object
 {
 
-    protected $finalData;
-    protected $realRoot;
+	protected $finalData;
+	protected $realRoot;
 
-    public function __construct()
-    {
-        $this->finalData = array();
-        $this->realRoot = null;
-    }
+	public function __construct()
+	{
+		$this->finalData = [ ];
+		$this->realRoot = NULL;
+	}
 
-    public final function getFinalData()
-    {
-        return $this->finalData;
-    }
+	public final function getFinalData()
+	{
+		return $this->finalData;
+	}
 }

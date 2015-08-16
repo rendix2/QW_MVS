@@ -12,31 +12,31 @@ namespace QW\FW\DP\State;
 class Context
 {
 
-    // Aktuální stav
-    private $state;
+	// Aktuální stav
+	private $state;
 
-    function __construct()
-    {
-        $this->state = new HappyState();
-    }
+	function __construct()
+	{
+		$this->state = new HappyState();
+	}
 
-    public function express()
-    {
-        echo 'Tedka Ti řeknu, jak se cítím<br>';
-        $this->state->express();
-    }
+	public function express()
+	{
+		echo 'Tedka Ti řeknu, jak se cítím<br>';
+		$this->state->express();
+	}
 
-    public function beHappy()
-    {
-        echo 'Tedka budu veselý<br>';
+	public function beHappy()
+	{
+		echo 'Tedka budu veselý<br>';
 
-        $this->state = new HappyState();
-    }
+		$this->state = new HappyState();
+	}
 
-    public function beSad()
-    {
-        echo 'Tedka budu smutný<br>';
-        $this->state = new SasState();
-    }
+	public function beSad()
+	{
+		echo 'Tedka budu smutný<br>';
+		$this->state = new SasState();
+	}
 
 }

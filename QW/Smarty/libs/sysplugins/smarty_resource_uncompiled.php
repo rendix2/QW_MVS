@@ -16,56 +16,57 @@
  */
 abstract class Smarty_Resource_Uncompiled extends Smarty_Resource
 {
-    /**
-     * Flag that it's an uncompiled resource
-     *
-     * @var bool
-     */
-    public $uncompiled = true;
+	/**
+	 * Flag that it's an uncompiled resource
+	 *
+	 * @var bool
+	 */
+	public $uncompiled = TRUE;
 
-    /**
-     * populate compiled object with compiled filepath
-     *
-     * @param Smarty_Template_Compiled $compiled compiled object
-     * @param Smarty_Internal_Template $_template template object (is ignored)
-     */
-    public function populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
-    {
-        $compiled->filepath = false;
-        $compiled->timestamp = false;
-        $compiled->exists = false;
-    }
+	/**
+	 * populate compiled object with compiled filepath
+	 *
+	 * @param Smarty_Template_Compiled $compiled  compiled object
+	 * @param Smarty_Internal_Template $_template template object (is ignored)
+	 */
+	public function populateCompiledFilepath( Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template )
+	{
+		$compiled->filepath = FALSE;
+		$compiled->timestamp = FALSE;
+		$compiled->exists = FALSE;
+	}
 
-    /**
-     * render compiled template code
-     *
-     * @param Smarty_Internal_Template $_template
-     *
-     * @return string
-     * @throws Exception
-     */
-    public function render($_template)
-    {
-        $level = ob_get_level();
-        ob_start();
-        try {
-            $this->renderUncompiled($_template->source, $_template);
-            return ob_get_clean();
-        } catch (Exception $e) {
-            while (ob_get_level() > $level) {
-                ob_end_clean();
-            }
-            throw $e;
-        }
-    }
+	/**
+	 * render compiled template code
+	 *
+	 * @param Smarty_Internal_Template $_template
+	 *
+	 * @return string
+	 * @throws Exception
+	 */
+	public function render( $_template )
+	{
+		$level = ob_get_level();
+		ob_start();
+		try {
+			$this->renderUncompiled( $_template->source, $_template );
 
-    /**
-     * Render and output the template (without using the compiler)
-     *
-     * @param  Smarty_Template_Source $source source object
-     * @param  Smarty_Internal_Template $_template template object
-     *
-     * @throws SmartyException          on failure
-     */
-    abstract public function renderUncompiled(Smarty_Template_Source $source, Smarty_Internal_Template $_template);
+			return ob_get_clean();
+		} catch ( Exception $e ) {
+			while ( ob_get_level() > $level ) {
+				ob_end_clean();
+			}
+			throw $e;
+		}
+	}
+
+	/**
+	 * Render and output the template (without using the compiler)
+	 *
+	 * @param  Smarty_Template_Source   $source    source object
+	 * @param  Smarty_Internal_Template $_template template object
+	 *
+	 * @throws SmartyException          on failure
+	 */
+	abstract public function renderUncompiled( Smarty_Template_Source $source, Smarty_Internal_Template $_template );
 }

@@ -7,34 +7,34 @@ use QW\FW\Trees\Binary\BinaryTree;
 
 class PostOrderIterativeIterator extends AbstractBinaryTreeIterator
 {
-    private $stack;
+	private $stack;
 
-    public function __construct(BinaryTree $root)
-    {
-        $this->stack = new \SplStack();
-        parent::__construct($root);
-    }
+	public function __construct( BinaryTree $root )
+	{
+		$this->stack = new \SplStack();
+		parent::__construct( $root );
+	}
 
-    protected function order(BinaryTree $root)
-    {
-        $lastVisited = null;
+	protected function order( BinaryTree $root )
+	{
+		$lastVisited = NULL;
 
-        while (!$this->stack->isEmpty() || $root != null) {
+		while ( !$this->stack->isEmpty() || $root != NULL ) {
 
-            if ($root != null) {
-                $this->stack->push($root);
-                $root = $root->getLeftChild();
-            } else {
-                $peekNode = $this->stack->top();
+			if ( $root != NULL ) {
+				$this->stack->push( $root );
+				$root = $root->getLeftChild();
+			} else {
+				$peekNode = $this->stack->top();
 
-                if ($peekNode->getRight() != null && $lastVisited != $peekNode->getRight()) {
-                    $root = $peekNode->getRight();
-                } else {
-                    $this->finalData[] = $peekNode->getData();
-                    $lastVisited = $this->stack->pop();
-                    $root = null;
-                }
-            }
-        }
-    }
+				if ( $peekNode->getRight() != NULL && $lastVisited != $peekNode->getRight() ) {
+					$root = $peekNode->getRight();
+				} else {
+					$this->finalData[] = $peekNode->getData();
+					$lastVisited = $this->stack->pop();
+					$root = NULL;
+				}
+			}
+		}
+	}
 }

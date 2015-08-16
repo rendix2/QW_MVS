@@ -7,121 +7,123 @@ use QW\FW\Interfaces\IDatabase;
 
 abstract class AbstractDatabase extends Object implements IDatabase
 {
-    protected static $AllQueryCount;
-    protected static $AllConnectionsCount;
+	protected static $AllQueryCount;
+	protected static $AllConnectionsCount;
 
-    protected $connection;
-    protected $queryCount;
-    protected $statement;
+	protected $connection;
+	protected $queryCount;
+	protected $statement;
 
-    // conection begin
-    protected $host;
-    protected $userName;
-    protected $userPassword;
-    protected $dbName;
-    protected $options;
-    // conection begin
+	// conection begin
+	protected $host;
+	protected $userName;
+	protected $userPassword;
+	protected $dbName;
+	protected $options;
 
-    abstract protected function connect();
+	// conection begin
 
-    public function __construct($host, $userName, $userPassword, $dbName, array $options){
-        parent::__construct();
+	abstract protected function connect();
 
-        $this->host = $host;
-        $this->userName = $userName;
-        $this->userPassword = $userPassword;
-        $this->dbName = $dbName;
-        $this->options = $options;
+	public function __construct( $host, $userName, $userPassword, $dbName, array $options )
+	{
+		parent::__construct();
 
-        $this->queryCount = 0;
-        $this->statement = null;
-        $this->connection = null;
-        self::$AllQueryCount = 0;
-        self::$AllConnectionsCount = 0;
-    }
+		$this->host = $host;
+		$this->userName = $userName;
+		$this->userPassword = $userPassword;
+		$this->dbName = $dbName;
+		$this->options = $options;
 
-    public function __destruct(){
+		$this->queryCount = 0;
+		$this->statement = NULL;
+		$this->connection = NULL;
+		self::$AllQueryCount = 0;
+		self::$AllConnectionsCount = 0;
+	}
 
-        if ( $this->statement != null )
-            $this->freeStatement();
+	public function __destruct()
+	{
 
-        $this->queryCount = null;
-        $this->connection = null;
-        $this->dbName = null;
-        $this->host = null;
-        $this->options = null;
+		if ( $this->statement != NULL ) $this->freeStatement();
 
-        $this->userName = null;
-        $this->userPassword = null;
+		$this->queryCount = NULL;
+		$this->connection = NULL;
+		$this->dbName = NULL;
+		$this->host = NULL;
+		$this->options = NULL;
 
-        parent::__destruct();
-    }
+		$this->userName = NULL;
+		$this->userPassword = NULL;
 
-    public static function getAllQueryCount()
-    {
-        return self::$AllQueryCount;
-    }
+		parent::__destruct();
+	}
 
-    public static function getAllConnectionsCount(){
-        return self::$AllConnectionsCount;
-    }
+	public static function getAllQueryCount()
+	{
+		return self::$AllQueryCount;
+	}
 
-    public function query($query, array $options)
-    {
-        try {
+	public static function getAllConnectionsCount()
+	{
+		return self::$AllConnectionsCount;
+	}
 
-            if ( $this->queryCount == 0 )
-            {
-                $this->connect();
-            }
+	public function query( $query, array $options )
+	{
+		try {
 
-            self::$AllQueryCount++;
-            $this->queryCount++;
-            $this->statement = $this->connection->prepare($query);
-            $this->statement->execute($options);
-        } catch (\PDOException $pdoEx) {
-            echo 'Databázová chyba!<br>';
-            echo 'V souboru: ' . $pdoEx->getFile() . '<br>';
-            echo 'Na řádku: ' . $pdoEx->getLine() . '<br>';
-            echo 'Chyba číslo: ' . $pdoEx->getCode() . '<br>';
-            echo 'Chyba: ' . $pdoEx->getMessage() . '<br>';
-            die();
-        }
-    }
+			if ( $this->queryCount == 0 ) {
+				$this->connect();
+			}
 
-    public function getQueryCount()
-    {
-        return $this->queryCount;
-    }
+			self::$AllQueryCount++;
+			$this->queryCount++;
+			$this->statement = $this->connection->prepare( $query );
+			$this->statement->execute( $options );
+		} catch ( \PDOException $pdoEx ) {
+			echo 'Databázová chyba!<br>';
+			echo 'V souboru: ' . $pdoEx->getFile() . '<br>';
+			echo 'Na řádku: ' . $pdoEx->getLine() . '<br>';
+			echo 'Chyba číslo: ' . $pdoEx->getCode() . '<br>';
+			echo 'Chyba: ' . $pdoEx->getMessage() . '<br>';
+			die();
+		}
+	}
 
-    public function fetch()
-    {
-        return $this->statement->fetch(\PDO::FETCH_ASSOC);
-    }
+	public function getQueryCount()
+	{
+		return $this->queryCount;
+	}
 
-    public function fetchAll()
-    {
-        return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
-    }
+	public function fetch()
+	{
+		return $this->statement->fetch( \PDO::FETCH_ASSOC );
+	}
 
-    public function fetchColumn()
-    {
-        return $this->statement->fetchColumn(\PDO::FETCH_ASSOC);
-    }
+	public function fetchAll()
+	{
+		return $this->statement->fetchAll( \PDO::FETCH_ASSOC );
+	}
 
-    public function numRows()
-    {
-        $this->statement->rowCount();
-    }
+	public function fetchColumn()
+	{
+		return $this->statement->fetchColumn( \PDO::FETCH_ASSOC );
+	}
 
-    public function lastID()
-    {
-        return $this->connection->lastInsertId();
-    }
+	public function numRows()
+	{
+		$this->statement->rowCount();
+	}
 
-    public function freeStatement()
-    {
-        $this->statement->closeCursor();
-        $this->statement = null;
-    }
+	public function lastID()
+	{
+		return $this->connection->lastInsertId();
+	}
+
+	public function freeStatement()
+	{
+		$this->statement->closeCursor();
+		$this->statement = NULL;
+	}
 }

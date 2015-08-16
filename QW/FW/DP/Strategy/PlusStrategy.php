@@ -14,14 +14,14 @@ use QW\FW\Math\Math;
 class PlusStrategy implements Strategy
 {
 
-    public function multiply($a, $b)
-    {
-        $times = Math::absoluteValue($b);
+	public function multiply( $a, $b )
+	{
+		$times = Math::absoluteValue( $b );
 
-        for ($i = 0; $i < $times; $i++) {
-            $a += $a;
-        }
+		for ( $i = 0; $i < $times; $i++ ) {
+			$a += $a;
+		}
 
-        return $b > 0 ? $a : -$a;
-    }
+		return $b > 0 ? $a : -$a;
+	}
 }

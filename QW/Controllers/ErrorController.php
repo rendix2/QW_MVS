@@ -6,15 +6,15 @@ use QW\Libs\Config;
 
 final class ErrorController extends AbstractBasicController
 {
-    public function __construct($name)
-    {
-        parent::__construct($name);
+	public function __construct( $name )
+	{
+		parent::__construct( $name );
 
-        $this->getView()->setPageName("Chyba");
-    }
+		$this->getView()->setPageName( "Chyba" );
+	}
 
-    public function index()
-    {
-        return $this->getView()->render($this->getViewName() . Config::SLASH . 'index');
-    }
+	public function index()
+	{
+		return $this->getView()->render( $this->getViewName() . Config::SLASH . 'index' );
+	}
 }

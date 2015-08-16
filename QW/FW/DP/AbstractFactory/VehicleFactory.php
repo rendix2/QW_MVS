@@ -12,8 +12,8 @@ namespace QW\FW\DP\AbstractFactory;
 interface VehicleFactory
 {
 
-    public function createSmallVehicle();
+	public function createSmallVehicle();
 
-    public function createBigVehicle();
+	public function createBigVehicle();
 
 }

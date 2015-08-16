@@ -14,29 +14,29 @@ use QW\FW\Trees\Binary\BinaryTree;
 
 class PreOrderIterativeIterator extends AbstractBinaryTreeIterator
 {
-    private $stack;
+	private $stack;
 
-    public function __construct(BinaryTree $root)
-    {
-        $this->stack = new \SplStack();
-        parent::__construct($root);
-    }
+	public function __construct( BinaryTree $root )
+	{
+		$this->stack = new \SplStack();
+		parent::__construct( $root );
+	}
 
-    protected function order(BinaryTree $root)
-    {
+	protected function order( BinaryTree $root )
+	{
 
-        while (!$this->stack->isEmpty() || $root != null) {
-            if ($root != null) {
-                $this->finalData[] = $root->getData();
+		while ( !$this->stack->isEmpty() || $root != NULL ) {
+			if ( $root != NULL ) {
+				$this->finalData[] = $root->getData();
 
-                if ($root->getRightChild() != null) {
-                    $this->stack->push($root->getRightChild());
-                }
+				if ( $root->getRightChild() != NULL ) {
+					$this->stack->push( $root->getRightChild() );
+				}
 
-                $root = $root->getLeftChild();
-            } else
-                $root = $this->stack->pop();
-        }
+				$root = $root->getLeftChild();
+			} else
+				$root = $this->stack->pop();
+		}
 
-    }
+	}
 }

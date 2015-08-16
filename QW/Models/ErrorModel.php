@@ -6,9 +6,9 @@ use QW\FW\Architecture\MVC\AbstractBasicModel;
 final class ErrorModel extends AbstractBasicModel
 {
 
-    public function index()
-    {
+	public function index()
+	{
 
-    }
+	}
 
 }

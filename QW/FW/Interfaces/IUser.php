@@ -4,16 +4,16 @@ namespace QW\FW\Interfaces;
 interface IUser
 {
 
-    const USER = 'user';
-    const ADMIN = 'admin';
+	const USER = 'user';
+	const ADMIN = 'admin';
 
-    public function getUserName();
+	public function getUserName();
 
-    public function getUserId();
+	public function getUserId();
 
-    public function getTemplate();
+	public function getTemplate();
 
-    public function getIP();
+	public function getIP();
 
-    public function isLogged();
+	public function isLogged();
 }

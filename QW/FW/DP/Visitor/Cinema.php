@@ -12,10 +12,10 @@ namespace QW\FW\DP\Visitor;
 class Cinema implements Place
 {
 
-    public function accept(Visitor $visitor)
-    {
-        echo 'Do kina šel: ' . $visitor;
+	public function accept( Visitor $visitor )
+	{
+		echo 'Do kina šel: ' . $visitor;
 
-        $visitor->visitCinema($this);
-    }
+		$visitor->visitCinema( $this );
+	}
 }

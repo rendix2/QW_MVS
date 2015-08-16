@@ -14,33 +14,33 @@ use QW\FW\Basic\IllegalArgumentException;
 class BucketSort extends AbstractSort
 {
 
-    private $bucketCount;
+	private $bucketCount;
 
-    public function __construct(array $data, $bucketCount)
-    {
-        parent::__construct($data);
+	public function __construct( array $data, $bucketCount )
+	{
+		parent::__construct( $data );
 
-        if ($this->bucketCount <= 0 || !is_numeric($bucketCount)) throw new IllegalArgumentException();
+		if ( $this->bucketCount <= 0 || !is_numeric( $bucketCount ) ) throw new IllegalArgumentException();
 
-        $this->bucketCount = $bucketCount;
-    }
+		$this->bucketCount = $bucketCount;
+	}
 
-    protected function sort(AbstractSort $sort)
-    {
-        $high = $this->data[0];
-        $low = $this->data[0];
+	protected function sort( AbstractSort $sort )
+	{
+		$high = $this->data[ 0 ];
+		$low = $this->data[ 0 ];
 
-        for ($i = 0; $i < $this->length; $i++) {
-            if ($this->data[$i] > $high) $high = $this->data[$i];
-            if ($this->data[$i] < $low) $low = $this->data[$i];
-        }
+		for ( $i = 0; $i < $this->length; $i++ ) {
+			if ( $this->data[ $i ] > $high ) $high = $this->data[ $i ];
+			if ( $this->data[ $i ] < $low ) $low = $this->data[ $i ];
+		}
 
-        $interval = ((float)($high - $low + 1)) / $this->bucketCount;
+		$interval = ( (float) ( $high - $low + 1 ) ) / $this->bucketCount;
 
-        $buckets = array();
+		$buckets = [ ];
 
-        for ($i = 0; $i < $this->length; $i++) {
-            $buckets[(int)(($this->data[$i] - $low) / $interval)] = $this->data[$i];
-        }
-    }
+		for ( $i = 0; $i < $this->length; $i++ ) {
+			$buckets[ (int) ( ( $this->data[ $i ] - $low ) / $interval ) ] = $this->data[ $i ];
+		}
+	}
 }

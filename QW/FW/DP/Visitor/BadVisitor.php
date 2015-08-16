@@ -12,18 +12,18 @@ namespace QW\FW\DP\Visitor;
 class BadVisitor implements Visitor
 {
 
-    public function __toString()
-    {
-        return 'Gauner';
-    }
+	public function __toString()
+	{
+		return 'Gauner';
+	}
 
-    public function visitMuseum(Museum $museum)
-    {
-        echo $this . " Vypil kávu nočního hlíče, lotr jeden!";
-    }
+	public function visitMuseum( Museum $museum )
+	{
+		echo $this . " Vypil kávu nočního hlíče, lotr jeden!";
+	}
 
-    public function visitCinema(Cinema $cinema)
-    {
-        echo $this . " Sežral popkorn vedlejšímu divákovi";
-    }
+	public function visitCinema( Cinema $cinema )
+	{
+		echo $this . " Sežral popkorn vedlejšímu divákovi";
+	}
 }

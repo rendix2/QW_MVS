@@ -6,24 +6,24 @@ use QW\FW\Interfaces\ISG;
 
 class Get implements ISG
 {
-    private static function __construct()
-    {
-    }
+	private static function __construct()
+	{
+	}
 
-    public static function set($k, $v)
-    {
-        $_GET[$k] = $v;
+	public static function set( $k, $v )
+	{
+		$_GET[ $k ] = $v;
 
-        return (self::get($k) == $v) ? true : false;
-    }
+		return ( self::get( $k ) == $v ) ? TRUE : FALSE;
+	}
 
-    public static function get($k)
-    {
-        return isset($_GET[$k]) ? $_GET[$k] : false;
-    }
+	public static function get( $k )
+	{
+		return isset( $_GET[ $k ] ) ? $_GET[ $k ] : FALSE;
+	}
 
-    public static function getAll()
-    {
-        return $_GET;
-    }
+	public static function getAll()
+	{
+		return $_GET;
+	}
 }

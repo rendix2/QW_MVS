@@ -6,18 +6,18 @@ use QW\FW\Basic\Object;
 
 abstract class AbstractArraySearch extends Object
 {
-    private $data;
-    private $length;
+	private $data;
+	private $length;
 
-    public function __construct(array $data)
-    {
-        parent::__construct();
+	public function __construct( array $data )
+	{
+		parent::__construct();
 
-        $this->data = $data;
-        $this->length = count($this->data);
+		$this->data = $data;
+		$this->length = count( $this->data );
 
-        $this->search();
-    }
+		$this->search();
+	}
 
-    abstract public function search();
+	abstract public function search();
 }

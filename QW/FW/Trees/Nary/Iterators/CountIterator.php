@@ -8,28 +8,28 @@ use QW\FW\Trees\Nary\NaryTree;
 final class CountIterator extends AbstractNaryTreeIterator
 {
 
-    private $countChildren;
+	private $countChildren;
 
-    public function __construct(NaryTree $root)
-    {
-        $this->countChildren = 0;
+	public function __construct( NaryTree $root )
+	{
+		$this->countChildren = 0;
 
-        parent::__construct($root);
-    }
+		parent::__construct( $root );
+	}
 
-    protected function order(NaryTree $root)
-    {
-        if ($root == null || $this->realRoot == $root) return;
+	protected function order( NaryTree $root )
+	{
+		if ( $root == NULL || $this->realRoot == $root ) return;
 
-        foreach ($root->getChildren() as $child) {
-            $this->order($child);
-        }
+		foreach ( $root->getChildren() as $child ) {
+			$this->order( $child );
+		}
 
-        $this->countChildren++;
-    }
+		$this->countChildren++;
+	}
 
-    public function getCountChildren()
-    {
-        return $this->countChildren;
-    }
+	public function getCountChildren()
+	{
+		return $this->countChildren;
+	}
 }

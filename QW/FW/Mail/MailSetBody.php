@@ -14,8 +14,8 @@ final class MailSetBody extends Object
 {
 
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
+	public function __construct()
+	{
+		parent::__construct();
+	}
 }

@@ -6,31 +6,30 @@ use QW\FW\Basic\Object;
 
 abstract class AbstractSort extends Object
 {
-    protected $data, $length;
+	protected $data, $length;
 
-    public function __construct(array $data)
-    {
-        parent::__construct();
+	public function __construct( array $data )
+	{
+		parent::__construct();
 
-        if ($this->length <= 1) return $this->data;
+		if ( $this->length <= 1 ) return $this->data;
 
-        foreach ($data as $v)
-            $this->data[] = $v;
+		foreach ( $data as $v ) $this->data[] = $v;
 
-        $this->length = count($this->data);
-    }
+		$this->length = count( $this->data );
+	}
 
-    protected static function swap(array $array, $left, $right)
-    {
-        $tmp = $array[$right];
-        $array[$right] = $array[$left];
-        $array[$left] = $tmp;
-    }
+	protected static function swap( array $array, $left, $right )
+	{
+		$tmp = $array[ $right ];
+		$array[ $right ] = $array[ $left ];
+		$array[ $left ] = $tmp;
+	}
 
-    public function getArray()
-    {
-        return $this->data;
-    }
+	public function getArray()
+	{
+		return $this->data;
+	}
 
-    abstract protected function sort(AbstractSort $sort);
+	abstract protected function sort( AbstractSort $sort );
 }

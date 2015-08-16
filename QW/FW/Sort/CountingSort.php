@@ -5,33 +5,32 @@ namespace QW\FW\Sort;
 class CountingSort extends AbstractSort
 {
 
-    protected function sort(AbstractSort $sort)
-    {
-        $min = $this->data[0];
-        $max = $this->data[0];
+	protected function sort( AbstractSort $sort )
+	{
+		$min = $this->data[ 0 ];
+		$max = $this->data[ 0 ];
 
-        for ($i = 1; $i < $this->length; $i++) {
-            if ($this->data[$i] < $min) $min = $this->data[$i];
-            elseif ($this->data[$i] > $max) $max = $this->data[$i];
-        }
+		for ( $i = 1; $i < $this->length; $i++ ) {
+			if ( $this->data[ $i ] < $min ) $min = $this->data[ $i ]; elseif ( $this->data[ $i ] > $max ) $max = $this->data[ $i ];
+		}
 
-        $count = array();
+		$count = [ ];
 
-        for ($i = 0; $i < $this->length; $i++) {
-            $count[$this->data[$i] - $min]++;
-        }
+		for ( $i = 0; $i < $this->length; $i++ ) {
+			$count[ $this->data[ $i ] - $min ]++;
+		}
 
-        $count[0]--;
-        for ($i = 1; $i < count($count); $i++) {
-            $count[$i] = $count[$i] + $count[$i - 1];
-        }
+		$count[ 0 ]--;
+		for ( $i = 1; $i < count( $count ); $i++ ) {
+			$count[ $i ] = $count[ $i ] + $count[ $i - 1 ];
+		}
 
-        $aux = array();
-        for ($i = $this->length - 1; $i >= 0; $i--) {
-            // very dirty code :O
-            $aux[$count[$this->data[$i] - $min]--] = $this->data[$i];
-        }
+		$aux = [ ];
+		for ( $i = $this->length - 1; $i >= 0; $i-- ) {
+			// very dirty code :O
+			$aux[ $count[ $this->data[ $i ] - $min ]-- ] = $this->data[ $i ];
+		}
 
-        return $aux;
-    }
+		return $aux;
+	}
 }

@@ -7,20 +7,20 @@ use QW\FW\Interfaces\ISingleton;
 
 abstract class Singleton extends Object implements ISingleton
 {
-    protected static $instance;
+	protected static $instance;
 
-    public final function __construct()
-    {
-        self::$instance = null;
-    }
+	public final function __construct()
+	{
+		self::$instance = NULL;
+	}
 
-    public static final function getSingleton()
-    {
-        if (self::$instance == null) {
-            $className = self::getStaticClassName();
-            self::$instance = new $className();
-        }
+	public static final function getSingleton()
+	{
+		if ( self::$instance == NULL ) {
+			$className = self::getStaticClassName();
+			self::$instance = new $className();
+		}
 
-        return self::$instance;
-    }
+		return self::$instance;
+	}
 }

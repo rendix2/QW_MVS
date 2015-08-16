@@ -17,33 +17,33 @@
 abstract class Smarty_Internal_ParseTree
 {
 
-    /**
-     * Parser object
-     *
-     * @var object
-     */
-    public $parser;
+	/**
+	 * Parser object
+	 *
+	 * @var object
+	 */
+	public $parser;
 
-    /**
-     * Buffer content
-     *
-     * @var mixed
-     */
-    public $data;
+	/**
+	 * Buffer content
+	 *
+	 * @var mixed
+	 */
+	public $data;
 
-    /**
-     * Subtree array
-     *
-     * @var array
-     */
-    public $subtrees = array();
+	/**
+	 * Subtree array
+	 *
+	 * @var array
+	 */
+	public $subtrees = [ ];
 
-    /**
-     * Return buffer
-     *
-     * @return string buffer content
-     */
-    abstract public function to_smarty_php();
+	/**
+	 * Return buffer
+	 *
+	 * @return string buffer content
+	 */
+	abstract public function to_smarty_php();
 }
 
 

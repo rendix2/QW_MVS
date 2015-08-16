@@ -11,49 +11,49 @@ namespace QW\FW\DP\Builder;
 class CheapBuilder implements Builder
 {
 
-    private $result;
+	private $result;
 
-    public function __construct()
-    {
-        $this->result = new Building();
-    }
+	public function __construct()
+	{
+		$this->result = new Building();
+	}
 
-    public function __destruct()
-    {
-        $this->result = null;
-    }
+	public function __destruct()
+	{
+		$this->result = NULL;
+	}
 
-    public function buildFloor()
-    {
-        $this->result->setFloor("Laminate Floor");
+	public function buildFloor()
+	{
+		$this->result->setFloor( "Laminate Floor" );
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function buildRoof()
-    {
-        $this->result->setRoof("wooden roof");
+	public function buildRoof()
+	{
+		$this->result->setRoof( "wooden roof" );
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function buildWalls()
-    {
-        $this->result->setWalls("panel walls");
+	public function buildWalls()
+	{
+		$this->result->setWalls( "panel walls" );
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function startNew()
-    {
-        $this->result = new Building();
+	public function startNew()
+	{
+		$this->result = new Building();
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getResult()
-    {
-        return $this->result;
-    }
+	public function getResult()
+	{
+		return $this->result;
+	}
 }
 

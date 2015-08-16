@@ -13,62 +13,60 @@ class MergeSort extends AbstractSort
 {
 
 
-    protected function sort(AbstractSort $sort)
-    {
-        if ($left == $right) return;
+	protected function sort( AbstractSort $sort )
+	{
+		if ( $left == $right ) return;
 
-        $middle = ($left + $right) / 2;
-        $this->mergeSort($array, $aux, $left, $middle);
-        $this->mergeSort($array, $aux, $middle + 1, $right);
-        $this->merge($array, $aux, $left, $right);
+		$middle = ( $left + $right ) / 2;
+		$this->mergeSort( $array, $aux, $left, $middle );
+		$this->mergeSort( $array, $aux, $middle + 1, $right );
+		$this->merge( $array, $aux, $left, $right );
 
-        for ($i = $left; $i <= $right; $i++) {
-            $array[$i] = $aux[$i];
-        }
+		for ( $i = $left; $i <= $right; $i++ ) {
+			$array[ $i ] = $aux[ $i ];
+		}
 
-        return $array;
-    }
+		return $array;
+	}
 
-    public function mergeSort(array $array, array $aux, $left, $right)
-    {
-        if ($left == $right) return;
+	public function mergeSort( array $array, array $aux, $left, $right )
+	{
+		if ( $left == $right ) return;
 
-        $middle = ($left + $right) / 2;
-        $this->mergeSort($array, $aux, $left, $middle);
-        $this->mergeSort($array, $aux, $middle + 1, $right);
-        $this->merge($array, $aux, $left, $right);
+		$middle = ( $left + $right ) / 2;
+		$this->mergeSort( $array, $aux, $left, $middle );
+		$this->mergeSort( $array, $aux, $middle + 1, $right );
+		$this->merge( $array, $aux, $left, $right );
 
-        for ($i = $left; $i <= $right; $i++) {
-            $array[$i] = $aux[$i];
-        }
+		for ( $i = $left; $i <= $right; $i++ ) {
+			$array[ $i ] = $aux[ $i ];
+		}
 
-        return $array;
-    }
+		return $array;
+	}
 
-    private function merge(array $array, array $aux, $left, $right)
-    {
-        $middle = ($left + $right) / 2;
-        $leftIndex = $left;
-        $rightIndex = (int)$middle + 1;
-        $auxIndex = $left;
+	private function merge( array $array, array $aux, $left, $right )
+	{
+		$middle = ( $left + $right ) / 2;
+		$leftIndex = $left;
+		$rightIndex = (int) $middle + 1;
+		$auxIndex = $left;
 
-        while ($leftIndex <= $middle && $rightIndex <= $right) {
-            if ($array[$leftIndex] >= $array[$rightIndex])
-                $aux[$auxIndex] = $array[$leftIndex];
-            else
-                $aux[$auxIndex] = $array[$rightIndex];
+		while ( $leftIndex <= $middle && $rightIndex <= $right ) {
+			if ( $array[ $leftIndex ] >= $array[ $rightIndex ] ) $aux[ $auxIndex ] = $array[ $leftIndex ]; else
+				$aux[ $auxIndex ] = $array[ $rightIndex ];
 
-            $auxIndex++;
-        }
+			$auxIndex++;
+		}
 
-        while ($leftIndex <= $middle) {
-            $aux[$auxIndex] = $array[$leftIndex++];
-            $auxIndex++;
-        }
+		while ( $leftIndex <= $middle ) {
+			$aux[ $auxIndex ] = $array[ $leftIndex++ ];
+			$auxIndex++;
+		}
 
-        while ($rightIndex <= $right) {
-            $aux[$auxIndex] = $array[$rightIndex++];
-            $auxIndex++;
-        }
-    }
+		while ( $rightIndex <= $right ) {
+			$aux[ $auxIndex ] = $array[ $rightIndex++ ];
+			$auxIndex++;
+		}
+	}
 }

@@ -7,102 +7,101 @@ use QW\FW\Basic\IllegalArgumentException;
 class SimpleLinkedList extends AbstractList
 {
 
-    private $last;
+	private $last;
 
-    public function __construct($data = null, $type = null)
-    {
-        parent::__construct($data);
+	public function __construct( $data = NULL, $type = NULL )
+	{
+		parent::__construct( $data );
 
-        $this->last = new Node($data);
-    }
+		$this->last = new Node( $data );
+	}
 
-    public function __toString()
-    {
-        $array = array();
+	public function __toString()
+	{
+		$array = [ ];
 
-        for ($i = 0; $i < $this->size; $i++) {
-            $array[] = $this->get($i);
-        }
+		for ( $i = 0; $i < $this->size; $i++ ) {
+			$array[] = $this->get( $i );
+		}
 
-        return '[ ' . implode(', ', $array) . ' ]';
-    }
+		return '[ ' . implode( ', ', $array ) . ' ]';
+	}
 
-    public function get($index)
-    {
-        if ($index < 0)
-            throw new IllegalArgumentException();
+	public function get( $index )
+	{
+		if ( $index < 0 ) throw new IllegalArgumentException();
 
-        $current = $this->last->getNextNode();
+		$current = $this->last->getNextNode();
 
-        for ($i = 0; $i < $index; $i++) {
-            if ($current->getNextNode() == null) return false;
+		for ( $i = 0; $i < $index; $i++ ) {
+			if ( $current->getNextNode() == NULL ) return FALSE;
 
-            $current = $current->getNextNode();
-        }
-        return $current->getData();
-    }
+			$current = $current->getNextNode();
+		}
 
-    public function add($data)
-    {
-        $current = $this->last;
+		return $current->getData();
+	}
 
-        while ($current->getNextNode() != null) {
-            $current = $current->getNextNode();
-        }
+	public function add( $data )
+	{
+		$current = $this->last;
 
-        $current->setNextNode(new Node($data));
-        $this->size++;
+		while ( $current->getNextNode() != NULL ) {
+			$current = $current->getNextNode();
+		}
 
-        return true;
-    }
+		$current->setNextNode( new Node( $data ) );
+		$this->size++;
 
-    public function contains($data)
-    {
-        $current = $this->last->getNextNode();
+		return TRUE;
+	}
 
-        for ($i = 0; $i < $this->size; $i++) {
-            if ($current->getData() == $data) return true;
+	public function contains( $data )
+	{
+		$current = $this->last->getNextNode();
 
-            $current = $current->getNextNode();
-        }
-        return false;
-    }
+		for ( $i = 0; $i < $this->size; $i++ ) {
+			if ( $current->getData() == $data ) return TRUE;
 
-    public function remove($index)
-    {
-        if ($index < 0 || $index > $this->size)
-            throw new IllegalArgumentException();
+			$current = $current->getNextNode();
+		}
 
-        $current = $this->last;
+		return FALSE;
+	}
 
-        for ($i = 0; $i < $index; $i++) {
-            if ($current->getNextNode() == null) return false;
+	public function remove( $index )
+	{
+		if ( $index < 0 || $index > $this->size ) throw new IllegalArgumentException();
 
-            $current = $current->getNextNode();
-        }
+		$current = $this->last;
 
-        if ($index < $this->size)
-            $current->setNextNode($current->getNextNode()->getNextNode());
+		for ( $i = 0; $i < $index; $i++ ) {
+			if ( $current->getNextNode() == NULL ) return FALSE;
 
-        $this->size--;
+			$current = $current->getNextNode();
+		}
 
-        return true;
-    }
+		if ( $index < $this->size ) $current->setNextNode( $current->getNextNode()->getNextNode() );
 
-    public function getLast()
-    {
-        return $this->helperGetLast($this->last);
-    }
+		$this->size--;
 
-    private function helperGetLast(Node $node)
-    {
-        if ($node->getNextNode() == null) return $node->getData();
+		return TRUE;
+	}
 
-        $this->helperGetLast($node->getNextNode());
-    }
+	public function getLast()
+	{
+		return $this->helperGetLast( $this->last );
+	}
 
-    public function getFirst()
-    {
-        return $this->last->getData();
-    }
+	private function helperGetLast( Node $node )
+	{
+		if ( $node->getNextNode() == NULL ) return $node->getData();
+
+		$this->helperGetLast( $node->getNextNode() );
+	}
+
+	public function getFirst()
+	{
+		return $this->last->getData();
+	}
 }

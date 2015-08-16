@@ -3,10 +3,10 @@ namespace QW\FW\Smarty;
 
 class TemplateUser extends \Smarty
 {
-    private $templateName;
+	private $templateName;
 
-    public function __construct($templateName)
-    {
-        $this->templateName = $templateName;
-    }
+	public function __construct( $templateName )
+	{
+		$this->templateName = $templateName;
+	}
 }

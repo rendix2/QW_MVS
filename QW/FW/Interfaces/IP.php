@@ -4,10 +4,10 @@ namespace QW\FW\Interfaces;
 
 interface IP
 {
-    public function getIP();
+	public function getIP();
 
-    public function getPart($part);
+	public function getPart( $part );
 
-    public function getLong();
+	public function getLong();
 
 }

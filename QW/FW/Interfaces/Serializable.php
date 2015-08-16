@@ -12,7 +12,7 @@ namespace QW\FW\Interfaces;
 interface Serializable
 {
 
-    public function serialize($input);
+	public function serialize( $input );
 
-    public function unserialize($input);
+	public function unserialize( $input );
 }

@@ -12,6 +12,6 @@ namespace QW\FW\Interfaces;
 interface Comparable
 {
 
-    public function equals($what);
+	public function equals( $what );
 
 }

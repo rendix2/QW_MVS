@@ -13,8 +13,8 @@ class HappyState implements StateOfMind
 {
 
 
-    public function express()
-    {
-        echo 'Jsem veselý';
-    }
+	public function express()
+	{
+		echo 'Jsem veselý';
+	}
 }

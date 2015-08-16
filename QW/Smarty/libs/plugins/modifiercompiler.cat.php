@@ -23,7 +23,7 @@
  *
  * @return string with compiled code
  */
-function smarty_modifiercompiler_cat($params)
+function smarty_modifiercompiler_cat( $params )
 {
-    return '(' . implode(').(', $params) . ')';
+	return '(' . implode( ').(', $params ) . ')';
 }

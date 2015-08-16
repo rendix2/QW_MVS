@@ -12,15 +12,15 @@ namespace QW\FW\DP\Command;
 class PrintCommand implements Command
 {
 
-    private $text;
+	private $text;
 
-    public function __construct($text)
-    {
-        $this->text = $text;
-    }
+	public function __construct( $text )
+	{
+		$this->text = $text;
+	}
 
-    public function execute()
-    {
-        echo $this->text;
-    }
+	public function execute()
+	{
+		echo $this->text;
+	}
 }

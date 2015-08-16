@@ -14,7 +14,7 @@ final class DatabasePostgreSQL extends AbstractDatabase
 		$this->options[] = [ \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8' ];
 
 		try {
-			$this->connection = new \PDO( 'pgsql::host=' . $this->host . ';dbname=' . $this->dbName . ';charser=utf8', $this->userName, $this->userPassword, $this->this->$options );
+			$this->connection = new \PDO( 'pgsql::host=' . $this->host . ';dbname=' . $this->dbName . ';charser=utf8', $this->userName, $this->userPassword, $this->options );
 			$this->connection->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
 		} catch ( \PDOException $pdoEx ) {
 			if ( $pdoEx->getCode() == 1045 ) echo 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>'; else if ( $pdoEx->getCode() == 2002 ) echo 'Nepodařilo se připojit k databázovému serveru: <b>' . $this->host . '</b><br>'; else if ( $pdoEx->getCode() == 1044 ) echo 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>'; else
@@ -22,6 +22,6 @@ final class DatabasePostgreSQL extends AbstractDatabase
 		}
 
 		$this->userPassword = NULL;
-		self::$AllConnectionsCount +;;
+		self::$AllConnectionsCount++;
     }
 }

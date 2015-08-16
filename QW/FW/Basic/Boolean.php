@@ -9,6 +9,11 @@ final class Boolean extends Object
 
 	private $boolean;
 
+	public function f()
+	{
+		return a();
+	}
+
 	function __construct( $boolean )
 	{
 		parent::__construct();

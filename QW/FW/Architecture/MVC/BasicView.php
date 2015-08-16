@@ -19,7 +19,6 @@ class BasicView extends Object {
 		parent::__construct();
 
 		$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default/';
-
 		$this->pageName = "";
 	}
 
@@ -28,7 +27,6 @@ class BasicView extends Object {
 	}
 
 	final public function setPageName($pageName) {
-
 		$this->pageName = $pageName;
 	}
 
@@ -42,12 +40,11 @@ class BasicView extends Object {
 
 	public function render($name, $include = FALSE) {
 		try {
-			if ( $include == TRUE ) {
+			if ( $include == TRUE )
 				if ( file_exists($this->pathToTemplate . $name . '.php') )
 					include_once( $this->pathToTemplate . $name . '.php' );
 				else
 					throw new BasicViewException('Nesprávný název view');
-			}
 			else {
 				if ( file_exists($this->pathToTemplate . 'Header.php') )
 					include_once( $this->pathToTemplate . 'Header.php' );

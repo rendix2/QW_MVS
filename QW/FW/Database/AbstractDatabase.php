@@ -41,9 +41,8 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 	public function __destruct() {
 
-		if ( $this->statement != NULL ) {
+		if ( $this->statement != NULL )
 			$this->freeStatement();
-		}
 
 		$this->queryCount = NULL;
 		$this->connection = NULL;
@@ -63,6 +62,22 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 	public static function getAllQueryCount() {
 		return self::$AllQueryCount;
+	}
+
+	protected final function checkConnection($errorCode){
+		switch($errorCode){
+			case 1045:
+				echo 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
+				break;
+			case 2002:
+				echo 'Nepodařilo se připojit k databázovému serveru: <b>' . $this->host . '</b><br>';
+				break;
+			case 1044:
+				echo 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
+				break;
+			default:
+				echo 'Neočekávaná PDO chyba číslo: <b>' . $errorCode . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
+		}
 	}
 
 	public function fetch() {

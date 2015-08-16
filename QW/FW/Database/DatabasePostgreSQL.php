@@ -15,18 +15,7 @@ final class DatabasePostgreSQL extends AbstractDatabase {
 			$this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		}
 		catch ( \PDOException $pdoEx ) {
-			if ( $pdoEx->getCode() == 1045 ) {
-				echo 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
-			}
-			else if ( $pdoEx->getCode() == 2002 ) {
-				echo 'Nepodařilo se připojit k databázovému serveru: <b>' . $this->host . '</b><br>';
-			}
-			else if ( $pdoEx->getCode() == 1044 ) {
-				echo 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
-			}
-			else {
-				echo 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
-			}
+			$this->checkConnection($pdoEx->getCode());
 		}
 
 		$this->userPassword = NULL;

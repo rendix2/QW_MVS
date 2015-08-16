@@ -38,7 +38,6 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	}
 
 	public function __destruct() {
-
 		if ( $this->statement != NULL )
 			$this->freeStatement();
 
@@ -108,7 +107,6 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 	public function query($query, array $options) {
 		try {
-
 			if ( $this->queryCount == 0 )
 				$this->connect();
 

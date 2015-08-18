@@ -3,7 +3,9 @@
 namespace QW\FW\Database;
 
 use QW\FW\Basic\Object;
+use QW\FW\Boot\NullPointerException;
 use QW\FW\Interfaces\IDatabase;
+use QW\FW\Utils\Log\Logger;
 
 abstract class AbstractDatabase extends Object implements IDatabase {
 	protected static $AllQueryCount;
@@ -18,12 +20,13 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	protected $userPassword;
 	protected $dbName;
 	protected $options;
+	protected $log;
 
 	abstract protected function connect();
 
 	// conection begin
 
-	public function __construct($host, $userName, $userPassword, $dbName, array $options) {
+	public function __construct($host, $userName, $userPassword, $dbName, array $options, $log = FALSE) {
 		parent::__construct();
 		self::$AllQueryCount       = 0;
 		self::$AllConnectionsCount = 0;
@@ -35,6 +38,12 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->queryCount = 0;
 		$this->statement = NULL;
 		$this->connection = NULL;
+
+		if ( !is_bool($log) )
+			$log = FALSE;
+
+		if ( $log )
+			$this->log = new Logger(Logger::LOG_TYPE_DATABASE);
 	}
 
 	public function __destruct() {
@@ -48,6 +57,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->options      = NULL;
 		$this->userName     = NULL;
 		$this->userPassword = NULL;
+		$this->log = NULL
 
 		parent::__destruct();
 	}
@@ -60,20 +70,30 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		return self::$AllQueryCount;
 	}
 
-	protected final function checkConnection(\PDOException $pdoEx) {
+	protected final function checkConnection(\PDOException $pdoEx = NULL) {
+		if ( $pdoEx == NULL )
+			throw new NullPointerException();
+
+		$message = '';
+
 		switch ( $pdoEx->getCode() ) {
 			case 1045:
-				echo 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
+				$message = 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
 				break;
 			case 2002:
-				echo 'Nepodařilo se připojit k databázovému serveru: <b>' . $this->host . '</b><br>';
+				$message = 'Nepodařilo se připojit k databázovému serveru: <b>' . $this->host . '</b><br>';
 				break;
 			case 1044:
-				echo 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
+				$message = 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
 				break;
 			default:
-				echo 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
+				$message = 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
 		}
+
+		if ( $this->log != FALSE )
+			$this->log->log($message);
+
+		die( $message );
 	}
 
 	public function fetch() {
@@ -110,18 +130,25 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 			if ( $this->queryCount == 0 )
 				$this->connect();
 
+			if ( $this->log != FALSE )
+				$this->log->log($query);
+
 			self::$AllQueryCount++;
 			$this->queryCount++;
 			$this->statement = $this->connection->prepare($query);
 			$this->statement->execute($options);
 		}
 		catch ( \PDOException $pdoEx ) {
-			echo 'Databázová chyba!<br>';
-			echo 'V souboru: ' . $pdoEx->getFile() . '<br>';
-			echo 'Na řádku: ' . $pdoEx->getLine() . '<br>';
-			echo 'Chyba číslo: ' . $pdoEx->getCode() . '<br>';
-			echo 'Chyba: ' . $pdoEx->getMessage() . '<br>';
-			die();
+			$message = 'Databázová chyba!<br>';
+			$message .= 'V souboru: ' . $pdoEx->getFile() . '<br>';
+			$message .= 'Na řádku: ' . $pdoEx->getLine() . '<br>';
+			$message .= 'Chyba číslo: ' . $pdoEx->getCode() . '<br>';
+			$message .= 'Chyba: ' . $pdoEx->getMessage() . '<br>';
+
+			if ( $this->log != FALSE )
+				$this->log->log($message);
+
+			die( $message );
 		}
 	}
 }

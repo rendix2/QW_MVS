@@ -11,6 +11,7 @@ class BasicView extends Object {
 	const PATH_TO_TEMPLATES = './QW/Templates/';
 	const USER_DEFAULT_NAME = 'Default/';
 	const USER_DIR_NAME = 'Web/';
+
 	protected $pathToTemplate;
 	protected $tableData;
 	protected $pageName;
@@ -20,6 +21,14 @@ class BasicView extends Object {
 
 		$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default/';
 		$this->pageName = "";
+	}
+
+	public function __destruct () {
+		$this->pathToTemplate = NULL;
+		$this->tableData      = NULL;
+		$this->pageName       = NULL;
+
+		parent::__destruct();
 	}
 
 	final public function getPageName () {

@@ -24,6 +24,14 @@ abstract class AbstractBasicController extends Object {
 		$this->viewName = str_replace( 'Controller', '', $this->getClassName() );
 	}
 
+	public function __destruct () {
+		$this->model    = NULL;
+		$this->viewName = NULL;
+		$this->view     = NULL;
+
+		parent::__destruct();
+	}
+
 	final protected function getModel () {
 		return $this->model;
 	}

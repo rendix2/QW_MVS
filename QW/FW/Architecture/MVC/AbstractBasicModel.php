@@ -18,6 +18,11 @@ abstract class AbstractBasicModel extends Object {
 			Config::$dbConfig[ 'dbPassword' ], Config::$dbConfig[ 'dbName' ], [ ] );
 	}
 
+	public function __destruct () {
+		$this->db = NULL;
+		parent::__destruct();
+	}
+
 	protected final function getDB () {
 		return $this->db;
 	}

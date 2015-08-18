@@ -57,6 +57,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->options      = NULL;
 		$this->userName     = NULL;
 		$this->userPassword = NULL;
+		$this->statement = NULL;
 		$this->log = NULL
 
 		parent::__destruct();

@@ -11,11 +11,9 @@ final class Folder extends File {
 	public function __construct($dirName, $create = FALSE) {
 		//parent::__construct();
 
-		if ( ( !is_dir($dirName) || !file_exists($dirName) ) && $create == FALSE )
-			throw new IllegalArgumentException();
+		if ( ( !is_dir($dirName) || !file_exists($dirName) ) && $create == FALSE ) throw new IllegalArgumentException();
 
-		else if ( !file_exists($dirName) && $create == TRUE )
-			mkdir($dirName);
+		else if ( !file_exists($dirName) && $create == TRUE ) mkdir($dirName);
 
 		$this->filePath = $dirName;
 	}
@@ -25,8 +23,7 @@ final class Folder extends File {
 		$array = [ ];
 
 		foreach ( glob($this->filePath . '*') as $v ) {
-			if ( $v == '.' || $v == '..' )
-				continue;
+			if ( $v == '.' || $v == '..' ) continue;
 
 			$array[] = $v;
 		}
@@ -42,9 +39,7 @@ final class Folder extends File {
 		$bytesTotal = 0;
 		$path       = realpath($this->filePath);
 
-		if ( $path !== FALSE )
-			foreach ( new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->filePath, FilesystemIterator::SKIP_DOTS)) as $object )
-				$bytesTotal += $object->getSize();
+		if ( $path !== FALSE ) foreach ( new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->filePath, FilesystemIterator::SKIP_DOTS)) as $object ) $bytesTotal += $object->getSize();
 
 		return $bytesTotal;
 	}

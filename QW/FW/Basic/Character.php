@@ -11,8 +11,7 @@ class Character extends Object {
 	public function __construct($char = '') {
 		parent::__construct();
 
-		if ( mb_strlen($char) != 1 )
-			throw new IllegalArgumentException();
+		if ( mb_strlen($char) != 1 ) throw new IllegalArgumentException();
 
 		$this->char = $char;
 	}
@@ -26,8 +25,7 @@ class Character extends Object {
 	}
 
 	public function equalsCharacter(Character $character = NULL) {
-		if ( $character == NULL )
-			throw new IllegalArgumentException();
+		if ( $character == NULL ) throw new IllegalArgumentException();
 
 		return $this->char == $character->char;
 	}

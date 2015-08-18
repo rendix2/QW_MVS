@@ -38,8 +38,7 @@ class String extends Object {
 	}
 
 	public function charAt($x) {
-		if ( !Validator::isNumber($x) || $x < 0 || $x > ( mb_strlen($this->string, 'UTF-8') - 1 ) )
-			throw new IllegalArgumentException();
+		if ( !Validator::isNumber($x) || $x < 0 || $x > ( mb_strlen($this->string, 'UTF-8') - 1 ) ) throw new IllegalArgumentException();
 
 		return $this->string{$x};
 	}
@@ -97,8 +96,7 @@ class String extends Object {
 	}
 
 	public function getMatches() {
-		if ( $this->matches == NULL || !is_array($this->matches) )
-			return FALSE;
+		if ( $this->matches == NULL || !is_array($this->matches) ) return FALSE;
 
 		return $this->matches;
 	}
@@ -111,12 +109,9 @@ class String extends Object {
 		$strlen = $this->getLength();
 		$start  = max(0, $start);
 
-		if ( mb_strlen($char, 'UTF-8') != 1 || $start > $strlen || $start < 0 )
-			throw new IllegalArgumentException();
+		if ( mb_strlen($char, 'UTF-8') != 1 || $start > $strlen || $start < 0 ) throw new IllegalArgumentException();
 
-		for ( $i = $start; $i < $strlen; $i++ )
-			if ( $this->string{$i} == $char )
-				return $i;
+		for ( $i = $start; $i < $strlen; $i++ ) if ( $this->string{$i} == $char ) return $i;
 
 		return FALSE;
 	}
@@ -130,8 +125,7 @@ class String extends Object {
 	}
 
 	public function nl2br($is_xhtml = NULL) {
-		if ( !is_null($is_xhtml || !is_bool($is_xhtml)) )
-			throw new IllegalArgumentException();
+		if ( !is_null($is_xhtml || !is_bool($is_xhtml)) ) throw new IllegalArgumentException();
 
 		return new String(nl2br($this->string, $is_xhtml));
 	}
@@ -178,8 +172,7 @@ class String extends Object {
 	}
 
 	public function subString($start, $end = NULL) {
-		if ( $start < 0 || ( $end > mb_strlen($this->string, 'UTF-8') && $end != NULL ) )
-			throw new IllegalArgumentException();
+		if ( $start < 0 || ( $end > mb_strlen($this->string, 'UTF-8') && $end != NULL ) ) throw new IllegalArgumentException();
 
 		return new String(mb_substr($this->string, $start, $end, 'UTF-8'));
 	}

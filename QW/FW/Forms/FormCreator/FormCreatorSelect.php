@@ -24,8 +24,7 @@ class FormCreatorSelect extends Object {
 		$this->name     = $name;
 		$this->multiple = $multiple == TRUE ? 'multiple="multiple' : '';
 
-		if ( !is_numeric($size) )
-			throw new IllegalArgumentException();
+		if ( !is_numeric($size) ) throw new IllegalArgumentException();
 
 		$this->size = $size;
 	}
@@ -50,8 +49,7 @@ class FormCreatorSelect extends Object {
 
 		$final = '<select name="' . $this->name . '" ' . $this->multiple . '>';
 
-		foreach ( $this->content as $v )
-			$final .= "<option name=\"" . key($this->content) . "\">{$v}</option>\n";
+		foreach ( $this->content as $v ) $final .= "<option name=\"" . key($this->content) . "\">{$v}</option>\n";
 
 		return $final;
 	}

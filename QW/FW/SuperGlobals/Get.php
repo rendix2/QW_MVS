@@ -8,6 +8,7 @@ class Get implements ISG {
 	public function __construct() {
 		throw new PrivateConstructException();
 	}
+
 	public static function get($k) {
 		return isset( $_GET[ $k ] ) ? $_GET[ $k ] : FALSE;
 	}

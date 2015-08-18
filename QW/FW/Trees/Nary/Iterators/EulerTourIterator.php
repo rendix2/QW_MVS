@@ -23,15 +23,11 @@ class EulerTourIterator extends AbstractNaryTreeIterator {
 	protected function order(NaryTree $root = NULL) {
 		$this->finalData[] = $root->getData();
 
-		for ( $key = 0; $key < ( $root->getDirectChildrenCount() / 2 ); $key++ )
-			if ( $root->getChildren()[ $key ] != NULL )
-				$this->order($root->getChildren()[ $key ]);
+		for ( $key = 0; $key < ( $root->getDirectChildrenCount() / 2 ); $key++ ) if ( $root->getChildren()[ $key ] != NULL ) $this->order($root->getChildren()[ $key ]);
 
 		$this->finalData[] = $root->getData();
 
-		for ( $key = $root->getDirectChildrenCount() - 1 / 2; $key < $root->getDirectChildrenCount(); $key++ )
-			if ( $root->getChildren()[ $key ] != NULL )
-				$this->order($root->getChildren()[ $key ]);
+		for ( $key = $root->getDirectChildrenCount() - 1 / 2; $key < $root->getDirectChildrenCount(); $key++ ) if ( $root->getChildren()[ $key ] != NULL ) $this->order($root->getChildren()[ $key ]);
 
 		$this->finalData[] = $root->getData();
 	}

@@ -28,55 +28,42 @@ class BlackList extends Object {
 	}
 
 	public function addIPs(array $long) {
-		foreach ( $long as $v )
-			$this->longOfIP[] = new IPvU($v);
+		foreach ( $long as $v ) $this->longOfIP[] = new IPvU($v);
 	}
 
 	public function addIPsv4(array $long) {
-		foreach ( $long as $v )
-			$this->longOfIP[] = new IPv4($v);
+		foreach ( $long as $v ) $this->longOfIP[] = new IPv4($v);
 	}
 
 	public function addIPsv6(array $long) {
-		foreach ( $long as $v )
-			$this->longOfIP[] = new IPv6($v);
+		foreach ( $long as $v ) $this->longOfIP[] = new IPv6($v);
 	}
 
 	public function addIp(IP $ip = NULL) {
-		if ( $ip == NULL )
-			throw new NullPointerException();
+		if ( $ip == NULL ) throw new NullPointerException();
 
 		$this->longOfIP[] = $ip;
 	}
 
 	public function addLong(IP $ip = NULL) {
-		if ( $ip == NULL )
-			throw new NullPointerException();
+		if ( $ip == NULL ) throw new NullPointerException();
 
 		$this->longOfIP[] = $ip;
 	}
 
 	public function deleteIp(IP $ip = NULL) {
-		if ( $ip == NULL )
-			throw new NullPointerException();
+		if ( $ip == NULL ) throw new NullPointerException();
 
-		foreach ( $this->longOfIP as $k => $v )
-			if ( $v->getLong() == $ip->getLong() )
-				unset( $this->longOfIP[ $k ] );
+		foreach ( $this->longOfIP as $k => $v ) if ( $v->getLong() == $ip->getLong() ) unset( $this->longOfIP[ $k ] );
 	}
 
 	public function deleteLong(IP $ip = NULL) {
-		if ( $ip == NULL )
-			throw new NullPointerException();
+		if ( $ip == NULL ) throw new NullPointerException();
 
-		foreach ( $this->longOfIP as $k => $v )
-			if ( $v->getLong() == $ip->getLong() )
-				unset( $this->longOfIP[ $k ] );
+		foreach ( $this->longOfIP as $k => $v ) if ( $v->getLong() == $ip->getLong() ) unset( $this->longOfIP[ $k ] );
 	}
 
 	public function run() {
-		foreach ( $this->longOfIP as $ip )
-			if ( $ip->getLong() == $this->myIp->getLong() )
-				die( 'Your IP as blacklisted.' );
+		foreach ( $this->longOfIP as $ip ) if ( $ip->getLong() == $this->myIp->getLong() ) die( 'Your IP as blacklisted.' );
 	}
 }

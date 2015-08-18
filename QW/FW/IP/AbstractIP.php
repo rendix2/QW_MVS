@@ -16,14 +16,11 @@ abstract class AbstractIP extends Object implements IP {
 	public function __construct($ip) {
 		parent::__construct();
 
-		if ( $ip == NULL )
-			throw new NullPointerException();
+		if ( $ip == NULL ) throw new NullPointerException();
 
-		if ( is_numeric($ip) )
-			$ip = long2ip($ip);
+		if ( is_numeric($ip) ) $ip = long2ip($ip);
 
-		if ( !Validator::validateIpUsingFilter($ip) )
-			throw new IllegalArgumentException();
+		if ( !Validator::validateIpUsingFilter($ip) ) throw new IllegalArgumentException();
 
 		$this->ipParted    = explode('.', $ip);
 		$this->ipCountPart = count($this->ipParted);
@@ -42,7 +39,6 @@ abstract class AbstractIP extends Object implements IP {
 	}
 
 	public function getPart($part) {
-		if ( !is_numeric($part) )
-			throw new IllegalArgumentException();
+		if ( !is_numeric($part) ) throw new IllegalArgumentException();
 	}
 }

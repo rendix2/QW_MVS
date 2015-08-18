@@ -38,16 +38,13 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->statement = NULL;
 		$this->connection = NULL;
 
-		if ( !is_bool($log) )
-			$log = FALSE;
+		if ( !is_bool($log) ) $log = FALSE;
 
-		if ( $log )
-			$this->log = new Logger(Logger::LOG_TYPE_DATABASE);
+		if ( $log ) $this->log = new Logger(Logger::LOG_TYPE_DATABASE);
 	}
 
 	public function __destruct() {
-		if ( $this->statement != NULL )
-			$this->freeStatement();
+		if ( $this->statement != NULL ) $this->freeStatement();
 
 		$this->queryCount   = NULL;
 		$this->connection   = NULL;
@@ -71,8 +68,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	}
 
 	protected final function checkConnection(\PDOException $pdoEx = NULL) {
-		if ( $pdoEx == NULL )
-			throw new NullPointerException();
+		if ( $pdoEx == NULL ) throw new NullPointerException();
 
 		$message = '';
 
@@ -90,8 +86,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 				$message .= 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
 		}
 
-		if ( $this->log != FALSE )
-			$this->log->log($message);
+		if ( $this->log != FALSE ) $this->log->log($message);
 
 		die( $message );
 	}
@@ -127,11 +122,9 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 	public function query($query, array $options) {
 		try {
-			if ( $this->queryCount == 0 )
-				$this->connect();
+			if ( $this->queryCount == 0 ) $this->connect();
 
-			if ( $this->log != FALSE )
-				$this->log->log($query);
+			if ( $this->log != FALSE ) $this->log->log($query);
 
 			self::$AllQueryCount++;
 			$this->queryCount++;
@@ -145,8 +138,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 			$message .= 'Chyba číslo: ' . $pdoEx->getCode() . '<br>';
 			$message .= 'Chyba: ' . $pdoEx->getMessage() . '<br>';
 
-			if ( $this->log != FALSE )
-				$this->log->log($message);
+			if ( $this->log != FALSE ) $this->log->log($message);
 
 			die( $message );
 		}

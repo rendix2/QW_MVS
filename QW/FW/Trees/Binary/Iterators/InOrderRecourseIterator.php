@@ -10,8 +10,7 @@ final class InOrderRecourseIterator extends AbstractBinaryTreeIterator {
 	}
 
 	protected function order(BinaryTree $root = NULL) {
-		if ( $root == NULL )
-			return;
+		if ( $root == NULL ) return;
 
 		$this->order($root->getLeftChild());
 		$this->finalData[] = $root->getData();

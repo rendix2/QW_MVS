@@ -15,12 +15,8 @@ class PrinterWrapper {
 		$this->charPerLine        = 100;
 	}
 
-	public function stringPrinter(Printer $printer) {
-		if ( $printer == NULL ) {
-			throw new NullPointerException();
-		}
-
-		$this->printer = $printer;
+	public function isCurrentLineFull() {
+		return $this->charPerCurrentLine >= $this->charPerLine;
 	}
 
 	public function myPrint(String $s) {
@@ -41,8 +37,12 @@ class PrinterWrapper {
 		}
 	}
 
-	public function isCurrentLineFull() {
-		return $this->charPerCurrentLine >= $this->charPerLine;
+	public function stringPrinter(Printer $printer) {
+		if ( $printer == NULL ) {
+			throw new NullPointerException();
+		}
+
+		$this->printer = $printer;
 	}
 
 	// we cant have function print ? :O says ide

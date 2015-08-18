@@ -15,24 +15,21 @@ class ShakerSort extends AbstractSort {
 		for ( $i = 0; $i < $this->length / 2; $i++ ) {
 			$swapped = FALSE;
 
-			for ( $j = $i; $j < $this->length - $i - 1; $j++ )
-				if ( $this->data[ $j ] < $this->data[ $j + 1 ] ) {
-					$tmp                  = $this->data[ $j ];
-					$this->data[ $j ]     = $this->data[ $j + 1 ];
-					$this->data[ $j + 1 ] = $tmp;
-					$swapped              = TRUE;
-				}
+			for ( $j = $i; $j < $this->length - $i - 1; $j++ ) if ( $this->data[ $j ] < $this->data[ $j + 1 ] ) {
+				$tmp                  = $this->data[ $j ];
+				$this->data[ $j ]     = $this->data[ $j + 1 ];
+				$this->data[ $j + 1 ] = $tmp;
+				$swapped              = TRUE;
+			}
 
-			for ( $j = $this->length - 2 - $i; $j > $i; $j-- )
-				if ( $this->data[ $j ] > $this->data[ $j - 1 ] ) {
-					$tmp                  = $this->data[ $j ];
-					$this->data[ $j ]     = $this->data[ $j - 1 ];
-					$this->data[ $j - 1 ] = $tmp;
-					$swapped              = TRUE;
-				}
+			for ( $j = $this->length - 2 - $i; $j > $i; $j-- ) if ( $this->data[ $j ] > $this->data[ $j - 1 ] ) {
+				$tmp                  = $this->data[ $j ];
+				$this->data[ $j ]     = $this->data[ $j - 1 ];
+				$this->data[ $j - 1 ] = $tmp;
+				$swapped              = TRUE;
+			}
 
-			if ( $swapped )
-				break;
+			if ( $swapped ) break;
 		}
 
 		return $this->data;

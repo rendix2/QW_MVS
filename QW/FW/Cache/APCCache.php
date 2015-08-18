@@ -12,8 +12,7 @@ final class APCCache extends Object implements ICache {
 	public function __construct($key) {
 		parent::__construct();
 
-		if ( apc_exists($key) )
-			throw new IllegalArgumentException('Klíč již existuje, zvolte jiný.');
+		if ( apc_exists($key) ) throw new IllegalArgumentException('Klíč již existuje, zvolte jiný.');
 
 		$this->key = $key;
 	}

@@ -23,16 +23,13 @@ final class ImageResize {
 	// my edit: check for file exists($file_in)
 
 	public static function image_resize($file_in, $file_out, $width, $height) {
-		if ( !file_exists($file_in) )
-			return FALSE;
+		if ( !file_exists($file_in) ) return FALSE;
 
 		$imagesize = getimagesize($file_in);
 
-		if ( ( !$width && !$height ) || !$imagesize[ 0 ] || !$imagesize[ 1 ] )
-			return FALSE;
+		if ( ( !$width && !$height ) || !$imagesize[ 0 ] || !$imagesize[ 1 ] ) return FALSE;
 
-		if ( $imagesize[ 0 ] == $width && $imagesize[ 1 ] == $height )
-			return copy($file_in, $file_out);
+		if ( $imagesize[ 0 ] == $width && $imagesize[ 1 ] == $height ) return copy($file_in, $file_out);
 
 		switch ( $imagesize[ 2 ] ) {
 			case 1:
@@ -49,14 +46,12 @@ final class ImageResize {
 				break;
 		}
 
-		if ( !$img )
-			return FALSE;
+		if ( !$img ) return FALSE;
 
 		$img2 = imagecreatetruecolor($width, $height);
 		imagecopyresampled($img2, $img, 0, 0, 0, 0, $width, $height, $imagesize[ 0 ], $imagesize[ 1 ]);
 
-		if ( $imagesize[ 2 ] == 2 )
-			return imagejpeg($img2, $file_out);
+		if ( $imagesize[ 2 ] == 2 ) return imagejpeg($img2, $file_out);
 		else if ( $imagesize[ 2 ] == 1 && function_exists("imagegif") ) {
 			imagetruecolortopalette($img2, FALSE, 256);
 
@@ -72,8 +67,7 @@ final class ImageResize {
 	public static function image_shrink_size($file_in, $max_x = 0, $max_y = 0) {
 		list( $width, $height ) = getimagesize($file_in);
 
-		if ( !$width || !$height )
-			return [ 0, 0 ];
+		if ( !$width || !$height ) return [ 0, 0 ];
 
 		if ( $max_x && $width > $max_x ) {
 			$height = round($height * $max_x / $width);

@@ -12,8 +12,7 @@ final class FileCache extends Object implements ICache {
 	public function __construct($fileName) {
 		parent::__construct();
 
-		if ( !preg_match('#^[a-zA-Z0-9-]#$', $fileName) )
-			throw new IllegalArgumentException();
+		if ( !preg_match('#^[a-zA-Z0-9-]#$', $fileName) ) throw new IllegalArgumentException();
 
 		$this->file = new File(self::PATH . $fileName);
 	}

@@ -23,8 +23,7 @@ class FormCreatorHTML4 {
 	function __toString() {
 		$finalData = '';
 
-		foreach ( $this->formData as $v )
-			$finalData .= $v;
+		foreach ( $this->formData as $v ) $finalData .= $v;
 
 		return $finalData;
 	}
@@ -48,8 +47,7 @@ class FormCreatorHTML4 {
 	}
 
 	public function addInputImage($name, $src) {
-		if ( !file_exists($src) )
-			throw new IllegalArgumentException();
+		if ( !file_exists($src) ) throw new IllegalArgumentException();
 
 		$this->formData[] = '<input type="image" name="{$name}" src="{$value}">';
 
@@ -57,8 +55,7 @@ class FormCreatorHTML4 {
 	}
 
 	public function addInputPassword($name, $size = '', $maxlength = '') {
-		if ( !is_numeric($maxlength) )
-			throw new IllegalArgumentException();
+		if ( !is_numeric($maxlength) ) throw new IllegalArgumentException();
 
 		$this->formData[] = '<input type="password" name="{$name}" value="" maxlength="{$maxlength}">';
 
@@ -86,8 +83,7 @@ class FormCreatorHTML4 {
 	}
 
 	public function addInputText($name, $value = '', $size = '', $maxlength = '', $autocomplete = 'off') {
-		if ( !is_numeric($maxlength) || $autocomplete != 'off' || $autocomplete != 'on' || !is_numeric($size) )
-			throw new IllegalArgumentException();
+		if ( !is_numeric($maxlength) || $autocomplete != 'off' || $autocomplete != 'on' || !is_numeric($size) ) throw new IllegalArgumentException();
 
 		$this->formData[] = '<input type="text" name="{$name}" value="{$value}" size="{$size}" maxlength="{$maxlength}" autocomplete="{$autocomplete}">';
 
@@ -95,8 +91,7 @@ class FormCreatorHTML4 {
 	}
 
 	public function addSelect() {
-		if ( $this->select == NULL )
-			throw new NullPointerException();
+		if ( $this->select == NULL ) throw new NullPointerException();
 
 		$this->formData[] = $this->select->getFinal();
 		$this->select     = NULL;

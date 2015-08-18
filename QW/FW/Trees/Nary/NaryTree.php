@@ -21,10 +21,7 @@ final class NaryTree extends AbstractTree {
 		$this->directChildrenCount = count($this->children);
 
 		// simulating array object type hinting :((
-		if ( $this->directChildrenCount )
-			foreach ( $children as $v )
-				if ( !( $v instanceof NaryTree ) )
-					throw new IllegalArgumentException();
+		if ( $this->directChildrenCount ) foreach ( $children as $v ) if ( !( $v instanceof NaryTree ) ) throw new IllegalArgumentException();
 
 		$this->children = $children;
 		$this->data     = $data;
@@ -33,13 +30,11 @@ final class NaryTree extends AbstractTree {
 	public function addChild(NaryTree $naryTree = NULL) {
 		$this->children[] = $naryTree;
 
-		if ( $naryTree != NULL )
-			$this->childrenCount++;
+		if ( $naryTree != NULL ) $this->childrenCount++;
 	}
 
 	public function getChild($id) {
-		if ( $id < 0 || $id > $this->directChildrenCount )
-			throw new IllegalArgumentException();
+		if ( $id < 0 || $id > $this->directChildrenCount ) throw new IllegalArgumentException();
 
 		return $this->children[ $id ];
 	}
@@ -49,9 +44,7 @@ final class NaryTree extends AbstractTree {
 	}
 
 	public function setChildren(array $children) {
-		foreach ( $children as $v )
-			if ( !( $v instanceof NaryTree ) )
-				throw new IllegalArgumentException();
+		foreach ( $children as $v ) if ( !( $v instanceof NaryTree ) ) throw new IllegalArgumentException();
 
 		$this->children            = $children;
 		$this->directChildrenCount = count($children);

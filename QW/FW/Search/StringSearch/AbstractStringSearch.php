@@ -13,8 +13,7 @@ abstract class AbstractStringSearch extends Object {
 	public function __construct($string) {
 		parent::__construct();
 
-		if ( !is_string($string) )
-			throw new IllegalArgumentException();
+		if ( !is_string($string) ) throw new IllegalArgumentException();
 
 		$this->string = (string) $string;
 	}

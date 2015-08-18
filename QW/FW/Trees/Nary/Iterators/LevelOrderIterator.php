@@ -15,8 +15,7 @@ class LevelOrderIterator extends AbstractNaryTreeIterator {
 	}
 
 	protected function order(NaryTree $root = NULL) {
-		if ( $root == NULL || $this->realRoot == $root )
-			return;
+		if ( $root == NULL || $this->realRoot == $root ) return;
 
 		$this->queue->enqueue($root);
 
@@ -24,9 +23,7 @@ class LevelOrderIterator extends AbstractNaryTreeIterator {
 			$current           = $this->queue->dequeue();
 			$this->finalData[] = $current->getData();
 
-			foreach ( $current->getChildren() as $child )
-				if ( $child != NULL )
-					$this->queue->enqueue($child);
+			foreach ( $current->getChildren() as $child ) if ( $child != NULL ) $this->queue->enqueue($child);
 		}
 	}
 }

@@ -25,8 +25,7 @@ class PostOrderIterativeIterator extends AbstractBinaryTreeIterator {
 			else {
 				$peekNode = $this->stack->top();
 
-				if ( $peekNode->getRight() != NULL && $lastVisited != $peekNode->getRight() )
-					$root = $peekNode->getRight();
+				if ( $peekNode->getRight() != NULL && $lastVisited != $peekNode->getRight() ) $root = $peekNode->getRight();
 				else {
 					$this->finalData[] = $peekNode->getData();
 					$lastVisited       = $this->stack->pop();

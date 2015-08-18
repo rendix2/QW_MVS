@@ -14,9 +14,7 @@ class QuickSort extends AbstractSort {
 	private function quickSort(array $array, $left, $right) {
 		if ( $left < $right ) {
 			$boundary = $left;
-			for ( $i = $left + 1; $i < $right; $i++ )
-				if ( $array[ $i ] > $array[ $left ] )
-					self::swap($array, $i, ++$boundary);
+			for ( $i = $left + 1; $i < $right; $i++ ) if ( $array[ $i ] > $array[ $left ] ) self::swap($array, $i, ++$boundary);
 
 			self::swap($array, $left, $boundary);
 			$this->quickSort($array, $left, $boundary);

@@ -21,8 +21,7 @@ class BetterBootstrap extends AbstractRouter {
 	}
 
 	protected function callControllerMethod() {
-		if ( in_array($this->params[ 0 ], $this->enabledRoutes) )
-			$this->callControllerMethod();
+		if ( in_array($this->params[ 0 ], $this->enabledRoutes) ) $this->callControllerMethod();
 		else
 			throw new IllegalArgumentException();
 	}

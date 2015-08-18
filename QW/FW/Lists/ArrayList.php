@@ -24,16 +24,13 @@ class ArrayList extends AbstractList implements IList {
 	}
 
 	public function contains($data) {
-		foreach ( $this->data as $v )
-			if ( $v == $data )
-				return TRUE;
+		foreach ( $this->data as $v ) if ( $v == $data ) return TRUE;
 
 		return FALSE;
 	}
 
 	public function get($index) {
-		if ( $index > $this->size )
-			throw new IllegalArgumentException();
+		if ( $index > $this->size ) throw new IllegalArgumentException();
 
 		return $this->data[ $index ];
 	}
@@ -47,11 +44,9 @@ class ArrayList extends AbstractList implements IList {
 	}
 
 	public function remove($index) {
-		if ( $index > $this->size )
-			throw new IllegalArgumentException();
+		if ( $index > $this->size ) throw new IllegalArgumentException();
 
-		for ( $i = $index + 1; $i < $this->size; $i++ )
-			$this->data[ $i - 1 ] = $this->data[ $i ];
+		for ( $i = $index + 1; $i < $this->size; $i++ ) $this->data[ $i - 1 ] = $this->data[ $i ];
 
 		unset( $this->data[ $this->size - 1 ] );
 		$this->size--;

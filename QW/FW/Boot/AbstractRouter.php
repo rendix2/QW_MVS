@@ -27,8 +27,7 @@ abstract class AbstractRouter extends Object {
 		$load = function ($class) {
 
 			// don't load Controller or Model by this
-			if ( preg_match('#Controller|Model$#', $class) )
-				return 2;
+			if ( preg_match('#Controller|Model$#', $class) ) return 2;
 
 			// manual Smarty load
 			if ( strpos('Smarty', $class) ) {
@@ -42,8 +41,7 @@ abstract class AbstractRouter extends Object {
 			$path = './' . implode('/', $c) . '.php';
 
 			// load class in namespace
-			if ( file_exists($path) )
-				require_once( $path );
+			if ( file_exists($path) ) require_once( $path );
 			else
 				die( 'File: ' . $path . ' doesn\'t exists<br>' );
 

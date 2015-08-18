@@ -62,7 +62,9 @@ An example of a section loop:
 
 
 
-                                                                                                                                                                                                                                                                        fax: {$contacts[sec1].fax}
+
+                                                                                                                                                                                                                                                                                    fax: {$contacts[sec1].fax}
+
 
 
 
@@ -107,7 +109,9 @@ An example of a section loop:
 
 
 
-                                                                                                                                                                                                                                                                        cell: {$contacts[sec1].cell}
+
+                                                                                                                                                                                                                                                                                    cell: {$contacts[sec1].cell}
+
 
 
 

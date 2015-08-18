@@ -18,6 +18,7 @@ abstract class AbstractRouter extends Object {
 		parent::__construct();
 
 		require_once( './Exception.php' );
+		require_once( '../QW/Smarty/libs/Smarty.class.php' );
 		$this->route();
 	}
 
@@ -27,14 +28,10 @@ abstract class AbstractRouter extends Object {
 		$load = function ( $class ) {
 
 			// don't load Controller or Model by this
-			if ( preg_match( '#Controller|Model$#', $class ) ) return 2;
+			if ( preg_match( '#Controller|Model$#', $class ) ) return -2;
 
 			// manual Smarty load
-			if ( strpos( 'Smarty', $class ) ) {
-				require( '/Smarty/Libs/Smarty.class.php' );
-
-				return 2;
-			}
+			if ( strpos( 'Smarty', $class ) ) return -1;
 
 			// parse namespace
 			$c    = explode( '\\', $class );

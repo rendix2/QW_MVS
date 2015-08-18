@@ -27,6 +27,18 @@ class BetterBootstrap extends AbstractRouter {
 			throw new IllegalArgumentException();
 	}
 
+	protected function loadMVC() {
+		// TODO: Implement loadMVC() method.
+	}
+
+	protected function loadMVP() {
+		// TODO: Implement loadMVP() method.
+	}
+
+	protected function loadMy() {
+		// TODO: Implement loadMy() method.
+	}
+
 	protected function setParams() {
 		$this->url    = isset( $_GET[ 'URL' ] ) ? $_GET[ 'URL' ] : NULL;
 		$this->params = rtrim($this->url, $this->$urlDelimiter);

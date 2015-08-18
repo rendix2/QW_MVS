@@ -98,7 +98,6 @@ class SimpleLinkedList extends AbstractList {
 			$current->setNextNode($current->getNextNode()
 			                              ->getNextNode());
 
-
 		$this->size--;
 
 		return TRUE;

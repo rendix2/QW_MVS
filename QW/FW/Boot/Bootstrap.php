@@ -53,6 +53,18 @@ class Bootstrap extends AbstractRouter {
 		$this->controller = new $c($this->params[ 0 ] . 'Model');
 	}
 
+	protected function loadMVC() {
+		// TODO: Implement loadMVC() method.
+	}
+
+	protected function loadMVP() {
+		// TODO: Implement loadMVP() method.
+	}
+
+	protected function loadMy() {
+		// TODO: Implement loadMy() method.
+	}
+
 	protected function noUrl() {
 		if ( empty( $this->url ) ) {
 			$this->controller = new IndexController('IndexModel');

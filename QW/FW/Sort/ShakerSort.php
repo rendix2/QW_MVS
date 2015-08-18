@@ -33,7 +33,6 @@ class ShakerSort extends AbstractSort {
 
 			if ( $swapped )
 				break;
-
 		}
 
 		return $this->data;

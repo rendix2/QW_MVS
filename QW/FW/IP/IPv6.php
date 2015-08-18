@@ -8,7 +8,8 @@ final class IPv6 extends AbstractIP {
 	public function __construct($ip) {
 		parent::__construct($ip);
 
-		if ( $this->getIpCountPart() != 6 ) // IPv6
+		// IPv6
+		if ( $this->getIpCountPart() != 6 )
 			throw new IllegalArgumentException();
 
 		$this->ipCoded = ip2long($ip);

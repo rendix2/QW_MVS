@@ -13,9 +13,6 @@ class LanguageAdmin extends Language {
 	private $langName, $langAdmin, $metaAdmin;
 
 	public function __construct($langName) {
-		if ( $langName == NULL )
-			throw new NullPointerException();
-
 		if ( !preg_match('#^[A-Z]*$#', $langName) )
 			throw new IllegalArgumentException();
 

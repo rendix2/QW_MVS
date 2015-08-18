@@ -19,9 +19,6 @@ class Language extends Object implements ILanguage {
 	public function __construct($langName) {
 		parent::__construct();
 
-		if ( $langName == NULL )
-			throw new NullPointerException();
-
 		if ( !preg_match('#^[A-Z]*$#', $langName) )
 			throw new IllegalArgumentException();
 

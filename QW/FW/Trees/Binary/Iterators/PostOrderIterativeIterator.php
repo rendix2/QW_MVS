@@ -13,7 +13,7 @@ class PostOrderIterativeIterator extends AbstractBinaryTreeIterator {
 		parent::__construct($root);
 	}
 
-	protected function order(BinaryTree $root) {
+	protected function order(BinaryTree $root = NULL) {
 		$lastVisited = NULL;
 
 		while ( !$this->stack->isEmpty() || $root != NULL ) {

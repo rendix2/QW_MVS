@@ -97,9 +97,8 @@ class String extends Object {
 	}
 
 	public function getMatches() {
-		if ( $this->matches == NULL || !is_array($this->matches) ) {
+		if ( $this->matches == NULL || !is_array($this->matches) )
 			return FALSE;
-		}
 
 		return $this->matches;
 	}
@@ -118,7 +117,6 @@ class String extends Object {
 		for ( $i = $start; $i < $strlen; $i++ )
 			if ( $this->string{$i} == $char )
 				return $i;
-
 
 		return FALSE;
 	}

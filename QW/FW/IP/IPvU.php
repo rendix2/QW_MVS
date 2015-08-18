@@ -10,12 +10,13 @@ class IPvU extends AbstractIP {
 	public function __construct($ip) {
 		parent::__construct($ip);
 
-		if ( $this->getIpCountPart() == 4 ) // IPv4
+		// IPv4
+		if ( $this->getIpCountPart() == 4 )
 			$this->IPv = new IPv4($ip);
-		else if ( $this->getIpCountPart() == 6 ) // IPv6
+		// IPv6
+		else if ( $this->getIpCountPart() == 6 )
 			$this->IPv = new IPv6($ip);
-		else
-			throw new IllegalArgumentException();
+		else throw new IllegalArgumentException();
 
 		$this->ipCoded = ip2long($ip);
 	}

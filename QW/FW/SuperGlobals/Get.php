@@ -5,9 +5,9 @@ namespace QW\FW\SuperGlobals;
 use QW\FW\Interfaces\ISG;
 
 class Get implements ISG {
-	private function __construct() {
+	public function __construct() {
+		throw new PrivateConstructException();
 	}
-
 	public static function get($k) {
 		return isset( $_GET[ $k ] ) ? $_GET[ $k ] : FALSE;
 	}

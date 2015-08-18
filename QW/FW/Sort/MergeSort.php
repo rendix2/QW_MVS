@@ -21,8 +21,7 @@ class MergeSort extends AbstractSort {
 		while ( $leftIndex <= $middle && $rightIndex <= $right ) {
 			if ( $array[ $leftIndex ] >= $array[ $rightIndex ] )
 				$aux[ $auxIndex ] = $array[ $leftIndex ];
-			else
-				$aux[ $auxIndex ] = $array[ $rightIndex ];
+			else $aux[ $auxIndex ] = $array[ $rightIndex ];
 
 			$auxIndex++;
 		}

@@ -25,7 +25,10 @@ class Character extends Object {
 		return $this->char == $char;
 	}
 
-	public function equalsCharacter(Character $character) {
+	public function equalsCharacter(Character $character = NULL) {
+		if ( $character == NULL )
+			throw new IllegalArgumentException();
+
 		return $this->char == $character->char;
 	}
 

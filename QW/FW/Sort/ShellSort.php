@@ -27,8 +27,7 @@ class ShellSort extends AbstractSort {
 			}
 			if ( $gap == 2 )
 				$gap = 1;
-			else
-				$gap /= 2.2;
+			else $gap /= 2.2;
 		}
 
 		return $this->data;

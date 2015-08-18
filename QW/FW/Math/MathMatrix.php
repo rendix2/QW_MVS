@@ -59,15 +59,13 @@ final class MathMatrix extends Object {
 	public function determinant2x2() {
 		if ( $this->isSquare() && $this->matrixSize == 2 )
 			return $this->matrix[ 0 ][ 0 ] * $this->matrix[ 1 ][ 1 ] - $this->matrix[ 0 ][ 1 ] * $this->matrix[ 1 ][ 0 ];
-		else
-			return FALSE;
+		else return FALSE;
 	}
 
 	private function determinant3x3() {
 		if ( $this->isSquare() && $this->getMatrixSize() == 3 )
 			return $this->matrix[ 0 ][ 0 ] * $this->matrix[ 1 ][ 1 ] * $this->matrix[ 2 ][ 2 ] + $this->matrix[ 0 ][ 1 ] * $this->matrix[ 1 ][ 2 ] * $this->matrix[ 2 ][ 0 ] + $this->matrix[ 0 ][ 2 ] * $this->matrix[ 1 ][ 0 ] * $this->matrix[ 2 ][ 1 ] - $this->matrix[ 0 ][ 1 ] * $this->matrix[ 1 ][ 0 ] * $this->matrix[ 2 ][ 2 ] - $this->matrix[ 0 ][ 0 ] * $this->matrix[ 1 ][ 2 ] * $this->matrix[ 2 ][ 1 ] - $this->matrix[ 0 ][ 2 ] * $this->matrix[ 1 ][ 1 ] * $this->matrix[ 2 ][ 0 ];
-		else
-			return FALSE;
+		else return FALSE;
 	}
 
 	public function getMatrix() {

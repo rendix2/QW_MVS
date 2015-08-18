@@ -19,7 +19,7 @@ final class CountIterator extends AbstractBinaryTreeIterator {
 		return $this->countChildren;
 	}
 
-	protected function order(BinaryTree $root) {
+	protected function order(BinaryTree $root = NULL) {
 		if ( $root == NULL || $this->realRoot == $root )
 			return;
 

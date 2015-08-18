@@ -14,7 +14,7 @@ class LevelOrderIterator extends AbstractBinaryTreeIterator {
 		parent::__construct($root);
 	}
 
-	protected function order(BinaryTree $root) {
+	protected function order(BinaryTree $root = NULL) {
 		if ( $root == NULL || $this->realRoot == $root )
 			return;
 

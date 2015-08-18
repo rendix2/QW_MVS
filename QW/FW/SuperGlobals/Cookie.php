@@ -2,10 +2,12 @@
 
 namespace QW\FW\SuperGlobals;
 
+use QW\FW\Boot\PrivateConstructException;
 use QW\FW\Interfaces\ISG;
 
 final class Cookie implements ISG {
-	private function __construct() {
+	public function __construct() {
+		throw new PrivateConstructException();
 	}
 
 	public static function get($k) {

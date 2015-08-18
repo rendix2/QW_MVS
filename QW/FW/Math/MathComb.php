@@ -2,10 +2,12 @@
 namespace QW\FW\Math;
 
 use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\PrivateConstructException;
 
 final class MathComb {
 
-	private function __construct() {
+	public function __construct() {
+		throw new PrivateConstructException();
 	}
 
 	public static function factorial($x) {

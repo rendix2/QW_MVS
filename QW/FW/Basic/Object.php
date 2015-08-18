@@ -34,7 +34,7 @@ class Object {
 		return '<br>I am: class: <b>' . $this->getClassName() . '</b>. You didn\'t overwrite <b>toString()</b> method.<br>';
 	}
 
-	protected static function getStaticClassName() {
+	final protected static function getStaticClassName() {
 		$wholeName = explode('\\', get_called_class());
 
 		return $wholeName[ count($wholeName) - 1 ];
@@ -62,7 +62,7 @@ class Object {
 		return $this;
 	}
 
-	protected function getReflection() {
+	final protected function getReflection() {
 		return new \ReflectionClass($this);
 	}
 

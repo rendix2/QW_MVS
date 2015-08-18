@@ -1,9 +1,12 @@
 <?php
 namespace QW\FW\Math;
 
+use QW\FW\Boot\PrivateConstructException;
+
 final class Math {
 
-	private function __construct() {
+	public function __construct() {
+		throw new PrivateConstructException();
 	}
 
 	public static function absoluteValue($x) {

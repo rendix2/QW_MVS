@@ -25,8 +25,8 @@ class CountingSort extends AbstractSort {
 			$count[ $i ] = $count[ $i ] + $count[ $i - 1 ];
 
 		$aux = [ ];
+		// very dirty code :O
 		for ( $i = $this->length - 1; $i >= 0; $i-- )
-			// very dirty code :O
 			$aux[ $count[ $this->data[ $i ] - $min ]-- ] = $this->data[ $i ];
 
 		return $aux;

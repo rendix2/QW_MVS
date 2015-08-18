@@ -21,7 +21,7 @@ class InOrderIterativeIterator extends AbstractBinaryTreeIterator {
 		parent::__construct($root);
 	}
 
-	protected function order(BinaryTree $root) {
+	protected function order(BinaryTree $root = NULL) {
 		while ( !$this->stack->isEmpty() || $root != NULL ) {
 			if ( $root != NULL ) {
 				$this->stack->push($root);

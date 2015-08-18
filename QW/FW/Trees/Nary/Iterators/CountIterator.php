@@ -19,7 +19,7 @@ final class CountIterator extends AbstractNaryTreeIterator {
 		return $this->countChildren;
 	}
 
-	protected function order(NaryTree $root) {
+	protected function order(NaryTree $root = NULL) {
 		if ( $root == NULL || $this->realRoot == $root )
 			return;
 

@@ -9,7 +9,8 @@ final class IPv4 extends AbstractIP {
 	public function __construct($ip) {
 		parent::__construct($ip);
 
-		if ( $this->getIpCountPart() != 4 ) // IPv4
+		// IPv4
+		if ( $this->getIpCountPart() != 4 )
 			throw new IllegalArgumentException();
 
 		$this->ipCoded = ip2long($ip);

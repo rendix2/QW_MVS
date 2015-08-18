@@ -23,9 +23,8 @@ final class BinaryTree extends AbstractTree {
 
 		if ( $this->left != NULL )
 			$this->directChildrenCount++;
-		if ( $this->right != NULL ) {
+		if ( $this->right != NULL )
 			$this->directChildrenCount++;
-		}
 	}
 
 	public function getChildrenCount() {

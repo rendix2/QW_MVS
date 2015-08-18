@@ -17,8 +17,7 @@ final class Mail extends Object {
 
 		if ( Validator::validateEmailUsingJakubVrana($to) )
 			$this->to = $to;
-		else
-			throw new IllegalArgumentException('Neplatná E-mailová adresa.');
+		else throw new IllegalArgumentException('Neplatná E-mailová adresa.');
 
 		$this->subject = $subject;
 	}

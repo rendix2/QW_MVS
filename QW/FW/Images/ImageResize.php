@@ -2,14 +2,14 @@
 
 namespace QW\FW\Images;
 
+use QW\FW\Boot\PrivateConstructException;
 use QW\FW\Config;
 use QW\FW\Math\Math;
 
 final class ImageResize {
-	private function __construct() {
+	public function __construct() {
+		throw new PrivateConstructException();
 	}
-
-	//functions from Jakub Vrána => php.vrana.cz
 
 	public static function canResize($imagePath) {
 		$pictureInfo  = getimagesize($imagePath);
@@ -53,7 +53,6 @@ final class ImageResize {
 			return FALSE;
 
 		$img2 = imagecreatetruecolor($width, $height);
-
 		imagecopyresampled($img2, $img, 0, 0, 0, 0, $width, $height, $imagesize[ 0 ], $imagesize[ 1 ]);
 
 		if ( $imagesize[ 2 ] == 2 )
@@ -73,9 +72,8 @@ final class ImageResize {
 	public static function image_shrink_size($file_in, $max_x = 0, $max_y = 0) {
 		list( $width, $height ) = getimagesize($file_in);
 
-		if ( !$width || !$height ) {
+		if ( !$width || !$height )
 			return [ 0, 0 ];
-		}
 
 		if ( $max_x && $width > $max_x ) {
 			$height = round($height * $max_x / $width);

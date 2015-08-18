@@ -20,7 +20,7 @@ class PreOrderIterativeIterator extends AbstractBinaryTreeIterator {
 		parent::__construct($root);
 	}
 
-	protected function order(BinaryTree $root) {
+	protected function order(BinaryTree $root = NULL) {
 
 		while ( !$this->stack->isEmpty() || $root != NULL ) {
 			if ( $root != NULL ) {
@@ -31,8 +31,7 @@ class PreOrderIterativeIterator extends AbstractBinaryTreeIterator {
 
 				$root = $root->getLeftChild();
 			}
-			else
-				$root = $this->stack->pop();
+			else $root = $this->stack->pop();
 		}
 	}
 }

@@ -9,7 +9,7 @@ final class Server implements ISG {
 	}
 
 	public static function get($k) {
-		return isset( $_SERVER[ mb_strtoupper($k) ] ) ? $_SERVER[ mb_strtoupper($k) ] : FALSE;
+		return isset( $_SERVER[ mb_strtoupper($k, 'UTF-8') ] ) ? $_SERVER[ mb_strtoupper($k, 'UTF-8') ] : FALSE;
 	}
 
 	public static function getAll() {

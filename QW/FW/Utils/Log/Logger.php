@@ -1,10 +1,11 @@
 <?php
 namespace QW\FW\Utils\Log;
 
+use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\FileSystem\File;
 
-class Logger {
+class Logger extends Object {
 
 	const LOG_TYPE_DATABASE = 1;
 
@@ -12,6 +13,7 @@ class Logger {
 	private $file;
 
 	public function __construct($type) {
+		parent::__construct();
 
 		$this->path = './logs/';
 
@@ -29,6 +31,8 @@ class Logger {
 	public function __destruct() {
 		$this->file = NULL;
 		$this->path = NULL;
+
+		parent::__destruct();
 	}
 
 	public function log($message) {

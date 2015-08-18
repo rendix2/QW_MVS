@@ -10,6 +10,8 @@ abstract class AbstractTreeIterator extends Object {
 	protected $realRoot;
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->finalData = [ ];
 		$this->realRoot  = NULL;
 	}

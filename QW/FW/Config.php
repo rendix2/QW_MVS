@@ -2,13 +2,16 @@
 
 namespace QW\FW;
 
+use QW\FW\Boot\PrivateConstructException;
+
 class Config {
 	const EMAIL = '';
 	const URL = '';
 	const URL_DELIMITER = '/';
 	public static $dbConfig = [ 'dbHost' => '', 'dbUser' => '', 'dbPassword' => '', 'dbName' => '' ];
 
-	private function __construct() {
+	public function __construct() {
+		throw new PrivateConstructException();
 	}
 
 	public static function getAllPHPIni() {

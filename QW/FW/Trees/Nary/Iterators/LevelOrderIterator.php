@@ -14,7 +14,7 @@ class LevelOrderIterator extends AbstractNaryTreeIterator {
 		parent::__construct($root);
 	}
 
-	protected function order(NaryTree $root) {
+	protected function order(NaryTree $root = NULL) {
 		if ( $root == NULL || $this->realRoot == $root )
 			return;
 

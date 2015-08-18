@@ -9,25 +9,11 @@
 namespace QW\FW\Math;
 
 
+use QW\FW\Boot\PrivateConstructException;
+
 final class MathEquation {
-	private function __construct() {
-	}
-
-	public static function solve_quadratic_equation($a, $b, $c) {
-		$d = $b * $b - 4 * $a * $c; // diskriminant
-
-		if ( $d < 0 )
-			return NULL;
-		else if ( $d == 0 ) {
-			$result = ( -$b / 2 * $a );
-
-			return $result;
-		}
-		else {
-			$result = ( ( -$b + sqrt($d) ) / ( 2 * $a ) . ( -$b - sqrt($d) ) / ( 2 * $a ) );
-
-			return $result;
-		}
+	public function __construct() {
+		throw new PrivateConstructException();
 	}
 
 	/*
@@ -39,4 +25,14 @@ final class MathEquation {
 	* @author Thomas (www.adamjak.net)
 	* http://www.algoritmy.net/article/1538/Kvadraticka-rovnice
 	*/
+
+	public static function solve_quadratic_equation($a, $b, $c) {
+		$d = $b * $b - 4 * $a * $c; // diskriminant
+
+		if ( $d < 0 )
+			return NULL;
+		else if ( $d == 0 )
+			return ( -$b / 2 * $a );
+		else return ( ( -$b + sqrt($d) ) / ( 2 * $a ) . ( -$b - sqrt($d) ) / ( 2 * $a ) );
+	}
 }

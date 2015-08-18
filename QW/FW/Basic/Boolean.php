@@ -2,6 +2,8 @@
 
 namespace QW\FW\Basic;
 
+use QW\FW\Boot\IllegalArgumentException;
+
 final class Boolean extends Object {
 	const FALSE = FALSE;
 	const TRUE = TRUE;
@@ -27,7 +29,10 @@ final class Boolean extends Object {
 		return $x == $y;
 	}
 
-	public static function compareBoolean(Boolean $x, Boolean $y) {
+	public static function compareBoolean(Boolean $x = NULL, Boolean $y = NULL) {
+		if ( $x == NULL || $y == NULL )
+			throw new IllegalArgumentException();
+
 		return $x->boolean == $y->boolean;
 	}
 
@@ -38,7 +43,10 @@ final class Boolean extends Object {
 		return $this->boolean == $boolean;
 	}
 
-	public function compareToBoolean(Boolean $boolean) {
+	public function compareToBoolean(Boolean $boolean = NULL) {
+		if ( $boolean == NULL )
+			throw new IllegalArgumentException();
+
 		return $this->boolean == $boolean->boolean;
 	}
 

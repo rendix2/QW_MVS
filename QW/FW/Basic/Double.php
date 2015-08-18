@@ -15,6 +15,12 @@ final class Double extends Object {
 		$this->double = $double;
 	}
 
+	public function __destruct() {
+		$this->double = NULL;
+
+		parent::__destruct();
+	}
+
 	public function __toString () {
 		return (string) $this->double;
 	}

@@ -21,6 +21,8 @@ class String extends Object {
 	function __destruct () {
 		$this->matches = NULL;
 		$this->string  = NULL;
+
+		parent::__destruct();
 	}
 
 	public function __toString () {

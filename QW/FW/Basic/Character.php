@@ -16,6 +16,12 @@ class Character extends Object {
 		$this->char = $char;
 	}
 
+	public function __destruct() {
+		$this->char = NULL;
+
+		parent::__destruct();
+	}
+
 	public function __toString () {
 		return $this->char;
 	}

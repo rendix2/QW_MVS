@@ -17,6 +17,12 @@ final class Integer extends Object {
 		$this->integer = $integer;
 	}
 
+	public function __destruct() {
+		$this->integer = NULL;
+
+		parent::__destruct();
+	}
+
 	public function __toString () {
 		return (string) $this->integer;
 	}

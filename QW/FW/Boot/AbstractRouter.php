@@ -6,8 +6,6 @@ use QW\FW\Basic\Object;
 use QW\FW\Utils\Log\Logger;
 
 abstract class AbstractRouter extends Object {
-	public static $z;
-	protected $g;
 
 	abstract protected function loadMVC ();
 

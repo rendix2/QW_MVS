@@ -16,6 +16,13 @@ class BetterBootstrap extends AbstractRouter {
 		parent::__construct();
 	}
 
+	public function __destruct() {
+		$this->enabledRoutes = NULL;
+		$this->urlDelimiter  = NULL;
+
+		parent::__destruct();
+	}
+
 	public function addRoute ( $route ) {
 		$this->enabledRoutes[] = $route;
 	}

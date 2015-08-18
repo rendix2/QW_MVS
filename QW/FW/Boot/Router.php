@@ -16,6 +16,15 @@ class Router extends AbstractRouter {
 		parent::__construct();
 	}
 
+	function __destruct() {
+		$this->controller = NULL;
+		$this->method     = NULL;
+		$this->params     = NULL;
+
+		parent::__destruct();
+	}
+
+
 	protected function loadMVP () {
 	}
 

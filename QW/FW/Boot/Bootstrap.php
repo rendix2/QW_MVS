@@ -9,9 +9,11 @@ final class BootstrapException extends \Exception {
 }
 
 class Bootstrap extends AbstractRouter {
-	protected $url, $params, $controller;
+	protected $url;
+	protected $params;
+	protected $controller;
 
-	public function __construct () {
+	public function __construct() {
 		parent::__construct();
 
 		$this->setParams();
@@ -27,13 +29,15 @@ class Bootstrap extends AbstractRouter {
 		}
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->params     = NULL;
 		$this->url        = NULL;
 		$this->controller = NULL;
+
+		parent::__destruct();
 	}
 
-	protected function callControllerMethod () {
+	protected function callControllerMethod() {
 		if ( isset( $this->params[ 1 ] ) ) {
 			if ( isset( $this->params[ 2 ] ) && isset( $this->params[ 1 ] ) &&
 				method_exists( $this->controller, $this->params[ 1 ] )
@@ -49,25 +53,25 @@ class Bootstrap extends AbstractRouter {
 			$this->controller->index();
 	}
 
-	protected function loadController () {
+	protected function loadController() {
 		$c = "\\QW\\Controllers\\" . $this->params[ 0 ] . 'Controller';
 
 		$this->controller = new $c( $this->params[ 0 ] . 'Model' );
 	}
 
-	protected function loadMVC () {
+	protected function loadMVC() {
 		// TODO: Implement loadMVC() method.
 	}
 
-	protected function loadMVP () {
+	protected function loadMVP() {
 		// TODO: Implement loadMVP() method.
 	}
 
-	protected function loadMy () {
+	protected function loadMy() {
 		// TODO: Implement loadMy() method.
 	}
 
-	protected function noUrl () {
+	protected function noUrl() {
 		if ( empty( $this->url ) ) {
 			$this->controller = new IndexController( 'IndexModel' );
 			$this->controller->index();
@@ -78,7 +82,7 @@ class Bootstrap extends AbstractRouter {
 		return FALSE;
 	}
 
-	protected function setParams () {
+	protected function setParams() {
 		$this->url    = isset( $_GET[ 'URL' ] ) ? $_GET[ 'URL' ] : NULL;
 		$this->params = rtrim( $this->url, Config::URL_DELIMITER );
 		$this->params = explode( Config::URL_DELIMITER, $this->params );

@@ -17,6 +17,12 @@ final class Boolean extends Object {
 		$this->boolean = $boolean;
 	}
 
+	public function __destruct() {
+		$this->boolean = NULL;
+
+		parent::__destruct();
+	}
+
 	public function __toString () {
 		return (string) $this->boolean;
 	}

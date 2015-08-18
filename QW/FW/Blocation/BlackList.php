@@ -25,6 +25,8 @@ class BlackList extends Object {
 		$this->run();
 		$this->longOfIP = NULL;
 		$this->myIp     = NULL;
+
+		parent::__destruct();
 	}
 
 	public function addIPs ( array $long ) {

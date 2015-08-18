@@ -17,7 +17,7 @@ abstract class AbstractRouter extends Object {
 		parent::__construct();
 
 		require_once( './Exception.php' );
-		require_once( './QW/Smarty/libs/Smarty.class.php' );
+		//require_once( './QW/Smarty/libs/Smarty.class.php' );
 		$this->route();
 	}
 

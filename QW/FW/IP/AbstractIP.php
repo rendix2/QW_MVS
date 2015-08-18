@@ -5,7 +5,6 @@ namespace QW\FW\IP;
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
-use QW\FW\Interfaces\IP;
 use QW\FW\Validator;
 
 abstract class AbstractIP extends Object implements IP {

@@ -1,5 +1,5 @@
 <?php
-namespace QW\FW\Interfaces;
+namespace QW\FW\SuperGlobals;
 
 interface ISG {
 	public static function get ( $k );

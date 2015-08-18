@@ -1,6 +1,6 @@
 <?php
 
-namespace QW\FW\Interfaces;
+namespace QW\FW\IP;
 
 interface IP {
 	public function getIP ();

@@ -3,7 +3,6 @@
 namespace QW\FW\SuperGlobals;
 
 use QW\FW\Boot\PrivateConstructException;
-use QW\FW\Interfaces\ISG;
 
 final class Cookie implements ISG {
 	public function __construct () {

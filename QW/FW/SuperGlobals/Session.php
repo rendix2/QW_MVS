@@ -2,11 +2,12 @@
 
 namespace QW\FW\SuperGlobals;
 
-use QW\FW\Interfaces\ISG;
+use QW\FW\Boot\PrivateConstructException;
 use QW\FW\Math\Math;
 
 final class Session implements ISG {
-	private function __construct () {
+	public function __construct () {
+		throw new PrivateConstructException();
 	}
 
 	public static function end () {

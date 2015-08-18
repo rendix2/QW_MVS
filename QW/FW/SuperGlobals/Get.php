@@ -2,7 +2,7 @@
 
 namespace QW\FW\SuperGlobals;
 
-use QW\FW\Interfaces\ISG;
+use QW\FW\Boot\PrivateConstructException;
 
 class Get implements ISG {
 	public function __construct () {

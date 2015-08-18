@@ -136,7 +136,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 			self::$AllQueryCount++;
 			$this->queryCount++;
 			$this->statement = $this->connection->prepare($query);
-			$this->statement->execute($options);
+			$this->statement->execute($options);//
 		}
 		catch ( \PDOException $pdoEx ) {
 			$message = 'Databázová chyba!<br>';

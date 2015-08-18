@@ -37,7 +37,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->options = $options;
 		$this->queryCount = 0;
 		$this->statement = NULL;
-		$this->connection = NULL;
+		$this->connection = NULL; //
 
 		if ( !is_bool($log) )
 			$log = FALSE;

@@ -9,14 +9,14 @@ abstract class AbstractTreeIterator extends Object {
 	protected $finalData;
 	protected $realRoot;
 
-	public function __construct() {
+	public function __construct () {
 		parent::__construct();
 
 		$this->finalData = [ ];
 		$this->realRoot  = NULL;
 	}
 
-	public final function getFinalData() {
+	public final function getFinalData () {
 		return $this->finalData;
 	}
 }

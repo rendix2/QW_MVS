@@ -21,11 +21,11 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	protected $options;
 	protected $log;
 
-	abstract protected function connect();
+	abstract protected function connect ();
 
 	// conection begin
 
-	public function __construct($host, $userName, $userPassword, $dbName, array $options, $log = FALSE) {
+	public function __construct ( $host, $userName, $userPassword, $dbName, array $options, $log = FALSE ) {
 		parent::__construct();
 		self::$AllQueryCount       = 0;
 		self::$AllConnectionsCount = 0;
@@ -38,12 +38,12 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->statement = NULL;
 		$this->connection = NULL;
 
-		if ( !is_bool($log) ) $log = FALSE;
+		if ( !is_bool( $log ) ) $log = FALSE;
 
-		if ( $log ) $this->log = new Logger(Logger::LOG_TYPE_DATABASE);
+		if ( $log ) $this->log = new Logger( Logger::LOG_TYPE_DATABASE );
 	}
 
-	public function __destruct() {
+	public function __destruct () {
 		if ( $this->statement != NULL ) $this->freeStatement();
 
 		$this->queryCount   = NULL;
@@ -59,15 +59,15 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		parent::__destruct();
 	}
 
-	public static function getAllConnectionsCount() {
+	public static function getAllConnectionsCount () {
 		return self::$AllConnectionsCount;
 	}
 
-	public static function getAllQueryCount() {
+	public static function getAllQueryCount () {
 		return self::$AllQueryCount;
 	}
 
-	protected final function checkConnection(\PDOException $pdoEx = NULL) {
+	protected final function checkConnection ( \PDOException $pdoEx = NULL ) {
 		if ( $pdoEx == NULL ) throw new NullPointerException();
 
 		$message = '';
@@ -83,53 +83,54 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 				$message .= 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
 				break;
 			default:
-				$message .= 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
+				$message .= 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() .
+					'</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
 		}
 
-		if ( $this->log != FALSE ) $this->log->log($message);
+		if ( $this->log != FALSE ) $this->log->log( $message );
 
 		die( $message );
 	}
 
-	public function fetch() {
-		return $this->statement->fetch(\PDO::FETCH_ASSOC);
+	public function fetch () {
+		return $this->statement->fetch( \PDO::FETCH_ASSOC );
 	}
 
-	public function fetchAll() {
-		return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
+	public function fetchAll () {
+		return $this->statement->fetchAll( \PDO::FETCH_ASSOC );
 	}
 
-	public function fetchColumn() {
-		return $this->statement->fetchColumn(\PDO::FETCH_ASSOC);
+	public function fetchColumn () {
+		return $this->statement->fetchColumn( \PDO::FETCH_ASSOC );
 	}
 
-	public function freeStatement() {
+	public function freeStatement () {
 		$this->statement->closeCursor();
 		$this->statement = NULL;
 	}
 
-	public function getQueryCount() {
+	public function getQueryCount () {
 		return $this->queryCount;
 	}
 
-	public function lastID() {
+	public function lastID () {
 		return $this->connection->lastInsertId();
 	}
 
-	public function numRows() {
+	public function numRows () {
 		$this->statement->rowCount();
 	}
 
-	public function query($query, array $options) {
+	public function query ( $query, array $options ) {
 		try {
 			if ( $this->queryCount == 0 ) $this->connect();
 
-			if ( $this->log != FALSE ) $this->log->log($query);
+			if ( $this->log != FALSE ) $this->log->log( $query );
 
 			self::$AllQueryCount++;
 			$this->queryCount++;
-			$this->statement = $this->connection->prepare($query);
-			$this->statement->execute($options);
+			$this->statement = $this->connection->prepare( $query );
+			$this->statement->execute( $options );
 		}
 		catch ( \PDOException $pdoEx ) {
 			$message = 'Databázová chyba!<br>';
@@ -138,7 +139,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 			$message .= 'Chyba číslo: ' . $pdoEx->getCode() . '<br>';
 			$message .= 'Chyba: ' . $pdoEx->getMessage() . '<br>';
 
-			if ( $this->log != FALSE ) $this->log->log($message);
+			if ( $this->log != FALSE ) $this->log->log( $message );
 
 			die( $message );
 		}

@@ -45,9 +45,9 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile($args, $compiler) {
+	public function compile ( $args, $compiler ) {
 		// check and get attributes
-		$_attr = $this->getAttributes($compiler, $args);
+		$_attr = $this->getAttributes( $compiler, $args );
 		// save possible attributes
 		if ( isset( $_attr[ 'assign' ] ) ) {
 			// output will be stored in a smarty variable instead of being displayed
@@ -65,21 +65,23 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
 		}
 		$_paramsArray = [ ];
 		foreach ( $_attr as $_key => $_value ) {
-			if ( is_int($_key) ) {
+			if ( is_int( $_key ) ) {
 				$_paramsArray[] = "$_key=>$_value";
 			}
 			else {
 				$_paramsArray[] = "'$_key'=>$_value";
 			}
 		}
-		$_params = 'array(' . implode(",", $_paramsArray) . ')';
+		$_params = 'array(' . implode( ",", $_paramsArray ) . ')';
 		//$compiler->suppressNocacheProcessing = true;
 		// was there an assign attribute
 		if ( isset( $_assign ) ) {
-			$_output = "<?php ob_start();\$_smarty_tpl->callTemplateFunction ({$_name}, \$_smarty_tpl, {$_params}, {$_nocache}); \$_smarty_tpl->assign({$_assign}, ob_get_clean());?>\n";
+			$_output =
+				"<?php ob_start();\$_smarty_tpl->callTemplateFunction ({$_name}, \$_smarty_tpl, {$_params}, {$_nocache}); \$_smarty_tpl->assign({$_assign}, ob_get_clean());?>\n";
 		}
 		else {
-			$_output = "<?php \$_smarty_tpl->callTemplateFunction ({$_name}, \$_smarty_tpl, {$_params}, {$_nocache});?>\n";
+			$_output =
+				"<?php \$_smarty_tpl->callTemplateFunction ({$_name}, \$_smarty_tpl, {$_params}, {$_nocache});?>\n";
 		}
 
 		return $_output;

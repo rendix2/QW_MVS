@@ -8,31 +8,31 @@ class SimpleLinkedList extends AbstractList {
 
 	private $last;
 
-	public function __construct($data = NULL, $type = NULL) {
-		parent::__construct($data);
-		$this->last = new Node($data);
+	public function __construct ( $data = NULL, $type = NULL ) {
+		parent::__construct( $data );
+		$this->last = new Node( $data );
 	}
 
-	public function __toString() {
+	public function __toString () {
 		$array = [ ];
 
-		for ( $i = 0; $i < $this->size; $i++ ) $array[] = $this->get($i);
+		for ( $i = 0; $i < $this->size; $i++ ) $array[] = $this->get( $i );
 
-		return '[ ' . implode(', ', $array) . ' ]';
+		return '[ ' . implode( ', ', $array ) . ' ]';
 	}
 
-	public function add($data) {
+	public function add ( $data ) {
 		$current = $this->last;
 
 		while ( $current->getNextNode() != NULL ) $current = $current->getNextNode();
 
-		$current->setNextNode(new Node($data));
+		$current->setNextNode( new Node( $data ) );
 		$this->size++;
 
 		return TRUE;
 	}
 
-	public function contains($data) {
+	public function contains ( $data ) {
 		$current = $this->last->getNextNode();
 
 		for ( $i = 0; $i < $this->size; $i++ ) {
@@ -44,7 +44,7 @@ class SimpleLinkedList extends AbstractList {
 		return FALSE;
 	}
 
-	public function get($index) {
+	public function get ( $index ) {
 		if ( $index < 0 ) throw new IllegalArgumentException();
 
 		$current = $this->last->getNextNode();
@@ -58,23 +58,23 @@ class SimpleLinkedList extends AbstractList {
 		return $current->getData();
 	}
 
-	public function getFirst() {
+	public function getFirst () {
 		return $this->last->getData();
 	}
 
-	public function getLast() {
-		return $this->helperGetLast($this->last);
+	public function getLast () {
+		return $this->helperGetLast( $this->last );
 	}
 
-	private function helperGetLast(Node $node = NULL) {
+	private function helperGetLast ( Node $node = NULL ) {
 		if ( $node == NULL ) throw new \QW\FW\Boot\IllegalArgumentException();
 
 		if ( $node->getNextNode() == NULL ) return $node->getData();
 
-		$this->helperGetLast($node->getNextNode());
+		$this->helperGetLast( $node->getNextNode() );
 	}
 
-	public function remove($index) {
+	public function remove ( $index ) {
 		if ( $index < 0 || $index > $this->size ) throw new IllegalArgumentException();
 
 		$current = $this->last;
@@ -85,8 +85,8 @@ class SimpleLinkedList extends AbstractList {
 			$current = $current->getNextNode();
 		}
 
-		if ( $index < $this->size ) $current->setNextNode($current->getNextNode()
-		                                                          ->getNextNode());
+		if ( $index < $this->size ) $current->setNextNode( $current->getNextNode()
+		                                                           ->getNextNode() );
 
 		$this->size--;
 

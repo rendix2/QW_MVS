@@ -31,7 +31,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile($args, $compiler, $parameter) {
+	public function compile ( $args, $compiler, $parameter ) {
 		if ( $parameter == 0 ) {
 			$this->required_attributes = [ 'start', 'to' ];
 			$this->optional_attributes = [ 'max', 'step' ];
@@ -41,12 +41,12 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 			$this->optional_attributes = [ ];
 		}
 		// check and get attributes
-		$_attr = $this->getAttributes($compiler, $args);
+		$_attr = $this->getAttributes( $compiler, $args );
 
 		$output = "<?php ";
 		if ( $parameter == 1 ) {
 			foreach ( $_attr[ 'start' ] as $_statement ) {
-				if ( is_array($_statement[ 'var' ]) ) {
+				if ( is_array( $_statement[ 'var' ] ) ) {
 					$var   = $_statement[ 'var' ][ 'var' ];
 					$index = $_statement[ 'var' ][ 'smarty_internal_index' ];
 				}
@@ -57,7 +57,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 				$output .= " \$_smarty_tpl->tpl_vars[$var] = new Smarty_Variable;";
 				$output .= " \$_smarty_tpl->tpl_vars[$var]->value{$index} = $_statement[value];\n";
 			}
-			if ( is_array($_attr[ 'var' ]) ) {
+			if ( is_array( $_attr[ 'var' ] ) ) {
 				$var   = $_attr[ 'var' ][ 'var' ];
 				$index = $_attr[ 'var' ][ 'smarty_internal_index' ];
 			}
@@ -69,7 +69,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 		}
 		else {
 			$_statement = $_attr[ 'start' ];
-			if ( is_array($_statement[ 'var' ]) ) {
+			if ( is_array( $_statement[ 'var' ] ) ) {
 				$var   = $_statement[ 'var' ][ 'var' ];
 				$index = $_statement[ 'var' ][ 'smarty_internal_index' ];
 			}
@@ -97,7 +97,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 		}
 		$output .= "?>";
 
-		$this->openTag($compiler, 'for', [ 'for', $compiler->nocache ]);
+		$this->openTag( $compiler, 'for', [ 'for', $compiler->nocache ] );
 		// maybe nocache because of nocache variables
 		$compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
 
@@ -122,12 +122,12 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile($args, $compiler, $parameter) {
+	public function compile ( $args, $compiler, $parameter ) {
 		// check and get attributes
-		$_attr = $this->getAttributes($compiler, $args);
+		$_attr = $this->getAttributes( $compiler, $args );
 
-		list( $openTag, $nocache ) = $this->closeTag($compiler, [ 'for' ]);
-		$this->openTag($compiler, 'forelse', [ 'forelse', $nocache ]);
+		list( $openTag, $nocache ) = $this->closeTag( $compiler, [ 'for' ] );
+		$this->openTag( $compiler, 'forelse', [ 'forelse', $nocache ] );
 
 		return "<?php }} else { ?>";
 	}
@@ -149,15 +149,15 @@ class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile($args, $compiler, $parameter) {
+	public function compile ( $args, $compiler, $parameter ) {
 		// check and get attributes
-		$_attr = $this->getAttributes($compiler, $args);
+		$_attr = $this->getAttributes( $compiler, $args );
 		// must endblock be nocache?
 		if ( $compiler->nocache ) {
 			$compiler->tag_nocache = TRUE;
 		}
 
-		list( $openTag, $compiler->nocache ) = $this->closeTag($compiler, [ 'for', 'forelse' ]);
+		list( $openTag, $compiler->nocache ) = $this->closeTag( $compiler, [ 'for', 'forelse' ] );
 
 		if ( $openTag == 'forelse' ) {
 			return "<?php }  ?>";

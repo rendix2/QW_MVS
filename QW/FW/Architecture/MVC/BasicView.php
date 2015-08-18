@@ -15,46 +15,50 @@ class BasicView extends Object {
 	protected $tableData;
 	protected $pageName;
 
-	public function __construct() {
+	public function __construct () {
 		parent::__construct();
 
 		$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default/';
 		$this->pageName = "";
 	}
 
-	final public function getPageName() {
+	final public function getPageName () {
 		return $this->pageName;
 	}
 
-	final public function setPageName($pageName) {
+	final public function setPageName ( $pageName ) {
 		$this->pageName = $pageName;
 	}
 
-	final public function getTableData() {
+	final public function getTableData () {
 		return $this->tableData;
 	}
 
-	final public function setTableData(array $table) {
+	final public function setTableData ( array $table ) {
 		$this->tableData = $table;
 	}
 
-	public function render($name, $include = FALSE) {
+	public function render ( $name, $include = FALSE ) {
 		try {
-			if ( $include == TRUE ) if ( file_exists($this->pathToTemplate . $name . '.php') ) include_once( $this->pathToTemplate . $name . '.php' );
+			if ( $include == TRUE ) if ( file_exists( $this->pathToTemplate . $name .
+				'.php' ) ) include_once( $this->pathToTemplate . $name . '.php' );
 			else
-				throw new BasicViewException('Nesprávný název view');
+				throw new BasicViewException( 'Nesprávný název view' );
 			else {
-				if ( file_exists($this->pathToTemplate . 'Header.php') ) include_once( $this->pathToTemplate . 'Header.php' );
+				if ( file_exists( $this->pathToTemplate . 'Header.php' ) ) include_once( $this->pathToTemplate .
+					'Header.php' );
 				else
-					throw new BasicViewException('Neexistující Header.');
+					throw new BasicViewException( 'Neexistující Header.' );
 
-				if ( file_exists($this->pathToTemplate . $name . '.php') ) include_once( $this->pathToTemplate . $name . '.php' );
+				if ( file_exists( $this->pathToTemplate . $name . '.php' ) ) include_once( $this->pathToTemplate .
+					$name . '.php' );
 				else
-					throw new BasicViewException('Nesprávný název view');
+					throw new BasicViewException( 'Nesprávný název view' );
 
-				if ( file_exists($this->pathToTemplate . 'Footer.php') ) include_once( $this->pathToTemplate . 'Footer.php' );
+				if ( file_exists( $this->pathToTemplate . 'Footer.php' ) ) include_once( $this->pathToTemplate .
+					'Footer.php' );
 				else
-					throw new BasicViewException('Neexistující Footer.');
+					throw new BasicViewException( 'Neexistující Footer.' );
 			}
 
 			return TRUE;

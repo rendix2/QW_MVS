@@ -13,12 +13,12 @@ class Adapter implements Target {
 
 	private $oldClass;
 
-	public function __construct() {
+	public function __construct () {
 		$this->oldClass = new OldClass();
 	}
 
 
-	public function newRequest() {
+	public function newRequest () {
 		return $this->oldClass->oldRequest();
 	}
 }

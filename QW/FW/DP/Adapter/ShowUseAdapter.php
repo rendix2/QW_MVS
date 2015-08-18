@@ -11,7 +11,7 @@ namespace QW\FW\DP\Adapter;
 
 class ShowUseAdapter {
 
-	function __construct() {
+	function __construct () {
 		$adapter = new Adapter();
 		$adapter->newRequest();
 	}

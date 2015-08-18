@@ -11,7 +11,7 @@ namespace QW\FW\DP\Strategy;
 
 class TimesStrategy implements Strategy {
 
-	public function multiply($a, $b) {
+	public function multiply ( $a, $b ) {
 		return $a * $b;
 	}
 }

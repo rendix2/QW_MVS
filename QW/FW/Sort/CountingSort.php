@@ -4,7 +4,7 @@ namespace QW\FW\Sort;
 
 class CountingSort extends AbstractSort {
 
-	protected function sort(AbstractSort $sort) {
+	protected function sort ( AbstractSort $sort ) {
 		$min = $this->data[ 0 ];
 		$max = $this->data[ 0 ];
 
@@ -17,7 +17,7 @@ class CountingSort extends AbstractSort {
 
 		$count[ 0 ]--;
 
-		for ( $i = 1; $i < count($count); $i++ ) $count[ $i ] = $count[ $i ] + $count[ $i - 1 ];
+		for ( $i = 1; $i < count( $count ); $i++ ) $count[ $i ] = $count[ $i ] + $count[ $i - 1 ];
 
 		$aux = [ ];
 		// very dirty code :O

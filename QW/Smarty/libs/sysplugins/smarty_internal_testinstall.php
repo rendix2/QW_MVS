@@ -24,7 +24,7 @@ class Smarty_Internal_TestInstall {
 	 *
 	 * @return bool   status, true if everything is fine, false else
 	 */
-	public static function testInstall(Smarty $smarty, &$errors = NULL) {
+	public static function testInstall ( Smarty $smarty, &$errors = NULL ) {
 		$status = TRUE;
 
 		if ( $errors === NULL ) {
@@ -33,21 +33,21 @@ class Smarty_Internal_TestInstall {
 			echo "Testing template directory...\n";
 		}
 
-		$_stream_resolve_include_path = function_exists('stream_resolve_include_path');
+		$_stream_resolve_include_path = function_exists( 'stream_resolve_include_path' );
 
 		// test if all registered template_dir are accessible
 		foreach ( $smarty->getTemplateDir() as $template_dir ) {
 			$_template_dir = $template_dir;
-			$template_dir  = realpath($template_dir);
+			$template_dir             = realpath( $template_dir );
 			// resolve include_path or fail existence
 			if ( !$template_dir ) {
-				if ( $smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir) ) {
+				if ( $smarty->use_include_path && !preg_match( '/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir ) ) {
 					// try PHP include_path
 					if ( $_stream_resolve_include_path ) {
-						$template_dir = stream_resolve_include_path($_template_dir);
+						$template_dir = stream_resolve_include_path( $_template_dir );
 					}
 					else {
-						$template_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_template_dir);
+						$template_dir = Smarty_Internal_Get_Include_Path::getIncludePath( $_template_dir );
 					}
 
 					if ( $template_dir !== FALSE ) {
@@ -59,7 +59,8 @@ class Smarty_Internal_TestInstall {
 					}
 					else {
 						$status  = FALSE;
-						$message = "FAILED: $_template_dir does not exist (and couldn't be found in include_path either)";
+						$message      =
+							"FAILED: $_template_dir does not exist (and couldn't be found in include_path either)";
 						if ( $errors === NULL ) {
 							echo $message . ".\n";
 						}
@@ -84,7 +85,7 @@ class Smarty_Internal_TestInstall {
 				}
 			}
 
-			if ( !is_dir($template_dir) ) {
+			if ( !is_dir( $template_dir ) ) {
 				$status  = FALSE;
 				$message = "FAILED: $template_dir is not a directory";
 				if ( $errors === NULL ) {
@@ -94,7 +95,7 @@ class Smarty_Internal_TestInstall {
 					$errors[ 'template_dir' ] = $message;
 				}
 			}
-			elseif ( !is_readable($template_dir) ) {
+			elseif ( !is_readable( $template_dir ) ) {
 				$status  = FALSE;
 				$message = "FAILED: $template_dir is not readable";
 				if ( $errors === NULL ) {
@@ -117,7 +118,7 @@ class Smarty_Internal_TestInstall {
 
 		// test if registered compile_dir is accessible
 		$__compile_dir = $smarty->getCompileDir();
-		$_compile_dir  = realpath($__compile_dir);
+		$_compile_dir                 = realpath( $__compile_dir );
 		if ( !$_compile_dir ) {
 			$status  = FALSE;
 			$message = "FAILED: {$__compile_dir} does not exist";
@@ -128,7 +129,7 @@ class Smarty_Internal_TestInstall {
 				$errors[ 'compile_dir' ] = $message;
 			}
 		}
-		elseif ( !is_dir($_compile_dir) ) {
+		elseif ( !is_dir( $_compile_dir ) ) {
 			$status  = FALSE;
 			$message = "FAILED: {$_compile_dir} is not a directory";
 			if ( $errors === NULL ) {
@@ -138,7 +139,7 @@ class Smarty_Internal_TestInstall {
 				$errors[ 'compile_dir' ] = $message;
 			}
 		}
-		elseif ( !is_readable($_compile_dir) ) {
+		elseif ( !is_readable( $_compile_dir ) ) {
 			$status  = FALSE;
 			$message = "FAILED: {$_compile_dir} is not readable";
 			if ( $errors === NULL ) {
@@ -148,7 +149,7 @@ class Smarty_Internal_TestInstall {
 				$errors[ 'compile_dir' ] = $message;
 			}
 		}
-		elseif ( !is_writable($_compile_dir) ) {
+		elseif ( !is_writable( $_compile_dir ) ) {
 			$status  = FALSE;
 			$message = "FAILED: {$_compile_dir} is not writable";
 			if ( $errors === NULL ) {
@@ -170,20 +171,20 @@ class Smarty_Internal_TestInstall {
 
 		// test if all registered plugins_dir are accessible
 		// and if core plugins directory is still registered
-		$_core_plugins_dir       = realpath(dirname(__FILE__) . '/../plugins');
+		$_core_plugins_dir = realpath( dirname( __FILE__ ) . '/../plugins' );
 		$_core_plugins_available = FALSE;
 		foreach ( $smarty->getPluginsDir() as $plugin_dir ) {
 			$_plugin_dir = $plugin_dir;
-			$plugin_dir  = realpath($plugin_dir);
+			$plugin_dir    = realpath( $plugin_dir );
 			// resolve include_path or fail existence
 			if ( !$plugin_dir ) {
-				if ( $smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_plugin_dir) ) {
+				if ( $smarty->use_include_path && !preg_match( '/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_plugin_dir ) ) {
 					// try PHP include_path
 					if ( $_stream_resolve_include_path ) {
-						$plugin_dir = stream_resolve_include_path($_plugin_dir);
+						$plugin_dir = stream_resolve_include_path( $_plugin_dir );
 					}
 					else {
-						$plugin_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_plugin_dir);
+						$plugin_dir = Smarty_Internal_Get_Include_Path::getIncludePath( $_plugin_dir );
 					}
 
 					if ( $plugin_dir !== FALSE ) {
@@ -220,7 +221,7 @@ class Smarty_Internal_TestInstall {
 				}
 			}
 
-			if ( !is_dir($plugin_dir) ) {
+			if ( !is_dir( $plugin_dir ) ) {
 				$status  = FALSE;
 				$message = "FAILED: $plugin_dir is not a directory";
 				if ( $errors === NULL ) {
@@ -230,7 +231,7 @@ class Smarty_Internal_TestInstall {
 					$errors[ 'plugins_dir' ] = $message;
 				}
 			}
-			elseif ( !is_readable($plugin_dir) ) {
+			elseif ( !is_readable( $plugin_dir ) ) {
 				$status  = FALSE;
 				$message = "FAILED: $plugin_dir is not readable";
 				if ( $errors === NULL ) {
@@ -240,7 +241,7 @@ class Smarty_Internal_TestInstall {
 					$errors[ 'plugins_dir' ] = $message;
 				}
 			}
-			elseif ( $_core_plugins_dir && $_core_plugins_dir == realpath($plugin_dir) ) {
+			elseif ( $_core_plugins_dir && $_core_plugins_dir == realpath( $plugin_dir ) ) {
 				$_core_plugins_available = TRUE;
 				if ( $errors === NULL ) {
 					echo "$plugin_dir is OK.\n";
@@ -269,7 +270,7 @@ class Smarty_Internal_TestInstall {
 
 		// test if all registered cache_dir is accessible
 		$__cache_dir = $smarty->getCacheDir();
-		$_cache_dir  = realpath($__cache_dir);
+		$_cache_dir        = realpath( $__cache_dir );
 		if ( !$_cache_dir ) {
 			$status  = FALSE;
 			$message = "FAILED: {$__cache_dir} does not exist";
@@ -280,7 +281,7 @@ class Smarty_Internal_TestInstall {
 				$errors[ 'cache_dir' ] = $message;
 			}
 		}
-		elseif ( !is_dir($_cache_dir) ) {
+		elseif ( !is_dir( $_cache_dir ) ) {
 			$status  = FALSE;
 			$message = "FAILED: {$_cache_dir} is not a directory";
 			if ( $errors === NULL ) {
@@ -290,7 +291,7 @@ class Smarty_Internal_TestInstall {
 				$errors[ 'cache_dir' ] = $message;
 			}
 		}
-		elseif ( !is_readable($_cache_dir) ) {
+		elseif ( !is_readable( $_cache_dir ) ) {
 			$status  = FALSE;
 			$message = "FAILED: {$_cache_dir} is not readable";
 			if ( $errors === NULL ) {
@@ -300,7 +301,7 @@ class Smarty_Internal_TestInstall {
 				$errors[ 'cache_dir' ] = $message;
 			}
 		}
-		elseif ( !is_writable($_cache_dir) ) {
+		elseif ( !is_writable( $_cache_dir ) ) {
 			$status  = FALSE;
 			$message = "FAILED: {$_cache_dir} is not writable";
 			if ( $errors === NULL ) {
@@ -323,16 +324,16 @@ class Smarty_Internal_TestInstall {
 		// test if all registered config_dir are accessible
 		foreach ( $smarty->getConfigDir() as $config_dir ) {
 			$_config_dir = $config_dir;
-			$config_dir  = realpath($config_dir);
+			$config_dir    = realpath( $config_dir );
 			// resolve include_path or fail existence
 			if ( !$config_dir ) {
-				if ( $smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_config_dir) ) {
+				if ( $smarty->use_include_path && !preg_match( '/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_config_dir ) ) {
 					// try PHP include_path
 					if ( $_stream_resolve_include_path ) {
-						$config_dir = stream_resolve_include_path($_config_dir);
+						$config_dir = stream_resolve_include_path( $_config_dir );
 					}
 					else {
-						$config_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_config_dir);
+						$config_dir = Smarty_Internal_Get_Include_Path::getIncludePath( $_config_dir );
 					}
 
 					if ( $config_dir !== FALSE ) {
@@ -369,7 +370,7 @@ class Smarty_Internal_TestInstall {
 				}
 			}
 
-			if ( !is_dir($config_dir) ) {
+			if ( !is_dir( $config_dir ) ) {
 				$status  = FALSE;
 				$message = "FAILED: $config_dir is not a directory";
 				if ( $errors === NULL ) {
@@ -379,7 +380,7 @@ class Smarty_Internal_TestInstall {
 					$errors[ 'config_dir' ] = $message;
 				}
 			}
-			elseif ( !is_readable($config_dir) ) {
+			elseif ( !is_readable( $config_dir ) ) {
 				$status  = FALSE;
 				$message = "FAILED: $config_dir is not readable";
 				if ( $errors === NULL ) {
@@ -401,9 +402,94 @@ class Smarty_Internal_TestInstall {
 		}
 		// test if sysplugins are available
 		$source = SMARTY_SYSPLUGINS_DIR;
-		if ( is_dir($source) ) {
-			$expected = [ "smarty_cacheresource.php" => TRUE, "smarty_cacheresource_custom.php" => TRUE, "smarty_cacheresource_keyvaluestore.php" => TRUE, "smarty_data.php" => TRUE, "smarty_internal_cacheresource_file.php" => TRUE, "smarty_internal_compile_append.php" => TRUE, "smarty_internal_compile_assign.php" => TRUE, "smarty_internal_compile_block.php" => TRUE, "smarty_internal_compile_break.php" => TRUE, "smarty_internal_compile_call.php" => TRUE, "smarty_internal_compile_capture.php" => TRUE, "smarty_internal_compile_config_load.php" => TRUE, "smarty_internal_compile_continue.php" => TRUE, "smarty_internal_compile_debug.php" => TRUE, "smarty_internal_compile_eval.php" => TRUE, "smarty_internal_compile_extends.php" => TRUE, "smarty_internal_compile_for.php" => TRUE, "smarty_internal_compile_foreach.php" => TRUE, "smarty_internal_compile_function.php" => TRUE, "smarty_internal_compile_if.php" => TRUE, "smarty_internal_compile_include.php" => TRUE, "smarty_internal_compile_include_php.php" => TRUE, "smarty_internal_compile_insert.php" => TRUE, "smarty_internal_compile_ldelim.php" => TRUE, "smarty_internal_compile_nocache.php" => TRUE, "smarty_internal_compile_private_block_plugin.php" => TRUE, "smarty_internal_compile_private_function_plugin.php" => TRUE, "smarty_internal_compile_private_modifier.php" => TRUE, "smarty_internal_compile_private_object_block_function.php" => TRUE, "smarty_internal_compile_private_object_function.php" => TRUE, "smarty_internal_compile_private_print_expression.php" => TRUE, "smarty_internal_compile_private_registered_block.php" => TRUE, "smarty_internal_compile_private_registered_function.php" => TRUE, "smarty_internal_compile_private_special_variable.php" => TRUE, "smarty_internal_compile_rdelim.php" => TRUE, "smarty_internal_compile_section.php" => TRUE, "smarty_internal_compile_setfilter.php" => TRUE, "smarty_internal_compile_while.php" => TRUE, "smarty_internal_compilebase.php" => TRUE, "smarty_internal_config_file_compiler.php" => TRUE, "smarty_internal_configfilelexer.php" => TRUE, "smarty_internal_configfileparser.php" => TRUE, "smarty_internal_data.php" => TRUE, "smarty_internal_debug.php" => TRUE, "smarty_internal_extension_codeframe.php" => TRUE, "smarty_internal_extension_config.php" => TRUE, "smarty_internal_extension_defaulttemplatehandler.php" => TRUE, "smarty_internal_filter_handler.php" => TRUE, "smarty_internal_function_call_handler.php" => TRUE, "smarty_internal_get_include_path.php" => TRUE, "smarty_internal_nocache_insert.php" => TRUE, "smarty_internal_parsetree.php" => TRUE, "smarty_internal_parsetree_code.php" => TRUE, "smarty_internal_parsetree_dq.php" => TRUE, "smarty_internal_parsetree_dqcontent.php" => TRUE, "smarty_internal_parsetree_tag.php" => TRUE, "smarty_internal_parsetree_template.php" => TRUE, "smarty_internal_parsetree_text.php" => TRUE, "smarty_internal_resource_eval.php" => TRUE, "smarty_internal_resource_extends.php" => TRUE, "smarty_internal_resource_file.php" => TRUE, "smarty_internal_resource_php.php" => TRUE, "smarty_internal_resource_registered.php" => TRUE, "smarty_internal_resource_stream.php" => TRUE, "smarty_internal_resource_string.php" => TRUE, "smarty_internal_smartytemplatecompiler.php" => TRUE, "smarty_internal_template.php" => TRUE, "smarty_internal_templatebase.php" => TRUE, "smarty_internal_templatecompilerbase.php" => TRUE, "smarty_internal_templatelexer.php" => TRUE, "smarty_internal_templateparser.php" => TRUE, "smarty_internal_utility.php" => TRUE, "smarty_internal_write_file.php" => TRUE, "smarty_resource.php" => TRUE, "smarty_resource_custom.php" => TRUE, "smarty_resource_recompiled.php" => TRUE, "smarty_resource_uncompiled.php" => TRUE, "smarty_security.php" => TRUE, "smarty_template_cached.php" => TRUE, "smarty_template_compiled.php" => TRUE, "smarty_template_config.php" => TRUE, "smarty_template_source.php" => TRUE, "smarty_undefined_variable.php" => TRUE, "smarty_variable.php" => TRUE, "smartycompilerexception.php" => TRUE, "smartyexception.php" => TRUE, ];
-			$iterator = new DirectoryIterator($source);
+		if ( is_dir( $source ) ) {
+			$expected    = [ "smarty_cacheresource.php"                                  => TRUE,
+			                 "smarty_cacheresource_custom.php"                           => TRUE,
+			                 "smarty_cacheresource_keyvaluestore.php"                    => TRUE,
+			                 "smarty_data.php"                                           => TRUE,
+			                 "smarty_internal_cacheresource_file.php"                    => TRUE,
+			                 "smarty_internal_compile_append.php"                        => TRUE,
+			                 "smarty_internal_compile_assign.php"                        => TRUE,
+			                 "smarty_internal_compile_block.php"                         => TRUE,
+			                 "smarty_internal_compile_break.php"                         => TRUE,
+			                 "smarty_internal_compile_call.php"                          => TRUE,
+			                 "smarty_internal_compile_capture.php"                       => TRUE,
+			                 "smarty_internal_compile_config_load.php"                   => TRUE,
+			                 "smarty_internal_compile_continue.php"                      => TRUE,
+			                 "smarty_internal_compile_debug.php"                         => TRUE,
+			                 "smarty_internal_compile_eval.php"                          => TRUE,
+			                 "smarty_internal_compile_extends.php"                       => TRUE,
+			                 "smarty_internal_compile_for.php"                           => TRUE,
+			                 "smarty_internal_compile_foreach.php"                       => TRUE,
+			                 "smarty_internal_compile_function.php"                      => TRUE,
+			                 "smarty_internal_compile_if.php"                            => TRUE,
+			                 "smarty_internal_compile_include.php"                       => TRUE,
+			                 "smarty_internal_compile_include_php.php"                   => TRUE,
+			                 "smarty_internal_compile_insert.php"                        => TRUE,
+			                 "smarty_internal_compile_ldelim.php"                        => TRUE,
+			                 "smarty_internal_compile_nocache.php"                       => TRUE,
+			                 "smarty_internal_compile_private_block_plugin.php"          => TRUE,
+			                 "smarty_internal_compile_private_function_plugin.php"       => TRUE,
+			                 "smarty_internal_compile_private_modifier.php"              => TRUE,
+			                 "smarty_internal_compile_private_object_block_function.php" => TRUE,
+			                 "smarty_internal_compile_private_object_function.php"       => TRUE,
+			                 "smarty_internal_compile_private_print_expression.php"      => TRUE,
+			                 "smarty_internal_compile_private_registered_block.php"      => TRUE,
+			                 "smarty_internal_compile_private_registered_function.php"   => TRUE,
+			                 "smarty_internal_compile_private_special_variable.php"      => TRUE,
+			                 "smarty_internal_compile_rdelim.php"                        => TRUE,
+			                 "smarty_internal_compile_section.php"                       => TRUE,
+			                 "smarty_internal_compile_setfilter.php"                     => TRUE,
+			                 "smarty_internal_compile_while.php"                         => TRUE,
+			                 "smarty_internal_compilebase.php"                           => TRUE,
+			                 "smarty_internal_config_file_compiler.php"                  => TRUE,
+			                 "smarty_internal_configfilelexer.php"                       => TRUE,
+			                 "smarty_internal_configfileparser.php"                      => TRUE,
+			                 "smarty_internal_data.php"                                  => TRUE,
+			                 "smarty_internal_debug.php"                                 => TRUE,
+			                 "smarty_internal_extension_codeframe.php"                   => TRUE,
+			                 "smarty_internal_extension_config.php"                      => TRUE,
+			                 "smarty_internal_extension_defaulttemplatehandler.php"      => TRUE,
+			                 "smarty_internal_filter_handler.php"                        => TRUE,
+			                 "smarty_internal_function_call_handler.php"                 => TRUE,
+			                 "smarty_internal_get_include_path.php"                      => TRUE,
+			                 "smarty_internal_nocache_insert.php"                        => TRUE,
+			                 "smarty_internal_parsetree.php"                             => TRUE,
+			                 "smarty_internal_parsetree_code.php"                        => TRUE,
+			                 "smarty_internal_parsetree_dq.php"                          => TRUE,
+			                 "smarty_internal_parsetree_dqcontent.php"                   => TRUE,
+			                 "smarty_internal_parsetree_tag.php"                         => TRUE,
+			                 "smarty_internal_parsetree_template.php"                    => TRUE,
+			                 "smarty_internal_parsetree_text.php"                        => TRUE,
+			                 "smarty_internal_resource_eval.php"                         => TRUE,
+			                 "smarty_internal_resource_extends.php"                      => TRUE,
+			                 "smarty_internal_resource_file.php"                         => TRUE,
+			                 "smarty_internal_resource_php.php"                          => TRUE,
+			                 "smarty_internal_resource_registered.php"                   => TRUE,
+			                 "smarty_internal_resource_stream.php"                       => TRUE,
+			                 "smarty_internal_resource_string.php"                       => TRUE,
+			                 "smarty_internal_smartytemplatecompiler.php"                => TRUE,
+			                 "smarty_internal_template.php"                              => TRUE,
+			                 "smarty_internal_templatebase.php"                          => TRUE,
+			                 "smarty_internal_templatecompilerbase.php"                  => TRUE,
+			                 "smarty_internal_templatelexer.php"                         => TRUE,
+			                 "smarty_internal_templateparser.php"                        => TRUE,
+			                 "smarty_internal_utility.php"                               => TRUE,
+			                 "smarty_internal_write_file.php"                            => TRUE,
+			                 "smarty_resource.php"                                       => TRUE,
+			                 "smarty_resource_custom.php"                                => TRUE,
+			                 "smarty_resource_recompiled.php"                            => TRUE,
+			                 "smarty_resource_uncompiled.php"                            => TRUE,
+			                 "smarty_security.php"                                       => TRUE,
+			                 "smarty_template_cached.php"                                => TRUE,
+			                 "smarty_template_compiled.php"                              => TRUE,
+			                 "smarty_template_config.php"                                => TRUE,
+			                 "smarty_template_source.php"                                => TRUE,
+			                 "smarty_undefined_variable.php"                             => TRUE,
+			                 "smarty_variable.php"                                       => TRUE,
+			                 "smartycompilerexception.php"                               => TRUE,
+			                 "smartyexception.php"                                       => TRUE, ];
+			$iterator    = new DirectoryIterator( $source );
 			foreach ( $iterator as $file ) {
 				if ( !$file->isDot() ) {
 					$filename = $file->getFilename();
@@ -414,7 +500,7 @@ class Smarty_Internal_TestInstall {
 			}
 			if ( $expected ) {
 				$status  = FALSE;
-				$message = "FAILED: files missing from libs/sysplugins: " . join(', ', array_keys($expected));
+				$message = "FAILED: files missing from libs/sysplugins: " . join( ', ', array_keys( $expected ) );
 				if ( $errors === NULL ) {
 					echo $message . ".\n";
 				}
@@ -442,9 +528,33 @@ class Smarty_Internal_TestInstall {
 		}
 		// test if core plugins are available
 		$source = SMARTY_PLUGINS_DIR;
-		if ( is_dir($source) ) {
-			$expected = [ "block.textformat.php" => TRUE, "function.counter.php" => TRUE, "function.cycle.php" => TRUE, "function.fetch.php" => TRUE, "function.html_checkboxes.php" => TRUE, "function.html_image.php" => TRUE, "function.html_options.php" => TRUE, "function.html_radios.php" => TRUE, "function.html_select_date.php" => TRUE, "function.html_select_time.php" => TRUE, "function.html_table.php" => TRUE, "function.mailto.php" => TRUE, "function.math.php" => TRUE, "modifier.capitalize.php" => TRUE, "modifier.date_format.php" => TRUE, "modifier.debug_print_var.php" => TRUE, "modifier.escape.php" => TRUE, "modifier.regex_replace.php" => TRUE, "modifier.replace.php" => TRUE, "modifier.spacify.php" => TRUE, "modifier.truncate.php" => TRUE, "modifiercompiler.cat.php" => TRUE, "modifiercompiler.count_characters.php" => TRUE, "modifiercompiler.count_paragraphs.php" => TRUE, "modifiercompiler.count_sentences.php" => TRUE, "modifiercompiler.count_words.php" => TRUE, "modifiercompiler.default.php" => TRUE, "modifiercompiler.escape.php" => TRUE, "modifiercompiler.from_charset.php" => TRUE, "modifiercompiler.indent.php" => TRUE, "modifiercompiler.lower.php" => TRUE, "modifiercompiler.noprint.php" => TRUE, "modifiercompiler.string_format.php" => TRUE, "modifiercompiler.strip.php" => TRUE, "modifiercompiler.strip_tags.php" => TRUE, "modifiercompiler.to_charset.php" => TRUE, "modifiercompiler.unescape.php" => TRUE, "modifiercompiler.upper.php" => TRUE, "modifiercompiler.wordwrap.php" => TRUE, "outputfilter.trimwhitespace.php" => TRUE, "shared.escape_special_chars.php" => TRUE, "shared.literal_compiler_param.php" => TRUE, "shared.make_timestamp.php" => TRUE, "shared.mb_str_replace.php" => TRUE, "shared.mb_unicode.php" => TRUE, "shared.mb_wordwrap.php" => TRUE, "variablefilter.htmlspecialchars.php" => TRUE, ];
-			$iterator = new DirectoryIterator($source);
+		if ( is_dir( $source ) ) {
+			$expected    =
+				[ "block.textformat.php"                  => TRUE, "function.counter.php" => TRUE,
+				  "function.cycle.php"                    => TRUE, "function.fetch.php" => TRUE,
+				  "function.html_checkboxes.php"          => TRUE, "function.html_image.php" => TRUE,
+				  "function.html_options.php"             => TRUE, "function.html_radios.php" => TRUE,
+				  "function.html_select_date.php"         => TRUE, "function.html_select_time.php" => TRUE,
+				  "function.html_table.php"               => TRUE, "function.mailto.php" => TRUE,
+				  "function.math.php"                     => TRUE, "modifier.capitalize.php" => TRUE,
+				  "modifier.date_format.php"              => TRUE, "modifier.debug_print_var.php" => TRUE,
+				  "modifier.escape.php"                   => TRUE, "modifier.regex_replace.php" => TRUE,
+				  "modifier.replace.php"                  => TRUE, "modifier.spacify.php" => TRUE,
+				  "modifier.truncate.php"                 => TRUE, "modifiercompiler.cat.php" => TRUE,
+				  "modifiercompiler.count_characters.php" => TRUE, "modifiercompiler.count_paragraphs.php" => TRUE,
+				  "modifiercompiler.count_sentences.php"  => TRUE, "modifiercompiler.count_words.php" => TRUE,
+				  "modifiercompiler.default.php"          => TRUE, "modifiercompiler.escape.php" => TRUE,
+				  "modifiercompiler.from_charset.php"     => TRUE, "modifiercompiler.indent.php" => TRUE,
+				  "modifiercompiler.lower.php"            => TRUE, "modifiercompiler.noprint.php" => TRUE,
+				  "modifiercompiler.string_format.php"    => TRUE, "modifiercompiler.strip.php" => TRUE,
+				  "modifiercompiler.strip_tags.php"       => TRUE, "modifiercompiler.to_charset.php" => TRUE,
+				  "modifiercompiler.unescape.php"         => TRUE, "modifiercompiler.upper.php" => TRUE,
+				  "modifiercompiler.wordwrap.php"         => TRUE, "outputfilter.trimwhitespace.php" => TRUE,
+				  "shared.escape_special_chars.php"       => TRUE, "shared.literal_compiler_param.php" => TRUE,
+				  "shared.make_timestamp.php"             => TRUE, "shared.mb_str_replace.php" => TRUE,
+				  "shared.mb_unicode.php"                 => TRUE, "shared.mb_wordwrap.php" => TRUE,
+				  "variablefilter.htmlspecialchars.php"   => TRUE, ];
+			$iterator    = new DirectoryIterator( $source );
 			foreach ( $iterator as $file ) {
 				if ( !$file->isDot() ) {
 					$filename = $file->getFilename();
@@ -455,7 +565,7 @@ class Smarty_Internal_TestInstall {
 			}
 			if ( $expected ) {
 				$status  = FALSE;
-				$message = "FAILED: files missing from libs/plugins: " . join(', ', array_keys($expected));
+				$message = "FAILED: files missing from libs/plugins: " . join( ', ', array_keys( $expected ) );
 				if ( $errors === NULL ) {
 					echo $message . ".\n";
 				}

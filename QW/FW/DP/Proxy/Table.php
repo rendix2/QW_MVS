@@ -11,8 +11,8 @@ namespace QW\FW\DP\Proxy;
 
 interface Table {
 
-	public function read($key);
+	public function read ( $key );
 
-	public function write($key, $value);
+	public function write ( $key, $value );
 
 }

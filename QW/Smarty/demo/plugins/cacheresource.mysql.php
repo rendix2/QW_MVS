@@ -29,17 +29,17 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	protected $fetchTimestamp;
 	protected $save;
 
-	public function __construct() {
+	public function __construct () {
 		try {
-			$this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "smarty");
+			$this->db = new PDO( "mysql:dbname=test;host=127.0.0.1", "smarty" );
 		}
 		catch ( PDOException $e ) {
-			throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
+			throw new SmartyException( 'Mysql Resource failed: ' . $e->getMessage() );
 		}
-		$this->fetch          = $this->db->prepare('SELECT modified, content FROM output_cache WHERE id = :id');
-		$this->fetchTimestamp = $this->db->prepare('SELECT modified FROM output_cache WHERE id = :id');
-		$this->save           = $this->db->prepare('REPLACE INTO output_cache (id, name, cache_id, compile_id, content)
-            VALUES  (:id, :name, :cache_id, :compile_id, :content)');
+		$this->fetch          = $this->db->prepare( 'SELECT modified, content FROM output_cache WHERE id = :id' );
+		$this->fetchTimestamp = $this->db->prepare( 'SELECT modified FROM output_cache WHERE id = :id' );
+		$this->save           = $this->db->prepare( 'REPLACE INTO output_cache (id, name, cache_id, compile_id, content)
+            VALUES  (:id, :name, :cache_id, :compile_id, :content)' );
 	}
 
 	/**
@@ -52,11 +52,11 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return integer      number of deleted caches
 	 */
-	protected function delete($name, $cache_id, $compile_id, $exp_time) {
+	protected function delete ( $name, $cache_id, $compile_id, $exp_time ) {
 		// delete the whole cache
 		if ( $name === NULL && $cache_id === NULL && $compile_id === NULL && $exp_time === NULL ) {
 			// returning the number of deleted caches would require a second query to count them
-			$query = $this->db->query('TRUNCATE TABLE output_cache');
+			$query = $this->db->query( 'TRUNCATE TABLE output_cache' );
 
 			return -1;
 		}
@@ -64,22 +64,23 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 		$where = [ ];
 		// equal test name
 		if ( $name !== NULL ) {
-			$where[] = 'name = ' . $this->db->quote($name);
+			$where[] = 'name = ' . $this->db->quote( $name );
 		}
 		// equal test compile_id
 		if ( $compile_id !== NULL ) {
-			$where[] = 'compile_id = ' . $this->db->quote($compile_id);
+			$where[] = 'compile_id = ' . $this->db->quote( $compile_id );
 		}
 		// range test expiration time
 		if ( $exp_time !== NULL ) {
-			$where[] = 'modified < DATE_SUB(NOW(), INTERVAL ' . intval($exp_time) . ' SECOND)';
+			$where[] = 'modified < DATE_SUB(NOW(), INTERVAL ' . intval( $exp_time ) . ' SECOND)';
 		}
 		// equal test cache_id and match sub-groups
 		if ( $cache_id !== NULL ) {
-			$where[] = '(cache_id = ' . $this->db->quote($cache_id) . ' OR cache_id LIKE ' . $this->db->quote($cache_id . '|%') . ')';
+			$where[] = '(cache_id = ' . $this->db->quote( $cache_id ) . ' OR cache_id LIKE ' .
+				$this->db->quote( $cache_id . '|%' ) . ')';
 		}
 		// run delete query
-		$query = $this->db->query('DELETE FROM output_cache WHERE ' . join(' AND ', $where));
+		$query = $this->db->query( 'DELETE FROM output_cache WHERE ' . join( ' AND ', $where ) );
 
 		return $query->rowCount();
 	}
@@ -96,13 +97,13 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return void
 	 */
-	protected function fetch($id, $name, $cache_id, $compile_id, &$content, &$mtime) {
-		$this->fetch->execute([ 'id' => $id ]);
+	protected function fetch ( $id, $name, $cache_id, $compile_id, &$content, &$mtime ) {
+		$this->fetch->execute( [ 'id' => $id ] );
 		$row = $this->fetch->fetch();
 		$this->fetch->closeCursor();
 		if ( $row ) {
 			$content = $row[ 'content' ];
-			$mtime   = strtotime($row[ 'modified' ]);
+			$mtime = strtotime( $row[ 'modified' ] );
 		}
 		else {
 			$content = NULL;
@@ -123,9 +124,9 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return integer|boolean timestamp (epoch) the template was modified, or false if not found
 	 */
-	protected function fetchTimestamp($id, $name, $cache_id, $compile_id) {
-		$this->fetchTimestamp->execute([ 'id' => $id ]);
-		$mtime = strtotime($this->fetchTimestamp->fetchColumn());
+	protected function fetchTimestamp ( $id, $name, $cache_id, $compile_id ) {
+		$this->fetchTimestamp->execute( [ 'id' => $id ] );
+		$mtime = strtotime( $this->fetchTimestamp->fetchColumn() );
 		$this->fetchTimestamp->closeCursor();
 
 		return $mtime;
@@ -143,8 +144,9 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return boolean      success
 	 */
-	protected function save($id, $name, $cache_id, $compile_id, $exp_time, $content) {
-		$this->save->execute([ 'id' => $id, 'name' => $name, 'cache_id' => $cache_id, 'compile_id' => $compile_id, 'content' => $content, ]);
+	protected function save ( $id, $name, $cache_id, $compile_id, $exp_time, $content ) {
+		$this->save->execute( [ 'id'      => $id, 'name' => $name, 'cache_id' => $cache_id, 'compile_id' => $compile_id,
+		                        'content' => $content, ] );
 
 		return ! !$this->save->rowCount();
 	}

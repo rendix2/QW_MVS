@@ -22,8 +22,8 @@ class Smarty_CacheResource_Pdo_Gzip extends Smarty_CacheResource_Pdo {
 	 * @return string $content
 	 * @access protected
 	 */
-	protected function inputContent($content) {
-		return gzdeflate($content);
+	protected function inputContent ( $content ) {
+		return gzdeflate( $content );
 	}
 
 	/*
@@ -33,8 +33,8 @@ class Smarty_CacheResource_Pdo_Gzip extends Smarty_CacheResource_Pdo {
 	 * @return string $content
 	 * @access protected
 	 */
-	protected function outputContent($content) {
-		return gzinflate($content);
+	protected function outputContent ( $content ) {
+		return gzinflate( $content );
 	}
 }
  

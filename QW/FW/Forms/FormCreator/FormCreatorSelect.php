@@ -15,7 +15,7 @@ class FormCreatorSelect extends Object {
 	private $size;
 	private $disabled;
 
-	public function __construct(FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled) {
+	public function __construct ( FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled ) {
 		parent::__construct();
 
 		$this->formCreatorHTML4 = $formCreatorHTML4;
@@ -24,32 +24,32 @@ class FormCreatorSelect extends Object {
 		$this->name     = $name;
 		$this->multiple = $multiple == TRUE ? 'multiple="multiple' : '';
 
-		if ( !is_numeric($size) ) throw new IllegalArgumentException();
+		if ( !is_numeric( $size ) ) throw new IllegalArgumentException();
 
 		$this->size = $size;
 	}
 
-	public function addChoice($data, $selected = FALSE, array $disabled) {
+	public function addChoice ( $data, $selected = FALSE, array $disabled ) {
 		$this->content[] = $data;
 
 		return $this;
 	}
 
-	public function addList(array $data, array $selected, array $disabled) {
+	public function addList ( array $data, array $selected, array $disabled ) {
 		$this->content[] = $data;
 
 		return $this;
 	}
 
-	public function getContent() {
+	public function getContent () {
 		return $this->content;
 	}
 
-	public function getFinal() {
+	public function getFinal () {
 
 		$final = '<select name="' . $this->name . '" ' . $this->multiple . '>';
 
-		foreach ( $this->content as $v ) $final .= "<option name=\"" . key($this->content) . "\">{$v}</option>\n";
+		foreach ( $this->content as $v ) $final .= "<option name=\"" . key( $this->content ) . "\">{$v}</option>\n";
 
 		return $final;
 	}

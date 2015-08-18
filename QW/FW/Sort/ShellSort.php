@@ -11,7 +11,7 @@ namespace QW\FW\Sort;
 
 class ShellSort extends AbstractSort {
 
-	protected function sort(AbstractSort $sort) {
+	protected function sort ( AbstractSort $sort ) {
 		$gap = $this->length / 2;
 
 		while ( $gap > 0 ) {

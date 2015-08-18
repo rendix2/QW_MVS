@@ -32,7 +32,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return integer number of cache files deleted
 	 */
-	abstract public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);
+	abstract public function clear ( Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time );
 
 	/**
 	 * Empty cache
@@ -42,7 +42,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return integer number of cache files deleted
 	 */
-	abstract public function clearAll(Smarty $smarty, $exp_time = NULL);
+	abstract public function clearAll ( Smarty $smarty, $exp_time = NULL );
 
 	/**
 	 * populate Cached Object with meta data from Resource
@@ -52,7 +52,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return void
 	 */
-	abstract public function populate(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template);
+	abstract public function populate ( Smarty_Template_Cached $cached, Smarty_Internal_Template $_template );
 
 	/**
 	 * populate Cached Object with timestamp and exists from Resource
@@ -61,7 +61,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return void
 	 */
-	abstract public function populateTimestamp(Smarty_Template_Cached $cached);
+	abstract public function populateTimestamp ( Smarty_Template_Cached $cached );
 
 	/**
 	 * Read the cached template and process header
@@ -71,7 +71,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return boolean true or false if the cached content does not exist
 	 */
-	abstract public function process(Smarty_Internal_Template $_template, Smarty_Template_Cached $cached = NULL);
+	abstract public function process ( Smarty_Internal_Template $_template, Smarty_Template_Cached $cached = NULL );
 
 	/**
 	 * Write the rendered template output to cache
@@ -81,14 +81,14 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return boolean success
 	 */
-	abstract public function writeCachedContent(Smarty_Internal_Template $_template, $content);
+	abstract public function writeCachedContent ( Smarty_Internal_Template $_template, $content );
 
 	/**
 	 * Invalid Loaded Cache Files
 	 *
 	 * @param Smarty $smarty Smarty object
 	 */
-	public static function invalidLoadedCache(Smarty $smarty) {
+	public static function invalidLoadedCache ( Smarty $smarty ) {
 		foreach ( $smarty->template_objects as $tpl ) {
 			if ( isset( $tpl->cached ) ) {
 				$tpl->cached->valid     = FALSE;
@@ -106,7 +106,7 @@ abstract class Smarty_CacheResource {
 	 * @throws SmartyException
 	 * @return Smarty_CacheResource Cache Resource Handler
 	 */
-	public static function load(Smarty $smarty, $type = NULL) {
+	public static function load ( Smarty $smarty, $type = NULL ) {
 		if ( !isset( $type ) ) {
 			$type = $smarty->caching_type;
 		}
@@ -123,20 +123,20 @@ abstract class Smarty_CacheResource {
 		}
 		// try sysplugins dir
 		if ( isset( self::$sysplugins[ $type ] ) ) {
-			$cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($type);
-			if ( !class_exists($cache_resource_class, FALSE) ) {
+			$cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst( $type );
+			if ( !class_exists( $cache_resource_class, FALSE ) ) {
 				require SMARTY_SYSPLUGINS_DIR . self::$sysplugins[ $type ];
 			}
 
 			return $smarty->_cacheresource_handlers[ $type ] = new $cache_resource_class();
 		}
 		// try plugins dir
-		$cache_resource_class = 'Smarty_CacheResource_' . ucfirst($type);
-		if ( $smarty->loadPlugin($cache_resource_class) ) {
+		$cache_resource_class = 'Smarty_CacheResource_' . ucfirst( $type );
+		if ( $smarty->loadPlugin( $cache_resource_class ) ) {
 			return $smarty->_cacheresource_handlers[ $type ] = new $cache_resource_class();
 		}
 		// give up
-		throw new SmartyException("Unable to load cache resource '{$type}'");
+		throw new SmartyException( "Unable to load cache resource '{$type}'" );
 	}
 
 	/**
@@ -147,7 +147,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return bool
 	 */
-	public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached) {
+	public function acquireLock ( Smarty $smarty, Smarty_Template_Cached $cached ) {
 		// create lock
 		return TRUE;
 	}
@@ -159,10 +159,10 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return null|string
 	 */
-	public function getCachedContent(Smarty_Internal_Template $_template) {
-		if ( $_template->cached->handler->process($_template) ) {
+	public function getCachedContent ( Smarty_Internal_Template $_template ) {
+		if ( $_template->cached->handler->process( $_template ) ) {
 			ob_start();
-			$_template->properties[ 'unifunc' ]($_template);
+			$_template->properties[ 'unifunc' ]( $_template );
 
 			return ob_get_clean();
 		}
@@ -178,7 +178,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return bool
 	 */
-	public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached) {
+	public function hasLock ( Smarty $smarty, Smarty_Template_Cached $cached ) {
 		// check if lock exists
 		return FALSE;
 	}
@@ -189,17 +189,17 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return bool|null
 	 */
-	public function locked(Smarty $smarty, Smarty_Template_Cached $cached) {
+	public function locked ( Smarty $smarty, Smarty_Template_Cached $cached ) {
 		// theoretically locking_timeout should be checked against time_limit (max_execution_time)
-		$start   = microtime(TRUE);
+		$start = microtime( TRUE );
 		$hadLock = NULL;
-		while ( $this->hasLock($smarty, $cached) ) {
+		while ( $this->hasLock( $smarty, $cached ) ) {
 			$hadLock = TRUE;
-			if ( microtime(TRUE) - $start > $smarty->locking_timeout ) {
+			if ( microtime( TRUE ) - $start > $smarty->locking_timeout ) {
 				// abort waiting for lock release
 				return FALSE;
 			}
-			sleep(1);
+			sleep( 1 );
 		}
 
 		return $hadLock;
@@ -213,7 +213,7 @@ abstract class Smarty_CacheResource {
 	 *
 	 * @return bool
 	 */
-	public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached) {
+	public function releaseLock ( Smarty $smarty, Smarty_Template_Cached $cached ) {
 		// release lock
 		return TRUE;
 	}

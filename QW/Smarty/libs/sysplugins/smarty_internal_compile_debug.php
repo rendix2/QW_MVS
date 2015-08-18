@@ -24,15 +24,16 @@ class Smarty_Internal_Compile_Debug extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile($args, $compiler) {
+	public function compile ( $args, $compiler ) {
 		// check and get attributes
-		$_attr = $this->getAttributes($compiler, $args);
+		$_attr = $this->getAttributes( $compiler, $args );
 
 		// compile always as nocache
 		$compiler->tag_nocache = TRUE;
 
 		// display debug template
-		$_output = "<?php \$_smarty_tpl->smarty->loadPlugin('Smarty_Internal_Debug'); Smarty_Internal_Debug::display_debug(\$_smarty_tpl); ?>";
+		$_output =
+			"<?php \$_smarty_tpl->smarty->loadPlugin('Smarty_Internal_Debug'); Smarty_Internal_Debug::display_debug(\$_smarty_tpl); ?>";
 
 		return $_output;
 	}

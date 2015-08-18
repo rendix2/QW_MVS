@@ -19,34 +19,34 @@ class EasyCaptcha extends Object {
 	private $captcha;
 	private $text;
 
-	public function __construct($width = 400, $height = 200) {
+	public function __construct ( $width = 400, $height = 200 ) {
 		parent::__construct();
 
-		$this->captcha = new ImageTextGenerate($width, $height);
-		$this->captcha->setBackgroundColorO(new Color(0, 0, 0));
-		$this->captcha->setTextColorO(new Color(255, 255, 255));
-		$string     = new String(uniqid());
-		$this->text = $string->subString(0, 6);
-		$this->captcha->setText(Math::randomInterval(0, 6), 0, 0, $this->text);
+		$this->captcha = new ImageTextGenerate( $width, $height );
+		$this->captcha->setBackgroundColorO( new Color( 0, 0, 0 ) );
+		$this->captcha->setTextColorO( new Color( 255, 255, 255 ) );
+		$string     = new String( uniqid() );
+		$this->text = $string->subString( 0, 6 );
+		$this->captcha->setText( Math::randomInterval( 0, 6 ), 0, 0, $this->text );
 	}
 
-	public function getBMP() {
+	public function getBMP () {
 		$this->captcha->toBMP();
 	}
 
-	public function getGIF() {
+	public function getGIF () {
 		$this->captcha->toGIF();
 	}
 
-	public function getJPG() {
+	public function getJPG () {
 		$this->captcha->toJPG();
 	}
 
-	public function getPNG() {
+	public function getPNG () {
 		$this->captcha->toPNG();
 	}
 
-	public function getText() {
+	public function getText () {
 		return $this->text;
 	}
 }

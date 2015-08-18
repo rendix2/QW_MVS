@@ -40,7 +40,7 @@ abstract class Smarty_Internal_ParseTree {
 	 *
 	 * @return string buffer content
 	 */
-	abstract public function to_smarty_php();
+	abstract public function to_smarty_php ();
 }
 
 

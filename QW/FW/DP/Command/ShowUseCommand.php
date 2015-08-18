@@ -15,15 +15,16 @@ class ShowUseCommand {
 
 	private $commands = [ ];
 
-	public function __construct() {
-		$this->commands[] = new PrintCommand("First Line");
+	public function __construct () {
+		$this->commands[] = new PrintCommand( "First Line" );
 		$this->commands[] = new NewLineCommand();
-		$this->commands[] = new PrintCommand("Second Line");
+		$this->commands[] = new PrintCommand( "Second Line" );
 		$this->commands[] = new NewLineCommand();
 	}
 
-	public function showExample() {
-		foreach ( $this->commands as $command ) // this code for check, if value in $commands array contains object which implements interface Command, in Java its not necessary
+	public function showExample () {
+		foreach ( $this->commands as $command )
+			// this code for check, if value in $commands array contains object which implements interface Command, in Java its not necessary
 		{
 			if ( $command instanceof Command ) {
 				$command->execute();

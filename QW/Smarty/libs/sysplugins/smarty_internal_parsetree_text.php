@@ -21,7 +21,7 @@ class Smarty_Internal_ParseTree_Text extends Smarty_Internal_ParseTree {
 	 * @param object $parser parser object
 	 * @param string $data   text
 	 */
-	public function __construct($parser, $data) {
+	public function __construct ( $parser, $data ) {
 		$this->parser = $parser;
 		$this->data   = $data;
 	}
@@ -31,7 +31,7 @@ class Smarty_Internal_ParseTree_Text extends Smarty_Internal_ParseTree {
 	 *
 	 * @return string text
 	 */
-	public function to_smarty_php() {
+	public function to_smarty_php () {
 		return $this->data;
 	}
 }

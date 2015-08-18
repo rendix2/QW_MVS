@@ -13,7 +13,7 @@ final class ShowOfUse {
 
 	private $context;
 
-	public function __construct() {
+	public function __construct () {
 		$this->context = new Context();
 
 		$this->context->beHappy();

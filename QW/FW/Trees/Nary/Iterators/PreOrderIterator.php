@@ -7,15 +7,15 @@ use QW\FW\Trees\Nary\NaryTree;
 
 class PreOrderIterator extends AbstractNaryTreeIterator {
 
-	public final function __construct(NaryTree $root) {
-		parent::__construct($root);
+	public final function __construct ( NaryTree $root ) {
+		parent::__construct( $root );
 	}
 
-	protected function order(NaryTree $root = NULL) {
+	protected function order ( NaryTree $root = NULL ) {
 		if ( $root == NULL || $this->realRoot == $root ) return;
 
 		$this->finalData[] = $root->getData();
 
-		foreach ( $root->getChildren() as $child ) $this->order($child);
+		foreach ( $root->getChildren() as $child ) $this->order( $child );
 	}
 }

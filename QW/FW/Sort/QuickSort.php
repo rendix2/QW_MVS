@@ -11,20 +11,21 @@ namespace QW\FW\Sort;
 
 class QuickSort extends AbstractSort {
 
-	private function quickSort(array $array, $left, $right) {
+	private function quickSort ( array $array, $left, $right ) {
 		if ( $left < $right ) {
 			$boundary = $left;
-			for ( $i = $left + 1; $i < $right; $i++ ) if ( $array[ $i ] > $array[ $left ] ) self::swap($array, $i, ++$boundary);
+			for ( $i = $left + 1; $i < $right; $i++ )
+				if ( $array[ $i ] > $array[ $left ] ) self::swap( $array, $i, ++$boundary );
 
-			self::swap($array, $left, $boundary);
-			$this->quickSort($array, $left, $boundary);
-			$this->quickSort($array, $boundary + 1, $right);
+			self::swap( $array, $left, $boundary );
+			$this->quickSort( $array, $left, $boundary );
+			$this->quickSort( $array, $boundary + 1, $right );
 		}
 
 		return $this->data;
 	}
 
-	protected function sort(AbstractSort $sort) {
+	protected function sort ( AbstractSort $sort ) {
 		// TODO: Implement sort() method.
 	}
 }

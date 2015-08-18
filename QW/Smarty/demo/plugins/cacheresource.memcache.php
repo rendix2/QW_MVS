@@ -18,9 +18,9 @@ class Smarty_CacheResource_Memcache extends Smarty_CacheResource_KeyValueStore {
 	 */
 	protected $memcache = NULL;
 
-	public function __construct() {
+	public function __construct () {
 		$this->memcache = new Memcache();
-		$this->memcache->addServer('127.0.0.1', 11211);
+		$this->memcache->addServer( '127.0.0.1', 11211 );
 	}
 
 	/**
@@ -30,10 +30,10 @@ class Smarty_CacheResource_Memcache extends Smarty_CacheResource_KeyValueStore {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	protected function delete(array $keys) {
+	protected function delete ( array $keys ) {
 		foreach ( $keys as $k ) {
-			$k = sha1($k);
-			$this->memcache->delete($k);
+			$k = sha1( $k );
+			$this->memcache->delete( $k );
 		}
 
 		return TRUE;
@@ -44,7 +44,7 @@ class Smarty_CacheResource_Memcache extends Smarty_CacheResource_KeyValueStore {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	protected function purge() {
+	protected function purge () {
 		$this->memcache->flush();
 	}
 
@@ -56,15 +56,15 @@ class Smarty_CacheResource_Memcache extends Smarty_CacheResource_KeyValueStore {
 	 * @return array   list of values with the given keys used as indexes
 	 * @return boolean true on success, false on failure
 	 */
-	protected function read(array $keys) {
+	protected function read ( array $keys ) {
 		$_keys = $lookup = [ ];
 		foreach ( $keys as $k ) {
-			$_k            = sha1($k);
+			$_k = sha1( $k );
 			$_keys[]       = $_k;
 			$lookup[ $_k ] = $k;
 		}
 		$_res = [ ];
-		$res  = $this->memcache->get($_keys);
+		$res = $this->memcache->get( $_keys );
 		foreach ( $res as $k => $v ) {
 			$_res[ $lookup[ $k ] ] = $v;
 		}
@@ -80,10 +80,10 @@ class Smarty_CacheResource_Memcache extends Smarty_CacheResource_KeyValueStore {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	protected function write(array $keys, $expire = NULL) {
+	protected function write ( array $keys, $expire = NULL ) {
 		foreach ( $keys as $k => $v ) {
-			$k = sha1($k);
-			$this->memcache->set($k, $v, 0, $expire);
+			$k = sha1( $k );
+			$this->memcache->set( $k, $v, 0, $expire );
 		}
 
 		return TRUE;

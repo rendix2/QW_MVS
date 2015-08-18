@@ -31,7 +31,7 @@ class SmartyCompilerException extends SmartyException {
 	 */
 	public $template = NULL;
 
-	public function __toString() {
+	public function __toString () {
 		return ' --> Smarty Compiler: ' . $this->message . ' <-- ';
 	}
 }

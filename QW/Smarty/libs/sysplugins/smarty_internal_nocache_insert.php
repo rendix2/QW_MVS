@@ -26,7 +26,7 @@ class Smarty_Internal_Nocache_Insert {
 	 *
 	 * @return string                   compiled code
 	 */
-	public static function compile($_function, $_attr, $_template, $_script, $_assign = NULL) {
+	public static function compile ( $_function, $_attr, $_template, $_script, $_assign = NULL ) {
 		$_output = '<?php ';
 		if ( $_script != 'null' ) {
 			// script which must be included
@@ -35,16 +35,18 @@ class Smarty_Internal_Nocache_Insert {
 		}
 		// call insert
 		if ( isset( $_assign ) ) {
-			$_output .= "\$_smarty_tpl->assign('{$_assign}' , {$_function} (" . var_export($_attr, TRUE) . ",\$_smarty_tpl), true);?>";
+			$_output .= "\$_smarty_tpl->assign('{$_assign}' , {$_function} (" . var_export( $_attr, TRUE ) .
+				",\$_smarty_tpl), true);?>";
 		}
 		else {
-			$_output .= "echo {$_function}(" . var_export($_attr, TRUE) . ",\$_smarty_tpl);?>";
+			$_output .= "echo {$_function}(" . var_export( $_attr, TRUE ) . ",\$_smarty_tpl);?>";
 		}
 		$_tpl = $_template;
 		while ( $_tpl->parent instanceof Smarty_Internal_Template ) {
 			$_tpl = $_tpl->parent;
 		}
 
-		return "/*%%SmartyNocache:{$_tpl->properties['nocache_hash']}%%*/" . $_output . "/*/%%SmartyNocache:{$_tpl->properties['nocache_hash']}%%*/";
+		return "/*%%SmartyNocache:{$_tpl->properties['nocache_hash']}%%*/" . $_output .
+		"/*/%%SmartyNocache:{$_tpl->properties['nocache_hash']}%%*/";
 	}
 }

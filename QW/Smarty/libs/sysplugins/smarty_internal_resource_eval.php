@@ -26,8 +26,8 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
 	 *
 	 * @return string unique resource name
 	 */
-	public function buildUniqueResourceName(Smarty $smarty, $resource_name, $isConfig = FALSE) {
-		return get_class($this) . '#' . $this->decode($resource_name);
+	public function buildUniqueResourceName ( Smarty $smarty, $resource_name, $isConfig = FALSE ) {
+		return get_class( $this ) . '#' . $this->decode( $resource_name );
 	}
 
 	/**
@@ -37,14 +37,14 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
 	 *
 	 * @return string decoded template_resource
 	 */
-	protected function decode($string) {
+	protected function decode ( $string ) {
 		// decode if specified
-		if ( ( $pos = strpos($string, ':') ) !== FALSE ) {
-			if ( !strncmp($string, 'base64', 6) ) {
-				return base64_decode(substr($string, 7));
+		if ( ( $pos = strpos( $string, ':' ) ) !== FALSE ) {
+			if ( !strncmp( $string, 'base64', 6 ) ) {
+				return base64_decode( substr( $string, 7 ) );
 			}
-			elseif ( !strncmp($string, 'urlencode', 9) ) {
-				return urldecode(substr($string, 10));
+			elseif ( !strncmp( $string, 'urlencode', 9 ) ) {
+				return urldecode( substr( $string, 10 ) );
 			}
 		}
 
@@ -58,7 +58,7 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
 	 *
 	 * @return string                 resource's basename
 	 */
-	public function getBasename(Smarty_Template_Source $source) {
+	public function getBasename ( Smarty_Template_Source $source ) {
 		return '';
 	}
 
@@ -71,8 +71,8 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
 	 *
 	 * @return string                 template source
 	 */
-	public function getContent(Smarty_Template_Source $source) {
-		return $this->decode($source->name);
+	public function getContent ( Smarty_Template_Source $source ) {
+		return $this->decode( $source->name );
 	}
 
 	/**
@@ -83,8 +83,8 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
 	 *
 	 * @return void
 	 */
-	public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL) {
-		$source->uid       = $source->filepath = sha1($source->name);
+	public function populate ( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
+		$source->uid = $source->filepath = sha1( $source->name );
 		$source->timestamp = FALSE;
 		$source->exists    = TRUE;
 	}

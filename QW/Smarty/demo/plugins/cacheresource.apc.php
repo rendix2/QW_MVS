@@ -10,10 +10,10 @@
  * @author  Uwe Tews
  */
 class Smarty_CacheResource_Apc extends Smarty_CacheResource_KeyValueStore {
-	public function __construct() {
+	public function __construct () {
 		// test if APC is present
-		if ( !function_exists('apc_cache_info') ) {
-			throw new Exception('APC Template Caching Error: APC is not installed');
+		if ( !function_exists( 'apc_cache_info' ) ) {
+			throw new Exception( 'APC Template Caching Error: APC is not installed' );
 		}
 	}
 
@@ -24,9 +24,9 @@ class Smarty_CacheResource_Apc extends Smarty_CacheResource_KeyValueStore {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	protected function delete(array $keys) {
+	protected function delete ( array $keys ) {
 		foreach ( $keys as $k ) {
-			apc_delete($k);
+			apc_delete( $k );
 		}
 
 		return TRUE;
@@ -37,8 +37,8 @@ class Smarty_CacheResource_Apc extends Smarty_CacheResource_KeyValueStore {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	protected function purge() {
-		return apc_clear_cache('user');
+	protected function purge () {
+		return apc_clear_cache( 'user' );
 	}
 
 	/**
@@ -49,9 +49,9 @@ class Smarty_CacheResource_Apc extends Smarty_CacheResource_KeyValueStore {
 	 * @return array   list of values with the given keys used as indexes
 	 * @return boolean true on success, false on failure
 	 */
-	protected function read(array $keys) {
+	protected function read ( array $keys ) {
 		$_res = [ ];
-		$res  = apc_fetch($keys);
+		$res = apc_fetch( $keys );
 		foreach ( $res as $k => $v ) {
 			$_res[ $k ] = $v;
 		}
@@ -67,9 +67,9 @@ class Smarty_CacheResource_Apc extends Smarty_CacheResource_KeyValueStore {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	protected function write(array $keys, $expire = NULL) {
+	protected function write ( array $keys, $expire = NULL ) {
 		foreach ( $keys as $k => $v ) {
-			apc_store($k, $v, $expire);
+			apc_store( $k, $v, $expire );
 		}
 
 		return TRUE;

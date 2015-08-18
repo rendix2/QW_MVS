@@ -9,31 +9,31 @@ class User extends AbstractUser implements IUser {
 	protected $userName, $userId, $userTemplate, $userIP;
 	private $admin;
 
-	public function __construct() {
+	public function __construct () {
 		$this->admin = FALSE;
 	}
 
-	public function getIP() {
+	public function getIP () {
 		return $this->userIP;
 	}
 
-	public function getTemplate() {
+	public function getTemplate () {
 		return $this->userTemplate;
 	}
 
-	public function getUserId() {
+	public function getUserId () {
 		return $this->userId;
 	}
 
-	public function getUserName() {
+	public function getUserName () {
 		return $this->userName;
 	}
 
-	public function isAdmin() {
-		return Session::get('Admin');
+	public function isAdmin () {
+		return Session::get( 'Admin' );
 	}
 
-	public function isLogged() {
-		return Session::get('Logged');
+	public function isLogged () {
+		return Session::get( 'Logged' );
 	}
 }

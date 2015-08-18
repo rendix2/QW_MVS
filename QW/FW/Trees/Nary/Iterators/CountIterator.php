@@ -9,20 +9,20 @@ final class CountIterator extends AbstractNaryTreeIterator {
 
 	private $countChildren;
 
-	public function __construct(NaryTree $root) {
+	public function __construct ( NaryTree $root ) {
 		$this->countChildren = 0;
 
-		parent::__construct($root);
+		parent::__construct( $root );
 	}
 
-	public function getCountChildren() {
+	public function getCountChildren () {
 		return $this->countChildren;
 	}
 
-	protected function order(NaryTree $root = NULL) {
+	protected function order ( NaryTree $root = NULL ) {
 		if ( $root == NULL || $this->realRoot == $root ) return;
 
-		foreach ( $root->getChildren() as $child ) $this->order($child);
+		foreach ( $root->getChildren() as $child ) $this->order( $child );
 
 		$this->countChildren++;
 	}

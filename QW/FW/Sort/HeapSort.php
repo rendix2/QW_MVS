@@ -12,7 +12,7 @@ namespace QW\FW\Sort;
 class HeapSort extends AbstractSort {
 
 
-	private function repairTop(array $array, $bottom, $topIndex) {
+	private function repairTop ( array $array, $bottom, $topIndex ) {
 		$tmp  = $array[ $topIndex ];
 		$succ = $topIndex * 2 + 1;
 
@@ -26,12 +26,12 @@ class HeapSort extends AbstractSort {
 		$array[ $topIndex ] = $tmp;
 	}
 
-	protected function sort(AbstractSort $sort) {
-		for ( $i = $this->length / 2 - 1; $i >= 0; $i-- ) $this->repairTop($this->data, $this->length - 1, $i);
+	protected function sort ( AbstractSort $sort ) {
+		for ( $i = $this->length / 2 - 1; $i >= 0; $i-- ) $this->repairTop( $this->data, $this->length - 1, $i );
 
 		for ( $i = $this->length - 1; $i > 0; $i-- ) {
-			$this->swap($this->data, 0, $i);
-			$this->repairTop($this->data, $i - 1, 0);
+			$this->swap( $this->data, 0, $i );
+			$this->repairTop( $this->data, $i - 1, 0 );
 		}
 
 		return $this->data;

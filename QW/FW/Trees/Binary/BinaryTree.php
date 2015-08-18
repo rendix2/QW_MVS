@@ -15,7 +15,7 @@ use QW\FW\Trees\Binary\Iterators\PreOrderRecourseIterator;
 final class BinaryTree extends AbstractTree {
 	private $left, $right;
 
-	public function __construct(BinaryTree $left = NULL, BinaryTree $right = NULL, $data) {
+	public function __construct ( BinaryTree $left = NULL, BinaryTree $right = NULL, $data ) {
 		parent::__construct();
 		$this->left  = $left;
 		$this->right = $right;
@@ -25,60 +25,60 @@ final class BinaryTree extends AbstractTree {
 		if ( $this->right != NULL ) $this->directChildrenCount++;
 	}
 
-	public function getChildrenCount() {
-		$itc                       = new CountIterator($this);
+	public function getChildrenCount () {
+		$itc = new CountIterator( $this );
 		$this->directChildrenCount = $itc->getCountChildren();
 
 		parent::getChildrenCount();
 	}
 
-	public function getLeftChild() {
+	public function getLeftChild () {
 		return $this->left;
 	}
 
-	public function getRightChild() {
+	public function getRightChild () {
 		return $this->right;
 	}
 
-	public function iteratorEulerTour() {
-		return new EulerTourIterator($this);
+	public function iteratorEulerTour () {
+		return new EulerTourIterator( $this );
 	}
 
-	public function iteratorInOrderIterative() {
-		return new InOrderIterativeIterator($this);
+	public function iteratorInOrderIterative () {
+		return new InOrderIterativeIterator( $this );
 	}
 
-	public function iteratorInOrderRecourse() {
-		return new InOrderRecourseIterator($this);
+	public function iteratorInOrderRecourse () {
+		return new InOrderRecourseIterator( $this );
 	}
 
-	public function iteratorLevelOrder() {
-		return new LevelOrderIterator($this);
+	public function iteratorLevelOrder () {
+		return new LevelOrderIterator( $this );
 	}
 
-	public function iteratorPostOrderIterative() {
-		return new PostOrderIterativeIterator($this);
+	public function iteratorPostOrderIterative () {
+		return new PostOrderIterativeIterator( $this );
 	}
 
-	public function iteratorPostOrderRecourse() {
-		return new PostOrderRecourseIterator($this);
+	public function iteratorPostOrderRecourse () {
+		return new PostOrderRecourseIterator( $this );
 	}
 
-	public function iteratorPreOrderIterative() {
-		return new PreOrderIterativeIterator($this);
+	public function iteratorPreOrderIterative () {
+		return new PreOrderIterativeIterator( $this );
 	}
 
-	public function iteratorPreOrderRecourse() {
-		return new PreOrderRecourseIterator($this);
+	public function iteratorPreOrderRecourse () {
+		return new PreOrderRecourseIterator( $this );
 	}
 
-	public function setLeftChild(BinaryTree $left = NULL) {
+	public function setLeftChild ( BinaryTree $left = NULL ) {
 		if ( $this->left == NULL && $left != NULL ) $this->directChildrenCount++;
 
 		$this->left = $left;
 	}
 
-	public function setRightChild(BinaryTree $right = NULL) {
+	public function setRightChild ( BinaryTree $right = NULL ) {
 		if ( $this->right == NULL && $right != NULL ) $this->directChildrenCount++;
 
 		$this->right = $right;

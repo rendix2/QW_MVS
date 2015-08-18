@@ -2,6 +2,6 @@
 namespace QW\FW\Interfaces;
 
 interface ISingleton {
-	public static function getSingleton();
+	public static function getSingleton ();
 }
 

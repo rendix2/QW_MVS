@@ -15,15 +15,15 @@ class BucketSort extends AbstractSort {
 
 	private $bucketCount;
 
-	public function __construct(array $data, $bucketCount) {
-		parent::__construct($data);
+	public function __construct ( array $data, $bucketCount ) {
+		parent::__construct( $data );
 
-		if ( $this->bucketCount <= 0 || !is_numeric($bucketCount) ) throw new IllegalArgumentException();
+		if ( $this->bucketCount <= 0 || !is_numeric( $bucketCount ) ) throw new IllegalArgumentException();
 
 		$this->bucketCount = $bucketCount;
 	}
 
-	protected function sort(AbstractSort $sort) {
+	protected function sort ( AbstractSort $sort ) {
 		$high = $this->data[ 0 ];
 		$low  = $this->data[ 0 ];
 
@@ -38,6 +38,7 @@ class BucketSort extends AbstractSort {
 
 		$buckets = [ ];
 
-		for ( $i = 0; $i < $this->length; $i++ ) $buckets[ (int) ( ( $this->data[ $i ] - $low ) / $interval ) ] = $this->data[ $i ];
+		for ( $i = 0; $i < $this->length; $i++ )
+			$buckets[ (int) ( ( $this->data[ $i ] - $low ) / $interval ) ] = $this->data[ $i ];
 	}
 }

@@ -7,16 +7,16 @@ use QW\FW\Trees\AbstractIterators\AbstractNaryTreeIterator;
 use QW\FW\Trees\Nary\NaryTree;
 
 class InOrderIterator extends AbstractNaryTreeIterator {
-	public final function __construct(NaryTree $root) {
-		parent::__construct($root);
+	public final function __construct ( NaryTree $root ) {
+		parent::__construct( $root );
 	}
 
-	protected function order(NaryTree $root = NULL) {
+	protected function order ( NaryTree $root = NULL ) {
 		if ( $root == NULL || $this->realRoot == $root ) return;
 
 		foreach ( $root->getChildren() as $child ) {
 			$this->finalData[] = $child->getData();
-			$this->order($child);
+			$this->order( $child );
 		}
 	}
 }

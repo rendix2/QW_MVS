@@ -6,12 +6,12 @@ use QW\FW\Trees\Binary\BinaryTree;
 
 abstract class AbstractBinaryTreeIterator extends AbstractTreeIterator {
 
-	abstract protected function order(BinaryTree $root);
+	abstract protected function order ( BinaryTree $root );
 
-	public function __construct(BinaryTree $root) {
+	public function __construct ( BinaryTree $root ) {
 		parent::__construct();
 
 		$this->realRoot = $root;
-		$this->order($root);
+		$this->order( $root );
 	}
 }

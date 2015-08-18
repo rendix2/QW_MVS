@@ -10,9 +10,9 @@ namespace QW\FW\Interfaces;
 
 
 interface ILanguage {
-	public function languageGetAllPackages();
+	public function languageGetAllPackages ();
 
-	public function languageGetMetaPack();
+	public function languageGetMetaPack ();
 
-	public function languageGetPack();
+	public function languageGetPack ();
 }

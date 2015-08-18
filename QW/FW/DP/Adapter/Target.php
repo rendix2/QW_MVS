@@ -11,6 +11,6 @@ namespace QW\FW\DP\Adapter;
 
 interface Target {
 
-	public function newRequest();
+	public function newRequest ();
 
 }

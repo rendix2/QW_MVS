@@ -31,9 +31,9 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
 	 *
 	 * @return bool
 	 */
-	public function compile($args, $compiler) {
-		$_attr = $this->getAttributes($compiler, $args);
-		$this->openTag($compiler, 'nocache', [ $compiler->nocache ]);
+	public function compile ( $args, $compiler ) {
+		$_attr = $this->getAttributes( $compiler, $args );
+		$this->openTag( $compiler, 'nocache', [ $compiler->nocache ] );
 		// enter nocache mode
 		$compiler->nocache = TRUE;
 		// this tag does not return compiled code
@@ -59,10 +59,10 @@ class Smarty_Internal_Compile_Nocacheclose extends Smarty_Internal_CompileBase {
 	 *
 	 * @return bool
 	 */
-	public function compile($args, $compiler) {
-		$_attr = $this->getAttributes($compiler, $args);
+	public function compile ( $args, $compiler ) {
+		$_attr = $this->getAttributes( $compiler, $args );
 		// leave nocache mode
-		list( $compiler->nocache ) = $this->closeTag($compiler, [ 'nocache' ]);
+		list( $compiler->nocache ) = $this->closeTag( $compiler, [ 'nocache' ] );
 		// this tag does not return compiled code
 		$compiler->has_code = FALSE;
 

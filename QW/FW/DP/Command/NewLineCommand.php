@@ -11,7 +11,7 @@ namespace QW\FW\DP\Command;
 
 class NewLineCommand implements Command {
 
-	public function execute() {
+	public function execute () {
 		echo "<br>\n";
 	}
 }

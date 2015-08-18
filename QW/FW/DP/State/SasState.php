@@ -11,7 +11,7 @@ namespace QW\FW\DP\State;
 
 class SasState implements StateOfMind {
 
-	public function express() {
+	public function express () {
 		echo 'Jsem smutný';
 	}
 }

@@ -43,7 +43,7 @@
  * @return string
  * @uses       smarty_function_escape_special_chars()
  */
-function smarty_function_html_checkboxes($params, $template) {
+function smarty_function_html_checkboxes ( $params, $template ) {
 	require_once( SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php' );
 
 	$name      = 'checkbox';
@@ -77,44 +77,47 @@ function smarty_function_html_checkboxes($params, $template) {
 
 			case 'values':
 			case 'output':
-				$$_key = array_values((array) $_val);
+			$$_key = array_values( (array) $_val );
 				break;
 
 			case 'checked':
 			case 'selected':
-				if ( is_array($_val) ) {
+			if ( is_array( $_val ) ) {
 					$selected = [ ];
 					foreach ( $_val as $_sel ) {
-						if ( is_object($_sel) ) {
-							if ( method_exists($_sel, "__toString") ) {
-								$_sel = smarty_function_escape_special_chars((string) $_sel->__toString());
+						if ( is_object( $_sel ) ) {
+							if ( method_exists( $_sel, "__toString" ) ) {
+								$_sel = smarty_function_escape_special_chars( (string) $_sel->__toString() );
 							}
 							else {
-								trigger_error("html_checkboxes: selected attribute contains an object of class '" . get_class($_sel) . "' without __toString() method", E_USER_NOTICE);
+								trigger_error( "html_checkboxes: selected attribute contains an object of class '" .
+									get_class( $_sel ) . "' without __toString() method", E_USER_NOTICE );
 								continue;
 							}
 						}
 						else {
-							$_sel = smarty_function_escape_special_chars((string) $_sel);
+							$_sel = smarty_function_escape_special_chars( (string) $_sel );
 						}
 						$selected[ $_sel ] = TRUE;
 					}
 				}
-				elseif ( is_object($_val) ) {
-					if ( method_exists($_val, "__toString") ) {
-						$selected = smarty_function_escape_special_chars((string) $_val->__toString());
+			elseif ( is_object( $_val ) ) {
+				if ( method_exists( $_val, "__toString" ) ) {
+					$selected = smarty_function_escape_special_chars( (string) $_val->__toString() );
 					}
 					else {
-						trigger_error("html_checkboxes: selected attribute is an object of class '" . get_class($_val) . "' without __toString() method", E_USER_NOTICE);
+						trigger_error( "html_checkboxes: selected attribute is an object of class '" .
+							get_class( $_val ) . "' without __toString() method", E_USER_NOTICE );
 					}
 				}
 				else {
-					$selected = smarty_function_escape_special_chars((string) $_val);
+					$selected = smarty_function_escape_special_chars( (string) $_val );
 				}
 				break;
 
 			case 'checkboxes':
-				trigger_error('html_checkboxes: the use of the "checkboxes" attribute is deprecated, use "options" instead', E_USER_WARNING);
+				trigger_error( 'html_checkboxes: the use of the "checkboxes" attribute is deprecated, use "options" instead',
+					E_USER_WARNING );
 				$options = (array) $_val;
 				break;
 
@@ -127,12 +130,13 @@ function smarty_function_html_checkboxes($params, $template) {
 			case 'disabled':
 			case 'readonly':
 				if ( !empty( $params[ 'strict' ] ) ) {
-					if ( !is_scalar($_val) ) {
-						trigger_error("html_options: $_key attribute must be a scalar, only boolean true or string '$_key' will actually add the attribute", E_USER_NOTICE);
+					if ( !is_scalar( $_val ) ) {
+						trigger_error( "html_options: $_key attribute must be a scalar, only boolean true or string '$_key' will actually add the attribute",
+							E_USER_NOTICE );
 					}
 
 					if ( $_val === TRUE || $_val === $_key ) {
-						$extra .= ' ' . $_key . '="' . smarty_function_escape_special_chars($_key) . '"';
+						$extra .= ' ' . $_key . '="' . smarty_function_escape_special_chars( $_key ) . '"';
 					}
 
 					break;
@@ -140,11 +144,11 @@ function smarty_function_html_checkboxes($params, $template) {
 			// omit break; to fall through!
 
 			default:
-				if ( !is_array($_val) ) {
-					$extra .= ' ' . $_key . '="' . smarty_function_escape_special_chars($_val) . '"';
+				if ( !is_array( $_val ) ) {
+					$extra .= ' ' . $_key . '="' . smarty_function_escape_special_chars( $_val ) . '"';
 				}
 				else {
-					trigger_error("html_checkboxes: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
+					trigger_error( "html_checkboxes: extra attribute '$_key' cannot be an array", E_USER_NOTICE );
 				}
 				break;
 		}
@@ -158,33 +162,38 @@ function smarty_function_html_checkboxes($params, $template) {
 
 	if ( isset( $options ) ) {
 		foreach ( $options as $_key => $_val ) {
-			$_html_result[] = smarty_function_html_checkboxes_output($name, $_key, $_val, $selected, $extra, $separator, $labels, $label_ids, $escape);
+			$_html_result[] =
+				smarty_function_html_checkboxes_output( $name, $_key, $_val, $selected, $extra, $separator, $labels,
+					$label_ids, $escape );
 		}
 	}
 	else {
 		foreach ( $values as $_i => $_key ) {
 			$_val           = isset( $output[ $_i ] ) ? $output[ $_i ] : '';
-			$_html_result[] = smarty_function_html_checkboxes_output($name, $_key, $_val, $selected, $extra, $separator, $labels, $label_ids, $escape);
+			$_html_result[] =
+				smarty_function_html_checkboxes_output( $name, $_key, $_val, $selected, $extra, $separator, $labels,
+					$label_ids, $escape );
 		}
 	}
 
 	if ( !empty( $params[ 'assign' ] ) ) {
-		$template->assign($params[ 'assign' ], $_html_result);
+		$template->assign( $params[ 'assign' ], $_html_result );
 	}
 	else {
-		return implode("\n", $_html_result);
+		return implode( "\n", $_html_result );
 	}
 }
 
-function smarty_function_html_checkboxes_output($name, $value, $output, $selected, $extra, $separator, $labels, $label_ids, $escape = TRUE) {
+function smarty_function_html_checkboxes_output ( $name, $value, $output, $selected, $extra, $separator, $labels, $label_ids, $escape = TRUE ) {
 	$_output = '';
 
-	if ( is_object($value) ) {
-		if ( method_exists($value, "__toString") ) {
+	if ( is_object( $value ) ) {
+		if ( method_exists( $value, "__toString" ) ) {
 			$value = (string) $value->__toString();
 		}
 		else {
-			trigger_error("html_options: value is an object of class '" . get_class($value) . "' without __toString() method", E_USER_NOTICE);
+			trigger_error( "html_options: value is an object of class '" . get_class( $value ) .
+				"' without __toString() method", E_USER_NOTICE );
 
 			return '';
 		}
@@ -193,12 +202,13 @@ function smarty_function_html_checkboxes_output($name, $value, $output, $selecte
 		$value = (string) $value;
 	}
 
-	if ( is_object($output) ) {
-		if ( method_exists($output, "__toString") ) {
+	if ( is_object( $output ) ) {
+		if ( method_exists( $output, "__toString" ) ) {
 			$output = (string) $output->__toString();
 		}
 		else {
-			trigger_error("html_options: output is an object of class '" . get_class($output) . "' without __toString() method", E_USER_NOTICE);
+			trigger_error( "html_options: output is an object of class '" . get_class( $output ) .
+				"' without __toString() method", E_USER_NOTICE );
 
 			return '';
 		}
@@ -209,7 +219,8 @@ function smarty_function_html_checkboxes_output($name, $value, $output, $selecte
 
 	if ( $labels ) {
 		if ( $label_ids ) {
-			$_id = smarty_function_escape_special_chars(preg_replace('![^\w\-\.]!' . Smarty::$_UTF8_MODIFIER, '_', $name . '_' . $value));
+			$_id = smarty_function_escape_special_chars( preg_replace( '![^\w\-\.]!' . Smarty::$_UTF8_MODIFIER, '_',
+				$name . '_' . $value ) );
 			$_output .= '<label for="' . $_id . '">';
 		}
 		else {
@@ -217,10 +228,10 @@ function smarty_function_html_checkboxes_output($name, $value, $output, $selecte
 		}
 	}
 
-	$name  = smarty_function_escape_special_chars($name);
-	$value = smarty_function_escape_special_chars($value);
+	$name  = smarty_function_escape_special_chars( $name );
+	$value = smarty_function_escape_special_chars( $value );
 	if ( $escape ) {
-		$output = smarty_function_escape_special_chars($output);
+		$output = smarty_function_escape_special_chars( $output );
 	}
 
 	$_output .= '<input type="checkbox" name="' . $name . '[]" value="' . $value . '"';
@@ -229,7 +240,7 @@ function smarty_function_html_checkboxes_output($name, $value, $output, $selecte
 		$_output .= ' id="' . $_id . '"';
 	}
 
-	if ( is_array($selected) ) {
+	if ( is_array( $selected ) ) {
 		if ( isset( $selected[ $value ] ) ) {
 			$_output .= ' checked="checked"';
 		}

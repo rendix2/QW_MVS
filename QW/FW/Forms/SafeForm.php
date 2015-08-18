@@ -8,8 +8,8 @@ final class SafeForm extends Object {
 
 	private $hash;
 
-	public function __construct() {
+	public function __construct () {
 		parent::__construct();
-		$this->hash = md5(uniqid());
+		$this->hash = md5( uniqid() );
 	}
 }

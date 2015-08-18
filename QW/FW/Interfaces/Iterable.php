@@ -11,7 +11,7 @@ namespace QW\FW\Interfaces;
 
 interface Iterable {
 
-	public function hasNext();
+	public function hasNext ();
 
-	public function next();
+	public function next ();
 }

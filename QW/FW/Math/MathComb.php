@@ -6,11 +6,11 @@ use QW\FW\Boot\PrivateConstructException;
 
 final class MathComb {
 
-	public function __construct() {
+	public function __construct () {
 		throw new PrivateConstructException();
 	}
 
-	public static function factorial($x) {
+	public static function factorial ( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 
 		if ( $x == 0 || $x == 1 ) return 1;
@@ -20,15 +20,15 @@ final class MathComb {
 		return $i;
 	}
 
-	public static function factorialRecurse($x) {
+	public static function factorialRecurse ( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 
 		if ( $x == 0 || $x == 1 ) return 1;
 
-		return $x * self::factorialRecurse($x - 1);
+		return $x * self::factorialRecurse( $x - 1 );
 	}
 
-	public static function fibonacci($x) {
+	public static function fibonacci ( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 
 		if ( $x == 0 ) return 0;
@@ -48,7 +48,7 @@ final class MathComb {
 		return $c;
 	}
 
-	public static function fibonacciRecurse($x) {
+	public static function fibonacciRecurse ( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 
 		switch ( $x ) {
@@ -57,6 +57,6 @@ final class MathComb {
 				return $x;
 		}
 
-		return self::fibonacciRecurse($x - 1) + self::fibonacciRecurse($x - 2);
+		return self::fibonacciRecurse( $x - 1 ) + self::fibonacciRecurse( $x - 2 );
 	}
 }

@@ -22,7 +22,7 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
 	 * @param string  &$source template source
 	 * @param integer &$mtime  template modification timestamp (epoch)
 	 */
-	abstract protected function fetch($name, &$source, &$mtime);
+	abstract protected function fetch ( $name, &$source, &$mtime );
 
 	/**
 	 * Fetch template's modification timestamp from data source
@@ -33,7 +33,7 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
 	 *
 	 * @return integer|boolean timestamp (epoch) the template was modified, or false if not found
 	 */
-	protected function fetchTimestamp($name) {
+	protected function fetchTimestamp ( $name ) {
 		return NULL;
 	}
 
@@ -44,8 +44,8 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
 	 *
 	 * @return string                 resource's basename
 	 */
-	public function getBasename(Smarty_Template_Source $source) {
-		return basename($source->name);
+	public function getBasename ( Smarty_Template_Source $source ) {
+		return basename( $source->name );
 	}
 
 	/**
@@ -56,13 +56,13 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
 	 * @return string                 template source
 	 * @throws SmartyException        if source cannot be loaded
 	 */
-	public function getContent(Smarty_Template_Source $source) {
-		$this->fetch($source->name, $content, $timestamp);
+	public function getContent ( Smarty_Template_Source $source ) {
+		$this->fetch( $source->name, $content, $timestamp );
 		if ( isset( $content ) ) {
 			return $content;
 		}
 
-		throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
+		throw new SmartyException( "Unable to read template {$source->type} '{$source->name}'" );
 	}
 
 	/**
@@ -71,16 +71,16 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
 	 * @param Smarty_Template_Source   $source    source object
 	 * @param Smarty_Internal_Template $_template template object
 	 */
-	public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL) {
+	public function populate ( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
 		$source->filepath = $source->type . ':' . $source->name;
-		$source->uid      = sha1($source->type . ':' . $source->name);
+		$source->uid = sha1( $source->type . ':' . $source->name );
 
-		$mtime = $this->fetchTimestamp($source->name);
+		$mtime = $this->fetchTimestamp( $source->name );
 		if ( $mtime !== NULL ) {
 			$source->timestamp = $mtime;
 		}
 		else {
-			$this->fetch($source->name, $content, $timestamp);
+			$this->fetch( $source->name, $content, $timestamp );
 			$source->timestamp = isset( $timestamp ) ? $timestamp : FALSE;
 			if ( isset( $content ) ) {
 				$source->content = $content;

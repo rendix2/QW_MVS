@@ -42,8 +42,7 @@ abstract class AbstractRouter extends Object {
 
 			// load class in namespace
 			if ( file_exists( $path ) ) require_once( $path );
-			else
-				die( 'File: ' . $path . ' doesn\'t exists<br>' );
+			else die( 'File: ' . $path . ' doesn\'t exists<br>' );
 
 			return 0;
 		};
@@ -52,7 +51,7 @@ abstract class AbstractRouter extends Object {
 			spl_autoload_register( $load );
 		}
 		catch ( \Exception $e ) {
-			echo $e->getMessage() . 'adw';
+			echo $e->getMessage();
 		}
 	}
 

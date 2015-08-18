@@ -23,7 +23,16 @@ class IllegalArgumentException extends RuntimeException {
 final class NotStringException extends IllegalArgumentException {
 }
 
-final class NotIntegerException extends IllegalArgumentException {
+final class NotCharacterException extends IllegalArgumentException {
+}
+
+class NotNumberException extends IllegalArgumentException {
+}
+
+final class NotIntegerException extends NotNumberException {
+}
+
+final class NotDoubleException extends NotNumberException {
 }
 
 final class OverMaxException extends IllegalArgumentException {

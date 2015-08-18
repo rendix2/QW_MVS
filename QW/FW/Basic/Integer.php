@@ -2,6 +2,8 @@
 
 namespace QW\FW\Basic;
 
+use QW\FW\Boot\IllegalArgumentException;
+
 final class Integer extends Object {
 	const MAX_VALUE = PHP_INT_MAX;
 	const MIN_VALUE = PHP_INT_MIN;

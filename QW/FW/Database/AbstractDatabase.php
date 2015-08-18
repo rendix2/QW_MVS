@@ -37,7 +37,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->options = $options;
 		$this->queryCount = 0;
 		$this->statement = NULL;
-		$this->connection = NULL; //
+		$this->connection = NULL;
 
 		if ( !is_bool($log) )
 			$log = FALSE;
@@ -78,16 +78,16 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 		switch ( $pdoEx->getCode() ) {
 			case 1045:
-				$message = 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
+				$message .= 'Nesprávné údaje pro přihlášení k databázovému serveru: <b>' . $this->host . '</b><br>';
 				break;
 			case 2002:
-				$message = 'Nepodařilo se připojit k databázovému serveru: <b>' . $this->host . '</b><br>';
+				$message .= 'Nepodařilo se připojit k databázovému serveru: <b>' . $this->host . '</b><br>';
 				break;
 			case 1044:
-				$message = 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
+				$message .= 'Nepodařilo se vybrat databázi na databázovém serveru: <b>' . $this->host . '</b><br>';
 				break;
 			default:
-				$message = 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
+				$message .= 'Neočekávaná PDO chyba číslo: <b>' . $pdoEx->getCode() . '</b> při připojení k databázovému serveru: <b>' . $this->host . '</b><br>';
 		}
 
 		if ( $this->log != FALSE )

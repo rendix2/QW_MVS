@@ -15,7 +15,6 @@ class Logger {
 
 	const LOG_TYPE_DATABASE = 1;
 
-
 	private $path;
 	private $file;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace QW\FW\Interfaces;
+namespace QW\FW\Cache;
 
 interface ICache {
 	public function addCache($data);

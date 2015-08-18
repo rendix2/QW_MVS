@@ -4,7 +4,6 @@ namespace QW\FW\Database;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\NullPointerException;
-use QW\FW\Interfaces\IDatabase;
 use QW\FW\Utils\Log\Logger;
 
 abstract class AbstractDatabase extends Object implements IDatabase {
@@ -58,7 +57,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->userName     = NULL;
 		$this->userPassword = NULL;
 		$this->statement = NULL;
-		$this->log = NULL
+		$this->log = NULL;
 
 		parent::__destruct();
 	}

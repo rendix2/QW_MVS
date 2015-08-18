@@ -1,6 +1,6 @@
 <?php
 
-namespace QW\FW\Interfaces;
+namespace QW\FW\Database;
 
 interface IDatabase {
 	//    public function __construct($host, $userName, $userPassword, $dbName, array $options); // connect!

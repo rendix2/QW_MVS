@@ -2,7 +2,9 @@
 
 namespace QW\FW\Cache;
 
-class ArrayCache extends AbstractCache {
+use QW\FW\Basic\Object;
+
+final class ArrayCache extends Object implements ICache {
 	private $data;
 
 	public function __construct() {

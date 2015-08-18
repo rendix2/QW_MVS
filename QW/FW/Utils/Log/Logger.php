@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tomáš
- * Date: 18. 8. 2015
- * Time: 16:01
- */
-
 namespace QW\FW\Utils\Log;
 
 use QW\FW\Boot\IllegalArgumentException;

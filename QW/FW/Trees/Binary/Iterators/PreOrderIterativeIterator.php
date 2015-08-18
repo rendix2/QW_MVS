@@ -15,12 +15,12 @@ use QW\FW\Trees\Binary\BinaryTree;
 class PreOrderIterativeIterator extends AbstractBinaryTreeIterator {
 	private $stack;
 
-	public function __construct ( BinaryTree $root ) {
+	public function __construct( BinaryTree $root ) {
 		$this->stack = new \SplStack();
 		parent::__construct( $root );
 	}
 
-	protected function order ( BinaryTree $root = NULL ) {
+	protected function order( BinaryTree $root = NULL ) {
 
 		while ( !$this->stack->isEmpty() || $root != NULL ) {
 			if ( $root != NULL ) {

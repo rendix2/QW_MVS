@@ -23,7 +23,7 @@ class Smarty_Internal_Extension_DefaultTemplateHandler {
 	 * @param Smarty_Internal_Template_Source $source
 	 * @param  Smarty_Resource                $resObj
 	 */
-	static function _getDefault ( Smarty_Internal_Template $_template, &$source, &$resObj ) {
+	static function _getDefault( Smarty_Internal_Template $_template, &$source, &$resObj ) {
 		if ( $source->isConfig ) {
 			$default_handler = $_template->smarty->default_config_handler_func;
 		}
@@ -57,7 +57,7 @@ class Smarty_Internal_Extension_DefaultTemplateHandler {
 	 *
 	 * @throws SmartyException
 	 */
-	static function registerDefaultConfigHandler ( Smarty $smarty, $callback ) {
+	static function registerDefaultConfigHandler( Smarty $smarty, $callback ) {
 		if ( is_callable( $callback ) ) {
 			$smarty->default_config_handler_func = $callback;
 		}
@@ -74,7 +74,7 @@ class Smarty_Internal_Extension_DefaultTemplateHandler {
 	 *
 	 * @throws SmartyException
 	 */
-	static function registerDefaultTemplateHandler ( Smarty $smarty, $callback ) {
+	static function registerDefaultTemplateHandler( Smarty $smarty, $callback ) {
 		if ( is_callable( $callback ) ) {
 			$smarty->default_template_handler_func = $callback;
 		}

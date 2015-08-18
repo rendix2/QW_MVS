@@ -127,7 +127,7 @@ class Smarty_Internal_Configfilelexer {
 	 * @param   string                             $data template source
 	 * @param Smarty_Internal_Config_File_Compiler $compiler
 	 */
-	function __construct ( $data, Smarty_Internal_Config_File_Compiler $compiler ) {
+	function __construct( $data, Smarty_Internal_Config_File_Compiler $compiler ) {
 		// add instance object
 		self::instance( $this );
 		$this->data    = $data . "\n"; //now all lines are \n-terminated
@@ -141,7 +141,7 @@ class Smarty_Internal_Configfilelexer {
 		$this->configBooleanize = $this->smarty->config_booleanize;
 	}
 
-	public static function &instance ( $new_instance = NULL ) {
+	public static function &instance( $new_instance = NULL ) {
 		static $instance = NULL;
 		if ( isset( $new_instance ) && is_object( $new_instance ) ) {
 			$instance = $new_instance;
@@ -150,90 +150,90 @@ class Smarty_Internal_Configfilelexer {
 		return $instance;
 	} // end function
 
-	public function PrintTrace () {
+	public function PrintTrace() {
 		$this->yyTraceFILE = fopen( 'php://output', 'w' );
 		$this->yyTracePrompt = '<br>';
 	}
 
-	function yy_r1_1 () {
+	function yy_r1_1() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_COMMENTSTART;
 		$this->yypushstate( self::COMMENT );
 	}
 
-	function yy_r1_2 () {
+	function yy_r1_2() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
 		$this->yypushstate( self::SECTION );
 	}
 
-	function yy_r1_3 () {
+	function yy_r1_3() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
 	}
 
-	function yy_r1_4 () {
+	function yy_r1_4() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
 		$this->yypushstate( self::VALUE );
 	}
 
-	function yy_r1_5 () {
+	function yy_r1_5() {
 
 		return FALSE;
 	}
 
-	function yy_r1_6 () {
+	function yy_r1_6() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
 	}
 
-	function yy_r1_7 () {
+	function yy_r1_7() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_ID;
 	}
 
-	function yy_r1_8 () {
+	function yy_r1_8() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_OTHER;
 	}
 
-	function yy_r2_1 () {
+	function yy_r2_1() {
 
 		return FALSE;
 	} // end function
 
-	function yy_r2_2 () {
+	function yy_r2_2() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_FLOAT;
 		$this->yypopstate();
 	}
 
-	function yy_r2_3 () {
+	function yy_r2_3() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_INT;
 		$this->yypopstate();
 	}
 
-	function yy_r2_4 () {
+	function yy_r2_4() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_QUOTES;
 		$this->yypushstate( self::TRIPPLE );
 	}
 
-	function yy_r2_5 () {
+	function yy_r2_5() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_SINGLE_QUOTED_STRING;
 		$this->yypopstate();
 	}
 
-	function yy_r2_6 () {
+	function yy_r2_6() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_DOUBLE_QUOTED_STRING;
 		$this->yypopstate();
 	}
 
-	function yy_r2_7 () {
+	function yy_r2_7() {
 
 		if ( !$this->configBooleanize ||
 			!in_array( strtolower( $this->value ), [ "true", "false", "on", "off", "yes", "no" ] )
@@ -249,60 +249,60 @@ class Smarty_Internal_Configfilelexer {
 		}
 	}
 
-	function yy_r2_8 () {
+	function yy_r2_8() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
 		$this->yypopstate();
 	}
 
-	function yy_r2_9 () {
+	function yy_r2_9() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
 		$this->value = "";
 		$this->yypopstate();
 	}
 
-	function yy_r3_1 () {
+	function yy_r3_1() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
 		$this->yypopstate();
 	}
 
-	function yy_r4_1 () {
+	function yy_r4_1() {
 
 		return FALSE;
 	}
 
-	function yy_r4_2 () {
+	function yy_r4_2() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_NAKED_STRING;
 	} // end function
 
-	function yy_r4_3 () {
+	function yy_r4_3() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
 		$this->yypopstate();
 	}
 
-	function yy_r5_1 () {
+	function yy_r5_1() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_DOT;
 	}
 
-	function yy_r5_2 () {
+	function yy_r5_2() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_SECTION;
 		$this->yypopstate();
 	} // end function
 
-	function yy_r6_1 () {
+	function yy_r6_1() {
 
 		$this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_QUOTES_END;
 		$this->yypopstate();
 		$this->yypushstate( self::START );
 	}
 
-	function yy_r6_2 () {
+	function yy_r6_2() {
 
 		$to = strlen( $this->data );
 		preg_match( "/\"\"\"[ \t\r]*[\n#;]/", $this->data, $match, PREG_OFFSET_CAPTURE, $this->counter );
@@ -316,7 +316,7 @@ class Smarty_Internal_Configfilelexer {
 		$this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_TEXT;
 	}
 
-	public function yybegin ( $state ) {
+	public function yybegin( $state ) {
 		$this->_yy_state = $state;
 		if ( $this->yyTraceFILE ) {
 			fprintf( $this->yyTraceFILE, "%sState set %s\n", $this->yyTracePrompt,
@@ -325,11 +325,11 @@ class Smarty_Internal_Configfilelexer {
 		}
 	}
 
-	public function yylex () {
+	public function yylex() {
 		return $this->{'yylex' . $this->_yy_state}();
 	}
 
-	public function yylex1 () {
+	public function yylex1() {
 		if ( !isset( $this->yy_global_pattern1 ) ) {
 			$this->yy_global_pattern1 =
 				"/\G(#|;)|\G(\\[)|\G(\\])|\G(=)|\G([ \t\r]+)|\G(\n)|\G([0-9]*[a-zA-Z_]\\w*)|\G([\S\s])/iS";
@@ -380,7 +380,7 @@ class Smarty_Internal_Configfilelexer {
 		while ( TRUE );
 	} // end function
 
-	public function yylex2 () {
+	public function yylex2() {
 		if ( !isset( $this->yy_global_pattern2 ) ) {
 			$this->yy_global_pattern2 =
 				"/\G([ \t\r]+)|\G(\\d+\\.\\d+(?=[ \t\r]*[\n#;]))|\G(\\d+(?=[ \t\r]*[\n#;]))|\G(\"\"\")|\G('[^'\\\\]*(?:\\\\.[^'\\\\]*)*'(?=[ \t\r]*[\n#;]))|\G(\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"(?=[ \t\r]*[\n#;]))|\G([a-zA-Z]+(?=[ \t\r]*[\n#;]))|\G([^\n]+?(?=[ \t\r]*\n))|\G(\n)/iS";
@@ -431,7 +431,7 @@ class Smarty_Internal_Configfilelexer {
 		while ( TRUE );
 	}
 
-	public function yylex3 () {
+	public function yylex3() {
 		if ( !isset( $this->yy_global_pattern3 ) ) {
 			$this->yy_global_pattern3 = "/\G([^\n]+?(?=[ \t\r]*\n))/iS";
 		}
@@ -481,7 +481,7 @@ class Smarty_Internal_Configfilelexer {
 		while ( TRUE );
 	}
 
-	public function yylex4 () {
+	public function yylex4() {
 		if ( !isset( $this->yy_global_pattern4 ) ) {
 			$this->yy_global_pattern4 = "/\G([ \t\r]+)|\G([^\n]+?(?=[ \t\r]*\n))|\G(\n)/iS";
 		}
@@ -531,7 +531,7 @@ class Smarty_Internal_Configfilelexer {
 		while ( TRUE );
 	}
 
-	public function yylex5 () {
+	public function yylex5() {
 		if ( !isset( $this->yy_global_pattern5 ) ) {
 			$this->yy_global_pattern5 = "/\G(\\.)|\G(.*?(?=[\.=[\]\r\n]))/iS";
 		}
@@ -581,7 +581,7 @@ class Smarty_Internal_Configfilelexer {
 		while ( TRUE );
 	} // end function
 
-	public function yylex6 () {
+	public function yylex6() {
 		if ( !isset( $this->yy_global_pattern6 ) ) {
 			$this->yy_global_pattern6 = "/\G(\"\"\"(?=[ \t\r]*[\n#;]))|\G([\S\s])/iS";
 		}
@@ -631,7 +631,7 @@ class Smarty_Internal_Configfilelexer {
 		while ( TRUE );
 	}
 
-	public function yypopstate () {
+	public function yypopstate() {
 		if ( $this->yyTraceFILE ) {
 			fprintf( $this->yyTraceFILE, "%sState pop %s\n", $this->yyTracePrompt,
 				isset( $this->state_name[ $this->_yy_state ] ) ? $this->state_name[ $this->_yy_state ] :
@@ -645,7 +645,7 @@ class Smarty_Internal_Configfilelexer {
 		}
 	}
 
-	public function yypushstate ( $state ) {
+	public function yypushstate( $state ) {
 		if ( $this->yyTraceFILE ) {
 			fprintf( $this->yyTraceFILE, "%sState push %s\n", $this->yyTracePrompt,
 				isset( $this->state_name[ $this->_yy_state ] ) ? $this->state_name[ $this->_yy_state ] :

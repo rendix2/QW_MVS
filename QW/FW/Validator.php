@@ -5,15 +5,15 @@ namespace QW\FW;
 use QW\FW\Boot\PrivateConstructException;
 
 final class Validator {
-	public function __construct () {
+	public function __construct() {
 		throw new PrivateConstructException();
 	}
 
-	public static function isNumber ( $number ) {
+	public static function isNumber( $number ) {
 		return is_numeric( $number );
 	}
 
-	public static function validateEmailIPv6 ( $email, $strict = TRUE ) {
+	public static function validateEmailIPv6( $email, $strict = TRUE ) {
 		$dot_string = $strict ? '(?:[A-Za-z0-9!#$%&*+=?^_`{|}~\'\\/-]|(?<!\\.|\\A)\\.(?!\\.|@))' :
 			'(?:[A-Za-z0-9!#$%&*+=?^_`{|}~\'\\/.-])';
 		$quoted_string = '(?:\\\\\\\\|\\\\"|\\\\?[A-Za-z0-9!#$%&*+=?^_`{|}~()<>[\\]:;@,. \'\\/-])';
@@ -39,13 +39,13 @@ final class Validator {
 			!isset( $matches[ 1 ][ 64 ] ) && !isset( $matches[ 0 ][ 254 ] ) );
 	}
 
-	public static function validateEmailUsingFilter ( $email ) {
+	public static function validateEmailUsingFilter( $email ) {
 		return filter_var( $email, FILTER_VALIDATE_EMAIL );
 	}
 
 	// http://php.net/manual/en/function.filter-var.php
 
-	public static function validateEmailUsingJakubVrana ( $email ) {
+	public static function validateEmailUsingJakubVrana( $email ) {
 		static $atom = '[-a-z0-9!#$%&\'*+/=?^_`{|}~]';
 		static $domain = '[a-z0-9]([-a-z0-9]{0,61}[a-z0-9])';
 
@@ -55,11 +55,11 @@ final class Validator {
 	// Jakub Vrana php.vrana.cz
 	// Looks very pretty and easy
 
-	public static function validateIpUsingFilter ( $ip ) {
+	public static function validateIpUsingFilter( $ip ) {
 		return filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
 	}
 
-	public static function validateURLUsingFilter ( $url ) {
+	public static function validateURLUsingFilter( $url ) {
 		return filter_var( $url, FILTER_VALIDATE_URL );
 	}
 }

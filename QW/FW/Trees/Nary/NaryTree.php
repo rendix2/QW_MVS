@@ -15,7 +15,7 @@ final class NaryTree extends AbstractTree {
 
 	private $children;
 
-	public function __construct ( array $children, $data ) {
+	public function __construct( array $children, $data ) {
 		parent::__construct();
 
 		$this->directChildrenCount = count( $this->children );
@@ -28,53 +28,53 @@ final class NaryTree extends AbstractTree {
 		$this->data     = $data;
 	}
 
-	public function addChild ( NaryTree $naryTree = NULL ) {
+	public function addChild( NaryTree $naryTree = NULL ) {
 		$this->children[] = $naryTree;
 
 		if ( $naryTree != NULL ) $this->childrenCount++;
 	}
 
-	public function getChild ( $id ) {
+	public function getChild( $id ) {
 		if ( $id < 0 || $id > $this->directChildrenCount ) throw new IllegalArgumentException();
 
 		return $this->children[ $id ];
 	}
 
-	public function getChildren () {
+	public function getChildren() {
 		return $this->children;
 	}
 
-	public function setChildren ( array $children ) {
+	public function setChildren( array $children ) {
 		foreach ( $children as $v ) if ( !( $v instanceof NaryTree ) ) throw new IllegalArgumentException();
 
 		$this->children            = $children;
 		$this->directChildrenCount = count( $children );
 	}
 
-	public function getChildrenCount () {
+	public function getChildrenCount() {
 		$its = new CountIterator( $this );
 		$this->childrenCount = $its->getCountChildren();
 
 		parent::getChildrenCount();
 	}
 
-	public function iteratorEulerTour () {
+	public function iteratorEulerTour() {
 		return new EulerTourIterator( $this );
 	}
 
-	public function iteratorInOrderIterative () {
+	public function iteratorInOrderIterative() {
 		return new InOrderIterator( $this );
 	}
 
-	public function iteratorLevelOrder () {
+	public function iteratorLevelOrder() {
 		return new LevelOrderIterator( $this );
 	}
 
-	public function iteratorPostOrderIterative () {
+	public function iteratorPostOrderIterative() {
 		return new PostOrderIterator( $this );
 	}
 
-	public function iteratorPreOrderIterative () {
+	public function iteratorPreOrderIterative() {
 		return new PreOrderIterator( $this );
 	}
 }

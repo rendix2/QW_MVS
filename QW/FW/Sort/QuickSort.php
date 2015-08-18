@@ -11,7 +11,7 @@ namespace QW\FW\Sort;
 
 class QuickSort extends AbstractSort {
 
-	private function quickSort ( array $array, $left, $right ) {
+	private function quickSort( array $array, $left, $right ) {
 		if ( $left < $right ) {
 			$boundary = $left;
 			for ( $i = $left + 1; $i < $right; $i++ )
@@ -25,7 +25,7 @@ class QuickSort extends AbstractSort {
 		return $this->data;
 	}
 
-	protected function sort ( AbstractSort $sort ) {
+	protected function sort( AbstractSort $sort ) {
 		// TODO: Implement sort() method.
 	}
 }

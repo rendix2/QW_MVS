@@ -7,7 +7,7 @@ use QW\FW\Boot\IllegalArgumentException;
 final class Double extends Object {
 	private $double;
 
-	public function __construct ( $double ) {
+	public function __construct( $double ) {
 		parent::__construct();
 
 		if ( !is_double( $double ) ) throw new IllegalArgumentException();
@@ -21,7 +21,7 @@ final class Double extends Object {
 		parent::__destruct();
 	}
 
-	public function __toString () {
+	public function __toString() {
 		return (string) $this->double;
 	}
 }

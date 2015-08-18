@@ -31,7 +31,7 @@ require_once( SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php' );
  * @return string
  * @uses     smarty_make_timestamp()
  */
-function smarty_function_html_select_time ( $params ) {
+function smarty_function_html_select_time( $params ) {
 	$prefix           = "Time_";
 	$field_array      = NULL;
 	$field_separator  = "\n";

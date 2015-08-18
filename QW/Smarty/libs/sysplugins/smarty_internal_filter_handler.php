@@ -29,7 +29,7 @@ class Smarty_Internal_Filter_Handler {
 	 * @throws SmartyException
 	 * @return string                   the filtered content
 	 */
-	public static function runFilter ( $type, $content, Smarty_Internal_Template $template ) {
+	public static function runFilter( $type, $content, Smarty_Internal_Template $template ) {
 		$output = $content;
 		// loop over autoload filters of specified type
 		if ( !empty( $template->smarty->autoload_filters[ $type ] ) ) {

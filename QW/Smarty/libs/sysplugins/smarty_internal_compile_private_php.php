@@ -34,7 +34,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase {
 	 * @return string
 	 * @throws \SmartyException
 	 */
-	public function compile ( $args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter ) {
+	public function compile( $args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter ) {
 		// check and get attributes
 		$_attr          = $this->getAttributes( $compiler, $args );
 		$compiler->has_code = FALSE;
@@ -115,7 +115,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase {
 	 *
 	 * @param $lex
 	 */
-	public function parsePhp ( $lex ) {
+	public function parsePhp( $lex ) {
 		$close          = 0;
 		$lex->taglineno = $lex->line;
 		$closeTag       = '?>';
@@ -178,20 +178,20 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase {
 					$body = FALSE;
 				}
 				else {
-					$start        = $pos + strlen( $value );
+					$start         = $pos + strlen( $value );
 					$phpCommentStart = $value == '/*';
 					if ( $phpCommentStart ) {
 						$phpCommentEnd = preg_match( '~([*][/])~', $lex->data, $match, PREG_OFFSET_CAPTURE, $start );
 						if ( $phpCommentEnd ) {
 							$pos2  = $match[ 0 ][ 1 ];
-							$start     = $pos2 + strlen( $match[ 0 ][ 0 ] );
+							$start = $pos2 + strlen( $match[ 0 ][ 0 ] );
 						}
 					}
 					while ( $close > $pos && $close < $start ) {
 						if ( preg_match( '~' . preg_quote( $closeTag, '~' ) . '~i', $lex->data, $match,
 							PREG_OFFSET_CAPTURE, $from ) ) {
 							$close = $match[ 0 ][ 1 ];
-							$from = $close + strlen( $match[ 0 ][ 0 ] );
+							$from  = $close + strlen( $match[ 0 ][ 0 ] );
 						}
 						else {
 							$lex->compiler->trigger_template_error( "missing closing tag '{$closeTag}'" );
@@ -215,7 +215,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase {
 	 * Call back function for $php_handling = PHP_QUOTE
 	 *
 	 */
-	private function quote ( $match ) {
+	private function quote( $match ) {
 		return htmlspecialchars( $match[ 0 ], ENT_QUOTES );
 	}
 }

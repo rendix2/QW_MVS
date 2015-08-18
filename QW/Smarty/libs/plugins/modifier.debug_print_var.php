@@ -22,7 +22,7 @@
  *
  * @return string
  */
-function smarty_modifier_debug_print_var ( $var, $max = 10, $length = 40, $depth = 0, $objects = [ ] ) {
+function smarty_modifier_debug_print_var( $var, $max = 10, $length = 40, $depth = 0, $objects = [ ] ) {
 	$_replace = [ "\n" => '<i>\n</i>', "\r" => '<i>\r</i>', "\t" => '<i>\t</i>' ];
 	switch ( gettype( $var ) ) {
 		case 'array' :

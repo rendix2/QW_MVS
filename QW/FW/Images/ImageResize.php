@@ -7,11 +7,11 @@ use QW\FW\Config;
 use QW\FW\Math\Math;
 
 final class ImageResize {
-	public function __construct () {
+	public function __construct() {
 		throw new PrivateConstructException();
 	}
 
-	public static function canResize ( $imagePath ) {
+	public static function canResize( $imagePath ) {
 		$pictureInfo  = getimagesize( $imagePath );
 		$memoryNeeded =
 			round( ( $pictureInfo[ 0 ] * $pictureInfo[ 1 ] * $pictureInfo[ 'bits' ] * $pictureInfo[ 'channels' ] / 8 +
@@ -24,7 +24,7 @@ final class ImageResize {
 	//functios from Jakub Vrána => php.vrana.cz
 	// my edit: check for file exists($file_in)
 
-	public static function image_resize ( $file_in, $file_out, $width, $height ) {
+	public static function image_resize( $file_in, $file_out, $width, $height ) {
 		if ( !file_exists( $file_in ) ) return FALSE;
 
 		$imagesize = getimagesize( $file_in );
@@ -66,7 +66,7 @@ final class ImageResize {
 	// http://www.pavlatka.cz/2012/05/php-enough-memory-manage-picture/
 	// calculate with used ram - my edit
 
-	public static function image_shrink_size ( $file_in, $max_x = 0, $max_y = 0 ) {
+	public static function image_shrink_size( $file_in, $max_x = 0, $max_y = 0 ) {
 		list( $width, $height ) = getimagesize( $file_in );
 
 		if ( !$width || !$height ) return [ 0, 0 ];

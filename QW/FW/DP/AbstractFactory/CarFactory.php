@@ -11,11 +11,11 @@ namespace QW\FW\DP\AbstractFactory;
 
 class CarFactory implements VehicleFactory {
 
-	public function createBigVehicle () {
+	public function createBigVehicle() {
 		return new Car();
 	}
 
-	public function createSmallVehicle () {
+	public function createSmallVehicle() {
 		return new Truck();
 	}
 }

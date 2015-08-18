@@ -47,7 +47,7 @@
  *
  * @return string
  */
-function smarty_function_html_table ( $params ) {
+function smarty_function_html_table( $params ) {
 	$table_attr = 'border="1"';
 	$tr_attr    = '';
 	$th_attr    = '';
@@ -169,7 +169,7 @@ function smarty_function_html_table ( $params ) {
 	return $output;
 }
 
-function smarty_function_html_table_cycle ( $name, $var, $no ) {
+function smarty_function_html_table_cycle( $name, $var, $no ) {
 	if ( !is_array( $var ) ) {
 		$ret = $var;
 	}

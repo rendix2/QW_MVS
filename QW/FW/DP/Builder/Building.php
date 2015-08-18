@@ -13,29 +13,29 @@ class Building {
 
 	private $floor, $walls, $roof;
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->floor = NULL;
 		$this->roof  = NULL;
 		$this->walls = NULL;
 	}
 
-	public function __toString () {
+	public function __toString() {
 		return $this->floor . ', ' . $this->walls . ', ' . $this->roof . '.';
 	}
 
-	public function setFloor ( $floor ) {
+	public function setFloor( $floor ) {
 		$this->floor = $floor;
 
 		return $this;
 	}
 
-	public function setRoof ( $roof ) {
+	public function setRoof( $roof ) {
 		$this->roof = $roof;
 
 		return $this;
 	}
 
-	public function setWalls ( $walls ) {
+	public function setWalls( $walls ) {
 		$this->walls = $walls;
 
 		return $this;

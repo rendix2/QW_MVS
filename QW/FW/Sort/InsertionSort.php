@@ -11,7 +11,7 @@ namespace QW\FW\Sort;
 
 class InsertionSort extends AbstractSort {
 
-	protected function sort ( AbstractSort $sort ) {
+	protected function sort( AbstractSort $sort ) {
 		for ( $i = 0; $i < $this->length - 1; $i++ ) {
 			$j   = $i + 1;
 			$tmp = $this->data[ $j ];

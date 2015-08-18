@@ -22,7 +22,7 @@ class Smarty_Internal_ParseTree_Dq extends Smarty_Internal_ParseTree {
 	 * @param object                    $parser  parser object
 	 * @param Smarty_Internal_ParseTree $subtree parse tree buffer
 	 */
-	public function __construct ( $parser, Smarty_Internal_ParseTree $subtree ) {
+	public function __construct( $parser, Smarty_Internal_ParseTree $subtree ) {
 		$this->parser     = $parser;
 		$this->subtrees[] = $subtree;
 		if ( $subtree instanceof Smarty_Internal_ParseTree_Tag ) {
@@ -35,7 +35,7 @@ class Smarty_Internal_ParseTree_Dq extends Smarty_Internal_ParseTree {
 	 *
 	 * @param Smarty_Internal_ParseTree $subtree parse tree buffer
 	 */
-	public function append_subtree ( Smarty_Internal_ParseTree $subtree ) {
+	public function append_subtree( Smarty_Internal_ParseTree $subtree ) {
 		$last_subtree = count( $this->subtrees ) - 1;
 		if ( $last_subtree >= 0 && $this->subtrees[ $last_subtree ] instanceof Smarty_Internal_ParseTree_Tag &&
 			$this->subtrees[ $last_subtree ]->saved_block_nesting < $this->parser->block_nesting_level
@@ -68,7 +68,7 @@ class Smarty_Internal_ParseTree_Dq extends Smarty_Internal_ParseTree {
 	 *
 	 * @return string compiled template code
 	 */
-	public function to_smarty_php () {
+	public function to_smarty_php() {
 		$code = '';
 		foreach ( $this->subtrees as $subtree ) {
 			if ( $code !== "" ) {

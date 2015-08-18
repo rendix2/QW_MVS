@@ -31,7 +31,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		if ( $parameter == 0 ) {
 			$this->required_attributes = [ 'start', 'to' ];
 			$this->optional_attributes = [ 'max', 'step' ];
@@ -122,7 +122,7 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 
@@ -149,7 +149,7 @@ class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 		// must endblock be nocache?

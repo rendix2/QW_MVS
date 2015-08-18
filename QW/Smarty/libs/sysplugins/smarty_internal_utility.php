@@ -37,7 +37,7 @@ class Smarty_Internal_Utility {
 	/**
 	 * private constructor to prevent calls creation of new instances
 	 */
-	final private function __construct () {
+	final private function __construct() {
 		// intentionally left blank
 	}
 
@@ -51,7 +51,7 @@ class Smarty_Internal_Utility {
 	 *
 	 * @return integer number of template files deleted
 	 */
-	public static function clearCompiledTemplate ( $resource_name, $compile_id, $exp_time, Smarty $smarty ) {
+	public static function clearCompiledTemplate( $resource_name, $compile_id, $exp_time, Smarty $smarty ) {
 		$_compile_dir = realpath( $smarty->getCompileDir() ) . '/';
 		if ( $_compile_dir == '/' ) { //We should never want to delete this!
 			return 0;
@@ -61,7 +61,7 @@ class Smarty_Internal_Utility {
 		if ( isset( $resource_name ) ) {
 			$_save_stat      = $smarty->caching;
 			$smarty->caching = FALSE;
-			$tpl     = new $smarty->template_class( $resource_name, $smarty );
+			$tpl = new $smarty->template_class( $resource_name, $smarty );
 			$smarty->caching = $_save_stat;
 
 			// remove from template cache
@@ -162,7 +162,7 @@ class Smarty_Internal_Utility {
 	 *
 	 * @return integer number of config files compiled
 	 */
-	public static function compileAllConfig ( $extension, $force_compile, $time_limit, $max_errors, Smarty $smarty ) {
+	public static function compileAllConfig( $extension, $force_compile, $time_limit, $max_errors, Smarty $smarty ) {
 		// switch off time limit
 		if ( function_exists( 'set_time_limit' ) ) {
 			@set_time_limit( $time_limit );
@@ -231,7 +231,7 @@ class Smarty_Internal_Utility {
 	 *
 	 * @return integer number of template files compiled
 	 */
-	public static function compileAllTemplates ( $extension, $force_compile, $time_limit, $max_errors, Smarty $smarty ) {
+	public static function compileAllTemplates( $extension, $force_compile, $time_limit, $max_errors, Smarty $smarty ) {
 		// switch off time limit
 		if ( function_exists( 'set_time_limit' ) ) {
 			@set_time_limit( $time_limit );
@@ -302,7 +302,7 @@ class Smarty_Internal_Utility {
 	 * @throws SmartyException
 	 * @return array                    of tag/attributes
 	 */
-	public static function getTags ( Smarty_Internal_Template $template ) {
+	public static function getTags( Smarty_Internal_Template $template ) {
 		$template->smarty->get_used_tags = TRUE;
 		$template->compileTemplateSource();
 

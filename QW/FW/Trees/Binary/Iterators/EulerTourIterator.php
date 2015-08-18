@@ -7,11 +7,11 @@ use QW\FW\Trees\Binary\BinaryTree;
 
 final class EulerTourIterator extends AbstractBinaryTreeIterator {
 
-	public function __construct ( BinaryTree $root ) {
+	public function __construct( BinaryTree $root ) {
 		parent::__construct( $root );
 	}
 
-	protected function order ( BinaryTree $root = NULL ) {
+	protected function order( BinaryTree $root = NULL ) {
 		$this->finalData[] = $root->getData();
 
 		if ( $root->getLeftChild() != NULL ) $this->order( $root->getLeftChild() );

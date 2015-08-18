@@ -78,7 +78,7 @@ class Smarty_Internal_Config_File_Compiler {
 	 * @param string $parser_class class name
 	 * @param Smarty $smarty       global instance
 	 */
-	public function __construct ( $lexer_class, $parser_class, Smarty $smarty ) {
+	public function __construct( $lexer_class, $parser_class, Smarty $smarty ) {
 		$this->smarty = $smarty;
 		// get required plugins
 		$this->lexer_class               = $lexer_class;
@@ -95,7 +95,7 @@ class Smarty_Internal_Config_File_Compiler {
 	 *
 	 * @return bool true if compiling succeeded, false if it failed
 	 */
-	public function compileTemplate ( Smarty_Internal_Template $template ) {
+	public function compileTemplate( Smarty_Internal_Template $template ) {
 		$this->template                                                                  = $template;
 		$this->template->properties[ 'file_dependency' ][ $this->template->source->uid ] =
 			[ $this->template->source->name, $this->template->source->timestamp, $this->template->source->type ];
@@ -160,7 +160,7 @@ class Smarty_Internal_Config_File_Compiler {
 	 *
 	 * @throws SmartyCompilerException
 	 */
-	public function trigger_config_file_error ( $args = NULL ) {
+	public function trigger_config_file_error( $args = NULL ) {
 		$this->lex    = Smarty_Internal_Configfilelexer::instance();
 		$this->parser = Smarty_Internal_Configfileparser::instance();
 		// get config source line which has error

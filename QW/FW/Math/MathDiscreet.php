@@ -7,11 +7,11 @@ use QW\FW\Boot\PrivateConstructException;
 
 final class MathDiscreet {
 
-	public function __construct () {
+	public function __construct() {
 		throw new PrivateConstructException();
 	}
 
-	public static function gcd ( $a, $b ) {
+	public static function gcd( $a, $b ) {
 		if ( $a < 1 || $b < 1 ) throw new IllegalArgumentException();
 
 		while ( $b != 0 ) {
@@ -23,7 +23,7 @@ final class MathDiscreet {
 		return $a;
 	}
 
-	public static function isPerfect ( $number ) {
+	public static function isPerfect( $number ) {
 		if ( $number % 2 == 1 ) return FALSE;
 
 		$result = 1;
@@ -42,7 +42,7 @@ final class MathDiscreet {
 		return $result == $number;
 	}
 
-	public static function isPrime ( $number ) {
+	public static function isPrime( $number ) {
 
 		switch ( $number ) {
 			case 1:
@@ -58,13 +58,13 @@ final class MathDiscreet {
 		return TRUE;
 	}
 
-	public static function lcm ( $a, $b ) {
+	public static function lcm( $a, $b ) {
 		if ( $a == 0 || $b == 0 ) return 0;
 
 		return ( $a * $b ) / self::gcd( $a, $b );
 	}
 
-	public static function sieveOfEratosthenes ( $number ) {
+	public static function sieveOfEratosthenes( $number ) {
 		$sieve      = [ ];
 		$sieve[ 0 ] = $sieve[ 1 ] = TRUE;
 

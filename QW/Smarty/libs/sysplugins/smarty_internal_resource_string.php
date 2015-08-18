@@ -26,7 +26,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
 	 *
 	 * @return string unique resource name
 	 */
-	public function buildUniqueResourceName ( Smarty $smarty, $resource_name, $isConfig = FALSE ) {
+	public function buildUniqueResourceName( Smarty $smarty, $resource_name, $isConfig = FALSE ) {
 		return get_class( $this ) . '#' . $this->decode( $resource_name );
 	}
 
@@ -37,7 +37,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
 	 *
 	 * @return string decoded template_resource
 	 */
-	protected function decode ( $string ) {
+	protected function decode( $string ) {
 		// decode if specified
 		if ( ( $pos = strpos( $string, ':' ) ) !== FALSE ) {
 			if ( !strncmp( $string, 'base64', 6 ) ) {
@@ -59,7 +59,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
 	 *
 	 * @return string                 resource's basename
 	 */
-	public function getBasename ( Smarty_Template_Source $source ) {
+	public function getBasename( Smarty_Template_Source $source ) {
 		return '';
 	}
 
@@ -72,7 +72,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
 	 *
 	 * @return string                 template source
 	 */
-	public function getContent ( Smarty_Template_Source $source ) {
+	public function getContent( Smarty_Template_Source $source ) {
 		return $this->decode( $source->name );
 	}
 
@@ -84,7 +84,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
 	 *
 	 * @return void
 	 */
-	public function populate ( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
+	public function populate( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
 		$source->uid = $source->filepath = sha1( $source->name );
 		$source->timestamp = 0;
 		$source->exists    = TRUE;

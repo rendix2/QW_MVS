@@ -26,7 +26,7 @@ class Smarty_Internal_Nocache_Insert {
 	 *
 	 * @return string                   compiled code
 	 */
-	public static function compile ( $_function, $_attr, $_template, $_script, $_assign = NULL ) {
+	public static function compile( $_function, $_attr, $_template, $_script, $_assign = NULL ) {
 		$_output = '<?php ';
 		if ( $_script != 'null' ) {
 			// script which must be included

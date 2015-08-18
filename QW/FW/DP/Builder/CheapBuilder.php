@@ -12,37 +12,37 @@ class CheapBuilder implements Builder {
 
 	private $result;
 
-	public function __construct () {
+	public function __construct() {
 		$this->result = new Building();
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->result = NULL;
 	}
 
-	public function buildFloor () {
+	public function buildFloor() {
 		$this->result->setFloor( "Laminate Floor" );
 
 		return $this;
 	}
 
-	public function buildRoof () {
+	public function buildRoof() {
 		$this->result->setRoof( "wooden roof" );
 
 		return $this;
 	}
 
-	public function buildWalls () {
+	public function buildWalls() {
 		$this->result->setWalls( "panel walls" );
 
 		return $this;
 	}
 
-	public function getResult () {
+	public function getResult() {
 		return $this->result;
 	}
 
-	public function startNew () {
+	public function startNew() {
 		$this->result = new Building();
 
 		return $this;

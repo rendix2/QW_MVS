@@ -49,7 +49,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	abstract protected function delete ( array $keys );
+	abstract protected function delete( array $keys );
 
 	/**
 	 * Read values for a add of keys from cache
@@ -58,7 +58,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return array list of values with the given keys used as indexes
 	 */
-	abstract protected function read ( array $keys );
+	abstract protected function read( array $keys );
 
 	/**
 	 * Save values for a add of keys to cache
@@ -68,7 +68,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	abstract protected function write ( array $keys, $expire = NULL );
+	abstract protected function write( array $keys, $expire = NULL );
 
 	/**
 	 * Lock cache for this template
@@ -78,7 +78,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return bool|void
 	 */
-	public function acquireLock ( Smarty $smarty, Smarty_Template_Cached $cached ) {
+	public function acquireLock( Smarty $smarty, Smarty_Template_Cached $cached ) {
 		$cached->is_locked = TRUE;
 		$key               = 'LOCK#' . $cached->filepath;
 		$this->write( [ $key => time() ], $smarty->locking_timeout );
@@ -91,7 +91,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @param string &$content the content to be cached
 	 */
-	protected function addMetaTimestamp ( &$content ) {
+	protected function addMetaTimestamp( &$content ) {
 		$mt = explode( " ", microtime() );
 		$ts = pack( "NN", $mt[ 1 ], (int) ( $mt[ 0 ] * 100000000 ) );
 		$content = $ts . $content;
@@ -112,7 +112,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 * @uses invalidate() to mark CacheIDs parent chain as outdated
 	 * @uses delete() to remove CacheID from cache
 	 */
-	public function clear ( Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time ) {
+	public function clear( Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time ) {
 		$uid = $this->getTemplateUid( $smarty, $resource_name, $cache_id, $compile_id );
 		$cid = $uid . '#' . $this->sanitize( $resource_name ) . '#' . $this->sanitize( $cache_id ) . '#' .
 			$this->sanitize( $compile_id );
@@ -133,7 +133,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 * @uses purge() to clear the whole store
 	 * @uses invalidate() to mark everything outdated if purge() is inapplicable
 	 */
-	public function clearAll ( Smarty $smarty, $exp_time = NULL ) {
+	public function clearAll( Smarty $smarty, $exp_time = NULL ) {
 		if ( !$this->purge() ) {
 			$this->invalidate( NULL );
 		}
@@ -154,7 +154,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return boolean success
 	 */
-	protected function fetch ( $cid, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, &$content = NULL, &$timestamp = NULL, $resource_uid = NULL ) {
+	protected function fetch( $cid, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, &$content = NULL, &$timestamp = NULL, $resource_uid = NULL ) {
 		$t = $this->read( [ $cid ] );
 		$content   = !empty( $t[ $cid ] ) ? $t[ $cid ] : NULL;
 		$timestamp = NULL;
@@ -182,7 +182,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return float  the microtime the CacheID was invalidated
 	 */
-	protected function getLatestInvalidationTimestamp ( $cid, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, $resource_uid = NULL ) {
+	protected function getLatestInvalidationTimestamp( $cid, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, $resource_uid = NULL ) {
 		// abort if there is no CacheID
 		if ( FALSE && !$cid ) {
 			return 0;
@@ -209,7 +209,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return float  the microtime the content was cached
 	 */
-	protected function getMetaTimestamp ( &$content ) {
+	protected function getMetaTimestamp( &$content ) {
 		$s       = unpack( "N", substr( $content, 0, 4 ) );
 		$m       = unpack( "N", substr( $content, 4, 4 ) );
 		$content = substr( $content, 8 );
@@ -227,7 +227,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return string filepath of cache file
 	 */
-	protected function getTemplateUid ( Smarty $smarty, $resource_name, $cache_id, $compile_id ) {
+	protected function getTemplateUid( Smarty $smarty, $resource_name, $cache_id, $compile_id ) {
 		$uid = '';
 		if ( isset( $resource_name ) ) {
 			$tpl = new $smarty->template_class( $resource_name, $smarty );
@@ -259,7 +259,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return boolean               true or false if cache is locked
 	 */
-	public function hasLock ( Smarty $smarty, Smarty_Template_Cached $cached ) {
+	public function hasLock( Smarty $smarty, Smarty_Template_Cached $cached ) {
 		$key  = 'LOCK#' . $cached->filepath;
 		$data = $this->read( [ $key ] );
 
@@ -277,7 +277,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return void
 	 */
-	protected function invalidate ( $cid = NULL, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, $resource_uid = NULL ) {
+	protected function invalidate( $cid = NULL, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, $resource_uid = NULL ) {
 		$now = microtime( TRUE );
 		$key = NULL;
 		// invalidate everything
@@ -318,7 +318,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 * @return array  list of InvalidationKeys
 	 * @uses $invalidationKeyPrefix to prepend to each InvalidationKey
 	 */
-	protected function listInvalidationKeys ( $cid, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, $resource_uid = NULL ) {
+	protected function listInvalidationKeys( $cid, $resource_name = NULL, $cache_id = NULL, $compile_id = NULL, $resource_uid = NULL ) {
 		$t     = [ 'IVK#ALL' ];
 		$_name = $_compile = '#';
 		if ( $resource_name ) {
@@ -365,7 +365,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return void
 	 */
-	public function populate ( Smarty_Template_Cached $cached, Smarty_Internal_Template $_template ) {
+	public function populate( Smarty_Template_Cached $cached, Smarty_Internal_Template $_template ) {
 		$cached->filepath = $_template->source->uid . '#' . $this->sanitize( $cached->source->resource ) . '#' .
 			$this->sanitize( $cached->cache_id ) . '#' . $this->sanitize( $cached->compile_id );
 
@@ -379,7 +379,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return void
 	 */
-	public function populateTimestamp ( Smarty_Template_Cached $cached ) {
+	public function populateTimestamp( Smarty_Template_Cached $cached ) {
 		if ( !$this->fetch( $cached->filepath, $cached->source->name, $cached->cache_id, $cached->compile_id, $content,
 			$timestamp, $cached->source->uid )
 		) {
@@ -398,7 +398,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return boolean                 true or false if the cached content does not exist
 	 */
-	public function process ( Smarty_Internal_Template $_template, Smarty_Template_Cached $cached = NULL ) {
+	public function process( Smarty_Internal_Template $_template, Smarty_Template_Cached $cached = NULL ) {
 		if ( !$cached ) {
 			$cached = $_template->cached;
 		}
@@ -429,7 +429,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return boolean true on success, false on failure
 	 */
-	protected function purge () {
+	protected function purge() {
 		return FALSE;
 	}
 
@@ -440,7 +440,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return string  content
 	 */
-	public function readCachedContent ( Smarty_Internal_Template $_template ) {
+	public function readCachedContent( Smarty_Internal_Template $_template ) {
 		$content   = $_template->cached->content ? $_template->cached->content : NULL;
 		$timestamp = NULL;
 		if ( $content === NULL ) {
@@ -465,7 +465,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return bool|void
 	 */
-	public function releaseLock ( Smarty $smarty, Smarty_Template_Cached $cached ) {
+	public function releaseLock( Smarty $smarty, Smarty_Template_Cached $cached ) {
 		$cached->is_locked = FALSE;
 		$key               = 'LOCK#' . $cached->filepath;
 		$this->delete( [ $key ] );
@@ -478,7 +478,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return string sanitized CacheID component
 	 */
-	protected function sanitize ( $string ) {
+	protected function sanitize( $string ) {
 		// some poeple smoke bad weed
 		$string = trim( $string, '|' );
 		if ( !$string ) {
@@ -496,7 +496,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 *
 	 * @return boolean                  success
 	 */
-	public function writeCachedContent ( Smarty_Internal_Template $_template, $content ) {
+	public function writeCachedContent( Smarty_Internal_Template $_template, $content ) {
 		$this->addMetaTimestamp( $content );
 
 		return $this->write( [ $_template->cached->filepath => $content ], $_template->properties[ 'cache_lifetime' ] );

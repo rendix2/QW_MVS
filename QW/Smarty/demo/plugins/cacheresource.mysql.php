@@ -29,7 +29,7 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	protected $fetchTimestamp;
 	protected $save;
 
-	public function __construct () {
+	public function __construct() {
 		try {
 			$this->db = new PDO( "mysql:dbname=test;host=127.0.0.1", "smarty" );
 		}
@@ -52,7 +52,7 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return integer      number of deleted caches
 	 */
-	protected function delete ( $name, $cache_id, $compile_id, $exp_time ) {
+	protected function delete( $name, $cache_id, $compile_id, $exp_time ) {
 		// delete the whole cache
 		if ( $name === NULL && $cache_id === NULL && $compile_id === NULL && $exp_time === NULL ) {
 			// returning the number of deleted caches would require a second query to count them
@@ -97,7 +97,7 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return void
 	 */
-	protected function fetch ( $id, $name, $cache_id, $compile_id, &$content, &$mtime ) {
+	protected function fetch( $id, $name, $cache_id, $compile_id, &$content, &$mtime ) {
 		$this->fetch->execute( [ 'id' => $id ] );
 		$row = $this->fetch->fetch();
 		$this->fetch->closeCursor();
@@ -124,7 +124,7 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return integer|boolean timestamp (epoch) the template was modified, or false if not found
 	 */
-	protected function fetchTimestamp ( $id, $name, $cache_id, $compile_id ) {
+	protected function fetchTimestamp( $id, $name, $cache_id, $compile_id ) {
 		$this->fetchTimestamp->execute( [ 'id' => $id ] );
 		$mtime = strtotime( $this->fetchTimestamp->fetchColumn() );
 		$this->fetchTimestamp->closeCursor();
@@ -144,7 +144,7 @@ class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
 	 *
 	 * @return boolean      success
 	 */
-	protected function save ( $id, $name, $cache_id, $compile_id, $exp_time, $content ) {
+	protected function save( $id, $name, $cache_id, $compile_id, $exp_time, $content ) {
 		$this->save->execute( [ 'id'      => $id, 'name' => $name, 'cache_id' => $cache_id, 'compile_id' => $compile_id,
 		                        'content' => $content, ] );
 

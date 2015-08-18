@@ -17,7 +17,7 @@
  * @return array sequence of unicodes
  * @author Rodney Rehm
  */
-function smarty_mb_to_unicode ( $string, $encoding = NULL ) {
+function smarty_mb_to_unicode( $string, $encoding = NULL ) {
 	if ( $encoding ) {
 		$expanded = mb_convert_encoding( $string, "UTF-32BE", $encoding );
 	}
@@ -39,7 +39,7 @@ function smarty_mb_to_unicode ( $string, $encoding = NULL ) {
  * @return string unicode as character sequence in given $encoding
  * @author Rodney Rehm
  */
-function smarty_mb_from_unicode ( $unicode, $encoding = NULL ) {
+function smarty_mb_from_unicode( $unicode, $encoding = NULL ) {
 	$t = '';
 	if ( !$encoding ) {
 		$encoding = mb_internal_encoding();

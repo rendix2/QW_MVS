@@ -10,16 +10,16 @@ class PrinterWrapper {
 	private $charPerLine;
 	private $charPerCurrentLine;
 
-	public function __construct () {
+	public function __construct() {
 		$this->charPerCurrentLine = 0;
 		$this->charPerLine        = 100;
 	}
 
-	public function isCurrentLineFull () {
+	public function isCurrentLineFull() {
 		return $this->charPerCurrentLine >= $this->charPerLine;
 	}
 
-	public function myPrint ( String $s ) {
+	public function myPrint( String $s ) {
 		if ( $s == NULL ) {
 			throw new NullPointerException();
 		}
@@ -37,7 +37,7 @@ class PrinterWrapper {
 		}
 	}
 
-	public function stringPrinter ( Printer $printer ) {
+	public function stringPrinter( Printer $printer ) {
 		if ( $printer == NULL ) {
 			throw new NullPointerException();
 		}
@@ -47,7 +47,7 @@ class PrinterWrapper {
 
 	// we cant have function print ? :O says ide
 
-	public function wrap2NewLine () {
+	public function wrap2NewLine() {
 		if ( !( $this->printer instanceof Printer ) ) {
 			throw new NullPointerException();
 		}

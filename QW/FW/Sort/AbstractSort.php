@@ -7,9 +7,9 @@ use QW\FW\Basic\Object;
 abstract class AbstractSort extends Object {
 	protected $data, $length;
 
-	abstract protected function sort ( AbstractSort $sort );
+	abstract protected function sort( AbstractSort $sort );
 
-	public function __construct ( array $data ) {
+	public function __construct( array $data ) {
 		parent::__construct();
 
 		if ( $this->length <= 1 ) return $this->data;
@@ -19,13 +19,13 @@ abstract class AbstractSort extends Object {
 		$this->length = count( $this->data );
 	}
 
-	protected static function swap ( array $array, $left, $right ) {
+	protected static function swap( array $array, $left, $right ) {
 		$tmp             = $array[ $right ];
 		$array[ $right ] = $array[ $left ];
 		$array[ $left ]  = $tmp;
 	}
 
-	public function getArray () {
+	public function getArray() {
 		return $this->data;
 	}
 }

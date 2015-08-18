@@ -30,7 +30,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
 	 *
 	 * @return string resource's basename
 	 */
-	public function getBasename ( Smarty_Template_Source $source ) {
+	public function getBasename( Smarty_Template_Source $source ) {
 		return str_replace( ':', '.', basename( $source->filepath ) );
 	}
 
@@ -42,7 +42,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
 	 * @return string template source
 	 * @throws SmartyException if source cannot be loaded
 	 */
-	public function getContent ( Smarty_Template_Source $source ) {
+	public function getContent( Smarty_Template_Source $source ) {
 		if ( !$source->exists ) {
 			throw new SmartyException( "Unable to read template {$source->type} '{$source->name}'" );
 		}
@@ -66,7 +66,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
 	 *
 	 * @throws SmartyException
 	 */
-	public function populate ( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
+	public function populate( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
 		$uid         = sha1( getcwd() );
 		$sources    = [ ];
 		$components  = explode( '|', $source->name );
@@ -98,7 +98,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
 	 *
 	 * @param Smarty_Template_Source $source source object
 	 */
-	public function populateTimestamp ( Smarty_Template_Source $source ) {
+	public function populateTimestamp( Smarty_Template_Source $source ) {
 		$source->exists = TRUE;
 		foreach ( $source->components as $s ) {
 			$source->exists = $source->exists && $s->exists;

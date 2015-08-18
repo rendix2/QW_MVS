@@ -6,7 +6,7 @@ class ShowOfUse {
 
 	private $rectangleDefault, $rectangleA, $rectangleB, $rectangleFactored;
 
-	public function __construct () {
+	public function __construct() {
 		echo $this->rectangleDefault = new Rectangle( 5, 2 );
 		echo $this->rectangleA = $this->rectangleDefault->setA( 7 );
 		echo $this->rectangleB = $this->rectangleDefault->setB( 87 );

@@ -34,7 +34,7 @@ class Smarty_Variable {
 	 * @param boolean $nocache if true any output of this variable will be not cached
 	 * @param int     $scope   the scope the variable will have  (local,parent or root)
 	 */
-	public function __construct ( $value = NULL, $nocache = FALSE, $scope = Smarty::SCOPE_LOCAL ) {
+	public function __construct( $value = NULL, $nocache = FALSE, $scope = Smarty::SCOPE_LOCAL ) {
 		$this->value   = $value;
 		$this->nocache = $nocache;
 		$this->scope   = $scope;
@@ -45,7 +45,7 @@ class Smarty_Variable {
 	 *
 	 * @return string
 	 */
-	public function __toString () {
+	public function __toString() {
 		return (string) $this->value;
 	}
 }

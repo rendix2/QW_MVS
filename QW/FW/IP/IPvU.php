@@ -7,7 +7,7 @@ use QW\FW\Boot\IllegalArgumentException;
 class IPvU extends AbstractIP {
 	private $IPv;
 
-	public function __construct ( $ip ) {
+	public function __construct( $ip ) {
 		parent::__construct( $ip );
 
 		// IPv4
@@ -19,11 +19,11 @@ class IPvU extends AbstractIP {
 		$this->ipCoded = ip2long( $ip );
 	}
 
-	public function getLong () {
+	public function getLong() {
 		return $this->IPv->getLong();
 	}
 
-	public function getPart ( $part ) {
+	public function getPart( $part ) {
 		return $this->IPv->getPart( $part );
 	}
 }

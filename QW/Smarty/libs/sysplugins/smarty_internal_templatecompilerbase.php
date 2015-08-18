@@ -265,12 +265,12 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return bool  true if compiling succeeded, false if it failed
 	 */
-	abstract protected function doCompile ( $_content );
+	abstract protected function doCompile( $_content );
 
 	/**
 	 * Initialize compiler
 	 */
-	public function __construct () {
+	public function __construct() {
 		$this->nocache_hash = str_replace( [ '.', ',' ], '_', uniqid( rand(), TRUE ) );
 	}
 
@@ -282,7 +282,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return string
 	 */
-	public function appendCode ( $left, $right ) {
+	public function appendCode( $left, $right ) {
 		if ( preg_match( '/\s*\?>\s*$/', $left ) && preg_match( '/^\s*<\?php\s+/', $right ) ) {
 			$left = preg_replace( '/\s*\?>\s*$/', "\n", $left );
 			$left .= preg_replace( '/^\s*<\?php\s+/', '', $right );
@@ -308,7 +308,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function callTagCompiler ( $tag, $args, $param1 = NULL, $param2 = NULL, $param3 = NULL ) {
+	public function callTagCompiler( $tag, $args, $param1 = NULL, $param2 = NULL, $param3 = NULL ) {
 		// check if tag allowed by security
 		if ( !isset( $this->smarty->security_policy ) || $this->smarty->security_policy->isTrustedTag( $tag, $this ) ) {
 			// re-use object if already exists
@@ -348,7 +348,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 * @throws SmartyException
 	 * @return string compiled code
 	 */
-	public function compileTag ( $tag, $args, $parameter = [ ] ) {
+	public function compileTag( $tag, $args, $parameter = [ ] ) {
 		$this->prefixCodeStack[] = $this->prefix_code;
 		$this->prefix_code       = [ ];
 		$result = $this->compileTag2( $tag, $args, $parameter );
@@ -368,7 +368,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 * @throws SmartyException
 	 * @return string compiled code
 	 */
-	private function compileTag2 ( $tag, $args, $parameter ) {
+	private function compileTag2( $tag, $args, $parameter ) {
 		$plugin_type = '';
 		// $args contains the attributes parsed and compiled by the lexer/parser
 		// assume that tag does compile into code, but creates no HTML output
@@ -634,7 +634,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return bool true if compiling succeeded, false if it failed
 	 */
-	public function compileTemplate ( Smarty_Internal_Template $template, $nocache = NULL, $parent_compiler = NULL ) {
+	public function compileTemplate( Smarty_Internal_Template $template, $nocache = NULL, $parent_compiler = NULL ) {
 		// save template object in compiler class
 		$this->template = $template;
 		if ( isset( $this->template->smarty->security_policy ) ) {
@@ -776,7 +776,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return string
 	 */
-	public function compileVariable ( $variable ) {
+	public function compileVariable( $variable ) {
 		if ( strpos( $variable, '(' ) == 0 ) {
 			// not a variable variable
 			$var               = trim( $variable, '\'' );
@@ -795,7 +795,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return string call name of function
 	 */
-	public function getPlugin ( $plugin_name, $plugin_type ) {
+	public function getPlugin( $plugin_name, $plugin_type ) {
 		$function = NULL;
 		if ( $this->template->caching && ( $this->nocache || $this->tag_nocache ) ) {
 			if ( isset( $this->template->required_plugins[ 'nocache' ][ $plugin_name ][ $plugin_type ] ) ) {
@@ -865,7 +865,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return boolean true if found
 	 */
-	public function getPluginFromDefaultHandler ( $tag, $plugin_type ) {
+	public function getPluginFromDefaultHandler( $tag, $plugin_type ) {
 		$callback  = NULL;
 		$script    = NULL;
 		$cacheable = TRUE;
@@ -916,7 +916,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return string
 	 */
-	public function makeNocacheCode ( $code ) {
+	public function makeNocacheCode( $code ) {
 		return "echo '/*%%SmartyNocache:{$this->nocache_hash}%%*/<?php " .
 		str_replace( "^#^", "'", addcslashes( $code, '\'\\' ) ) . "?>/*/%%SmartyNocache:{$this->nocache_hash}%%*/';\n";
 	}
@@ -924,7 +924,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	/**
 	 *  restore file and line offset
 	 */
-	public function popTrace () {
+	public function popTrace() {
 		if ( $this->smarty->debugging ) {
 			Smarty_Internal_Debug::end_compile( $this->template );
 		}
@@ -949,7 +949,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return string  content
 	 */
-	public function processNocacheCode ( $content, $is_code ) {
+	public function processNocacheCode( $content, $is_code ) {
 		// If the template is not evaluated and we have a nocache section and or a nocache tag
 		if ( $is_code && !empty( $content ) ) {
 			// generate replacement code
@@ -992,7 +992,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @return null|\Smarty_Internal_ParseTree_Text
 	 */
-	public function processText ( $text ) {
+	public function processText( $text ) {
 		if ( $this->parser->strip ) {
 			return new Smarty_Internal_ParseTree_Text( $this->parser, preg_replace( $this->stripRegEx, '', $text ) );
 		}
@@ -1009,7 +1009,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 * @param int    $line  line offset to source
 	 * @param bool   $debug false debug end_compile shall not be called
 	 */
-	public function pushTrace ( $file, $uid, $line, $debug = TRUE ) {
+	public function pushTrace( $file, $uid, $line, $debug = TRUE ) {
 		if ( $this->smarty->debugging && $debug ) {
 			Smarty_Internal_Debug::end_compile( $this->template );
 		}
@@ -1034,7 +1034,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
 	 *
 	 * @throws SmartyCompilerException when an unexpected token is found
 	 */
-	public function trigger_template_error ( $args = NULL, $line = NULL ) {
+	public function trigger_template_error( $args = NULL, $line = NULL ) {
 		// get template source line which has error
 		if ( !isset( $line ) ) {
 			$line = $this->lex->line;

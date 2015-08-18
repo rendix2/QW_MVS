@@ -8,42 +8,42 @@ class ArrayList extends AbstractList implements IList {
 
 	private $data;
 
-	public function __construct () {
+	public function __construct() {
 		parent::__construct();
 		$this->data = [ ];
 		$this->size = 0;
 	}
 
-	public function __toString () {
+	public function __toString() {
 		return '[ ' . implode( ', ', $this->data ) . ' ]';
 	}
 
-	public function add ( $data ) {
+	public function add( $data ) {
 		$this->data[] = $data;
 		$this->size++;
 	}
 
-	public function contains ( $data ) {
+	public function contains( $data ) {
 		foreach ( $this->data as $v ) if ( $v == $data ) return TRUE;
 
 		return FALSE;
 	}
 
-	public function get ( $index ) {
+	public function get( $index ) {
 		if ( $index > $this->size ) throw new IllegalArgumentException();
 
 		return $this->data[ $index ];
 	}
 
-	public function getFirst () {
+	public function getFirst() {
 		return $this->data[ 0 ];
 	}
 
-	public function getLast () {
+	public function getLast() {
 		return $this->data[ $this->size - 1 ];
 	}
 
-	public function remove ( $index ) {
+	public function remove( $index ) {
 		if ( $index > $this->size ) throw new IllegalArgumentException();
 
 		for ( $i = $index + 1; $i < $this->size; $i++ ) $this->data[ $i - 1 ] = $this->data[ $i ];

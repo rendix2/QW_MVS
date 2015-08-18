@@ -26,7 +26,7 @@ class Smarty_Resource_Mysqls extends Smarty_Resource_Custom {
 	// prepared fetch() statement
 	protected $fetch;
 
-	public function __construct () {
+	public function __construct() {
 		try {
 			$this->db = new PDO( "mysql:dbname=test;host=127.0.0.1", "smarty" );
 		}
@@ -45,7 +45,7 @@ class Smarty_Resource_Mysqls extends Smarty_Resource_Custom {
 	 *
 	 * @return void
 	 */
-	protected function fetch ( $name, &$source, &$mtime ) {
+	protected function fetch( $name, &$source, &$mtime ) {
 		$this->fetch->execute( [ 'name' => $name ] );
 		$row = $this->fetch->fetch();
 		$this->fetch->closeCursor();

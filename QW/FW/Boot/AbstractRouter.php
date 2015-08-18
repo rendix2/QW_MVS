@@ -7,13 +7,13 @@ use QW\FW\Utils\Log\Logger;
 
 abstract class AbstractRouter extends Object {
 
-	abstract protected function loadMVC ();
+	abstract protected function loadMVC();
 
-	abstract protected function loadMVP ();
+	abstract protected function loadMVP();
 
-	abstract protected function loadMy ();
+	abstract protected function loadMy();
 
-	public function __construct () {
+	public function __construct() {
 		parent::__construct();
 
 		require_once( './Exception.php' );
@@ -21,7 +21,7 @@ abstract class AbstractRouter extends Object {
 		$this->route();
 	}
 
-	public static function loadClass () {
+	public static function loadClass() {
 		mb_internal_encoding( "UTF-8" );
 
 		$load = function ( $class ) {
@@ -58,7 +58,7 @@ abstract class AbstractRouter extends Object {
 		}
 	}
 
-	protected final function route () {
+	protected final function route() {
 		self::loadClass();
 		$this->loadMVC();
 		$this->loadMVP();

@@ -21,11 +21,11 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	protected $options;
 	protected $log;
 
-	abstract protected function connect ();
+	abstract protected function connect();
 
 	// conection begin
 
-	public function __construct ( $host, $userName, $userPassword, $dbName, array $options, $log = FALSE ) {
+	public function __construct( $host, $userName, $userPassword, $dbName, array $options, $log = FALSE ) {
 		parent::__construct();
 		self::$AllQueryCount       = 0;
 		self::$AllConnectionsCount = 0;
@@ -43,7 +43,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		if ( $log ) $this->log = new Logger( Logger::LOG_TYPE_DATABASE );
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		if ( $this->statement != NULL ) $this->freeStatement();
 
 		$this->queryCount   = NULL;
@@ -59,15 +59,15 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		parent::__destruct();
 	}
 
-	public static function getAllConnectionsCount () {
+	public static function getAllConnectionsCount() {
 		return self::$AllConnectionsCount;
 	}
 
-	public static function getAllQueryCount () {
+	public static function getAllQueryCount() {
 		return self::$AllQueryCount;
 	}
 
-	protected final function checkConnection ( \PDOException $pdoEx = NULL ) {
+	protected final function checkConnection( \PDOException $pdoEx = NULL ) {
 		if ( $pdoEx == NULL ) throw new NullPointerException();
 
 		$message = '';
@@ -92,36 +92,36 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		die( $message );
 	}
 
-	public function fetch () {
+	public function fetch() {
 		return $this->statement->fetch( \PDO::FETCH_ASSOC );
 	}
 
-	public function fetchAll () {
+	public function fetchAll() {
 		return $this->statement->fetchAll( \PDO::FETCH_ASSOC );
 	}
 
-	public function fetchColumn () {
+	public function fetchColumn() {
 		return $this->statement->fetchColumn( \PDO::FETCH_ASSOC );
 	}
 
-	public function freeStatement () {
+	public function freeStatement() {
 		$this->statement->closeCursor();
 		$this->statement = NULL;
 	}
 
-	public function getQueryCount () {
+	public function getQueryCount() {
 		return $this->queryCount;
 	}
 
-	public function lastID () {
+	public function lastID() {
 		return $this->connection->lastInsertId();
 	}
 
-	public function numRows () {
+	public function numRows() {
 		$this->statement->rowCount();
 	}
 
-	public function query ( $query, array $options ) {
+	public function query( $query, array $options ) {
 		try {
 			if ( $this->queryCount == 0 ) $this->connect();
 

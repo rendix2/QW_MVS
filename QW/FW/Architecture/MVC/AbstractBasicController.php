@@ -11,9 +11,9 @@ abstract class AbstractBasicController extends Object {
 	private $model;
 	private $viewName;
 
-	abstract public function index ();
+	abstract public function index();
 
-	public function __construct ( $name ) {
+	public function __construct( $name ) {
 		parent::__construct();
 
 		$c = '\\QW\\Models\\' . $name;
@@ -24,7 +24,7 @@ abstract class AbstractBasicController extends Object {
 		$this->viewName = str_replace( 'Controller', '', $this->getClassName() );
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->model    = NULL;
 		$this->viewName = NULL;
 		$this->view     = NULL;
@@ -32,15 +32,15 @@ abstract class AbstractBasicController extends Object {
 		parent::__destruct();
 	}
 
-	final protected function getModel () {
+	final protected function getModel() {
 		return $this->model;
 	}
 
-	final protected function getView () {
+	final protected function getView() {
 		return $this->view;
 	}
 
-	final protected function getViewName () {
+	final protected function getViewName() {
 		return $this->viewName;
 	}
 }

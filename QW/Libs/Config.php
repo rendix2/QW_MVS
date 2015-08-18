@@ -12,7 +12,7 @@ final class Config extends FWConfig {
 	public static $dbConfig = [ 'dbHost' => 'localhost', 'dbUser' => 'xpy', 'dbPassword' => '19723698',
 	                            'dbName' => 'cvutblog' ];
 
-	public function __construct () {
+	public function __construct() {
 		parent::__construct();
 	}
 }

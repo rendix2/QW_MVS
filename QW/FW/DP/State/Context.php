@@ -14,22 +14,22 @@ class Context {
 	// Aktuální stav
 	private $state;
 
-	function __construct () {
+	function __construct() {
 		$this->state = new HappyState();
 	}
 
-	public function beHappy () {
+	public function beHappy() {
 		echo 'Tedka budu veselý<br>';
 
 		$this->state = new HappyState();
 	}
 
-	public function beSad () {
+	public function beSad() {
 		echo 'Tedka budu smutný<br>';
 		$this->state = new SasState();
 	}
 
-	public function express () {
+	public function express() {
 		echo 'Tedka Ti řeknu, jak se cítím<br>';
 		$this->state->express();
 	}

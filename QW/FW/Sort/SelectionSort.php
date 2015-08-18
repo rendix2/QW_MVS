@@ -11,7 +11,7 @@ namespace QW\FW\Sort;
 
 class SelectionSort extends AbstractSort {
 
-	protected function sort ( AbstractSort $sort ) {
+	protected function sort( AbstractSort $sort ) {
 		for ( $i = 0; $i < $this->length - 1; $i++ ) {
 			$maxIndex = $i;
 			for ( $j = $i + 1; $j < $this->length; $j++ )

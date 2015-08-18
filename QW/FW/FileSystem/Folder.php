@@ -8,7 +8,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 final class Folder extends File {
-	public function __construct ( $dirName, $create = FALSE ) {
+	public function __construct( $dirName, $create = FALSE ) {
 		//parent::__construct();
 
 		if ( ( !is_dir( $dirName ) || !file_exists( $dirName ) ) &&
@@ -21,7 +21,7 @@ final class Folder extends File {
 	}
 
 	// http://stackoverflow.com/questions/478121/php-get-directory-size
-	public function content () {
+	public function content() {
 		$array = [ ];
 
 		foreach ( glob( $this->filePath . '*' ) as $v ) {
@@ -33,11 +33,11 @@ final class Folder extends File {
 		return $array;
 	}
 
-	public function delete () {
+	public function delete() {
 		return rmdir( $this->filePath );
 	}
 
-	public function size () {
+	public function size() {
 		$bytesTotal = 0;
 		$path = realpath( $this->filePath );
 

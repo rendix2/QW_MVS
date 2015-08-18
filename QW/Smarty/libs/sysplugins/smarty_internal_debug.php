@@ -48,7 +48,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param Smarty_Internal_Template $_template
 	 */
-	public static function debugUrl ( Smarty_Internal_Template $_template ) {
+	public static function debugUrl( Smarty_Internal_Template $_template ) {
 		if ( isset( $_SERVER[ 'QUERY_STRING' ] ) ) {
 			$_query_string = $_SERVER[ 'QUERY_STRING' ];
 		}
@@ -84,7 +84,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 * @param Smarty_Internal_Template|Smarty $obj object to debug
 	 * @param bool                            $full
 	 */
-	public static function display_debug ( $obj, $full = FALSE ) {
+	public static function display_debug( $obj, $full = FALSE ) {
 		if ( !$full ) {
 			self::$offset++;
 			$savedIndex  = self::$index;
@@ -159,7 +159,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template cached template
 	 */
-	public static function end_cache ( Smarty_Internal_Template $template ) {
+	public static function end_cache( Smarty_Internal_Template $template ) {
 		$key = self::get_key( $template );
 		self::$template_data[ self::$index ][ $key ][ 'cache_time' ] += microtime( TRUE ) -
 			self::$template_data[ self::$index ][ $key ][ 'start_time' ];
@@ -170,7 +170,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template
 	 */
-	public static function end_compile ( Smarty_Internal_Template $template ) {
+	public static function end_compile( Smarty_Internal_Template $template ) {
 		if ( !empty( $template->compiler->trace_uid ) ) {
 			$key = $template->compiler->trace_uid;
 		}
@@ -190,7 +190,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template
 	 */
-	public static function end_render ( Smarty_Internal_Template $template ) {
+	public static function end_render( Smarty_Internal_Template $template ) {
 		$key = self::get_key( $template );
 		self::$template_data[ self::$index ][ $key ][ 'render_time' ] += microtime( TRUE ) -
 			self::$template_data[ self::$index ][ $key ][ 'start_time' ];
@@ -201,7 +201,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template cached template
 	 */
-	public static function end_template ( Smarty_Internal_Template $template ) {
+	public static function end_template( Smarty_Internal_Template $template ) {
 		$key = self::get_key( $template );
 		self::$template_data[ self::$index ][ $key ][ 'total_time' ] += microtime( TRUE ) -
 			self::$template_data[ self::$index ][ $key ][ 'start_template_time' ];
@@ -215,7 +215,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @return StdClass
 	 */
-	public static function get_debug_vars ( $obj ) {
+	public static function get_debug_vars( $obj ) {
 		$config_vars = [ ];
 		foreach ( $obj->config_vars as $key => $var ) {
 			$config_vars[ $key ][ 'value' ] = $var;
@@ -310,7 +310,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @return string key into $template_data
 	 */
-	private static function get_key ( Smarty_Internal_Template $template ) {
+	private static function get_key( Smarty_Internal_Template $template ) {
 		static $_is_stringy = [ 'string' => TRUE, 'eval' => TRUE ];
 		// calculate Uid if not already done
 		if ( $template->source->uid == '' ) {
@@ -342,7 +342,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template
 	 */
-	public static function ignore ( Smarty_Internal_Template $template ) {
+	public static function ignore( Smarty_Internal_Template $template ) {
 		// calculate Uid if not already done
 		if ( $template->source->uid == '' ) {
 			$template->source->filepath;
@@ -355,7 +355,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Data $data data object
 	 */
-	public static function register_data ( Smarty_Data $data ) {
+	public static function register_data( Smarty_Data $data ) {
 	}
 
 	/**
@@ -363,7 +363,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template cached template
 	 */
-	public static function register_template ( Smarty_Internal_Template $template ) {
+	public static function register_template( Smarty_Internal_Template $template ) {
 	}
 
 	/**
@@ -371,7 +371,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template cached template
 	 */
-	public static function start_cache ( Smarty_Internal_Template $template ) {
+	public static function start_cache( Smarty_Internal_Template $template ) {
 		$key                                                         = self::get_key( $template );
 		self::$template_data[ self::$index ][ $key ][ 'start_time' ] = microtime( TRUE );
 	}
@@ -381,7 +381,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template
 	 */
-	public static function start_compile ( Smarty_Internal_Template $template ) {
+	public static function start_compile( Smarty_Internal_Template $template ) {
 		static $_is_stringy = [ 'string' => TRUE, 'eval' => TRUE ];
 		if ( !empty( $template->compiler->trace_uid ) ) {
 			$key = $template->compiler->trace_uid;
@@ -412,7 +412,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 *
 	 * @param \Smarty_Internal_Template $template
 	 */
-	public static function start_render ( Smarty_Internal_Template $template ) {
+	public static function start_render( Smarty_Internal_Template $template ) {
 		$key                                                         = self::get_key( $template );
 		self::$template_data[ self::$index ][ $key ][ 'start_time' ] = microtime( TRUE );
 	}
@@ -423,7 +423,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	 * @param \Smarty_Internal_Template $template template
 	 * @param null                      $mode     true: display   false: fetch  null: subtemolate
 	 */
-	public static function start_template ( Smarty_Internal_Template $template, $mode = NULL ) {
+	public static function start_template( Smarty_Internal_Template $template, $mode = NULL ) {
 		if ( isset( $mode ) ) {
 			self::$index++;
 			self::$offset++;

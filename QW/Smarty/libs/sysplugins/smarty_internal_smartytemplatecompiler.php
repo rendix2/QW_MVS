@@ -62,7 +62,7 @@ class Smarty_Internal_SmartyTemplateCompiler extends Smarty_Internal_TemplateCom
 	 * @param string $parser_class class name
 	 * @param Smarty $smarty       global instance
 	 */
-	public function __construct ( $lexer_class, $parser_class, $smarty ) {
+	public function __construct( $lexer_class, $parser_class, $smarty ) {
 		$this->smarty = $smarty;
 		parent::__construct();
 		// get required plugins
@@ -77,7 +77,7 @@ class Smarty_Internal_SmartyTemplateCompiler extends Smarty_Internal_TemplateCom
 	 *
 	 * @return bool  true if compiling succeeded, false if it failed
 	 */
-	protected function doCompile ( $_content, $isTemplateSource = FALSE ) {
+	protected function doCompile( $_content, $isTemplateSource = FALSE ) {
 		/* here is where the compiling takes place. Smarty
 		  tags in the templates are replaces with PHP code,
 		  then written to compiled files. */

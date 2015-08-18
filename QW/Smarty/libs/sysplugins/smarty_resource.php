@@ -84,7 +84,7 @@ abstract class Smarty_Resource {
 	 * @return string                 template source
 	 * @throws SmartyException        if source cannot be loaded
 	 */
-	abstract public function getContent ( Smarty_Template_Source $source );
+	abstract public function getContent( Smarty_Template_Source $source );
 
 	/**
 	 * populate Source Object with meta data from Resource
@@ -92,7 +92,7 @@ abstract class Smarty_Resource {
 	 * @param Smarty_Template_Source   $source    source object
 	 * @param Smarty_Internal_Template $_template template object
 	 */
-	abstract public function populate ( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL );
+	abstract public function populate( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL );
 
 	/**
 	 * modify template_resource according to resource handlers specifications
@@ -102,7 +102,7 @@ abstract class Smarty_Resource {
 	 *
 	 * @return string unique resource name
 	 */
-	public static function getUniqueTemplateName ( $template, $template_resource ) {
+	public static function getUniqueTemplateName( $template, $template_resource ) {
 		$smarty = isset( $template->smarty ) ? $template->smarty : $template;
 		list( $name, $type ) = self::parseResourceName( $template_resource, $smarty->default_resource_type );
 		// TODO: optimize for Smarty's internal resource types
@@ -127,7 +127,7 @@ abstract class Smarty_Resource {
 	 * @throws SmartyException
 	 * @return Smarty_Resource Resource Handler
 	 */
-	public static function load ( Smarty $smarty, $type ) {
+	public static function load( Smarty $smarty, $type ) {
 		// try smarty's cache
 		if ( isset( $smarty->_resource_handlers[ $type ] ) ) {
 			return $smarty->_resource_handlers[ $type ];
@@ -197,7 +197,7 @@ abstract class Smarty_Resource {
 	 *
 	 * @return array with parsed resource name and type
 	 */
-	public static function parseResourceName ( $resource_name, $default_resource ) {
+	public static function parseResourceName( $resource_name, $default_resource ) {
 		if ( preg_match( '/^([A-Za-z0-9_\-]{2,})[:]/', $resource_name, $match ) ) {
 			$type = $match[ 1 ];
 			$name = substr( $resource_name, strlen( $match[ 0 ] ) );
@@ -224,7 +224,7 @@ abstract class Smarty_Resource {
 	 *
 	 * @return Smarty_Template_Source   Source Object
 	 */
-	public static function source ( Smarty_Internal_Template $_template = NULL, Smarty $smarty = NULL, $template_resource = NULL ) {
+	public static function source( Smarty_Internal_Template $_template = NULL, Smarty $smarty = NULL, $template_resource = NULL ) {
 		return Smarty_Template_Source::load( $_template, $smarty, $template_resource );
 	}
 
@@ -237,7 +237,7 @@ abstract class Smarty_Resource {
 	 *
 	 * @return string unique resource name
 	 */
-	public function buildUniqueResourceName ( Smarty $smarty, $resource_name, $isConfig = FALSE ) {
+	public function buildUniqueResourceName( Smarty $smarty, $resource_name, $isConfig = FALSE ) {
 		if ( $isConfig ) {
 			return get_class( $this ) . '#' . $smarty->joined_config_dir . '#' . $resource_name;
 		}
@@ -262,7 +262,7 @@ abstract class Smarty_Resource {
 	 *
 	 * @return string                 resource's basename
 	 */
-	public function getBasename ( Smarty_Template_Source $source ) {
+	public function getBasename( Smarty_Template_Source $source ) {
 		return NULL;
 	}
 
@@ -271,7 +271,7 @@ abstract class Smarty_Resource {
 	 *
 	 * @param Smarty_Template_Source $source source object
 	 */
-	public function populateTimestamp ( Smarty_Template_Source $source ) {
+	public function populateTimestamp( Smarty_Template_Source $source ) {
 		// intentionally left blank
 	}
 }

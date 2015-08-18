@@ -10,23 +10,23 @@ set_error_handler( 'error_handler' );
 set_exception_handler( 'exception_handler' );
 register_shutdown_function( 'shutdown_handler' );
 
-function assert_callcack ( $file, $line, $message ) {
+function assert_callcack( $file, $line, $message ) {
 	throw new CustomizableException( $message, NULL, $file, $line );
 }
 
-function error_handler ( $errno, $error, $file, $line, $vars ) {
+function error_handler( $errno, $error, $file, $line, $vars ) {
 	if ( $errno === 0 || ( $errno & error_reporting() ) === 0 ) return;
 
 	throw new CustomizableException( $error, $errno, $file, $line );
 }
 
-function exception_handler ( Exception $e ) {
+function exception_handler( Exception $e ) {
 	// Do what ever!
 	echo '<pre>', print_r( $e, TRUE ), '</pre>';
 	exit;
 }
 
-function shutdown_handler () {
+function shutdown_handler() {
 	try {
 		if ( NULL !== $error = error_get_last() ) throw new CustomizableException( $error[ 'message' ],
 			$error[ 'type' ], $error[ 'file' ], $error[ 'line' ] );
@@ -37,7 +37,7 @@ function shutdown_handler () {
 }
 
 class CustomizableException extends \Exception {
-	public function __construct ( $message = NULL, $code = NULL, $file = NULL, $line = NULL ) {
+	public function __construct( $message = NULL, $code = NULL, $file = NULL, $line = NULL ) {
 		if ( $code === NULL ) parent::__construct( $message );
 		else
 			parent::__construct( $message, $code );

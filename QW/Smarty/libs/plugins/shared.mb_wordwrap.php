@@ -21,7 +21,7 @@ if ( !function_exists( 'smarty_mb_wordwrap' ) ) {
 	 * @return string  wrapped string
 	 * @author Rodney Rehm
 	 */
-	function smarty_mb_wordwrap ( $str, $width = 75, $break = "\n", $cut = FALSE ) {
+	function smarty_mb_wordwrap( $str, $width = 75, $break = "\n", $cut = FALSE ) {
 		// break words into tokens using white space as a delimiter
 		$tokens =
 			preg_split( '!(\s)!S' . Smarty::$_UTF8_MODIFIER, $str, -1, PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE );

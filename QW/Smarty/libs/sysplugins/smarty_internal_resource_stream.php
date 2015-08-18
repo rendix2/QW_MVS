@@ -27,7 +27,7 @@ class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
 	 *
 	 * @return string unique resource name
 	 */
-	public function buildUniqueResourceName ( Smarty $smarty, $resource_name, $isConfig = FALSE ) {
+	public function buildUniqueResourceName( Smarty $smarty, $resource_name, $isConfig = FALSE ) {
 		return get_class( $this ) . '#' . $resource_name;
 	}
 
@@ -39,7 +39,7 @@ class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
 	 * @return string template source
 	 * @throws SmartyException if source cannot be loaded
 	 */
-	public function getContent ( Smarty_Template_Source $source ) {
+	public function getContent( Smarty_Template_Source $source ) {
 		$t = '';
 		// the availability of the stream has already been checked in Smarty_Resource::fetch()
 		$fp = fopen( $source->filepath, 'r+' );
@@ -64,7 +64,7 @@ class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
 	 *
 	 * @return void
 	 */
-	public function populate ( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
+	public function populate( Smarty_Template_Source $source, Smarty_Internal_Template $_template = NULL ) {
 		if ( strpos( $source->resource, '://' ) !== FALSE ) {
 			$source->filepath = $source->resource;
 		}

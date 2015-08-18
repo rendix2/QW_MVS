@@ -23,7 +23,7 @@ class Smarty_Internal_ParseTree_DqContent extends Smarty_Internal_ParseTree {
 	 * @param object $parser parser object
 	 * @param string $data   string section
 	 */
-	public function __construct ( $parser, $data ) {
+	public function __construct( $parser, $data ) {
 		$this->parser = $parser;
 		$this->data   = $data;
 	}
@@ -33,7 +33,7 @@ class Smarty_Internal_ParseTree_DqContent extends Smarty_Internal_ParseTree {
 	 *
 	 * @return string doubled quoted string
 	 */
-	public function to_smarty_php () {
+	public function to_smarty_php() {
 		return '"' . $this->data . '"';
 	}
 }

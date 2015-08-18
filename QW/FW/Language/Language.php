@@ -16,7 +16,7 @@ class Language extends Object implements ILanguage {
 	const PREFIX_NAME_META = '/langMeta';
 	private $langName, $lang, $meta, $allPackages;
 
-	public function __construct ( $langName ) {
+	public function __construct( $langName ) {
 		parent::__construct();
 
 		if ( !preg_match( '#^[A-Z]*$#', $langName ) ) throw new IllegalArgumentException();
@@ -46,7 +46,7 @@ class Language extends Object implements ILanguage {
 			parse_ini_file( self::PATH . $this->langName . self::PREFIX_NAME_META . $this->langName . self::EXT );
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->lang     = NULL;
 		$this->langName = NULL;
 		$this->meta     = NULL;
@@ -54,15 +54,15 @@ class Language extends Object implements ILanguage {
 		parent::__destruct();
 	}
 
-	public function languageGetAllPackages () {
+	public function languageGetAllPackages() {
 		return $this->allPackages;
 	}
 
-	public function languageGetMetaPack () {
+	public function languageGetMetaPack() {
 		return $this->meta;
 	}
 
-	public function languageGetPack () {
+	public function languageGetPack() {
 		return $this->lang;
 	}
 }

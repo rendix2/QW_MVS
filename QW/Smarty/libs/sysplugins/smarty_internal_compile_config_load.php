@@ -45,7 +45,7 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		static $_is_legal_scope = [ 'local' => TRUE, 'parent' => TRUE, 'root' => TRUE, 'global' => TRUE ];
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );

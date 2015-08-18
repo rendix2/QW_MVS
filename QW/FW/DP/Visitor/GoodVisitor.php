@@ -11,15 +11,15 @@ namespace QW\FW\DP\Visitor;
 
 class GoodVisitor implements Visitor {
 
-	function __toString () {
+	function __toString() {
 		return 'Hodný návštěvník';
 	}
 
-	public function visitCinema ( Cinema $cinema ) {
+	public function visitCinema( Cinema $cinema ) {
 		echo $this . " Je v kině";
 	}
 
-	public function visitMuseum ( Museum $museum ) {
+	public function visitMuseum( Museum $museum ) {
 		echo $this . " Je v muzeu";
 	}
 }

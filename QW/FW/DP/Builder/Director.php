@@ -11,7 +11,7 @@ namespace QW\FW\DP\Builder;
 
 class Director {
 
-	public function build ( Builder $builder ) {
+	public function build( Builder $builder ) {
 		return $builder->buildWalls()
 		               ->buildRoof()
 		               ->buildFloor()

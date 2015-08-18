@@ -13,11 +13,11 @@ class PrintCommand implements Command {
 
 	private $text;
 
-	public function __construct ( $text ) {
+	public function __construct( $text ) {
 		$this->text = $text;
 	}
 
-	public function execute () {
+	public function execute() {
 		echo $this->text;
 	}
 }

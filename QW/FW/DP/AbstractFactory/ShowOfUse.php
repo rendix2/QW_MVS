@@ -4,7 +4,7 @@ namespace QW\FW\DP\AbstractFactory;
 
 class ShowOfUse {
 
-	public function __construct () {
+	public function __construct() {
 		$carFactory  = new CarFactory();
 		$shipFactory = new ShipFactory();
 

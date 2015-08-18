@@ -33,7 +33,7 @@ class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_C
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter, $tag ) {
+	public function compile( $args, $compiler, $parameter, $tag ) {
 		if ( !isset( $tag[ 5 ] ) || substr( $tag, -5 ) != 'close' ) {
 			// opening tag of block plugin
 			// check and get attributes
@@ -87,7 +87,7 @@ class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_C
 			if ( $compiler->nocache ) {
 				$compiler->tag_nocache = TRUE;
 			}
-			$base_tag     = substr( $tag, 0, -5 );
+			$base_tag = substr( $tag, 0, -5 );
 			// closing tag of block plugin, restore nocache
 			list( $_params, $compiler->nocache ) = $this->closeTag( $compiler, $base_tag );
 			// This tag does create output

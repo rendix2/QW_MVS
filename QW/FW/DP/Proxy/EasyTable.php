@@ -6,11 +6,11 @@ class EasyTable implements Table {
 
 	private $array = [ ];
 
-	public function read ( $key ) {
+	public function read( $key ) {
 		return $this->array[ $key ];
 	}
 
-	public function write ( $key, $value ) {
+	public function write( $key, $value ) {
 		$this->array[ $key ] = $value;
 	}
 }

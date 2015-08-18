@@ -11,11 +11,11 @@ namespace QW\FW\DP\AbstractFactory;
 
 class ShipFactory implements VehicleFactory {
 
-	public function createBigVehicle () {
+	public function createBigVehicle() {
 		return new Boat();
 	}
 
-	public function createSmallVehicle () {
+	public function createSmallVehicle() {
 		return new Ferry();
 	}
 }

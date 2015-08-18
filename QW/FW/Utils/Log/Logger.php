@@ -13,7 +13,7 @@ class Logger extends Object {
 	private $path;
 	private $file;
 
-	public function __construct ( $type ) {
+	public function __construct( $type ) {
 		parent::__construct();
 
 		$this->path = './logs/';
@@ -34,14 +34,14 @@ class Logger extends Object {
 		$this->file = new File( $this->path, TRUE );
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->file = NULL;
 		$this->path = NULL;
 
 		parent::__destruct();
 	}
 
-	public function log ( $message ) {
+	public function log( $message ) {
 		$this->file->addContent( (string) $message . "\n\n" );
 	}
 }

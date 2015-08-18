@@ -40,7 +40,7 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 	 * @throws SmartyException
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 		// nocache option
@@ -141,7 +141,7 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
 	 *
 	 * @return string
 	 */
-	private function compile_output_filter ( $compiler, $name, $output ) {
+	private function compile_output_filter( $compiler, $name, $output ) {
 		$plugin_name = "smarty_variablefilter_{$name}";
 		$path = $compiler->smarty->loadPlugin( $plugin_name, FALSE );
 		if ( $path ) {

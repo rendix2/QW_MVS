@@ -71,7 +71,7 @@ class Smarty_Template_Config extends Smarty_Template_Source {
 	 * @param string          $type     type of resource
 	 * @param string          $name     resource name
 	 */
-	public function __construct ( Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name ) {
+	public function __construct( Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name ) {
 		$this->handler  = clone $handler; // Note: prone to circular references
 		$this->resource = $resource;
 		$this->type     = $type;
@@ -90,7 +90,7 @@ class Smarty_Template_Config extends Smarty_Template_Source {
 	 * @return Smarty_Template_Source Source Object
 	 * @throws SmartyException
 	 */
-	public static function load ( Smarty_Internal_Template $_template = NULL, Smarty $smarty = NULL, $template_resource = NULL ) {
+	public static function load( Smarty_Internal_Template $_template = NULL, Smarty $smarty = NULL, $template_resource = NULL ) {
 		static $_incompatible_resources = [ 'extends' => TRUE, 'php' => TRUE ];
 		$smarty            = $_template->smarty;
 		$template_resource = $_template->template_resource;

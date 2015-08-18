@@ -25,7 +25,7 @@
  *
  * @return string truncated string
  */
-function smarty_modifier_truncate ( $string, $length = 80, $etc = '...', $break_words = FALSE, $middle = FALSE ) {
+function smarty_modifier_truncate( $string, $length = 80, $etc = '...', $break_words = FALSE, $middle = FALSE ) {
 	if ( $length == 0 ) {
 		return '';
 	}

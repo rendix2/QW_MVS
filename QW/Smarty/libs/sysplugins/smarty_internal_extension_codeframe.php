@@ -21,7 +21,7 @@ class Smarty_Internal_Extension_CodeFrame {
 	 *
 	 * @return string
 	 */
-	public static function appendCode ( $left, $right ) {
+	public static function appendCode( $left, $right ) {
 		if ( preg_match( '/\s*\?>$/', $left ) && preg_match( '/^<\?php\s+/', $right ) ) {
 			$left = preg_replace( '/\s*\?>$/', "\n", $left );
 			$left .= preg_replace( '/^<\?php\s+/', '', $right );
@@ -42,7 +42,7 @@ class Smarty_Internal_Extension_CodeFrame {
 	 *
 	 * @return string
 	 */
-	public static function create ( Smarty_Internal_Template $_template, $content = '', $cache = FALSE ) {
+	public static function create( Smarty_Internal_Template $_template, $content = '', $cache = FALSE ) {
 		// build property code
 		$_template->properties[ 'has_nocache_code' ] =
 			$_template->has_nocache_code || !empty( $_template->required_plugins[ 'nocache' ] );
@@ -113,7 +113,7 @@ class Smarty_Internal_Extension_CodeFrame {
 	 *
 	 * @return string
 	 */
-	public static function createFunctionFrame ( Smarty_Internal_Template $_template, $content = '' ) {
+	public static function createFunctionFrame( Smarty_Internal_Template $_template, $content = '' ) {
 		if ( !isset( $_template->properties[ 'unifunc' ] ) ) {
 			$_template->properties[ 'unifunc' ] = 'content_' . str_replace( [ '.', ',' ], '_', uniqid( '', TRUE ) );
 		}

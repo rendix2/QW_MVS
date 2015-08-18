@@ -46,7 +46,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
 	 * @throws SmartyException
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		if ( !( $compiler->smarty instanceof SmartyBC ) ) {
 			throw new SmartyException( "{include_php} is deprecated, use SmartyBC class to enable" );
 		}

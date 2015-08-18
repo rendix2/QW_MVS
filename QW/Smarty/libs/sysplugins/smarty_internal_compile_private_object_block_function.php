@@ -34,7 +34,7 @@ class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Inter
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter, $tag, $method ) {
+	public function compile( $args, $compiler, $parameter, $tag, $method ) {
 		if ( !isset( $tag[ 5 ] ) || substr( $tag, -5 ) != 'close' ) {
 			// opening tag of block plugin
 			// check and get attributes
@@ -63,7 +63,7 @@ class Smarty_Internal_Compile_Private_Object_Block_Function extends Smarty_Inter
 				"<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}->{$method}', {$_params}); \$_block_repeat=true; echo \$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params}, null, \$_smarty_tpl, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
 		}
 		else {
-			$base_tag     = substr( $tag, 0, -5 );
+			$base_tag = substr( $tag, 0, -5 );
 			// must endblock be nocache?
 			if ( $compiler->nocache ) {
 				$compiler->tag_nocache = TRUE;

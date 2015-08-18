@@ -89,7 +89,7 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 	 * @param string $table : table (or view) name
 	 * @param string $database : optionnal - if table is located in another db
 	 */
-	public function __construct ( PDO $pdo, $table, $database = NULL ) {
+	public function __construct( PDO $pdo, $table, $database = NULL ) {
 
 		if ( is_null( $table ) ) {
 			throw new SmartyException( "Table name for caching can't be null" );
@@ -120,7 +120,7 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 	 * @return integer number of deleted caches
 	 * @access protected
 	 */
-	protected function delete ( $name = NULL, $cache_id = NULL, $compile_id = NULL, $exp_time = NULL ) {
+	protected function delete( $name = NULL, $cache_id = NULL, $compile_id = NULL, $exp_time = NULL ) {
 
 		// delete the whole cache
 		if ( $name === NULL && $cache_id === NULL && $compile_id === NULL && $exp_time === NULL ) {
@@ -180,7 +180,7 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 	 * @return void
 	 * @access protected
 	 */
-	protected function fetch ( $id, $name, $cache_id = NULL, $compile_id = NULL, &$content, &$mtime ) {
+	protected function fetch( $id, $name, $cache_id = NULL, $compile_id = NULL, &$content, &$mtime ) {
 
 		$stmt = $this->getFetchStatement( $this->fetchColumns, $id, $cache_id, $compile_id );
 		$stmt->execute();
@@ -197,7 +197,7 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 		}
 	}
 
-	protected function fillStatementsWithTableName () {
+	protected function fillStatementsWithTableName() {
 
 		foreach ( $this->fetchStatements AS &$statement ) {
 			$statement = sprintf( $statement, $this->getTableName(), '%s' );
@@ -231,7 +231,7 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 	//        return $mtime;
 	//    }
 
-	protected function getFetchStatement ( $columns, $id, $cache_id = NULL, $compile_id = NULL ) {
+	protected function getFetchStatement( $columns, $id, $cache_id = NULL, $compile_id = NULL ) {
 
 		if ( !is_null( $cache_id ) && !is_null( $compile_id ) ) {
 			$query = $this->fetchStatements[ 'withCacheIdAndCompileId' ] AND
@@ -272,7 +272,7 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 	 * @return string
 	 * @access protected
 	 */
-	protected function getTableName () {
+	protected function getTableName() {
 		return ( is_null( $this->database ) ) ? "`{$this->table}`" : "`{$this->database}`.`{$this->table}`";
 	}
 
@@ -284,11 +284,11 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 	 * @access protected
 	 */
 
-	protected function inputContent ( $content ) {
+	protected function inputContent( $content ) {
 		return $content;
 	}
 
-	protected function outputContent ( $content ) {
+	protected function outputContent( $content ) {
 		return $content;
 	}
 
@@ -305,7 +305,7 @@ class Smarty_CacheResource_Pdo extends Smarty_CacheResource_Custom {
 	 * @return boolean success
 	 * @access protected
 	 */
-	protected function save ( $id, $name, $cache_id = NULL, $compile_id = NULL, $exp_time, $content ) {
+	protected function save( $id, $name, $cache_id = NULL, $compile_id = NULL, $exp_time, $content ) {
 
 		$stmt = $this->pdo->prepare( $this->insertStatement );
 

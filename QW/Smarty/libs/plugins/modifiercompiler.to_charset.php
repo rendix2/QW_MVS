@@ -18,7 +18,7 @@
  *
  * @return string with compiled code
  */
-function smarty_modifiercompiler_to_charset ( $params ) {
+function smarty_modifiercompiler_to_charset( $params ) {
 	if ( !Smarty::$_MBSTRING ) {
 		// FIXME: (rodneyrehm) shouldn't this throw an error?
 		return $params[ 0 ];

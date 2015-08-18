@@ -39,7 +39,7 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 		if ( $_attr[ 'nocache' ] === TRUE ) {

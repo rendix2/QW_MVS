@@ -45,7 +45,7 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		$this->required_attributes = [ 'var' ];
 		$this->optional_attributes = [ 'assign' ];
 		// check and get attributes

@@ -12,7 +12,7 @@ namespace QW\FW\Sort;
 class MergeSort extends AbstractSort {
 
 
-	private function merge ( array $array, array $aux, $left, $right ) {
+	private function merge( array $array, array $aux, $left, $right ) {
 		$middle     = ( $left + $right ) / 2;
 		$leftIndex  = $left;
 		$rightIndex = (int) $middle + 1;
@@ -36,7 +36,7 @@ class MergeSort extends AbstractSort {
 		}
 	}
 
-	public function mergeSort ( array $array, array $aux, $left, $right ) {
+	public function mergeSort( array $array, array $aux, $left, $right ) {
 		if ( $left == $right ) return;
 
 		$middle = ( $left + $right ) / 2;
@@ -49,7 +49,7 @@ class MergeSort extends AbstractSort {
 		return $array;
 	}
 
-	protected function sort ( AbstractSort $sort ) {
+	protected function sort( AbstractSort $sort ) {
 		if ( $left == $right ) return;
 
 		$middle = ( $left + $right ) / 2;
@@ -62,7 +62,7 @@ class MergeSort extends AbstractSort {
 		return $array;
 	}
 
-	protected function sort ( AbstractSort $sort ) {
+	protected function sort( AbstractSort $sort ) {
 		if ( $left == $right ) return;
 
 		$middle = ( $left + $right ) / 2;

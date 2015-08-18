@@ -49,7 +49,7 @@ class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase {
 	 *
 	 * @return boolean true
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 
@@ -99,7 +99,7 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
 	 *
 	 * @return bool true
 	 */
-	public function compile ( $args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter ) {
+	public function compile( $args, Smarty_Internal_TemplateCompilerBase $compiler, $parameter ) {
 		$this->compiler = $compiler;
 		$saved_data = $this->closeTag( $compiler, [ 'function' ] );
 		$_attr          = $saved_data[ 0 ];
@@ -236,7 +236,7 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
 	 *
 	 * @return mixed
 	 */
-	function removeNocache ( $match ) {
+	function removeNocache( $match ) {
 		$code =
 			preg_replace( "/((<\?php )?echo '\/\*%%SmartyNocache:{$this->compiler->template->properties['nocache_hash']}%%\*\/)|(\/\*\/%%SmartyNocache:{$this->compiler->template->properties['nocache_hash']}%%\*\/';(\?>\n)?)/",
 				'', $match[ 0 ] );

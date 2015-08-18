@@ -78,7 +78,7 @@ class Smarty_Autoloader {
 	 *
 	 * @param string $class A class name.
 	 */
-	public static function autoload ( $class ) {
+	public static function autoload( $class ) {
 		// Request for Smarty or already unknown class
 		if ( isset( self::$unknown[ $class ] ) ) {
 			return;
@@ -118,7 +118,7 @@ class Smarty_Autoloader {
 	 *
 	 * @param bool $prepend Whether to prepend the autoloader or not.
 	 */
-	public static function register ( $prepend = FALSE ) {
+	public static function register( $prepend = FALSE ) {
 		self::$SMARTY_DIR            = defined( 'SMARTY_DIR' ) ? SMARTY_DIR : dirname( __FILE__ ) . '/';
 		self::$SMARTY_SYSPLUGINS_DIR =
 			defined( 'SMARTY_SYSPLUGINS_DIR' ) ? SMARTY_SYSPLUGINS_DIR : self::$SMARTY_DIR . 'sysplugins/';
@@ -135,7 +135,7 @@ class Smarty_Autoloader {
 	 *
 	 * @param bool $prepend Whether to prepend the autoloader or not.
 	 */
-	public static function registerBC ( $prepend = FALSE ) {
+	public static function registerBC( $prepend = FALSE ) {
 		/**
 		 * register the class autoloader
 		 */

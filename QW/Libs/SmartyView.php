@@ -8,7 +8,7 @@ class SmartyView extends BasicView {
 
 	private $smarty;
 
-	function __construct ( $cache ) {
+	function __construct( $cache ) {
 		parent::__construct();
 
 		if ( !is_bool( $cache ) ) throw new IllegalArgumentException();
@@ -20,11 +20,11 @@ class SmartyView extends BasicView {
 		$this->smarty->setCompileCheck( TRUE );
 	}
 
-	final public function getSmarty () {
+	final public function getSmarty() {
 		return $this->smarty;
 	}
 
-	public function render ( $templateName, array $data ) {
+	public function render( $templateName, array $data ) {
 		try {
 			$this->smarty->assign( $data );
 			$this->smarty->display( $templateName . '.tpl' );

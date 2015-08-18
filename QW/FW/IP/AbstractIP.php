@@ -12,7 +12,7 @@ abstract class AbstractIP extends Object implements IP {
 	protected $ipCoded;
 	protected $ipCountPart;
 
-	public function __construct ( $ip ) {
+	public function __construct( $ip ) {
 		parent::__construct();
 
 		if ( $ip == NULL ) throw new NullPointerException();
@@ -25,19 +25,19 @@ abstract class AbstractIP extends Object implements IP {
 		$this->ipCountPart = count( $this->ipParted );
 	}
 
-	public final function getIp () {
+	public final function getIp() {
 		return long2ip( $this->ipCoded );
 	}
 
-	protected final function getIpCountPart () {
+	protected final function getIpCountPart() {
 		return $this->ipCountPart;
 	}
 
-	public function getLong () {
+	public function getLong() {
 		return $this->ipCoded;
 	}
 
-	public function getPart ( $part ) {
+	public function getPart( $part ) {
 		if ( !is_numeric( $part ) ) throw new IllegalArgumentException();
 	}
 }

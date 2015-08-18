@@ -25,15 +25,15 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// check and get attributes
-		$_attr                          = $this->getAttributes( $compiler, $args );
+		$_attr      = $this->getAttributes( $compiler, $args );
 		$output = $parameter[ 'value' ];
 		// loop over list of modifiers
 		foreach ( $parameter[ 'modifierlist' ] as $single_modifier ) {
 			$modifier             = $single_modifier[ 0 ];
 			$single_modifier[ 0 ] = $output;
-			$params                     = implode( ',', $single_modifier );
+			$params = implode( ',', $single_modifier );
 			// check if we know already the type of modifier
 			if ( isset( $compiler->known_modifier_type[ $modifier ] ) ) {
 				$modifier_types = [ $compiler->known_modifier_type[ $modifier ] ];

@@ -3,7 +3,7 @@ namespace QW\FW\Sort;
 
 class ComboSort extends AbstractSort {
 
-	protected function sort ( AbstractSort $sort ) {
+	protected function sort( AbstractSort $sort ) {
 		$swapped = FALSE;
 		$gap     = $this->length;
 

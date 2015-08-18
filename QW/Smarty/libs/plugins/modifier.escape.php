@@ -23,7 +23,7 @@
  *
  * @return string escaped input string
  */
-function smarty_modifier_escape ( $string, $esc_type = 'html', $char_set = NULL, $double_encode = TRUE ) {
+function smarty_modifier_escape( $string, $esc_type = 'html', $char_set = NULL, $double_encode = TRUE ) {
 	static $_double_encode = NULL;
 	if ( $_double_encode === NULL ) {
 		$_double_encode = version_compare( PHP_VERSION, '5.2.3', '>=' );

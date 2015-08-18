@@ -58,7 +58,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 	 * @throws SmartyCompilerException
 	 * @return string compiled code
 	 */
-	public function compile ( $args, Smarty_Internal_SmartyTemplateCompiler $compiler, $parameter ) {
+	public function compile( $args, Smarty_Internal_SmartyTemplateCompiler $compiler, $parameter ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 
@@ -205,7 +205,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 				$tpl = new $compiler->smarty->template_class ( $tpl_name, $compiler->smarty, $compiler->template,
 					$compiler->template->cache_id, $c_id, $_caching );
 				// save unique function name
-				$compiler->parent_compiler->mergedSubTemplatesData[ $tpl_name ][ $uid ][ 'func' ]             =
+				$compiler->parent_compiler->mergedSubTemplatesData[ $tpl_name ][ $uid ][ 'func' ] =
 				$tpl->properties[ 'unifunc' ] = 'content_' . str_replace( [ '.', ',' ], '_', uniqid( '', TRUE ) );
 				if ( $compiler->inheritance ) {
 					$tpl->compiler->inheritance = TRUE;

@@ -25,7 +25,7 @@ require_once( SMARTY_PLUGINS_DIR . 'shared.literal_compiler_param.php' );
  *
  * @return string with compiled code
  */
-function smarty_modifiercompiler_escape ( $params, $compiler ) {
+function smarty_modifiercompiler_escape( $params, $compiler ) {
 	static $_double_encode = NULL;
 	if ( $_double_encode === NULL ) {
 		$_double_encode = version_compare( PHP_VERSION, '5.2.3', '>=' );

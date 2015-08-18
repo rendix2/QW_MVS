@@ -26,7 +26,7 @@ class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File {
 	/**
 	 * Create a new PHP Resource
 	 */
-	public function __construct () {
+	public function __construct() {
 		$this->short_open_tag = ini_get( 'short_open_tag' );
 	}
 
@@ -38,7 +38,7 @@ class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File {
 	 * @return string                 template source
 	 * @throws SmartyException        if source cannot be loaded
 	 */
-	public function getContent ( Smarty_Template_Source $source ) {
+	public function getContent( Smarty_Template_Source $source ) {
 		if ( $source->timestamp ) {
 			return '';
 		}
@@ -51,7 +51,7 @@ class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File {
 	 * @param Smarty_Template_Compiled $compiled  compiled object
 	 * @param Smarty_Internal_Template $_template template object (is ignored)
 	 */
-	public function populateCompiledFilepath ( Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template ) {
+	public function populateCompiledFilepath( Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template ) {
 		$compiled->filepath  = FALSE;
 		$compiled->timestamp = FALSE;
 		$compiled->exists    = FALSE;
@@ -66,7 +66,7 @@ class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File {
 	 * @return void
 	 * @throws SmartyException          if template cannot be loaded or allow_php_templates is disabled
 	 */
-	public function renderUncompiled ( Smarty_Template_Source $source, Smarty_Internal_Template $_template ) {
+	public function renderUncompiled( Smarty_Template_Source $source, Smarty_Internal_Template $_template ) {
 		if ( !$source->smarty->allow_php_templates ) {
 			throw new SmartyException( "PHP templates are disabled" );
 		}

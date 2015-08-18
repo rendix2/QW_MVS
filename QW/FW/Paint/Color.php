@@ -13,7 +13,7 @@ final class Color extends Object {
 	const RED = 0xFF0000;
 	private $red, $green, $blue;
 
-	public function __construct ( $red, $green, $blue ) {
+	public function __construct( $red, $green, $blue ) {
 		parent::__construct();
 
 		if ( $red < -1 || $red >= 256 ) throw new IllegalArgumentException( 'Červená je mimo rozsah.' );
@@ -27,7 +27,7 @@ final class Color extends Object {
 		$this->blue  = $blue;
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->red   = NULL;
 		$this->green = NULL;
 		$this->blue  = NULL;
@@ -35,20 +35,20 @@ final class Color extends Object {
 		parent::__destruct();
 	}
 
-	public function getBlue () {
+	public function getBlue() {
 		return $this->blue;
 	}
 
-	public function getGreen () {
+	public function getGreen() {
 		return $this->green;
 	}
 
-	public function getRGB () {
+	public function getRGB() {
 		return (int) Math::decimalToHexadecimal( $this->red ) . Math::decimalToHexadecimal( $this->green ) .
 		Math::decimalToHexadecimal( $this->blue );
 	}
 
-	public function getRed () {
+	public function getRed() {
 		return $this->red;
 	}
 }

@@ -11,7 +11,7 @@ namespace QW\FW\DP\Visitor;
 
 class ShowOfUse {
 
-	public function __construct () {
+	public function __construct() {
 		$goodVisit = new GoodVisitor();
 		$badVisit  = new BadVisitor();
 

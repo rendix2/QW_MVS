@@ -13,7 +13,7 @@ class Smarty_Internal_Extension_Config {
 	 * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance
 	 *                              for chaining
 	 */
-	static function clearConfig ( $obj, $name = NULL ) {
+	static function clearConfig( $obj, $name = NULL ) {
 		if ( isset( $name ) ) {
 			unset( $obj->config_vars[ $name ] );
 		}
@@ -30,7 +30,7 @@ class Smarty_Internal_Extension_Config {
 	 * @param null   $sections
 	 * @param string $scope
 	 */
-	static function configLoad ( $obj, $config_file, $sections = NULL, $scope = 'local' ) {
+	static function configLoad( $obj, $config_file, $sections = NULL, $scope = 'local' ) {
 		$smarty                           = isset( $obj->smarty ) ? $obj->smarty : $obj;
 		$confObj = new $smarty->template_class( $config_file, $smarty, $obj );
 		$confObj->caching                 = Smarty::CACHING_OFF;
@@ -59,7 +59,7 @@ class Smarty_Internal_Extension_Config {
 	 *
 	 * @return mixed  the value of the config variable
 	 */
-	static function getConfigVariable ( $obj, $variable, $error_enable = TRUE ) {
+	static function getConfigVariable( $obj, $variable, $error_enable = TRUE ) {
 		$_ptr = $obj;
 		while ( $_ptr !== NULL ) {
 			if ( isset( $_ptr->config_vars[ $variable ] ) ) {
@@ -85,7 +85,7 @@ class Smarty_Internal_Extension_Config {
 	 *
 	 * @return string variable value or or array of variables
 	 */
-	static function getConfigVars ( $obj, $varname = NULL, $search_parents = TRUE ) {
+	static function getConfigVars( $obj, $varname = NULL, $search_parents = TRUE ) {
 		$_ptr      = $obj;
 		$var_array = [ ];
 		while ( $_ptr !== NULL ) {
@@ -121,7 +121,7 @@ class Smarty_Internal_Extension_Config {
 	 *
 	 * @throws Exception
 	 */
-	static function loadConfigVars ( $_template, $_config_vars ) {
+	static function loadConfigVars( $_template, $_config_vars ) {
 		$scope = $_template->source->scope;
 		// pointer to scope (local scope is parent of template object
 		$scope_ptr = $_template->parent;

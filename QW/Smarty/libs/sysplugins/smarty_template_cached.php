@@ -104,7 +104,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @param Smarty_Internal_Template $_template template object
 	 */
-	public function __construct ( Smarty_Internal_Template $_template ) {
+	public function __construct( Smarty_Internal_Template $_template ) {
 		$this->compile_id = $_template->compile_id;
 		$this->cache_id   = $_template->cache_id;
 		if ( !isset( $_template->source ) ) {
@@ -122,7 +122,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @return Smarty_Template_Cached
 	 */
-	static function load ( Smarty_Internal_Template $_template ) {
+	static function load( Smarty_Internal_Template $_template ) {
 		$_template->cached = $cached = new Smarty_Template_Cached( $_template );
 		$cached->handler->populate( $cached, $_template );
 		// caching enabled ?
@@ -141,7 +141,7 @@ class Smarty_Template_Cached {
 	 * @param Smarty_Internal_Template $_template
 	 * @param  string                  $content
 	 */
-	public function cacheModifiedCheck ( Smarty_Internal_Template $_template, $content ) {
+	public function cacheModifiedCheck( Smarty_Internal_Template $_template, $content ) {
 		$_isCached           = $_template->isCached() && !$_template->has_nocache_code;
 		$_last_modified_date = @substr( $_SERVER[ 'HTTP_IF_MODIFIED_SINCE' ], 0,
 			strpos( $_SERVER[ 'HTTP_IF_MODIFIED_SINCE' ], 'GMT' ) + 3 );
@@ -188,7 +188,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @return bool flag true if cache is valid
 	 */
-	public function isCached ( Smarty_Internal_Template $_template ) {
+	public function isCached( Smarty_Internal_Template $_template ) {
 		if ( $this->valid !== NULL ) {
 			return $this->valid;
 		}
@@ -270,7 +270,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @param Smarty_Internal_Template $_template template object
 	 */
-	public function process ( Smarty_Internal_Template $_template ) {
+	public function process( Smarty_Internal_Template $_template ) {
 		if ( $this->handler->process( $_template, $this ) === FALSE ) {
 			$this->valid = FALSE;
 		}
@@ -289,7 +289,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @return string content
 	 */
-	public function read ( Smarty_Internal_Template $_template ) {
+	public function read( Smarty_Internal_Template $_template ) {
 		if ( !$_template->source->recompiled ) {
 			return $this->handler->readCachedContent( $_template );
 		}
@@ -305,7 +305,7 @@ class Smarty_Template_Cached {
 	 * @return string
 	 * @throws Exception
 	 */
-	public function render ( Smarty_Internal_Template $_template ) {
+	public function render( Smarty_Internal_Template $_template ) {
 		if ( !$this->processed ) {
 			$this->process( $_template );
 		}
@@ -322,7 +322,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @throws SmartyException
 	 */
-	public function updateCache ( Smarty_Internal_Template $_template, $content, $no_output_filter ) {
+	public function updateCache( Smarty_Internal_Template $_template, $content, $no_output_filter ) {
 		$_template->properties[ 'has_nocache_code' ] = FALSE;
 		// get text between non-cached items
 		$cache_split =
@@ -360,7 +360,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @return boolean success
 	 */
-	public function write ( Smarty_Internal_Template $_template, $content ) {
+	public function write( Smarty_Internal_Template $_template, $content ) {
 		if ( !$_template->source->recompiled ) {
 			if ( $this->handler->writeCachedContent( $_template, $content ) ) {
 				$this->content   = NULL;
@@ -392,7 +392,7 @@ class Smarty_Template_Cached {
 	 *
 	 * @return bool
 	 */
-	public function writeCachedContent ( Smarty_Internal_Template $_template, $content ) {
+	public function writeCachedContent( Smarty_Internal_Template $_template, $content ) {
 		if ( $_template->source->recompiled || !( $_template->caching == Smarty::CACHING_LIFETIME_CURRENT ||
 				$_template->caching == Smarty::CACHING_LIFETIME_SAVED )
 		) {

@@ -47,7 +47,7 @@ class Smarty_Template_Compiled {
 	/**
 	 * create Compiled Object container
 	 */
-	public function __construct () {
+	public function __construct() {
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Smarty_Template_Compiled {
 	 *
 	 * @return Smarty_Template_Compiled compiled object
 	 */
-	static function load ( $_template ) {
+	static function load( $_template ) {
 		if ( !isset( $_template->source ) ) {
 			$_template->loadSource();
 		}
@@ -95,7 +95,7 @@ class Smarty_Template_Compiled {
 	 * @return string
 	 * @throws Exception
 	 */
-	public function compileTemplateSource ( Smarty_Internal_Template $_template ) {
+	public function compileTemplateSource( Smarty_Internal_Template $_template ) {
 		if ( !$_template->source->recompiled ) {
 			$_template->properties[ 'file_dependency' ] = [ ];
 		}
@@ -133,7 +133,7 @@ class Smarty_Template_Compiled {
 	 *
 	 * @param Smarty_Internal_Template $_template template object
 	 **/
-	public function populateCompiledFilepath ( Smarty_Internal_Template $_template ) {
+	public function populateCompiledFilepath( Smarty_Internal_Template $_template ) {
 		$_compile_id =
 			isset( $_template->compile_id ) ? preg_replace( '![^\w\|]+!', '_', $_template->compile_id ) : NULL;
 		if ( $_template->source->isConfig ) {
@@ -165,7 +165,7 @@ class Smarty_Template_Compiled {
 		}
 		$_compile_dir = $_template->smarty->getCompileDir();
 		// add basename if not specified
-		$_basename       = $_template->source->handler->getBasename( $_template->source );
+		$_basename = $_template->source->handler->getBasename( $_template->source );
 		if ( $_basename === NULL ) {
 			$_basename = basename( preg_replace( '![^\w\/]+!', '_', $_template->source->name ) );
 		}
@@ -188,7 +188,7 @@ class Smarty_Template_Compiled {
 	 *
 	 * @throws Exception
 	 */
-	public function process ( Smarty_Internal_Template $_template ) {
+	public function process( Smarty_Internal_Template $_template ) {
 		$_smarty_tpl = $_template;
 		if ( $_template->source->recompiled || !$_template->compiled->exists || $_template->smarty->force_compile ) {
 			$this->compileTemplateSource( $_template );
@@ -235,7 +235,7 @@ class Smarty_Template_Compiled {
 	 *
 	 * @return string content
 	 */
-	public function read ( Smarty_Internal_Template $_template ) {
+	public function read( Smarty_Internal_Template $_template ) {
 		if ( !$_template->source->recompiled ) {
 			return file_get_contents( $this->filepath );
 		}
@@ -251,7 +251,7 @@ class Smarty_Template_Compiled {
 	 * @return string
 	 * @throws Exception
 	 */
-	public function render ( Smarty_Internal_Template $_template ) {
+	public function render( Smarty_Internal_Template $_template ) {
 
 		if ( !$this->processed ) {
 			$this->process( $_template );
@@ -269,7 +269,7 @@ class Smarty_Template_Compiled {
 	 *
 	 * @return boolean success
 	 */
-	public function write ( Smarty_Internal_Template $_template, $code ) {
+	public function write( Smarty_Internal_Template $_template, $code ) {
 		if ( !$_template->source->recompiled ) {
 			$obj = new Smarty_Internal_Write_File();
 			if ( $obj->writeFile( $this->filepath, $code, $_template->smarty ) === TRUE ) {

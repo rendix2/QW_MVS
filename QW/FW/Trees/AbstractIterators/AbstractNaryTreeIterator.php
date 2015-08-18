@@ -6,9 +6,9 @@ use QW\FW\Trees\Nary\NaryTree;
 
 abstract class AbstractNaryTreeIterator extends AbstractTreeIterator {
 
-	abstract protected function order ( NaryTree $root );
+	abstract protected function order( NaryTree $root );
 
-	public function __construct ( NaryTree $root ) {
+	public function __construct( NaryTree $root ) {
 		parent::__construct();
 
 		$this->realRoot = $root;

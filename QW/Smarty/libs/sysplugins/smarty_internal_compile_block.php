@@ -65,7 +65,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 	 * @param        $compiler
 	 * @param string $source source text
 	 */
-	static function blockSource ( $compiler, $source ) {
+	static function blockSource( $compiler, $source ) {
 		Smarty_Internal_Compile_Block::$block_data[ Smarty_Internal_Compile_Block::$nested_block_names[ 0 ] ][ 'source' ] .= $source;
 	}
 
@@ -77,7 +77,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string   compiled code of child block
 	 */
-	static function compileChildBlock ( $compiler, $_name = NULL ) {
+	static function compileChildBlock( $compiler, $_name = NULL ) {
 		if ( $compiler->inheritance_child ) {
 			$name1 = Smarty_Internal_Compile_Block::$nested_block_names[ 0 ];
 			if ( isset( $compiler->template->block_data[ $name1 ] ) ) {
@@ -177,7 +177,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string   compiled code of child block
 	 */
-	static function compileParentBlock ( $compiler, $_name = NULL ) {
+	static function compileParentBlock( $compiler, $_name = NULL ) {
 		// if called by {$smarty.block.parent} we must search the name of enclosing {block}
 		if ( $_name == NULL ) {
 			$stack_count = count( $compiler->_tag_stack );
@@ -211,7 +211,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 	 *
 	 * @return boolean true
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 		$_name = trim( $_attr[ 'name' ], "\"'" );
@@ -276,7 +276,7 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		$compiler->has_code = TRUE;
 		// check and get attributes
 		$_attr      = $this->getAttributes( $compiler, $args );
@@ -407,7 +407,7 @@ class Smarty_Internal_Compile_Private_Child_Block extends Smarty_Internal_Compil
 	 *
 	 * @return boolean true
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 
@@ -457,7 +457,7 @@ class Smarty_Internal_Compile_Private_Child_Blockclose extends Smarty_Internal_C
 	 *
 	 * @return boolean true
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 

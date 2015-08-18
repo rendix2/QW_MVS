@@ -6,13 +6,13 @@ interface IUser {
 	const ADMIN = 'admin';
 	const USER = 'user';
 
-	public function getIP ();
+	public function getIP();
 
-	public function getTemplate ();
+	public function getTemplate();
 
-	public function getUserId ();
+	public function getUserId();
 
-	public function getUserName ();
+	public function getUserName();
 
-	public function isLogged ();
+	public function isLogged();
 }

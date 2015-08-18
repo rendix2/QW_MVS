@@ -11,14 +11,14 @@ namespace QW\FW\DP\Builder;
 
 interface Builder {
 
-	public function buildFloor ();
+	public function buildFloor();
 
-	public function buildRoof ();
+	public function buildRoof();
 
-	public function buildWalls ();
+	public function buildWalls();
 
-	public function getResult ();
+	public function getResult();
 
-	public function __construct ();
+	public function __construct();
 
 }

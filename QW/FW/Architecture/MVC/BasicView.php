@@ -16,14 +16,14 @@ class BasicView extends Object {
 	protected $tableData;
 	protected $pageName;
 
-	public function __construct () {
+	public function __construct() {
 		parent::__construct();
 
 		$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default/';
 		$this->pageName = "";
 	}
 
-	public function __destruct () {
+	public function __destruct() {
 		$this->pathToTemplate = NULL;
 		$this->tableData      = NULL;
 		$this->pageName       = NULL;
@@ -31,23 +31,23 @@ class BasicView extends Object {
 		parent::__destruct();
 	}
 
-	final public function getPageName () {
+	final public function getPageName() {
 		return $this->pageName;
 	}
 
-	final public function setPageName ( $pageName ) {
+	final public function setPageName( $pageName ) {
 		$this->pageName = $pageName;
 	}
 
-	final public function getTableData () {
+	final public function getTableData() {
 		return $this->tableData;
 	}
 
-	final public function setTableData ( array $table ) {
+	final public function setTableData( array $table ) {
 		$this->tableData = $table;
 	}
 
-	public function render ( $name, $include = FALSE ) {
+	public function render( $name, $include = FALSE ) {
 		try {
 			if ( $include == TRUE ) if ( file_exists( $this->pathToTemplate . $name .
 				'.php' ) ) include_once( $this->pathToTemplate . $name . '.php' );

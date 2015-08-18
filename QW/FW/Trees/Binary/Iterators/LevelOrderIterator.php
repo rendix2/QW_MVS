@@ -9,12 +9,12 @@ class LevelOrderIterator extends AbstractBinaryTreeIterator {
 
 	private $queue;
 
-	public function __construct ( BinaryTree $root ) {
+	public function __construct( BinaryTree $root ) {
 		$this->queue = new \SplQueue();
 		parent::__construct( $root );
 	}
 
-	protected function order ( BinaryTree $root = NULL ) {
+	protected function order( BinaryTree $root = NULL ) {
 		if ( $root == NULL || $this->realRoot == $root ) return;
 
 		$this->queue->enqueue( $root );

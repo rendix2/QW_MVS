@@ -24,7 +24,7 @@ class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 		$this->openTag( $compiler, 'if', [ 1, $compiler->nocache ] );
@@ -97,7 +97,7 @@ class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		list( $nesting, $compiler->tag_nocache ) = $this->closeTag( $compiler, [ 'if', 'elseif' ] );
 		$this->openTag( $compiler, 'else', [ $nesting, $compiler->tag_nocache ] );
 
@@ -121,7 +121,7 @@ class Smarty_Internal_Compile_Elseif extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// check and get attributes
 		$_attr   = $this->getAttributes( $compiler, $args );
 
@@ -240,7 +240,7 @@ class Smarty_Internal_Compile_Ifclose extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler, $parameter ) {
+	public function compile( $args, $compiler, $parameter ) {
 		// must endblock be nocache?
 		if ( $compiler->nocache ) {
 			$compiler->tag_nocache = TRUE;

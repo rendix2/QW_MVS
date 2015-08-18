@@ -38,7 +38,7 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		// check and get attributes
 		$_attr   = $this->getAttributes( $compiler, $args );
 
@@ -70,7 +70,7 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
 	 *
 	 * @return string compiled code
 	 */
-	public function compile ( $args, $compiler ) {
+	public function compile( $args, $compiler ) {
 		// check and get attributes
 		$_attr = $this->getAttributes( $compiler, $args );
 		// must endblock be nocache?

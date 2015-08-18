@@ -139,7 +139,7 @@ class Smarty_Template_Source {
 	 *
 	 * @internal param string $unique_resource unique resource name
 	 */
-	public function __construct ( Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name ) {
+	public function __construct( Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name ) {
 		$this->handler = $handler; // Note: prone to circular references
 
 		$this->recompiled            = $handler->recompiled;
@@ -162,7 +162,7 @@ class Smarty_Template_Source {
 	 * @return mixed
 	 * @throws SmartyException if $property_name is not valid
 	 */
-	public function __get ( $property_name ) {
+	public function __get( $property_name ) {
 		switch ( $property_name ) {
 			case 'timestamp':
 			case 'exists':
@@ -186,7 +186,7 @@ class Smarty_Template_Source {
 	 *
 	 * @throws SmartyException if $property_name is not valid
 	 */
-	public function __set ( $property_name, $value ) {
+	public function __set( $property_name, $value ) {
 		switch ( $property_name ) {
 			// regular attributes
 			case 'timestamp':
@@ -213,7 +213,7 @@ class Smarty_Template_Source {
 	 * @return Smarty_Template_Source Source Object
 	 * @throws SmartyException
 	 */
-	public static function load ( Smarty_Internal_Template $_template = NULL, Smarty $smarty = NULL, $template_resource = NULL ) {
+	public static function load( Smarty_Internal_Template $_template = NULL, Smarty $smarty = NULL, $template_resource = NULL ) {
 		if ( $_template ) {
 			$smarty            = $_template->smarty;
 			$template_resource = $_template->template_resource;
@@ -271,7 +271,7 @@ class Smarty_Template_Source {
 	 *
 	 * @param Smarty_Internal_Template $_template template object
 	 */
-	public function renderUncompiled ( Smarty_Internal_Template $_template ) {
+	public function renderUncompiled( Smarty_Internal_Template $_template ) {
 		$level = ob_get_level();
 		ob_start();
 		try {

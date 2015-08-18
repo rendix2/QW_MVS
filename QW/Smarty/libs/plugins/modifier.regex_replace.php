@@ -22,7 +22,7 @@
  *
  * @return string
  */
-function smarty_modifier_regex_replace ( $string, $search, $replace ) {
+function smarty_modifier_regex_replace( $string, $search, $replace ) {
 	if ( is_array( $search ) ) {
 		foreach ( $search as $idx => $s ) {
 			$search[ $idx ] = _smarty_regex_replace_check( $s );
@@ -41,7 +41,7 @@ function smarty_modifier_regex_replace ( $string, $search, $replace ) {
  * @return string
  * @ignore
  */
-function _smarty_regex_replace_check ( $search ) {
+function _smarty_regex_replace_check( $search ) {
 	// null-byte injection detection
 	// anything behind the first null-byte is ignored
 	if ( ( $pos = strpos( $search, "\0" ) ) !== FALSE ) {

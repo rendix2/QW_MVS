@@ -49,7 +49,7 @@ abstract class Smarty_Internal_CompileBase {
 	 *
 	 * @return mixed        any type the opening tag's name or saved data
 	 */
-	public function closeTag ( $compiler, $expectedTag ) {
+	public function closeTag( $compiler, $expectedTag ) {
 		if ( count( $compiler->_tag_stack ) > 0 ) {
 			// get stacked info
 			list( $_openTag, $_data ) = array_pop( $compiler->_tag_stack );
@@ -88,7 +88,7 @@ abstract class Smarty_Internal_CompileBase {
 	 *
 	 * @return array  of mapped attributes for further processing
 	 */
-	public function getAttributes ( $compiler, $attributes ) {
+	public function getAttributes( $compiler, $attributes ) {
 		$_indexed_attr = [ ];
 		// loop over attributes
 		foreach ( $attributes as $key => $mixed ) {
@@ -179,7 +179,7 @@ abstract class Smarty_Internal_CompileBase {
 	 * @param string $openTag  the opening tag's name
 	 * @param mixed  $data     optional data saved
 	 */
-	public function openTag ( $compiler, $openTag, $data = NULL ) {
+	public function openTag( $compiler, $openTag, $data = NULL ) {
 		array_push( $compiler->_tag_stack, [ $openTag, $data ] );
 	}
 }

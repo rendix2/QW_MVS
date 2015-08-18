@@ -9,12 +9,12 @@ class LevelOrderIterator extends AbstractNaryTreeIterator {
 
 	private $queue;
 
-	public function __construct ( NaryTree $root ) {
+	public function __construct( NaryTree $root ) {
 		$this->queue = new \SplQueue();
 		parent::__construct( $root );
 	}
 
-	protected function order ( NaryTree $root = NULL ) {
+	protected function order( NaryTree $root = NULL ) {
 		if ( $root == NULL || $this->realRoot == $root ) return;
 
 		$this->queue->enqueue( $root );

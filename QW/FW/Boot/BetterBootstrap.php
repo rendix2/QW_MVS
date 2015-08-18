@@ -9,7 +9,7 @@ class BetterBootstrap extends AbstractRouter {
 	private $enabledRoutes;
 	private $urlDelimiter;
 
-	public function __construct ( $urlDelimiter = Config::URL_DELIMITER ) {
+	public function __construct( $urlDelimiter = Config::URL_DELIMITER ) {
 		$this->$urlDelimiter = $urlDelimiter;
 		$this->enabledRoutes = [ ];
 
@@ -23,29 +23,29 @@ class BetterBootstrap extends AbstractRouter {
 		parent::__destruct();
 	}
 
-	public function addRoute ( $route ) {
+	public function addRoute( $route ) {
 		$this->enabledRoutes[] = $route;
 	}
 
-	protected function callControllerMethod () {
+	protected function callControllerMethod() {
 		if ( in_array( $this->params[ 0 ], $this->enabledRoutes ) ) $this->callControllerMethod();
 		else
 			throw new IllegalArgumentException();
 	}
 
-	protected function loadMVC () {
+	protected function loadMVC() {
 		// TODO: Implement loadMVC() method.
 	}
 
-	protected function loadMVP () {
+	protected function loadMVP() {
 		// TODO: Implement loadMVP() method.
 	}
 
-	protected function loadMy () {
+	protected function loadMy() {
 		// TODO: Implement loadMy() method.
 	}
 
-	protected function setParams () {
+	protected function setParams() {
 		$this->url    = isset( $_GET[ 'URL' ] ) ? $_GET[ 'URL' ] : NULL;
 		$this->params = rtrim( $this->url, $this->$urlDelimiter );
 		$this->params = explode( $this->$urlDelimiter, $this->params );

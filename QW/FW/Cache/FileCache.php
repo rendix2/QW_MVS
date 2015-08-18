@@ -9,7 +9,7 @@ final class FileCache extends Object implements ICache {
 	const PATH = './cache/';
 	private $file;
 
-	public function __construct ( $fileName ) {
+	public function __construct( $fileName ) {
 		parent::__construct();
 
 		if ( !preg_match( '#^[a-zA-Z0-9-]#$', $fileName ) ) throw new IllegalArgumentException();
@@ -17,15 +17,15 @@ final class FileCache extends Object implements ICache {
 		$this->file = new File( self::PATH . $fileName );
 	}
 
-	public function addCache ( $data ) {
+	public function addCache( $data ) {
 		return $this->file->setContent( self::PATH . $this->file->path(), serialize( $data ), FILE_APPEND );
 	}
 
-	public function removeCache () {
+	public function removeCache() {
 		return $this->file->delete();
 	}
 
-	public function useCache () {
+	public function useCache() {
 		return unserialize( $this->file->getContent() );
 	}
 }

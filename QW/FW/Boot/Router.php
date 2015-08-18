@@ -7,7 +7,7 @@ class Router extends AbstractRouter {
 	private $method;
 	private $params;
 
-	public function __construct () {
+	public function __construct() {
 		// init
 		$this->controller = 'Index';
 		$this->method     = 'index';
@@ -24,11 +24,10 @@ class Router extends AbstractRouter {
 		parent::__destruct();
 	}
 
-
-	protected function loadMVP () {
+	protected function loadMVP() {
 	}
 
-	protected final function loadMvc () {
+	protected final function loadMvc() {
 		$url = $this->parseUrl();
 
 		if ( file_exists( './Controllers/' . $url[ 0 ] . '.php' ) ) {
@@ -49,10 +48,10 @@ class Router extends AbstractRouter {
 		call_user_func_array( [ $this->controller, $this->method ], $this->params );
 	}
 
-	protected function loadMy () {
+	protected function loadMy() {
 	}
 
-	private function parseUrl () {
+	private function parseUrl() {
 		if ( isset( $_GET[ 'url' ] ) ) return explode( '/',
 			filter_var( rtrim( $_GET[ 'url' ], '/' ), FILTER_SANITIZE_URL ) );
 	}

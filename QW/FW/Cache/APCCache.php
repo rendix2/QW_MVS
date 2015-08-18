@@ -9,7 +9,7 @@ use QW\FW\Boot\IllegalArgumentException;
 final class APCCache extends Object implements ICache {
 	private $key;
 
-	public function __construct ( $key ) {
+	public function __construct( $key ) {
 		parent::__construct();
 
 		if ( apc_exists( $key ) ) throw new IllegalArgumentException( 'Klíč již existuje, zvolte jiný.' );
@@ -17,15 +17,15 @@ final class APCCache extends Object implements ICache {
 		$this->key = $key;
 	}
 
-	public function addCache ( $data ) {
+	public function addCache( $data ) {
 		return apc_add( $this->key, $data );
 	}
 
-	public function removeCache () {
+	public function removeCache() {
 		return apc_delete( $this->key );
 	}
 
-	public function useCache () {
+	public function useCache() {
 		return apc_fetch( $this->key );
 	}
 }

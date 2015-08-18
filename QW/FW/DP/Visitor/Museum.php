@@ -11,7 +11,7 @@ namespace QW\FW\DP\Visitor;
 
 class Museum implements Place {
 
-	public function accept ( Visitor $visitor ) {
+	public function accept( Visitor $visitor ) {
 		echo 'Do muzea šel: ' . $visitor;
 		$visitor->visitMuseum( $this );
 	}

@@ -16,7 +16,7 @@ abstract class AbstractBasicController extends Object {
 	public function __construct( $name ) {
 		parent::__construct();
 
-		$c = '\\QW\\Models\\' . $name;
+		$c = '\\QW\\Models\\' . $name . 'Model';
 
 		//$this->view = new SmartyView();
 		$this->view     = new BasicView();

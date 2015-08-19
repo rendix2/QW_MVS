@@ -13,7 +13,9 @@ class Router extends AbstractRouter {
 		$this->method     = 'index';
 		$this->params     = [ ];
 
-		parent::__construct();
+		//parent::__construct();
+
+
 	}
 
 	function __destruct() {
@@ -30,12 +32,20 @@ class Router extends AbstractRouter {
 	protected final function loadMvc() {
 		$url = $this->parseUrl();
 
-		if ( file_exists( './Controllers/' . $url[ 0 ] . '.php' ) ) {
-			$this->controller = $url[ 0 ];
+		if ( empty( $url ) ) $url = $this->controller;
+
+		//require_once('./QW/FW/Architecture/MVC/AbstractBasicController.php');
+		//require_once('./QW/FW/Architecture/MVC/AbstractBasicModel.php');
+		//require_once('./QW/FW/Architecture/MVC/BasicView.php');
+
+		if ( file_exists( './QW/Controllers/' . $url[ 0 ] . 'Controller.php' ) ) {
+			$this->controller = 'QW\\Controllers\\' . $url[ 0 ] . 'Controller';
 			unset( $url[ 0 ] );
+
+			echo $this->controller;
 		}
 
-		require_once( './Controllers/' . $this->controller . '.php' );
+		require_once( './QW/Controllers/' . $this->controller . 'Controller.php' );
 
 		$this->controller = new $this->controller;
 

@@ -3,7 +3,6 @@
 namespace QW\FW\Boot;
 
 use QW\FW\Basic\Object;
-use QW\FW\Utils\Log\Logger;
 
 abstract class AbstractRouter extends Object {
 
@@ -16,7 +15,7 @@ abstract class AbstractRouter extends Object {
 	public function __construct() {
 		parent::__construct();
 
-		require_once( './Exception.php' );
+		require_once( './QW/FW/Boot/Exception.php' );
 		require_once( './QW/Smarty/libs/Smarty.class.php' );
 		$this->route();
 	}
@@ -27,9 +26,11 @@ abstract class AbstractRouter extends Object {
 		$load = function ( $class ) {
 
 			// don't load Controller or Model by this
-			if ( preg_match( '#Controller|Model$#', $class ) ) return -2;
+			//if ( preg_match( '#Controller|Model$#', $class ) ) return -2;
 
 			// manual Smarty load
+			if ( preg_match( '#Smarty#', $class ) ) return -3;
+
 			if ( strpos( 'Smarty', $class ) ) return -1;
 
 			// parse namespace
@@ -41,8 +42,8 @@ abstract class AbstractRouter extends Object {
 			else {
 				$message = 'Error from ' . self::getStaticClassName() . ': File: ' . $path . ' doesn\'t exists<br>';
 
-				$logger = new Logger( Logger::LOG_TYPE_FILE );
-				$logger->log( $message );
+				//$logger = new Logger( Logger::LOG_TYPE_FILE );
+				//$logger->log( $message );
 
 				die( $message );
 			}
@@ -51,7 +52,7 @@ abstract class AbstractRouter extends Object {
 		};
 
 		try {
-			spl_autoload_register( $load );
+			spl_autoload_register( $load, TRUE );
 		}
 		catch ( \Exception $e ) {
 			echo $e->getMessage();

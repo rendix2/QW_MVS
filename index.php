@@ -3,8 +3,8 @@
 include( './autoLoader.php' );
 include( './debug.php' );
 
-use QW\FW\Boot\Router;
+use QW\FW\Boot\Bootstrap;
 
-$quickWeb = new Router();
+$quickWeb = new Bootstrap();
 
 ?>

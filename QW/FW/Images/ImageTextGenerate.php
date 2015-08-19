@@ -2,9 +2,9 @@
 
 namespace QW\FW\Images;
 
-use QW\FW\Basic\NullPointerException;
 use QW\FW\Basic\Object;
-use QW\FW\Basic\RuntimeException;
+use QW\FW\Boot\NullPointerException;
+use QW\FW\Boot\RuntimeException;
 use QW\FW\Paint\Color;
 
 final class ImageTextGenerate extends Object {

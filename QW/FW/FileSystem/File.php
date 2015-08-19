@@ -2,8 +2,8 @@
 
 namespace QW\FW\FileSystem;
 
-use QW\FW\Basic\IllegalArgumentException;
 use QW\FW\Basic\Object;
+use QW\FW\Boot\IllegalArgumentException;
 
 class File extends Object {
 	protected $filePath;
@@ -12,7 +12,7 @@ class File extends Object {
 		parent::__construct();
 
 		if ( $create == FALSE && !file_exists( $filePath ) ) throw new IllegalArgumentException();
-		else if ( $create == TRUE && file_exists( $filePath ) ) touch( $filePath );
+		else if ( $create == TRUE && !file_exists( $filePath ) ) touch( $filePath );
 
 		if ( !is_file( $filePath ) ) throw new IllegalArgumentException();
 

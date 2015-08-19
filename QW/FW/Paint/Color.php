@@ -2,7 +2,6 @@
 
 namespace QW\FW\Paint;
 
-
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Math\Math;

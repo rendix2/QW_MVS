@@ -14,7 +14,7 @@ class Bootstrap extends AbstractRouter {
 	protected $controller;
 
 	public function __construct() {
-		//parent::__construct();
+		parent::__construct();
 
 		$this->setParams();
 
@@ -56,7 +56,7 @@ class Bootstrap extends AbstractRouter {
 	protected function loadController() {
 		$c = "\\QW\\Controllers\\" . $this->params[ 0 ] . 'Controller';
 
-		require_once( './QW/Controllers/' . $this->params[ 0 ] . 'Controller.php' );
+		//require_once( './QW/Controllers/' . $this->params[ 0 ] . 'Controller.php' );
 
 		$this->controller = new $c( $this->params[ 0 ] );
 	}

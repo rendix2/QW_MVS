@@ -18,6 +18,8 @@ final class ImageTextGenerate extends Object {
 	}
 
 	public function __destruct() {
+		$this->imageTextColor = NULL;
+
 		if ( is_resource( $this->imageResource ) ) imagedestroy( $this->imageResource );
 
 		$this->imageTextColor = NULL;

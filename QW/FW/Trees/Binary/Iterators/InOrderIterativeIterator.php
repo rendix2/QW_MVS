@@ -30,7 +30,7 @@ class InOrderIterativeIterator extends AbstractBinaryTreeIterator {
 			else {
 				$root              = $this->stack->pop();
 				$this->finalData[] = $root->getData();
-				$root              = $root->getRight();
+				$root = $root->getRightChild();
 			}
 		}
 	}

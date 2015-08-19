@@ -23,8 +23,8 @@ class LevelOrderIterator extends AbstractBinaryTreeIterator {
 			$current = $this->queue->dequeue();
 			$this->finalData[] = $current->getData();
 
-			if ( $current->getLeft() != NULL ) $this->queue->enqueue( $current->getLeft() );
-			if ( $current->getRight() != NULL ) $this->queue->enqueue( $current->getRight() );
+			if ( $current->getLeftChild() != NULL ) $this->queue->enqueue( $current->getLeftChild() );
+			if ( $current->getRightChild() != NULL ) $this->queue->enqueue( $current->getRightChild() );
 		}
 	}
 }

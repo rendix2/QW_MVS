@@ -13,7 +13,7 @@ class Router extends AbstractRouter {
 		$this->method     = 'index';
 		$this->params     = [ ];
 
-		//parent::__construct();
+		parent::__construct();
 
 
 	}
@@ -34,7 +34,7 @@ class Router extends AbstractRouter {
 
 		if ( empty( $url ) ) $url = $this->controller;
 
-		//require_once('./QW/FW/Architecture/MVC/AbstractBasicController.php');
+		require_once( './QW/FW/Architecture/MVC/AbstractBasicController.php' );
 		//require_once('./QW/FW/Architecture/MVC/AbstractBasicModel.php');
 		//require_once('./QW/FW/Architecture/MVC/BasicView.php');
 

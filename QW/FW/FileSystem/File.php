@@ -19,6 +19,12 @@ class File extends Object {
 		$this->filePath = $filePath;
 	}
 
+	public function __destruct() {
+		$this->filePath = NULL;
+
+		parent::__destruct();
+	}
+
 	final public function accessTime() {
 		return fileatime( $this->filePath );
 	}

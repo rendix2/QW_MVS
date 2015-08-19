@@ -12,14 +12,12 @@ final class ImageTextGenerate extends Object {
 	private $imageTextColor;
 
 	public function __construct( $width, $height ) {
-		parent::__construct();
+		//parent::__construct();
 
 		$this->imageResource = imagecreate( $width, $height );
 	}
 
 	public function __destruct() {
-		$this->imageTextColor = NULL;
-
 		if ( is_resource( $this->imageResource ) ) imagedestroy( $this->imageResource );
 
 		$this->imageTextColor = NULL;

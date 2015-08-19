@@ -8,14 +8,14 @@ class Object {
 	private static $name;
 
 	public final function __call( $name, $arguments ) {
-		echo $name;
+		//echo $name;
 
 		if ( !$this->methodExists( $name ) ) throw new MemberAccessException( 'Non-existing method: <b>' .
 			$this->getClassName() . '</b>::<b>' . $name . '</b>' );
 	}
 
 	public final static function __callStatic( $name, $arguments ) {
-		echo $name;
+		//echo $name;
 
 		if ( !self::methodExists( $name ) ) throw new MemberAccessException( 'Non-existing method: ' .
 			self::getStaticClassName() . '</b>::<b>' . $name . '</b>' );

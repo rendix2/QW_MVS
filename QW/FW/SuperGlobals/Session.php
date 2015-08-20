@@ -5,8 +5,10 @@ namespace QW\FW\SuperGlobals;
 use QW\FW\Boot\PrivateConstructException;
 use QW\FW\Math\Math;
 
-final class Session implements ISG {
+final class Session extends SuperGlobals implements ISG {
 	public function __construct() {
+		parent::__construct();
+
 		throw new PrivateConstructException();
 	}
 
@@ -22,11 +24,26 @@ final class Session implements ISG {
 	public static function get( $k ) {
 		self::newId();
 
-		return isset( $_SESSION[ $k ] ) ? $_SESSION[ $k ] : FALSE;
+		if ( self::$magicQuotes ) $k = stripslashes( $k );
+
+		$result = isset( $_SESSION[ $k ] ) ? $_SESSION[ $k ] : FALSE;;
+
+		if ( self::$magicQuotes && !$result ) $result = stripslashes( $result );
+
+		return $result;
 	}
 
 	public static function getAll() {
 		self::newId();
+
+		if ( self::$magicQuotes ) {
+			$array = [ ];
+			foreach ( $_SESSION as $k => $v ) {
+				$array[ stripslashes( $k ) ] = stripslashes( $v );
+			}
+
+			return $array;
+		}
 
 		return $_SESSION;
 	}

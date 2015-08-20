@@ -4,16 +4,33 @@ namespace QW\FW\SuperGlobals;
 
 use QW\FW\Boot\PrivateConstructException;
 
-final class Cookie implements ISG {
+final class Cookie extends SuperGlobals implements ISG {
 	public function __construct() {
+		parent::__construct();
+
 		throw new PrivateConstructException();
 	}
 
 	public static function get( $k ) {
-		return isset( $_COOKIE[ $k ] ) ? $_COOKIE[ $k ] : FALSE;
+		if ( self::$magicQuotes ) $k = stripslashes( $k );
+
+		$result = isset( $_COOKIE[ $k ] ) ? $_COOKIE[ $k ] : FALSE;;
+
+		if ( self::$magicQuotes && !$result ) $result = stripslashes( $result );
+
+		return $result;
 	}
 
 	public static function getAll() {
+		if ( self::$magicQuotes ) {
+			$array = [ ];
+			foreach ( $_COOKIE as $k => $v ) {
+				$array[ stripslashes( $k ) ] = stripslashes( $v );
+			}
+
+			return $array;
+		}
+
 		return $_COOKIE;
 	}
 

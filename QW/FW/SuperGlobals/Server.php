@@ -4,16 +4,34 @@ namespace QW\FW\SuperGlobals;
 
 use QW\FW\Boot\PrivateConstructException;
 
-final class Server implements ISG {
+final class Server extends SuperGlobals implements ISG {
 	public function __construct() {
+		parent::__construct();
+
 		throw new PrivateConstructException();
 	}
 
 	public static function get( $k ) {
-		return isset( $_SERVER[ mb_strtoupper( $k, 'UTF-8' ) ] ) ? $_SERVER[ mb_strtoupper( $k, 'UTF-8' ) ] : FALSE;
+		$k = strtoupper( $k );
+		if ( self::$magicQuotes ) $k = stripslashes( $k );
+
+		$result = isset( $_COOKIE[ $k ] ) ? $_COOKIE[ $k ] : FALSE;;
+
+		if ( self::$magicQuotes && !$result ) $result = stripslashes( $result );
+
+		return $result;
 	}
 
 	public static function getAll() {
+		if ( self::$magicQuotes ) {
+			$array = [ ];
+			foreach ( $_SERVER as $k => $v ) {
+				$array[ stripslashes( $k ) ] = stripslashes( $v );
+			}
+
+			return $array;
+		}
+
 		return $_SERVER;
 	}
 

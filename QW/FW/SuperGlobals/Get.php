@@ -4,16 +4,34 @@ namespace QW\FW\SuperGlobals;
 
 use QW\FW\Boot\PrivateConstructException;
 
-class Get implements ISG {
+class Get extends SuperGlobals implements ISG {
 	public function __construct() {
+		parent::__construct();
+
 		throw new PrivateConstructException();
 	}
 
 	public static function get( $k ) {
-		return isset( $_GET[ $k ] ) ? $_GET[ $k ] : FALSE;
+		if ( self::$magicQuotes ) $k = stripslashes( $k );
+
+		$result = isset( $_GET[ $k ] ) ? $_GET[ $k ] : FALSE;;
+
+		if ( self::$magicQuotes && !$result ) $result = stripslashes( $result );
+
+		return $result;
 	}
 
 	public static function getAll() {
+		if ( self::$magicQuotes ) {
+			$array = [ ];
+
+			foreach ( $_GET as $k => $v ) {
+				$array[ stripslashes( $k ) ] = stripslashes( $v );
+			}
+
+			return $array;
+		}
+
 		return $_GET;
 	}
 

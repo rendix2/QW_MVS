@@ -12,6 +12,11 @@ final class HelpController extends AbstractBasicController {
 			->setPageName( "Nápověda" );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
+
 	public function index() {
 		return $this->getView()
 			->render( $this->getViewName() . Config::SLASH . 'index' );

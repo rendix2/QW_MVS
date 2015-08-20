@@ -25,8 +25,8 @@ abstract class AbstractBasicController extends Object {
 	}
 
 	public function __destruct() {
-		$this->model    = NULL;
 		$this->viewName = NULL;
+		$this->model = NULL;
 		$this->view     = NULL;
 
 		parent::__destruct();

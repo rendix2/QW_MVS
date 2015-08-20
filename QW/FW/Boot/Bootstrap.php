@@ -30,9 +30,9 @@ class Bootstrap extends AbstractRouter {
 	}
 
 	public function __destruct() {
+		$this->controller = NULL;
 		$this->params     = NULL;
 		$this->url        = NULL;
-		$this->controller = NULL;
 
 		parent::__destruct();
 	}

@@ -44,17 +44,19 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	}
 
 	public function __destruct() {
-		if ( $this->statement != NULL ) $this->freeStatement();
+		self::$AllQueryCount       = NULL;
+		self::$AllConnectionsCount = NULL;
 
-		$this->queryCount   = NULL;
+		if ( $this->statement != NULL ) $this->freeStatement();
 		$this->connection   = NULL;
+		$this->queryCount   = NULL;
 		$this->dbName       = NULL;
 		$this->host         = NULL;
 		$this->options      = NULL;
 		$this->userName     = NULL;
 		$this->userPassword = NULL;
-		$this->statement = NULL;
-		$this->log = NULL;
+		$this->statement    = NULL;
+		$this->log          = NULL;
 
 		parent::__destruct();
 	}

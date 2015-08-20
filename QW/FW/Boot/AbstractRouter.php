@@ -13,13 +13,16 @@ abstract class AbstractRouter extends Object {
 	abstract protected function loadMy();
 
 	public function __construct( $debug = FALSE ) {
-		$this->setAllDebug( $debug );
 		parent::__construct( $debug );
 
+		$this->setAllDebug( $debug );
 		require_once( './QW/FW/Boot/Exception.php' );
 		require_once( './QW/Smarty/libs/Smarty.class.php' );
 		$this->route();
+	}
 
+	public function __destruct() {
+		parent::__destruct();
 	}
 
 	public static function loadClass() {

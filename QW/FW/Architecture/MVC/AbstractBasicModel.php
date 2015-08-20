@@ -12,7 +12,7 @@ final class ModelException extends \Exception {
 abstract class AbstractBasicModel extends Object {
 	private $db; //, $language, $template;
 
-	final function __construct() {
+	public function __construct() {
 		parent::__construct();
 		$this->db = new DatabaseMySQL( Config::$dbConfig[ 'dbHost' ], Config::$dbConfig[ 'dbUser' ],
 			Config::$dbConfig[ 'dbPassword' ], Config::$dbConfig[ 'dbName' ], [ ] );
@@ -20,6 +20,7 @@ abstract class AbstractBasicModel extends Object {
 
 	public function __destruct() {
 		$this->db = NULL;
+
 		parent::__destruct();
 	}
 

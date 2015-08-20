@@ -14,6 +14,10 @@ final class UserController extends AbstractBasicController {
 			->setPageName( "Uživatel" );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	public function delete() {
 	}
 

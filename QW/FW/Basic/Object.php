@@ -4,10 +4,10 @@ namespace QW\FW\Basic;
 
 use QW\FW\Boot\MemberAccessException;
 
-class Object {
+abstract class Object {
 	private static $name;
 
-	public final function __call( $name, $arguments ) {
+	final public function __call( $name, $arguments ) {
 		if ( !$this->methodExists( $name ) ) {
 			$message = 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . (string) $name . '</b>';
 			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
@@ -16,7 +16,7 @@ class Object {
 		}
 	}
 
-	public final static function __callStatic( $name, $arguments ) {
+	final public static function __callStatic( $name, $arguments ) {
 		if ( !self::methodExists( $name ) ) {
 			$message = 'Non-existing method: ' . self::getStaticClassName() . '</b>::<b>' . (string) $name . '</b>';
 			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
@@ -25,7 +25,7 @@ class Object {
 		}
 	}
 
-	public final function __clone() {
+	final public function __clone() {
 		throw new MemberAccessException();
 	}
 
@@ -43,8 +43,8 @@ class Object {
 	}
 
 	public function __toString() {
-		return '<br>I am: class: <b>' . $this->getClassName() .
-		'</b>. You didn\'t overwrite <b>toString()</b> method.<br>';
+		return '<br>I am: <b>' . $this->getClassName() .
+		'</b>. You didn\'t overwrite <b>toString()</b> method. This message is in <b>Object</b> class<br>';
 	}
 
 	final protected static function getStaticClassName() {

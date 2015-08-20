@@ -14,11 +14,11 @@ abstract class Object {
 
 	final public function __call( $name, $arguments ) {
 		if ( $this->debug || self::$staticDebug ) echo $this->getClassName() . '::' . $name . '(' .
-			explode( ',', $arguments ) . ')</b>';
+			explode( ',', $arguments ) . ')</b><br>';
 
 		if ( !$this->methodExists( $name ) ) {
 			throw new MemberAccessException( 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . $name .
-				'()' );
+				'()<br>' );
 		}
 
 		self::callCounter();
@@ -29,7 +29,7 @@ abstract class Object {
 
 		if ( !self::methodExists( $name ) ) {
 			throw new MemberAccessException( 'Non-existing method: ' . self::getStaticClassName() . '::' . $name .
-				'()</b>' );
+				'()</b><br>' );
 		}
 
 		self::staticCallCounter();
@@ -42,19 +42,21 @@ abstract class Object {
 	public function __construct( $debug = FALSE ) {
 		$this->debug = $debug;
 
-		if ( $this->debug == TRUE || self::$staticDebug == TRUE ) {
+		if ( self::$staticDebug == TRUE || $this->debug == TRUE || $debug == TRUE ) {
 			self::$objectsCounter++;
 
-			echo 'Creating instance of: <b>' . $this->getClassName() . '</b>';
+			echo 'Creating instance of: <b>' . $this->getClassName() . '</b><br>';
 		}
 	}
 
 	public function __destruct() {
 		if ( $this->debug == TRUE || self::$staticDebug == TRUE ) echo 'Destroying instance of: <b>' .
-			$this->getClassName() . '</b>';
+			$this->getClassName() . '</b><br>';
+
+		echo self::$objectsCounter . '<br>';
 
 		if ( self::$objectsCounter > 0 ) self::$objectsCounter--;
-		else throw new MemberAccessException( 'Too much objects destroyed. Something is wrong with your memory management. Maybe wrong destructors calling' );
+		else throw new MemberAccessException( 'Too much objects destroyed. Something is wrong with your memory management. Maybe wrong destructors calling.<br>' );
 
 		$this->debug = NULL;
 	}
@@ -62,13 +64,13 @@ abstract class Object {
 
 	final public function __get( $name ) {
 		if ( !$this->propertyExists( $name ) ) throw new MemberAccessException( 'Non-existing property: <b>' .
-			$this->getClassName() . '</b>-><b>' . (string) $name . '</b>' );
+			$this->getClassName() . '</b>-><b>' . (string) $name . '</b><br>' );
 	}
 
 
 	public function __toString() {
 		return '<br>I am: <b>' . $this->getClassName() .
-		'</b>. You didn\'t overwrite <b>toString()</b> method. This message is in <b>Object</b> class<br>';
+		'</b>. You didn\'t overwrite <b>toString()</b> method. This message is in <b>Object</b> class.<br>';
 	}
 
 
@@ -109,7 +111,7 @@ abstract class Object {
 
 	final private function debugStatic( $name, $arguments ) {
 		if ( $this->debug == TRUE || self::$staticDebug == TRUE ) echo 'Static call of: <b>' .
-			self::getStaticClassName() . '::' . $name . '(' . explode( ', ', $arguments ) . ')</b>';
+			self::getStaticClassName() . '::' . $name . '(' . explode( ', ', $arguments ) . ')</b><br>';
 	}
 
 	public function equals( Object $object ) {

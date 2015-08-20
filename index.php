@@ -5,7 +5,8 @@ include( './debug.php' );
 
 use QW\FW\Boot\Bootstrap;
 
-$quickWeb = new Bootstrap();
+$quickWeb = new Bootstrap( TRUE );
 $quickWeb->startDebug();
+
 
 ?>

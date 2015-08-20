@@ -7,15 +7,13 @@ class Router extends AbstractRouter {
 	private $method;
 	private $params;
 
-	public function __construct() {
+	public function __construct( $debug = FALSE ) {
 		// init
 		$this->controller = 'Index';
 		$this->method     = 'index';
 		$this->params     = [ ];
 
-		parent::__construct();
-
-
+		parent::__construct( $debug );
 	}
 
 	function __destruct() {

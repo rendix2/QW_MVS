@@ -13,8 +13,8 @@ class Bootstrap extends AbstractRouter {
 	protected $params;
 	protected $controller;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->setParams();
 
@@ -75,7 +75,7 @@ class Bootstrap extends AbstractRouter {
 
 	protected function noUrl() {
 		if ( empty( $this->url ) ) {
-			$this->controller = new IndexController( 'IndexModel' );
+			$this->controller = new IndexController( 'Index' );
 			$this->controller->index();
 
 			return TRUE;

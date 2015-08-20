@@ -9,11 +9,11 @@ class BetterBootstrap extends AbstractRouter {
 	private $enabledRoutes;
 	private $urlDelimiter;
 
-	public function __construct( $urlDelimiter = Config::URL_DELIMITER ) {
+	public function __construct( $debug = FALSE, $urlDelimiter = Config::URL_DELIMITER ) {
 		$this->$urlDelimiter = $urlDelimiter;
 		$this->enabledRoutes = [ ];
 
-		parent::__construct();
+		parent::__construct( $debug );
 	}
 
 	public function __destruct() {

@@ -49,15 +49,14 @@ abstract class Object {
 		}
 	}
 
-
 	public function __destruct() {
 		if ( $this->debug == TRUE || self::$staticDebug == TRUE ) echo 'Destroying instance of: <b>' .
 			$this->getClassName() . '</b>';
 
-		self::$objectsCounter          = NULL;
-		self::$methodStaticCallCounter = NULL;
-		self::$methodCallCounter       = NULL;
-		$this->debug                   = NULL;
+		if ( self::$objectsCounter > 0 ) self::$objectsCounter--;
+		else throw new MemberAccessException( 'Too much objects destroyed. Something is wrong with your memory management. Maybe wrong destructors calling' );
+
+		$this->debug = NULL;
 	}
 
 

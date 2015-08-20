@@ -8,17 +8,21 @@ class Object {
 	private static $name;
 
 	public final function __call( $name, $arguments ) {
-		//echo $name;
+		if ( !$this->methodExists( $name ) ) {
+			$message = 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . $name . '</b>';
+			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
 
-		if ( !$this->methodExists( $name ) ) throw new MemberAccessException( 'Non-existing method: <b>' .
-			$this->getClassName() . '</b>::<b>' . $name . '</b>' );
+			throw new MemberAccessException( $message );
+		}
 	}
 
 	public final static function __callStatic( $name, $arguments ) {
-		//echo $name;
+		if ( !self::methodExists( $name ) ) {
+			$message = 'Non-existing method: ' . self::getStaticClassName() . '</b>::<b>' . $name . '</b>';
+			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
 
-		if ( !self::methodExists( $name ) ) throw new MemberAccessException( 'Non-existing method: ' .
-			self::getStaticClassName() . '</b>::<b>' . $name . '</b>' );
+			throw new MemberAccessException( $message );
+		}
 	}
 
 	public final function __clone() {
@@ -65,6 +69,10 @@ class Object {
 
 	final protected function getExceptionName() {
 		return $this->hasException() ? $this->getClassName() . 'Exception' : FALSE;
+	}
+
+	private final function getExecutionStack() {
+		print_r( debug_backtrace() );
 	}
 
 	final protected function getInstance() {

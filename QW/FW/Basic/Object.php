@@ -21,6 +21,10 @@ class Object {
 			self::getStaticClassName() . '</b>::<b>' . $name . '</b>' );
 	}
 
+	public final function __clone() {
+		throw new MemberAccessException();
+	}
+
 	public function __construct() {
 		self::$name = NULL;
 	}

@@ -1,10 +1,9 @@
 <?php
 
-namespace QW\FW\Forms\FomCreator;
+namespace QW\FW\Forms\FormCreator;
 
-use QW\FW\Basic\IllegalArgumentException;
 use QW\FW\Basic\Object;
-use QW\FW\Forms\FormCreator\FormCreatorHTML4;
+use QW\FW\Boot\IllegalArgumentException;
 
 class FormCreatorSelect extends Object {
 	private $formCreatorHTML4;

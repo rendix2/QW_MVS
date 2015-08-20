@@ -33,19 +33,19 @@ final class Boolean extends Object {
 		return $x == $y;
 	}
 
-	public static function compareBoolean( Boolean $x = NULL, Boolean $y = NULL ) {
+	public static function equalsBoolean( Boolean $x = NULL, Boolean $y = NULL ) {
 		if ( $x == NULL || $y == NULL ) throw new IllegalArgumentException();
 
 		return $x->boolean == $y->boolean;
 	}
 
-	public function compareTo( $boolean ) {
+	public function equals( $boolean ) {
 		if ( !is_bool( $boolean ) ) throw new IllegalArgumentException();
 
 		return $this->boolean == $boolean;
 	}
 
-	public function compareToBoolean( Boolean $boolean = NULL ) {
+	public function equalsToBoolean( Boolean $boolean = NULL ) {
 		if ( $boolean == NULL ) throw new IllegalArgumentException();
 
 		return $this->boolean == $boolean->boolean;

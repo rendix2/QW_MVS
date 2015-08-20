@@ -5,39 +5,57 @@ namespace QW\FW\Basic;
 use QW\FW\Boot\MemberAccessException;
 
 abstract class Object {
-	private static $name;
+	private static $objectsCounter = 0;
+	private static $methodCallCounter = 0;
+	private static $methodStaticCallCounter = 0;
+	private $debug;
 
 	final public function __call( $name, $arguments ) {
-		if ( !$this->methodExists( $name ) ) {
-			$message = 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . (string) $name . '</b>';
-			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
+		if ( $this->debug ) echo $this->getClassName() . '::' . $name . '(' . explode( ',', $arguments ) . ')</b>';
 
-			throw new MemberAccessException( $message );
+		if ( !$this->methodExists( $name ) ) {
+			throw new MemberAccessException( 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . $name .
+				'()' );
 		}
+
+		self::callCounter();
 	}
 
 	final public static function __callStatic( $name, $arguments ) {
-		if ( !self::methodExists( $name ) ) {
-			$message = 'Non-existing method: ' . self::getStaticClassName() . '</b>::<b>' . (string) $name . '</b>';
-			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
+		self::debugStatic( $name, $arguments );
 
-			throw new MemberAccessException( $message );
+		if ( !self::methodExists( $name ) ) {
+			throw new MemberAccessException( 'Non-existing method: ' . self::getStaticClassName() . '::' . $name .
+				'()</b>' );
 		}
+
+		self::staticCallCounter();
 	}
 
 	final public function __clone() {
 		throw new MemberAccessException();
 	}
 
-	public function __construct() {
-		self::$name = NULL;
+	public function __construct( $debug = FALSE ) {
+		$this->debug = $debug;
+
+		if ( $this->debug ) {
+			self::$objectsCounter++;
+
+			echo 'Creating instance of: <b>' . $this->getClassName() . '</b>';
+		}
 	}
 
 	public function __destruct() {
-		self::$name = NULL;
+		if ( $this->debug ) echo 'Destroying instance of: <b>' . $this->getClassName() . '</b>';
+
+		self::$objectsCounter          = NULL;
+		self::$methodStaticCallCounter = NULL;
+		self::$methodCallCounter       = NULL;
+		$this->debug                   = NULL;
 	}
 
-	public final function __get( $name ) {
+	final public function __get( $name ) {
 		if ( !$this->propertyExists( $name ) ) throw new MemberAccessException( 'Non-existing property: <b>' .
 			$this->getClassName() . '</b>-><b>' . (string) $name . '</b>' );
 	}
@@ -47,14 +65,35 @@ abstract class Object {
 		'</b>. You didn\'t overwrite <b>toString()</b> method. This message is in <b>Object</b> class<br>';
 	}
 
+	final public static function getMethodCallCounter() {
+		return self::$methodCallCounter;
+	}
+
+	final public static function getMethodStaticCallCounter() {
+		return self::$methodStaticCallCounter;
+	}
+
+	final public static function getObjectsCount() {
+		return self::$objectsCounter;
+	}
+
 	final protected static function getStaticClassName() {
 		$wholeName = explode( '\\', get_called_class() );
 
 		return $wholeName[ count( $wholeName ) - 1 ];
 	}
 
+	final private function callCounter() {
+		if ( $this->debug ) self::$methodCallCounter++;
+	}
+
 	final protected function classExists( $class ) {
 		return class_exists( (string) $class );
+	}
+
+	final private function debugStatic( $name, $arguments ) {
+		if ( $this->debug ) echo 'Static call of: <b>' . self::getStaticClassName() . '::' . $name . '(' .
+			explode( ', ', $arguments ) . ')</b>';
 	}
 
 	public function equals( Object $object ) {
@@ -71,7 +110,7 @@ abstract class Object {
 		return $this->hasException() ? $this->getClassName() . 'Exception' : FALSE;
 	}
 
-	private final function getExecutionStack() {
+	final private function getExecutionStack() {
 		print_r( debug_backtrace() );
 	}
 
@@ -97,5 +136,9 @@ abstract class Object {
 
 	final protected function propertyExists( $propertyName ) {
 		return property_exists( $this, (string) $propertyName );
+	}
+
+	final private function staticCallCounter() {
+		if ( $this->debug ) self::$methodStaticCallCounter++;
 	}
 }

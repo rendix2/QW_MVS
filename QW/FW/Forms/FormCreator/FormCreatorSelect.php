@@ -10,7 +10,7 @@ class FormCreatorSelect extends Object {
 	private $formCreatorHTML4;
 
 	private $content;
-	private $name;
+	private $objectsCounter;
 	private $multiple;
 	private $size;
 	private $disabled;
@@ -21,7 +21,7 @@ class FormCreatorSelect extends Object {
 		$this->formCreatorHTML4 = $formCreatorHTML4;
 
 		$this->content  = [ ];
-		$this->name     = $name;
+		$this->objectsCounter = $name;
 		$this->multiple = $multiple == TRUE ? 'multiple="multiple' : '';
 
 		if ( !is_numeric( $size ) ) throw new IllegalArgumentException();
@@ -47,7 +47,7 @@ class FormCreatorSelect extends Object {
 
 	public function getFinal() {
 
-		$final = '<select name="' . $this->name . '" ' . $this->multiple . '>';
+		$final = '<select name="' . $this->objectsCounter . '" ' . $this->multiple . '>';
 
 		foreach ( $this->content as $v ) $final .= "<option name=\"" . key( $this->content ) . "\">{$v}</option>\n";
 

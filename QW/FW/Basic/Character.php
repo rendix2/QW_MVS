@@ -11,7 +11,7 @@ class Character extends Object {
 	public function __construct( $char = '' ) {
 		parent::__construct();
 
-		if ( mb_strlen( $char ) != 1 ) throw new IllegalArgumentException();
+		if ( mb_strlen( $char, 'UTF-8' ) != 1 ) throw new IllegalArgumentException();
 
 		$this->char = $char;
 	}

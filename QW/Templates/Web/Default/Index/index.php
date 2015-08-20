@@ -39,3 +39,5 @@ print_r( $root2->iteratorPostOrderRecourse()
 echo '<br>';
 echo '<br>';
 
+$root2 = NULL;
+

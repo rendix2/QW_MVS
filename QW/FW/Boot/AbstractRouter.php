@@ -68,12 +68,4 @@ abstract class AbstractRouter extends Object {
 		$this->loadMVP();
 		$this->loadMy();
 	}
-
-	final public function startDebug() {
-		$this->setAllDebug( TRUE );
-	}
-
-	final public function stopDebug() {
-		$this->setAllDebug( FALSE );
-	}
 }

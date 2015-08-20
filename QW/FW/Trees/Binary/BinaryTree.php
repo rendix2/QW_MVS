@@ -25,6 +25,13 @@ final class BinaryTree extends AbstractTree {
 		if ( $this->right != NULL ) $this->directChildrenCount++;
 	}
 
+	public function __destruct() {
+		$this->left  = NULL;
+		$this->right = NULL;
+
+		parent::__destruct();
+	}
+
 	public function getChildrenCount() {
 		$itc = new CountIterator( $this );
 		$this->directChildrenCount = $itc->getCountChildren();

@@ -13,11 +13,11 @@ abstract class Object {
 	private $debug;
 
 	final public function __call( $name, $arguments ) {
-		if ( $this->debug || self::$staticDebug ) echo $this->getClassName() . '::' . $name . '(' .
-			explode( ',', $arguments ) . ')</b><br>';
+		if ( self::$staticDebug || $this->debug ) echo 'Invalid method calling:' . $this->getClassName() . '::' .
+			$name . '(' . implode( $arguments, ', ' ) . ')<br>';
 
 		if ( !$this->methodExists( $name ) ) {
-			throw new MemberAccessException( 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . $name .
+			throw new MemberAccessException( 'Invalid method calling: ' . $this->getClassName() . '::' . $name .
 				'()<br>' );
 		}
 
@@ -53,10 +53,11 @@ abstract class Object {
 		if ( $this->debug == TRUE || self::$staticDebug == TRUE ) echo 'Destroying instance of: <b>' .
 			$this->getClassName() . '</b><br>';
 
-		echo self::$objectsCounter . '<br>';
 
-		if ( self::$objectsCounter > 0 ) self::$objectsCounter--;
-		else throw new MemberAccessException( 'Too much objects destroyed. Something is wrong with your memory management. Maybe wrong destructors calling.<br>' );
+		if ( self::$staticDebug == TRUE && self::$objectsCounter > 0 ) self::$objectsCounter--;
+		else if ( self::$staticDebug == TRUE &&
+			self::$objectsCounter < 0
+		) throw new MemberAccessException( 'Too much objects destroyed. Something is wrong with your memory management. Maybe wrong destructors calling.<br>' );
 
 		$this->debug = NULL;
 	}
@@ -64,7 +65,7 @@ abstract class Object {
 
 	final public function __get( $name ) {
 		if ( !$this->propertyExists( $name ) ) throw new MemberAccessException( 'Non-existing property: <b>' .
-			$this->getClassName() . '</b>-><b>' . (string) $name . '</b><br>' );
+			$this->getClassName() . '</b>::$<b>' . (string) $name . '</b><br>' );
 	}
 
 
@@ -111,7 +112,7 @@ abstract class Object {
 
 	final private function debugStatic( $name, $arguments ) {
 		if ( $this->debug == TRUE || self::$staticDebug == TRUE ) echo 'Static call of: <b>' .
-			self::getStaticClassName() . '::' . $name . '(' . explode( ', ', $arguments ) . ')</b><br>';
+			self::getStaticClassName() . '::' . $name . '(' . implode( $arguments, ', ' ) . ')</b><br>';
 	}
 
 	public function equals( Object $object ) {

@@ -13,6 +13,10 @@ final class IndexController extends AbstractBasicController {
 			->setPageName( "QW" );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	public function index() {
 		$this->getView()
 			->setTableData( $this->getModel()

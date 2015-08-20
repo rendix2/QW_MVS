@@ -54,7 +54,7 @@ class Object {
 	}
 
 	final protected function classExists( $class ) {
-		return class_exists( $class );
+		return class_exists( (string) $class );
 	}
 
 	public function equals( Object $object ) {
@@ -92,10 +92,10 @@ class Object {
 	}
 
 	final protected function methodExists( $methodName ) {
-		return method_exists( $this, $methodName );
+		return method_exists( $this, (string) $methodName );
 	}
 
 	final protected function propertyExists( $propertyName ) {
-		return property_exists( $this, $propertyName );
+		return property_exists( $this, (string) $propertyName );
 	}
 }

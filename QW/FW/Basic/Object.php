@@ -9,7 +9,7 @@ class Object {
 
 	public final function __call( $name, $arguments ) {
 		if ( !$this->methodExists( $name ) ) {
-			$message = 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . $name . '</b>';
+			$message = 'Non-existing method: <b> ' . $this->getClassName() . '</b>::<b>' . (string) $name . '</b>';
 			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
 
 			throw new MemberAccessException( $message );
@@ -18,7 +18,7 @@ class Object {
 
 	public final static function __callStatic( $name, $arguments ) {
 		if ( !self::methodExists( $name ) ) {
-			$message = 'Non-existing method: ' . self::getStaticClassName() . '</b>::<b>' . $name . '</b>';
+			$message = 'Non-existing method: ' . self::getStaticClassName() . '</b>::<b>' . (string) $name . '</b>';
 			$message .= ' with arguments: <b>' . explode( ', ', $arguments ) . '</b><br>';
 
 			throw new MemberAccessException( $message );
@@ -39,7 +39,7 @@ class Object {
 
 	public final function __get( $name ) {
 		if ( !$this->propertyExists( $name ) ) throw new MemberAccessException( 'Non-existing property: <b>' .
-			$this->getClassName() . '</b>-><b>' . $name . '</b>' );
+			$this->getClassName() . '</b>-><b>' . (string) $name . '</b>' );
 	}
 
 	public function __toString() {

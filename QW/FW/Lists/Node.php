@@ -16,6 +16,14 @@ class Node extends Object {
 		$this->nextNode = $nextNode;
 	}
 
+
+	public function __destruct() {
+		$this->data     = NULL;
+		$this->nextNode = NULL;
+
+		parent::__destruct();
+	}
+
 	public function getData() {
 		return $this->data;
 	}

@@ -20,6 +20,10 @@ final class Folder extends File {
 		$this->filePath = $dirName;
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	// http://stackoverflow.com/questions/478121/php-get-directory-size
 	public function content() {
 		$array = [ ];

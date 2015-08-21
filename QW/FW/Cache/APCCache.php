@@ -17,6 +17,12 @@ final class APCCache extends Object implements ICache {
 		$this->key = $key;
 	}
 
+	public function __destruct() {
+		$this->key = NULL;
+
+		parent::__destruct();
+	}
+
 	public function addCache( $data ) {
 		return apc_add( $this->key, $data );
 	}

@@ -21,6 +21,7 @@ final class ImageTextGenerate extends Object {
 		if ( is_resource( $this->imageResource ) ) imagedestroy( $this->imageResource );
 
 		$this->imageTextColor = NULL;
+		$this->imageResource = NULL;
 	}
 
 	public function destroyImage() {

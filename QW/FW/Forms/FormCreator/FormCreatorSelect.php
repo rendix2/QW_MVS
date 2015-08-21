@@ -28,6 +28,16 @@ class FormCreatorSelect extends Object {
 		$this->size = $size;
 	}
 
+	public function __destruct() {
+		$this->content        = NULL;
+		$this->objectsCounter = NULL;
+		$this->multiple       = NULL;
+		$this->size           = NULL;
+		$this->disabled       = NULL;
+
+		parent::__destruct();
+	}
+
 	public function addChoice( $data, $selected = FALSE, array $disabled ) {
 		$this->content[] = $data;
 

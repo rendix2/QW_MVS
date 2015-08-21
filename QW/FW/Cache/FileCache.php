@@ -17,6 +17,12 @@ final class FileCache extends Object implements ICache {
 		$this->file = new File( self::PATH . $fileName );
 	}
 
+	public function __destruct() {
+		$this->file = NULL;
+
+		parent::__destruct();
+	}
+
 	public function addCache( $data ) {
 		return $this->file->setContent( self::PATH . $this->file->path(), serialize( $data ), FILE_APPEND );
 	}

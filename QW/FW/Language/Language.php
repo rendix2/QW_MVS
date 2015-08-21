@@ -1,9 +1,8 @@
 <?php
 namespace QW\Libs;
 
-use QW\FW\Basic\IllegalArgumentException;
-use QW\FW\Basic\NullPointerException;
 use QW\FW\Basic\Object;
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Interfaces\ILanguage;
 
 final class LanguageException extends \Exception {
@@ -14,7 +13,10 @@ class Language extends Object implements ILanguage {
 	const PATH = './Languages/';
 	const PREFIX_NAME = '/lang';
 	const PREFIX_NAME_META = '/langMeta';
-	private $langName, $lang, $meta, $allPackages;
+	private $langName;
+	private $lang;
+	private $meta;
+	private $allPackages;
 
 	public function __construct( $langName ) {
 		parent::__construct();
@@ -47,9 +49,10 @@ class Language extends Object implements ILanguage {
 	}
 
 	public function __destruct() {
-		$this->lang     = NULL;
-		$this->langName = NULL;
-		$this->meta     = NULL;
+		$this->lang        = NULL;
+		$this->langName    = NULL;
+		$this->meta        = NULL;
+		$this->allPackages = NULL;
 
 		parent::__destruct();
 	}

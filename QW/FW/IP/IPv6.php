@@ -14,6 +14,10 @@ final class IPv6 extends AbstractIP {
 		$this->ipCoded = ip2long( $ip );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	public function getPart( $part ) {
 		parent::getPart( $part );
 

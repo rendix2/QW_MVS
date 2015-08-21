@@ -13,6 +13,13 @@ class SimpleLinkedList extends AbstractList {
 		$this->last = new Node( $data );
 	}
 
+
+	public function __destruct() {
+		$this->last = NULL;
+
+		parent::__destruct();
+	}
+
 	public function __toString() {
 		$array = [ ];
 

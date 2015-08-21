@@ -19,6 +19,15 @@ class FormCreatorHTML4 extends Object {
 		$this->select     = NULL;
 	}
 
+	public function __destruct() {
+		$this->formData = NULL;
+		$this->method   = NULL;
+		$this->action   = NULL;
+		$this->select   = NULL;
+
+		parent::__destruct();
+	}
+
 	function __toString() {
 		$finalData = '';
 

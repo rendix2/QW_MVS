@@ -30,6 +30,13 @@ class EasyCaptcha extends Object {
 		$this->captcha->setText( Math::randomInterval( 0, 6 ), 0, 0, $this->text );
 	}
 
+	public function __destruct() {
+		$this->captcha = NULL;
+		$this->text    = NULL;
+
+		parent::__destruct();
+	}
+
 	public function getBMP() {
 		$this->captcha->toBMP();
 	}

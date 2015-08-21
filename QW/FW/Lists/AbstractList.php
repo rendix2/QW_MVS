@@ -11,4 +11,10 @@ abstract class AbstractList extends Object implements IList {
 		parent::__construct();
 		$this->size = 0;
 	}
+
+	public function __destruct() {
+		$this->size = NULL;
+
+		parent::__destruct();
+	}
 }

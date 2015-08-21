@@ -40,11 +40,6 @@ final class Mail extends Object {
 		return mb_send_mail( $this->to, $this->subject, $this->text );
 	}
 
-	/**
-	 * @param $text
-	 *
-	 * @throws IllegalArgumentException
-	 */
 	public function setText( $text ) {
 		if ( empty( $text ) ) throw new IllegalArgumentException( 'Prázdný text E-mailu' );
 

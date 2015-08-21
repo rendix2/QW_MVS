@@ -14,6 +14,13 @@ class ArrayList extends AbstractList implements IList {
 		$this->size = 0;
 	}
 
+
+	public function __destruct() {
+		$this->data = NULL;
+
+		parent::__destruct();
+	}
+
 	public function __toString() {
 		return '[ ' . implode( ', ', $this->data ) . ' ]';
 	}

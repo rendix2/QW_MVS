@@ -12,6 +12,12 @@ final class ArrayCache extends Object implements ICache {
 		$this->data = [ ];
 	}
 
+	public function __destruct() {
+		$this->data = NULL;
+
+		parent::__destruct();
+	}
+
 	public function addCache( $data ) {
 		$this->data[] = $data;
 	}

@@ -25,6 +25,15 @@ abstract class AbstractIP extends Object implements IP {
 		$this->ipCountPart = count( $this->ipParted );
 	}
 
+	public function __destruct() {
+
+		$this->ipParted    = NULL;
+		$this->ipCoded     = NULL;
+		$this->ipCountPart = NULL;
+
+		parent::__destruct();
+	}
+
 	public final function getIp() {
 		return long2ip( $this->ipCoded );
 	}

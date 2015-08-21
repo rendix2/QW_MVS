@@ -13,6 +13,11 @@ class Form extends Object {
 		$this->safeForm = new SafeForm();
 	}
 
+	public function __destruct() {
+		$this->safeForm = NULL;
+		parent::__destruct();
+	}
+
 	public function getSafeForm() {
 		return $this->safeForm;
 	}

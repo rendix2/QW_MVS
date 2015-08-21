@@ -19,6 +19,11 @@ class IPvU extends AbstractIP {
 		$this->ipCoded = ip2long( $ip );
 	}
 
+	public function __destruct() {
+		$this->IPv = NULL;
+		parent::__destruct();
+	}
+
 	public function getLong() {
 		return $this->IPv->getLong();
 	}

@@ -14,6 +14,10 @@ class Config {
 		throw new PrivateConstructException();
 	}
 
+	public function __destruct() {
+		self::$dbConfig = NULL;
+	}
+
 	public static function getAllPHPIni() {
 		return parse_ini_file( php_ini_loaded_file(), TRUE );
 	}

@@ -10,6 +10,11 @@ final class PostOrderRecourseIterator extends AbstractBinaryTreeIterator {
 		parent::__construct( $root );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
+
 	protected function order( BinaryTree $root = NULL ) {
 		if ( $root == NULL ) return;
 

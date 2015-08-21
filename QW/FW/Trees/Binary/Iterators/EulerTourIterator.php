@@ -11,6 +11,10 @@ final class EulerTourIterator extends AbstractBinaryTreeIterator {
 		parent::__construct( $root );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	protected function order( BinaryTree $root = NULL ) {
 		$this->finalData[] = $root->getData();
 

@@ -20,6 +20,10 @@ class EulerTourIterator extends AbstractNaryTreeIterator {
 		else $this->order( $root );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	protected function order( NaryTree $root = NULL ) {
 		$this->finalData[] = $root->getData();
 

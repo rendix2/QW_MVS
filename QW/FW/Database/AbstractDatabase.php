@@ -44,20 +44,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	}
 
 	public function __destruct() {
-		self::$AllQueryCount       = NULL;
-		self::$AllConnectionsCount = NULL;
-
-		if ( $this->statement != NULL ) $this->freeStatement();
-		$this->connection   = NULL;
-		$this->queryCount   = NULL;
-		$this->dbName       = NULL;
-		$this->host         = NULL;
-		$this->options      = NULL;
-		$this->userName     = NULL;
-		$this->userPassword = NULL;
-		$this->statement    = NULL;
-		$this->log          = NULL;
-
+		$this->disconect();
 		parent::__destruct();
 	}
 
@@ -92,6 +79,22 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		if ( $this->log != FALSE ) $this->log->log( $message );
 
 		die( $message );
+	}
+
+	public function disconect() {
+		self::$AllQueryCount       = NULL;
+		self::$AllConnectionsCount = NULL;
+
+		if ( $this->statement != NULL ) $this->freeStatement();
+		$this->connection   = NULL;
+		$this->statement    = NULL;
+		$this->queryCount   = NULL;
+		$this->dbName       = NULL;
+		$this->host         = NULL;
+		$this->options      = NULL;
+		$this->userName     = NULL;
+		$this->userPassword = NULL;
+		$this->log          = NULL;
 	}
 
 	public function fetch() {

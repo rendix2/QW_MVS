@@ -20,6 +20,12 @@ class PreOrderIterativeIterator extends AbstractBinaryTreeIterator {
 		parent::__construct( $root );
 	}
 
+	public function __destruct() {
+		$this->stack = NULL;
+		parent::__destruct();
+	}
+
+
 	protected function order( BinaryTree $root = NULL ) {
 
 		while ( !$this->stack->isEmpty() || $root != NULL ) {

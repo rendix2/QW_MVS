@@ -9,4 +9,5 @@ $z->addInputText( 'name', 'jmeno' )
 
 echo $z;
 
+$z = NULL;
 echo \QW\FW\SuperGlobals\Post::get( 'password' );

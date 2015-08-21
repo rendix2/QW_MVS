@@ -16,6 +16,13 @@ abstract class AbstractTreeIterator extends Object {
 		$this->realRoot  = NULL;
 	}
 
+	public function __destruct() {
+		$this->finalData = NULL;
+		$this->realRoot  = NULL;
+
+		parent::__destruct();
+	}
+
 	public final function getFinalData() {
 		return $this->finalData;
 	}

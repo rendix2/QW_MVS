@@ -15,6 +15,11 @@ final class CountIterator extends AbstractNaryTreeIterator {
 		parent::__construct( $root );
 	}
 
+	public function __destruct() {
+		$this->countChildren = NULL;
+		parent::__destruct();
+	}
+
 	public function getCountChildren() {
 		return $this->countChildren;
 	}

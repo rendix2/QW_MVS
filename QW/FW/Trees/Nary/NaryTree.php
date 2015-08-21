@@ -28,6 +28,12 @@ final class NaryTree extends AbstractTree {
 		$this->data     = $data;
 	}
 
+	public function __destruct() {
+		$this->children = NULL;
+
+		parent::__destruct();
+	}
+
 	public function addChild( NaryTree $naryTree = NULL ) {
 		$this->children[] = $naryTree;
 

@@ -14,4 +14,8 @@ abstract class AbstractBinaryTreeIterator extends AbstractTreeIterator {
 		$this->realRoot = $root;
 		$this->order( $root );
 	}
+
+	public function __destruct() {
+		parent::__destruct();
+	}
 }

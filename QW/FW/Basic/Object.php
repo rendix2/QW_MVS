@@ -9,7 +9,7 @@ use QW\FW\Boot\MemberAccessException;
 /*
  *  Tom, CTU FEE 2015
  *
- *  Petra, "jen píšu, abys tam nebylo nic :D"
+ *  Petra, FB 2015, "jen píšu, abys tam nebylo nic :D"
  *          "*aby"
  *
  *

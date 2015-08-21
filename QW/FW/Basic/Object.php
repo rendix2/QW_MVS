@@ -5,6 +5,16 @@ namespace QW\FW\Basic;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\MemberAccessException;
 
+
+/*
+ *  Tom, CTU FEE 2015
+ *
+ *  Petra, "jen píšu, abys tam nebylo nic :D"
+ *          "*aby"
+ *
+ *
+ */
+
 abstract class Object {
 	private static $objectsCounter = 0;
 	private static $methodCallCounter = 0;

@@ -4,6 +4,14 @@ namespace QW\FW\Boot;
 
 use QW\FW\Basic\Object;
 
+/*
+ *  Tom, CTU FEE 2015
+ *
+ *  Petra, "jen píšu, aby tam nebylo nic :D"
+ *
+ *
+ */
+
 abstract class AbstractRouter extends Object {
 
 	abstract protected function loadMVC();

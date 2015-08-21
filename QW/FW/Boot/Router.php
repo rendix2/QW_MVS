@@ -16,7 +16,7 @@ class Router extends AbstractRouter {
 		parent::__construct( $debug );
 	}
 
-	function __destruct() {
+	public function __destruct() {
 		$this->controller = NULL;
 		$this->method     = NULL;
 		$this->params     = NULL;

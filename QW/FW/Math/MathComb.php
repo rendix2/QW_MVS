@@ -1,10 +1,13 @@
 <?php
 namespace QW\FW\Math;
 
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\PrivateConstructException;
 
 final class MathComb {
+
+	static $fib = [ ];
+	static private $fibMemo = [ ];
 
 	public function __construct() {
 		throw new PrivateConstructException();
@@ -48,6 +51,39 @@ final class MathComb {
 		return $c;
 	}
 
+	// exponential!!! O(2^(n/2))
+
+	public static function fibonacciBetter( $x ) {
+		foreach ( range( 1, $x + 1 ) as $k ) {
+
+			if ( $k <= 2 ) $f = 1;
+			else $f = self::$fib[ $k - 1 ] + self::$fib[ $k ];
+
+			self::$fib[ $k ] = $f;
+		}
+
+		return self::$fib[ $x ];
+	}
+
+	public static function fibonacciBetterRecurse( $x ) {
+		if ( $x < 0 ) throw new IllegalArgumentException();
+		if ( in_array( $x, self::$fibMemo ) ) return self::$fibMemo[ $x ];
+
+		switch ( $x ) {
+			case 0:
+			case 1:
+				return $x;
+		}
+
+		$f                   = self::fibonacciBetterRecurse( $x - 1 ) + self::fibonacciBetterRecurse( $x - 2 );
+		self::$fibMemo[ $x ] = $f;
+
+		return $f;
+	}
+
+
+	// constant O(n)
+
 	public static function fibonacciRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 
@@ -59,4 +95,5 @@ final class MathComb {
 
 		return self::fibonacciRecurse( $x - 1 ) + self::fibonacciRecurse( $x - 2 );
 	}
+
 }

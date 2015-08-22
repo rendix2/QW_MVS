@@ -8,6 +8,7 @@ final class MathComb {
 
 	static $fib = [ ];
 	static private $fibMemo = [ ];
+	private static $tribMemo = [ ];
 
 	public function __construct() {
 		throw new PrivateConstructException();
@@ -51,6 +52,8 @@ final class MathComb {
 		return $c;
 	}
 
+	// constant O(n)
+
 	public static function fibonacciBetter( $x ) {
 		foreach ( range( 1, $x + 1 ) as $k ) {
 
@@ -63,7 +66,8 @@ final class MathComb {
 		return self::$fib[ $x ];
 	}
 
-	// constant O(n)
+	// exponential!!! O(2^(n/2))
+
 	public static function fibonacciBetterRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 		if ( in_array( $x, self::$fibMemo ) ) return self::$fibMemo[ $x ];
@@ -74,12 +78,27 @@ final class MathComb {
 		return $f;
 	}
 
-
-	// exponential!!! O(2^(n/2))
 	public static function fibonacciRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 
 		return self::fibonacciRecurse( $x - 1 ) + self::fibonacciRecurse( $x - 2 );
 	}
 
+	public static function tribonacciBetterRecourse( $x ) {
+		if ( $x < 0 ) throw new IllegalArgumentException();
+		if ( in_array( $x, self::$tribMemo ) ) return self::$tribMemo[ $x ];
+
+		return self::tribonacciRecourse( $x - 1 ) + self::tribonacciRecourse( $x - 2 ) +
+		self::tribonacciRecourse( $x - 3 );
+	}
+
+	public static function tribonacciRecourse( $x ) {
+		if ( $x < 0 ) throw new IllegalArgumentException();
+
+		$f                    = self::tribonacciRecourse( $x - 1 ) + self::tribonacciRecourse( $x - 2 ) +
+			self::tribonacciRecourse( $x - 3 );
+		self::$tribMemo[ $x ] = $f;
+
+		return $f;
+	}
 }

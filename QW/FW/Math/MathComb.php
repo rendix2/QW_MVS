@@ -51,8 +51,6 @@ final class MathComb {
 		return $c;
 	}
 
-	// exponential!!! O(2^(n/2))
-
 	public static function fibonacciBetter( $x ) {
 		foreach ( range( 1, $x + 1 ) as $k ) {
 
@@ -65,6 +63,7 @@ final class MathComb {
 		return self::$fib[ $x ];
 	}
 
+	// constant O(n)
 	public static function fibonacciBetterRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 		if ( in_array( $x, self::$fibMemo ) ) return self::$fibMemo[ $x ];
@@ -82,8 +81,7 @@ final class MathComb {
 	}
 
 
-	// constant O(n)
-
+	// exponential!!! O(2^(n/2))
 	public static function fibonacciRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 

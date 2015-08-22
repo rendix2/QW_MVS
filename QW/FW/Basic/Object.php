@@ -1,11 +1,4 @@
 <?php
-
-namespace QW\FW\Basic;
-
-use QW\FW\Boot\IllegalArgumentException;
-use QW\FW\Boot\MemberAccessException;
-
-
 /*
  *  Tom, CTU FEE 2015
  *
@@ -14,6 +7,11 @@ use QW\FW\Boot\MemberAccessException;
  *
  *
  */
+
+namespace QW\FW\Basic;
+
+use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\MemberAccessException;
 
 abstract class Object {
 	private static $objectsCounter = 0;

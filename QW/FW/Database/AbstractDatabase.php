@@ -3,6 +3,7 @@
 namespace QW\FW\Database;
 
 use QW\FW\Basic\Object;
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Utils\Log\Logger;
 
@@ -20,12 +21,14 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	protected $dbName;
 	protected $options;
 	protected $log;
+	protected $connectEveryQuery;
+	protected $connectOnCreate;
 
 	abstract protected function connect();
 
 	// conection begin
 
-	public function __construct( $host, $userName, $userPassword, $dbName, array $options, $log = FALSE ) {
+	public function __construct( $host, $userName, $userPassword, $dbName, array $options, $log = FALSE, $connectEveryQuery = FALSE, $connectOnCreate = FALSE ) {
 		parent::__construct();
 		self::$AllQueryCount       = 0;
 		self::$AllConnectionsCount = 0;
@@ -39,12 +42,28 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->connection = NULL;
 
 		if ( !is_bool( $log ) ) $log = FALSE;
-
+		if ( !is_bool( $connectEveryQuery ) ) $connectEveryQuery = FALSE;
+		if ( !is_bool( $connectOnCreate ) ) $connectOnCreate = FALSE;
 		if ( $log ) $this->log = new Logger( Logger::LOG_TYPE_DATABASE );
+		if ( ( $this->connectOnCreate ^ $this->connectEveryQuery ) throw new IllegalArgumentException();
+
+		$this->connectEveryQuery = $connectEveryQuery;
+
+		if ( $this->connectOnCreate = TRUE ) $this->connect();
 	}
 
 	public function __destruct() {
-		$this->disconect();
+		self::$AllQueryCount       = NULL;
+		self::$AllConnectionsCount = NULL;
+		$this->queryCount          = NULL;
+		$this->dbName              = NULL;
+		$this->host                = NULL;
+		$this->options             = NULL;
+		$this->userName            = NULL;
+		$this->userPassword        = NULL;
+		$this->log                 = NULL;
+
+		$this->disconnect();
 		parent::__destruct();
 	}
 
@@ -81,20 +100,10 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		die( $message );
 	}
 
-	public function disconect() {
-		self::$AllQueryCount       = NULL;
-		self::$AllConnectionsCount = NULL;
-
+	public function disconnect() {
 		if ( $this->statement != NULL ) $this->freeStatement();
-		$this->connection   = NULL;
-		$this->statement    = NULL;
-		$this->queryCount   = NULL;
-		$this->dbName       = NULL;
-		$this->host         = NULL;
-		$this->options      = NULL;
-		$this->userName     = NULL;
-		$this->userPassword = NULL;
-		$this->log          = NULL;
+		$this->connection = NULL;
+		$this->statement  = NULL;
 	}
 
 	public function fetch() {
@@ -128,7 +137,9 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 	public function query( $query, array $options ) {
 		try {
-			if ( $this->queryCount == 0 ) $this->connect();
+			if ( ( $this->connectOnCreate == FALSE && $this->queryCount == 0 ) ||
+				$this->connectEveryQuery == TRUE
+			) $this->connect();
 
 			if ( $this->log != FALSE ) $this->log->log( $query );
 
@@ -136,6 +147,8 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 			$this->queryCount++;
 			$this->statement = $this->connection->prepare( $query );
 			$this->statement->execute( $options );
+
+			if ( $this->connectEveryQuery == TRUE ) $this->disconnect();
 		}
 		catch ( \PDOException $pdoEx ) {
 			$message = 'Databázová chyba!<br>';

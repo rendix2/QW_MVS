@@ -19,7 +19,7 @@ abstract class AbstractBasicModel extends Object {
 	}
 
 	public function __destruct() {
-		$this->db->disconect();
+		$this->db->disconnect();
 		$this->db = NULL;
 
 		parent::__destruct();

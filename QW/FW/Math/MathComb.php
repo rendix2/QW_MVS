@@ -68,12 +68,6 @@ final class MathComb {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 		if ( in_array( $x, self::$fibMemo ) ) return self::$fibMemo[ $x ];
 
-		switch ( $x ) {
-			case 0:
-			case 1:
-				return $x;
-		}
-
 		$f                   = self::fibonacciBetterRecurse( $x - 1 ) + self::fibonacciBetterRecurse( $x - 2 );
 		self::$fibMemo[ $x ] = $f;
 

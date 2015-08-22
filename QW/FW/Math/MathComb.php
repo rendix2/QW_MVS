@@ -79,12 +79,6 @@ final class MathComb {
 	public static function fibonacciRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 
-		switch ( $x ) {
-			case 0:
-			case 1:
-				return $x;
-		}
-
 		return self::fibonacciRecurse( $x - 1 ) + self::fibonacciRecurse( $x - 2 );
 	}
 

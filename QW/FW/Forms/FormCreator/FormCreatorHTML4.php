@@ -5,18 +5,28 @@ namespace QW\FW\Forms\FormCreator;
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
+use QW\FW\Hash;
 
 class FormCreatorHTML4 extends Object {
 	protected $formData;
+	protected $csfrCheckName;
+	protected $csfrCheckValue;
 	private $method;
 	private $action;
 	private $select;
 
-	public function __construct( $method = 'post', $action = '', $name = '' ) {
-		$this->action     = $action;
-		$this->method     = $method;
-		$this->formData[] = '<form method="' . $this->method . '" action="' . $this->action . '" name="' . $name . '">';
-		$this->select     = NULL;
+	public function __construct( $method = 'post', $action = '', $name = '', $debug = NULL ) {
+		parent::__construct( $debug );
+
+		$this->csfrCheckName  = Hash::r();
+		$this->csfrCheckValue = Hash::r3();
+		$this->action         = $action;
+		$this->method         = $method;
+		$this->formData[]     =
+			'<form method="' . $this->method . '" action="' . $this->action . '" name="' . $name . '">';
+		$this->formData[]     =
+			'<input type="hidden" name="' . $this->csfrCheckName . '" value="' . $this->csfrCheckValue . '">';
+		$this->select         = NULL;
 	}
 
 	public function __destruct() {
@@ -114,5 +124,13 @@ class FormCreatorHTML4 extends Object {
 	public function createSelect( $name, $multiple = FALSE, $size = 5, $disabled = FALSE ) {
 		return ( $this->select == NULL ) ? new FormCreatorSelect( $this, $name, $multiple, $size, FALSE ) :
 			$this->select;
+	}
+
+	final public function getCsfrCheckName() {
+		return $this->csfrCheckName;
+	}
+
+	final public function getCsfrCheckValue() {
+		return $this->csfrCheckValue;
 	}
 }

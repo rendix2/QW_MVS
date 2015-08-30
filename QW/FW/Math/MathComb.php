@@ -27,8 +27,7 @@ final class MathComb {
 
 	public static function factorialRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
-
-		if ( $x == 0 || $x == 1 ) return 1;
+		else if ( $x == 0 || $x == 1 ) return 1;
 
 		return $x * self::factorialRecurse( $x - 1 );
 	}

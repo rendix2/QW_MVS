@@ -14,12 +14,11 @@ class FormCreatorSelect extends Object {
 	private $size;
 	private $disabled;
 
-	public function __construct( FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled ) {
-		parent::__construct();
+	public function __construct( FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled, $debug = NULL ) {
+		parent::__construct( $debug );
 
 		$this->formCreatorHTML4 = $formCreatorHTML4;
-
-		$this->content  = [ ];
+		$this->content = [ ];
 		$this->objectsCounter = $name;
 		$this->multiple = $multiple == TRUE ? 'multiple="multiple' : '';
 
@@ -55,7 +54,6 @@ class FormCreatorSelect extends Object {
 	}
 
 	public function getFinal() {
-
 		$final = '<select name="' . $this->objectsCounter . '" ' . $this->multiple . '>';
 
 		foreach ( $this->content as $v ) $final .= "<option name=\"" . key( $this->content ) . "\">{$v}</option>\n";

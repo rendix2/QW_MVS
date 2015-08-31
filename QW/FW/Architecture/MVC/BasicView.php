@@ -16,8 +16,8 @@ class BasicView extends Object {
 	protected $tableData;
 	protected $pageName;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = NULL ) {
+		parent::__construct( $debug );
 
 		$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default/';
 		$this->pageName = "";

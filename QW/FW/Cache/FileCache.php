@@ -9,8 +9,8 @@ final class FileCache extends Object implements ICache {
 	const PATH = './cache/';
 	private $file;
 
-	public function __construct( $fileName ) {
-		parent::__construct();
+	public function __construct( $fileName, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( !preg_match( '#^[a-zA-Z0-9-]#$', $fileName ) ) throw new IllegalArgumentException();
 

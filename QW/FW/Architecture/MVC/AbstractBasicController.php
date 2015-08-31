@@ -13,8 +13,8 @@ abstract class AbstractBasicController extends Object {
 
 	abstract public function index();
 
-	public function __construct( $name ) {
-		parent::__construct();
+	public function __construct( $name, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$c = '\\QW\\Models\\' . $name . 'Model';
 

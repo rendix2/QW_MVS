@@ -8,8 +8,8 @@ class Form extends Object {
 
 	private $safeForm;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = FALSE ) {
+		parent::__construct( $debug );
 		$this->safeForm = new SafeForm();
 	}
 

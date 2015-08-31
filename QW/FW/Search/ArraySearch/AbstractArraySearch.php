@@ -10,8 +10,8 @@ abstract class AbstractArraySearch extends Object {
 
 	abstract public function search();
 
-	public function __construct( array $data ) {
-		parent::__construct();
+	public function __construct( array $data, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->data   = $data;
 		$this->length = count( $this->data );

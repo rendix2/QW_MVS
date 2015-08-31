@@ -6,8 +6,8 @@ use QW\FW\Basic\Object;
 final class MathMatrix extends Object {
 	private $matrix, $matrixSize;
 
-	public function __construct( array $matrix ) {
-		parent::__construct();
+	public function __construct( array $matrix, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->matrix     = $matrix;
 		$this->matrixSize = count( $this->matrix );

@@ -5,15 +5,14 @@ use QW\FW\Basic\Object;
 use QW\FW\Database\DatabaseMySQL;
 use QW\Libs\Config;
 
-
 final class ModelException extends \Exception {
 }
 
 abstract class AbstractBasicModel extends Object {
 	private $db; //, $language, $template;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = FALSE ) {
+		parent::__construct( $debug );
 		$this->db = new DatabaseMySQL( Config::$dbConfig[ 'dbHost' ], Config::$dbConfig[ 'dbUser' ],
 			Config::$dbConfig[ 'dbPassword' ], Config::$dbConfig[ 'dbName' ], [ ] );
 	}

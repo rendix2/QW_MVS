@@ -4,8 +4,6 @@
  *
  *  Petra, FB 2015, "jen píšu, abys tam nebylo nic :D"
  *          "*aby"
- *
- *
  */
 
 namespace QW\FW\Basic;
@@ -103,7 +101,7 @@ abstract class Object {
 		return $wholeName[ count( $wholeName ) - 1 ];
 	}
 
-	final public static function setAllDebug( $debug ) {
+	final public static function setAllDebug( $debug = FALSE ) {
 		if ( !is_bool( $debug ) ) throw new IllegalArgumentException();
 
 		self::$staticDebug = $debug;

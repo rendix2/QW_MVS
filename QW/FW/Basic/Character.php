@@ -8,8 +8,8 @@ class Character extends Object {
 
 	private $char;
 
-	public function __construct( $char = '' ) {
-		parent::__construct();
+	public function __construct( $char = '', $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( mb_strlen( $char, 'UTF-8' ) != 1 ) throw new IllegalArgumentException();
 

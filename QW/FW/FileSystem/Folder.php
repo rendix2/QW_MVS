@@ -3,13 +3,13 @@
 namespace QW\FW\FileSystem;
 
 use FilesystemIterator;
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\IllegalArgumentException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 final class Folder extends File {
-	public function __construct( $dirName, $create = FALSE ) {
-		//parent::__construct();
+	public function __construct( $dirName, $create = FALSE, $debug = FALSE ) {
+		//parent::__construct($debug = FALSE);
 
 		if ( ( !is_dir( $dirName ) || !file_exists( $dirName ) ) &&
 			$create == FALSE

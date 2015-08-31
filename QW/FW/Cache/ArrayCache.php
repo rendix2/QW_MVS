@@ -7,8 +7,8 @@ use QW\FW\Basic\Object;
 final class ArrayCache extends Object implements ICache {
 	private $data;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = FALSE ) {
+		parent::__construct( $debug );
 		$this->data = [ ];
 	}
 

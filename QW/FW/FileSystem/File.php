@@ -8,8 +8,8 @@ use QW\FW\Boot\IllegalArgumentException;
 class File extends Object {
 	protected $filePath;
 
-	public function __construct( $filePath, $create = FALSE ) {
-		parent::__construct();
+	public function __construct( $filePath, $create = FALSE, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( $create == FALSE && !file_exists( $filePath ) ) throw new IllegalArgumentException();
 		else if ( $create == TRUE && !file_exists( $filePath ) ) touch( $filePath );

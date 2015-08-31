@@ -19,8 +19,8 @@ class EasyCaptcha extends Object {
 	private $captcha;
 	private $text;
 
-	public function __construct( $width = 400, $height = 200 ) {
-		parent::__construct();
+	public function __construct( $width = 400, $height = 200, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->captcha = new ImageTextGenerate( $width, $height );
 		$this->captcha->setBackgroundColorO( new Color( 0, 0, 0 ) );

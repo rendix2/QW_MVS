@@ -7,8 +7,8 @@ use QW\Libs\Config;
 
 final class UserController extends AbstractBasicController {
 
-	public function __construct( $name ) {
-		parent::__construct( $name );
+	public function __construct( $name, $debug = FALSE ) {
+		parent::__construct( $name, $debug );
 
 		$this->getView()
 			->setPageName( "Uživatel" );

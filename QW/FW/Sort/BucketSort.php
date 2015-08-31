@@ -1,21 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 7. 7. 2015
- * Time: 13:59
- */
 
 namespace QW\FW\Sort;
 
-
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\IllegalArgumentException;
 
 class BucketSort extends AbstractSort {
 
 	private $bucketCount;
 
-	public function __construct( array $data, $bucketCount ) {
+	public function __construct( array $data, $bucketCount, $debug = FALSE ) {
 		parent::__construct( $data );
 
 		if ( $this->bucketCount <= 0 || !is_numeric( $bucketCount ) ) throw new IllegalArgumentException();
@@ -29,13 +22,10 @@ class BucketSort extends AbstractSort {
 
 		for ( $i = 0; $i < $this->length; $i++ ) {
 			if ( $this->data[ $i ] > $high ) $high = $this->data[ $i ];
-
 			if ( $this->data[ $i ] < $low ) $low = $this->data[ $i ];
-
 		}
 
 		$interval = ( (float) ( $high - $low + 1 ) ) / $this->bucketCount;
-
 		$buckets = [ ];
 
 		for ( $i = 0; $i < $this->length; $i++ )

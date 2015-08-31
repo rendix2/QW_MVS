@@ -9,8 +9,8 @@ abstract class AbstractSort extends Object {
 
 	abstract protected function sort( AbstractSort $sort );
 
-	public function __construct( array $data ) {
-		parent::__construct();
+	public function __construct( array $data, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( $this->length <= 1 ) return $this->data;
 

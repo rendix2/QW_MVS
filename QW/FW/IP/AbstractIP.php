@@ -12,8 +12,8 @@ abstract class AbstractIP extends Object implements IP {
 	protected $ipCoded;
 	protected $ipCountPart;
 
-	public function __construct( $ip ) {
-		parent::__construct();
+	public function __construct( $ip, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( $ip == NULL ) throw new NullPointerException();
 

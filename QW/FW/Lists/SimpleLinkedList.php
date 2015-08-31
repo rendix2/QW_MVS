@@ -8,8 +8,8 @@ class SimpleLinkedList extends AbstractList {
 
 	private $last;
 
-	public function __construct( $data = NULL, $type = NULL ) {
-		parent::__construct( $data );
+	public function __construct( $data = NULL, $type = NULL, $debug = FALSE ) {
+		parent::__construct( $data, $debug );
 		$this->last = new Node( $data );
 	}
 

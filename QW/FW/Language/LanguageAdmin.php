@@ -12,7 +12,7 @@ class LanguageAdmin extends Language {
 
 	private $langName, $langAdmin, $metaAdmin;
 
-	public function __construct( $langName ) {
+	public function __construct( $langName, $debug = FALSE ) {
 		if ( !preg_match( '#^[A-Z]*$#', $langName ) ) throw new IllegalArgumentException();
 
 		$this->langName = $langName;

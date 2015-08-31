@@ -7,7 +7,7 @@ use QW\FW\Boot\IllegalArgumentException;
 class IPvU extends AbstractIP {
 	private $IPv;
 
-	public function __construct( $ip ) {
+	public function __construct( $ip, $debug = FALSE ) {
 		parent::__construct( $ip );
 
 		// IPv4

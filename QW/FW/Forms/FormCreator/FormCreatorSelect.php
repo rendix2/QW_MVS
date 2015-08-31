@@ -14,7 +14,7 @@ class FormCreatorSelect extends Object {
 	private $size;
 	private $disabled;
 
-	public function __construct( FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled, $debug = NULL ) {
+	public function __construct( FormCreatorHTML4 $formCreatorHTML4, $name, $multiple, $size, $disabled, $debug = FALSE ) {
 		parent::__construct( $debug );
 
 		$this->formCreatorHTML4 = $formCreatorHTML4;

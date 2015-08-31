@@ -8,8 +8,8 @@ class ArrayList extends AbstractList implements IList {
 
 	private $data;
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = FALSE ) {
+		parent::__construct( $debug );
 		$this->data = [ ];
 		$this->size = 0;
 	}

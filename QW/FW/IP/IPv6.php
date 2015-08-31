@@ -5,8 +5,8 @@ namespace QW\FW\IP;
 use QW\FW\Boot\IllegalArgumentException;
 
 final class IPv6 extends AbstractIP {
-	public function __construct( $ip ) {
-		parent::__construct( $ip );
+	public function __construct( $ip, $debug = FALSE ) {
+		parent::__construct( $ip, $debug );
 
 		// IPv6
 		if ( $this->getIpCountPart() != 6 ) throw new IllegalArgumentException();

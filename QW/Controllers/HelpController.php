@@ -5,8 +5,8 @@ use QW\FW\Architecture\MVC\AbstractBasicController;
 use QW\Libs\Config;
 
 final class HelpController extends AbstractBasicController {
-	public function __construct( $name ) {
-		parent::__construct( $name );
+	public function __construct( $name, $debug = FALSE ) {
+		parent::__construct( $name, $debug );
 
 		$this->getView()
 			->setPageName( "Nápověda" );

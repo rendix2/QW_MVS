@@ -15,7 +15,7 @@ class FormCreatorHTML4 extends Object {
 	private $action;
 	private $select;
 
-	public function __construct( $method = 'post', $action = '', $name = '', $debug = NULL ) {
+	public function __construct( $method = 'post', $action = '', $name = '', $debug = FALSE ) {
 		parent::__construct( $debug );
 
 		$this->csfrCheckName  = Hash::r();

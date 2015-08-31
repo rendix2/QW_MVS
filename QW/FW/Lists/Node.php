@@ -9,8 +9,8 @@ class Node extends Object {
 	private $data;
 	private $nextNode;
 
-	public function __construct( $data, Node $nextNode = NULL ) {
-		parent::__construct();
+	public function __construct( $data, Node $nextNode = NULL, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->data     = $data;
 		$this->nextNode = $nextNode;

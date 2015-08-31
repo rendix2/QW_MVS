@@ -9,8 +9,8 @@ final class Integer extends Object {
 	const MIN_VALUE = PHP_INT_MIN;
 	private $integer;
 
-	public function __construct( $integer ) {
-		parent::__construct();
+	public function __construct( $integer, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( !is_double( $integer ) ) throw new IllegalArgumentException();
 

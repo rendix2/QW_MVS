@@ -9,8 +9,8 @@ use QW\FW\Boot\IllegalArgumentException;
 final class APCCache extends Object implements ICache {
 	private $key;
 
-	public function __construct( $key ) {
-		parent::__construct();
+	public function __construct( $key, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( apc_exists( $key ) ) throw new IllegalArgumentException( 'Klíč již existuje, zvolte jiný.' );
 

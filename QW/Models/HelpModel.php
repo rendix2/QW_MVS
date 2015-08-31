@@ -5,8 +5,8 @@ use QW\FW\Architecture\MVC\AbstractBasicModel;
 
 final class HelpModel extends AbstractBasicModel {
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = FALSE ) {
+		parent::__construct( $debug );
 	}
 
 	public function __destruct() {

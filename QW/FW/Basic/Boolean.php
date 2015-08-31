@@ -9,8 +9,8 @@ final class Boolean extends Object {
 	const TRUE = TRUE;
 	private $boolean;
 
-	public function __construct( $boolean ) {
-		parent::__construct();
+	public function __construct( $boolean, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( !is_bool( $boolean ) ) throw new IllegalArgumentException();
 

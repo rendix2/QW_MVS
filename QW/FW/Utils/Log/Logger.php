@@ -13,8 +13,8 @@ class Logger extends Object {
 	private $path;
 	private $file;
 
-	public function __construct( $type ) {
-		parent::__construct();
+	public function __construct( $type, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->path = './logs/';
 

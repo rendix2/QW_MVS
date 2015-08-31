@@ -6,8 +6,8 @@ namespace QW\FW\IP;
 use QW\FW\Boot\IllegalArgumentException;
 
 final class IPv4 extends AbstractIP {
-	public function __construct( $ip ) {
-		parent::__construct( $ip );
+	public function __construct( $ip, $debug = FALSE ) {
+		parent::__construct( $ip, $debug );
 
 		// IPv4
 		if ( $this->getIpCountPart() != 4 ) throw new IllegalArgumentException();

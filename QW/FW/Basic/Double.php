@@ -7,8 +7,8 @@ use QW\FW\Boot\IllegalArgumentException;
 final class Double extends Object {
 	private $double;
 
-	public function __construct( $double ) {
-		parent::__construct();
+	public function __construct( $double = 0.0, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( !is_double( $double ) ) throw new IllegalArgumentException();
 

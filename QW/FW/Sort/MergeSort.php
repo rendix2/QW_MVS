@@ -8,9 +8,7 @@
 
 namespace QW\FW\Sort;
 
-
 class MergeSort extends AbstractSort {
-
 
 	private function merge( array $array, array $aux, $left, $right ) {
 		$middle     = ( $left + $right ) / 2;

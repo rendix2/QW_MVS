@@ -18,8 +18,8 @@ class Language extends Object implements ILanguage {
 	private $meta;
 	private $allPackages;
 
-	public function __construct( $langName ) {
-		parent::__construct();
+	public function __construct( $langName, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( !preg_match( '#^[A-Z]*$#', $langName ) ) throw new IllegalArgumentException();
 

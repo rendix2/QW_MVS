@@ -10,7 +10,7 @@ class String extends Object {
 	protected $string;
 	protected $matches;
 
-	public function __construct( $string = "" ) {
+	public function __construct( $string = "", $debug = FALSE ) {
 		parent::__construct();
 
 		$this->string     = (string) $string;

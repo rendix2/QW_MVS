@@ -1,19 +1,18 @@
 <?php
 namespace QW\FW;
 
-use QW\FW\Basic\IllegalArgumentException;
 use QW\FW\Basic\Object;
+use QW\FW\Boot\IllegalArgumentException;
 
 class MailException extends \Exception {
-
 }
 
 final class Mail extends Object {
 
 	private $to, $subject, $text;
 
-	public function __construct( $to, $subject ) {
-		parent::__construct();
+	public function __construct( $to, $subject, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		if ( Validator::validateEmailUsingJakubVrana( $to ) ) $this->to = $to;
 		else throw new IllegalArgumentException( 'Neplatná E-mailová adresa.' );

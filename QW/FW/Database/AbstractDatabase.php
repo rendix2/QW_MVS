@@ -28,8 +28,8 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 
 	// conection begin
 
-	public function __construct( $host, $userName, $userPassword, $dbName, array $options, $log = FALSE, $connectEveryQuery = FALSE, $connectOnCreate = FALSE ) {
-		parent::__construct();
+	public function __construct( $host, $userName, $userPassword, $dbName, array $options, $log = FALSE, $connectEveryQuery = FALSE, $connectOnCreate = FALSE, $debug = FALSE ) {
+		parent::__construct( $debug );
 		self::$AllQueryCount       = 0;
 		self::$AllConnectionsCount = 0;
 		$this->host = $host;
@@ -42,10 +42,10 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		$this->connection = NULL;
 
 		if ( !is_bool( $log ) ) $log = FALSE;
-		if ( !is_bool( $connectEveryQuery ) ) $connectEveryQuery = FALSE;
-		if ( !is_bool( $connectOnCreate ) ) $connectOnCreate = FALSE;
+		if ( !is_bool( $connectEveryQuery ) ) $this->connectEveryQuery = FALSE;
+		if ( !is_bool( $connectOnCreate ) ) $this->connectOnCreate = FALSE;
 		if ( $log ) $this->log = new Logger( Logger::LOG_TYPE_DATABASE );
-		if ( ( $this->connectOnCreate ^ $this->connectEveryQuery ) throw new IllegalArgumentException();
+		if ( $this->connectOnCreate ^ $this->connectEveryQuery ) throw new IllegalArgumentException();
 
 		$this->connectEveryQuery = $connectEveryQuery;
 

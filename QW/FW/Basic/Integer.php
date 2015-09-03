@@ -12,7 +12,7 @@ final class Integer extends Object {
 	public function __construct( $integer, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_double( $integer ) ) throw new IllegalArgumentException();
+		if ( !is_integer( $integer ) ) throw new IllegalArgumentException();
 
 		$this->integer = $integer;
 	}
@@ -28,11 +28,17 @@ final class Integer extends Object {
 	}
 
 	public function ceil() {
-		return new Integer( ceil( $this->integer ) );
+		return new Integer( (int) ceil( $this->integer ) );
+	}
+
+	public function divide( $number ) {
+		if ( $number == 0 ) throw new IllegalArgumentException();
+
+		return new Integer( (int) ( $this->integer / $number ) );
 	}
 
 	public function floor() {
-		return new Integer( floor( $this->integer ) );
+		return new Integer( (int) floor( $this->integer ) );
 	}
 
 	public function getInteger() {
@@ -47,8 +53,27 @@ final class Integer extends Object {
 		return new Integer( min( $this->integer, min( $this->integer, $number ) ) );
 	}
 
+	public function minus( $number ) {
+		if ( $number == 0 ) return new Integer( $this->integer );
+
+		return new Integer( $number - $this->integer );
+	}
+
+	public function plus( $number ) {
+		if ( $number == 0 ) return new Integer( $this->integer );
+
+		return new Integer( $number + $this->integer );
+	}
+
 	public function round( $precision = 0, $mode = PHP_ROUND_HALF_UP ) {
-		return new Integer( round( $this->integer, $precision, $mode ) );
+		return new Integer( (int) round( $this->integer, $precision, $mode ) );
+	}
+
+	public function times( $number ) {
+		if ( $number == 0 ) return new Integer( 0 );
+		if ( $number == 1 ) return new Integer( $this->integer );
+
+		return new Integer( $number * $this->integer );
 	}
 
 	public function toASCII() {

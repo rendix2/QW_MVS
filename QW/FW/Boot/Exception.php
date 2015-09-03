@@ -26,6 +26,9 @@ final class NotStringException extends IllegalArgumentException {
 final class NotCharacterException extends IllegalArgumentException {
 }
 
+final class DivisionByZero extends IllegalArgumentException {
+}
+
 class NotNumberException extends IllegalArgumentException {
 }
 

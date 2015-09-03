@@ -3,6 +3,7 @@
 namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\NullPointerException;
 
 final class Integer extends Object {
 	const MAX_VALUE = PHP_INT_MAX;
@@ -37,6 +38,13 @@ final class Integer extends Object {
 		return new Integer( (int) ( $this->integer / $number ) );
 	}
 
+	public function divideInteger( Integer $number = NULL ) {
+		if ( $number == NULL ) throw new NullPointerException();
+		if ( $number == 0 ) return new Integer( $this->integer );
+
+		return new Integer( $number->integer / $this->integer );
+	}
+
 	public function floor() {
 		return new Integer( (int) floor( $this->integer ) );
 	}
@@ -59,10 +67,24 @@ final class Integer extends Object {
 		return new Integer( $number - $this->integer );
 	}
 
+	public function minusInteger( Integer $number = NULL ) {
+		if ( $number == NULL ) throw new NullPointerException();
+		if ( $number == 0 ) return new Integer( $this->integer );
+
+		return new Integer( $number->integer - $this->integer );
+	}
+
 	public function plus( $number ) {
 		if ( $number == 0 ) return new Integer( $this->integer );
 
 		return new Integer( $number + $this->integer );
+	}
+
+	public function plusInteger( Integer $number = NULL ) {
+		if ( $number == NULL ) throw new NullPointerException();
+		if ( $number == 0 ) return new Integer( $this->integer );
+
+		return new Integer( $number->integer + $this->integer );
 	}
 
 	public function round( $precision = 0, $mode = PHP_ROUND_HALF_UP ) {
@@ -74,6 +96,14 @@ final class Integer extends Object {
 		if ( $number == 1 ) return new Integer( $this->integer );
 
 		return new Integer( $number * $this->integer );
+	}
+
+	public function timesInteger( Integer $number = NULL ) {
+		if ( $number == NULL ) throw new NullPointerException();
+		if ( $number == 0 ) return new Integer( 0 );
+		if ( $number == 1 ) return new Integer( $this->integer );
+
+		return new Integer( $number->integer * $this->integer );
 	}
 
 	public function toASCII() {

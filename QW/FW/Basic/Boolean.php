@@ -3,6 +3,7 @@
 namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\NullPointerException;
 
 final class Boolean extends Object {
 	const FALSE = FALSE;
@@ -49,5 +50,27 @@ final class Boolean extends Object {
 		if ( $boolean == NULL ) throw new IllegalArgumentException();
 
 		return $this->boolean == $boolean->boolean;
+	}
+
+	public function logAndBoolean( Boolean $bool = NULL ) {
+		if ( $bool == NULL ) throw new NullPointerException();
+
+		return new Boolean( $this->boolean && $bool->boolean );
+	}
+
+	public function logORBoolean( Boolean $bool = NULL ) {
+		if ( $bool == NULL ) throw new NullPointerException();
+
+		return new Boolean( $this->boolean || $bool->boolean );
+	}
+
+	public function logXorBoolean( Boolean $bool = NULL ) {
+		if ( $bool == NULL ) throw new NullPointerException();
+
+		return new Boolean( $this->boolean ^ $bool->boolean );
+	}
+
+	public function neg() {
+		return new Boolean( !$this->boolean );
 	}
 }

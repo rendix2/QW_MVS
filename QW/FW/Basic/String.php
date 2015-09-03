@@ -11,7 +11,7 @@ class String extends Object {
 	protected $matches;
 
 	public function __construct( $string = "", $debug = FALSE ) {
-		parent::__construct();
+		parent::__construct( $debug );
 
 		$this->string     = (string) $string;
 		$this->matches    = NULL;

@@ -10,6 +10,10 @@ abstract class AbstractCache extends Object implements ICache {
 		parent::__construct( $debug );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	public function updateCache( $data ) {
 		$this->removeCache();
 		$this->addCache( $data );

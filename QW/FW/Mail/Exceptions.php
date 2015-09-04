@@ -1,4 +1,6 @@
 <?php
 
-class MailException extends \Exception {
+use QW\FW\Boot\MyException;
+
+class MailException extends MyException {
 }

@@ -16,7 +16,7 @@ abstract class Object {
 	private static $methodCallCounter = 0;
 	private static $methodStaticCallCounter = 0;
 	private static $staticDebug = FALSE;
-	private $debug;
+	protected $debug;
 
 	final public function __call( $name, $arguments ) {
 		if ( self::$staticDebug || $this->debug ) echo 'Invalid method calling:' . $this->getClassName() . '::' .
@@ -80,16 +80,17 @@ abstract class Object {
 		'</b>. You didn\'t overwrite <b>toString()</b> method. This message is in <b>Object</b> class.<br>';
 	}
 
+	final public static function getAllDebug() {
+		return self::$staticDebug;
+	}
 
 	final public static function getMethodCallCounter() {
 		return self::$methodCallCounter;
 	}
 
-
 	final public static function getMethodStaticCallCounter() {
 		return self::$methodStaticCallCounter;
 	}
-
 
 	final public static function getObjectsCount() {
 		return self::$objectsCounter;
@@ -106,7 +107,6 @@ abstract class Object {
 
 		self::$staticDebug = $debug;
 	}
-
 
 	final private function callCounter() {
 		if ( $this->debug == TRUE || self::$staticDebug == TRUE ) self::$methodCallCounter++;

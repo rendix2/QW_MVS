@@ -3,6 +3,8 @@
 namespace QW\FW\Boot;
 
 // Main Exceptions
+use QW\FW\Basic\Object;
+
 class LoggedException extends \Exception {
 
 	public function __construct( $message = '', $code = 0, \Exception $previous = NULL ) {
@@ -17,7 +19,7 @@ class MyException extends \Exception {
 	public function __construct( $message = '', $logged = FALSE, $code = 0, \Exception $previous = NULL ) {
 		parent::__construct( $message, $code, $previous );
 
-		if ( $logged == TRUE ) new LoggedException( $message, $code, $previous );
+		if ( $logged == TRUE || Object::getAllDebug() ) new LoggedException( $message, $code, $previous );
 	}
 }
 

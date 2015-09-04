@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 13. 6. 2015
- * Time: 23:35
- */
 
 namespace QW\FW\Captcha\EasyCaptcha;
 

@@ -3,9 +3,6 @@ namespace QW\FW\Architecture\MVC;
 
 use QW\FW\Basic\Object;
 
-final class BasicViewException extends \Exception {
-}
-
 class BasicView extends Object {
 	const ADMIN_DIR_NAME = 'Admin/';
 	const PATH_TO_TEMPLATES = './QW/Templates/';

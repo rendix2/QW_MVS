@@ -2,7 +2,29 @@
 
 namespace QW\FW\Boot;
 
-class ProgrammerExceptions extends \Exception {
+
+// Main Exception
+class LoggedException extends \Exception {
+	public function __construct( $message = '', $code = 0, \Exception $previous = NULL ) {
+		parent::__construct( $message, $code, $previous );
+		AbstractRouter::getGlobalLogger()
+		              ->log( $message );
+	}
+}
+
+class MyException extends \Exception {
+
+	public function __construct( $message = '', $logged = FALSE, $code = 0, \Exception $previous = NULL ) {
+		parent::__construct( $message, $code, $previous );
+
+		if ( $logged == TRUE ) new LoggedException( $message, $code, $previous );
+	}
+}
+
+class ProgrammerExceptions extends MyException {
+}
+
+class ProgrammerLoggedException extends LoggedException {
 }
 
 class UnsupportedOperationException extends ProgrammerExceptions {
@@ -14,7 +36,7 @@ class MemberAccessException extends ProgrammerExceptions {
 final class PrivateConstructException extends MemberAccessException {
 }
 
-class RuntimeException extends \Exception {
+class RuntimeException extends MyException {
 }
 
 class IllegalArgumentException extends RuntimeException {
@@ -58,6 +80,11 @@ final class FileNotWritableException extends IOException {
 }
 
 class NullPointerException extends RuntimeException {
+}
+
+
+// Boot exception
+final class BootstrapException extends \Exception {
 }
 
 ?>

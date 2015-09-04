@@ -5,9 +5,6 @@ use QW\FW\Basic\Object;
 use QW\FW\Database\DatabaseMySQL;
 use QW\Libs\Config;
 
-final class ModelException extends \Exception {
-}
-
 abstract class AbstractBasicModel extends Object {
 	private $db; //, $language, $template;
 

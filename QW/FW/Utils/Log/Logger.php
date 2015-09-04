@@ -9,7 +9,7 @@ class Logger extends Object {
 
 	const LOG_TYPE_DATABASE = 1;
 	const LOG_TYPE_FILE = 2;
-
+	const LOG_TYPE_GLOBAL = 0;
 	private $path;
 	private $file;
 
@@ -19,6 +19,10 @@ class Logger extends Object {
 		$this->path = './logs/';
 
 		switch ( $type ) {
+			case self::LOG_TYPE_FILE: {
+				$this->path .= 'global.txt';
+				break;
+			}
 			case self::LOG_TYPE_DATABASE: {
 				$this->path .= 'database.txt';
 				break;

@@ -2,7 +2,9 @@
 
 namespace QW\Libs;
 
-use QW\FW\Basic\IllegalArgumentException;
+
+use QW\FW\Architecture\MVC\BasicView;
+use QW\FW\Boot\IllegalArgumentException;
 
 class SmartyView extends BasicView {
 

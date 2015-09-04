@@ -5,8 +5,6 @@ namespace QW\FW\Boot;
 use QW\Controllers\IndexController;
 use QW\FW\Config;
 
-final class BootstrapException extends \Exception {
-}
 
 class Bootstrap extends AbstractRouter {
 	protected $url;

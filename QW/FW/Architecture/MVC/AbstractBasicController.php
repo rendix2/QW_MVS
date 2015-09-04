@@ -3,9 +3,6 @@ namespace QW\FW\Architecture\MVC;
 
 use QW\FW\Basic\Object;
 
-final class ControllerException extends \Exception {
-}
-
 abstract class AbstractBasicController extends Object {
 	private $view;
 	private $model;

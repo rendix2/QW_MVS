@@ -3,9 +3,11 @@
 namespace QW\FW\Boot;
 
 use QW\FW\Basic\Object;
-
+use QW\FW\Utils\Log\Logger;
 
 abstract class AbstractRouter extends Object {
+
+	private static $logger;
 
 	abstract protected function loadMVC();
 
@@ -15,15 +17,20 @@ abstract class AbstractRouter extends Object {
 
 	public function __construct( $debug = FALSE ) {
 		parent::__construct( $debug );
+		self::$logger = new Logger( Logger::LOG_TYPE_GLOBAL, $debug );
 
 		$this->setAllDebug( $debug );
-		require_once( './QW/FW/Boot/Exception.php' );
+		//require_once( './QW/FW/Boot/Exceptions.php' );
 		require_once( './QW/Smarty/libs/Smarty.class.php' );
 		$this->route();
 	}
 
 	public function __destruct() {
 		parent::__destruct();
+	}
+
+	final public static function getGlobalLogger() {
+		return self::$logger;
 	}
 
 	public static function loadClass() {

@@ -4,9 +4,6 @@ namespace QW\FW;
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 
-class MailException extends \Exception {
-}
-
 final class Mail extends Object {
 
 	private $to, $subject, $text;

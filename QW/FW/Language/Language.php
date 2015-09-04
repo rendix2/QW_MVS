@@ -5,9 +5,6 @@ use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Interfaces\ILanguage;
 
-final class LanguageException extends \Exception {
-}
-
 class Language extends Object implements ILanguage {
 	const EXT = '.ini';
 	const PATH = './Languages/';

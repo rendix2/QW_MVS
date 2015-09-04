@@ -7,5 +7,7 @@ interface ICache {
 
 	public function removeCache();
 
+	public function updateCache( $data );
+
 	public function useCache();
 }

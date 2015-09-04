@@ -2,9 +2,8 @@
 
 namespace QW\FW\Cache;
 
-use QW\FW\Basic\Object;
 
-final class ArrayCache extends Object implements ICache {
+final class ArrayCache extends AbstractCache implements ICache {
 	private $data;
 
 	public function __construct( $debug = FALSE ) {

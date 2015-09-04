@@ -2,10 +2,10 @@
 
 namespace QW\FW\Cache;
 
-use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\FileSystem\File;
 
-final class FileCache extends Object implements ICache {
+final class FileCache extends AbstractCache implements ICache {
 	const PATH = './cache/';
 	private $file;
 

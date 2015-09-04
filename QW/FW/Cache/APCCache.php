@@ -2,11 +2,9 @@
 
 namespace QW\FW\Cache;
 
-
-use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 
-final class APCCache extends Object implements ICache {
+final class APCCache extends AbstractCache implements ICache {
 	private $key;
 
 	public function __construct( $key, $debug = FALSE ) {

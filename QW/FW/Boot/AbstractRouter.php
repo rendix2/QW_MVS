@@ -33,20 +33,25 @@ abstract class AbstractRouter extends Object {
 
 			// don't load Controller or Model by this
 			//if ( preg_match( '#Controller|Model$#', $class ) ) return -2;
-
 			// manual Smarty load
 			if ( preg_match( '#Smarty#', $class ) ) return -3;
-
 			if ( strpos( 'Smarty', $class ) ) return -1;
 
 			// parse namespace
-			$c    = explode( '\\', $class );
-			$path = './' . implode( '/', $c ) . '.php';
+
+			$c                = explode( '\\', $class );
+			$count            = count( $c );
+			$pathToFile       = './' . implode( '/', $c ) . '.php';
+			$pathToDir        = './' . implode( '/', array_slice( $c, $count - 1 ) );
+			$pathToExceptions = $pathToDir . '/Exceptions.php';
+
+			if ( file_exists( $pathToExceptions ) ) require_once( $pathToExceptions );
 
 			// load class in namespace
-			if ( file_exists( $path ) ) require_once( $path );
+			if ( file_exists( $pathToFile ) ) require_once( $pathToFile );
 			else {
-				$message = 'Error from ' . self::getStaticClassName() . ': File: ' . $path . ' doesn\'t exists<br>';
+				$message =
+					'Error from ' . self::getStaticClassName() . ': File: ' . $pathToFile . ' doesn\'t exists<br>';
 
 				//$logger = new Logger( Logger::LOG_TYPE_FILE );
 				//$logger->log( $message );

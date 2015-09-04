@@ -86,7 +86,7 @@ class NullPointerException extends RuntimeException {
 
 
 // Boot exception
-final class BootstrapException extends \Exception {
+final class BootstrapException extends MyException {
 }
 
 ?>

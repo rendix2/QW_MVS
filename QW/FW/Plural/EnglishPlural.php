@@ -8,7 +8,7 @@
 
 namespace QW\FW\Plural;
 
-class EnglishPlural extends AbstractPlural {
+final class EnglishPlural extends AbstractPlural {
 
 	public function __construct( $count, $word, $debug = FALSE ) {
 		parent::__construct( $debug );

@@ -8,7 +8,6 @@
 
 namespace QW\FW\Plural;
 
-
 use QW\FW\Basic\Object;
 
 abstract class AbstractPlural extends Object {

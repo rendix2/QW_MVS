@@ -3,6 +3,7 @@
 namespace QW\FW\Forms;
 
 use QW\FW\Basic\Object;
+use QW\FW\Hash;
 
 final class SafeForm extends Object {
 
@@ -10,7 +11,7 @@ final class SafeForm extends Object {
 
 	public function __construct( $debug = FALSE ) {
 		parent::__construct( $debug );
-		$this->hash = md5( uniqid() );
+		$this->hash = Hash::r();
 	}
 
 	public function __destruct() {

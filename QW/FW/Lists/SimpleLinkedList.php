@@ -2,7 +2,7 @@
 
 namespace QW\FW\Lists;
 
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\IllegalArgumentException;
 
 class SimpleLinkedList extends AbstractList {
 
@@ -12,7 +12,6 @@ class SimpleLinkedList extends AbstractList {
 		parent::__construct( $data, $debug );
 		$this->last = new Node( $data );
 	}
-
 
 	public function __destruct() {
 		$this->last = NULL;
@@ -74,7 +73,7 @@ class SimpleLinkedList extends AbstractList {
 	}
 
 	private function helperGetLast( Node $node = NULL ) {
-		if ( $node == NULL ) throw new \QW\FW\Boot\IllegalArgumentException();
+		if ( $node == NULL ) throw new IllegalArgumentException();
 
 		if ( $node->getNextNode() == NULL ) return $node->getData();
 

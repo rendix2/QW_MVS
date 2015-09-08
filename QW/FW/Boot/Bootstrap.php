@@ -5,7 +5,6 @@ namespace QW\FW\Boot;
 use QW\Controllers\IndexController;
 use QW\FW\Config;
 
-
 class Bootstrap extends AbstractRouter {
 	protected $url;
 	protected $params;

@@ -103,7 +103,6 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	public function disconnect() {
 		if ( $this->statement != NULL ) $this->freeStatement();
 		$this->connection = NULL;
-		$this->statement  = NULL;
 	}
 
 	public function fetch() {

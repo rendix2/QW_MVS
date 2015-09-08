@@ -11,8 +11,8 @@ final class ImageTextGenerate extends Object {
 	private $imageResource;
 	private $imageTextColor;
 
-	public function __construct( $width, $height ) {
-		//parent::__construct();
+	public function __construct( $width, $height, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->imageResource = imagecreate( $width, $height );
 	}
@@ -30,8 +30,8 @@ final class ImageTextGenerate extends Object {
 
 			return TRUE;
 		}
-		else
-			return FALSE;
+
+		return FALSE;
 	}
 
 	public function setBackgroundColor( $red, $green, $blue ) {

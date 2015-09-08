@@ -12,10 +12,9 @@ class Node extends Object {
 	public function __construct( $data, Node $nextNode = NULL, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		$this->data     = $data;
+		$this->data = $data;
 		$this->nextNode = $nextNode;
 	}
-
 
 	public function __destruct() {
 		$this->data     = NULL;

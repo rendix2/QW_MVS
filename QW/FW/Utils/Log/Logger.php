@@ -19,7 +19,7 @@ class Logger extends Object {
 		$this->path = './logs/';
 
 		switch ( $type ) {
-			case self::LOG_TYPE_FILE: {
+			case self::LOG_TYPE_GLOBAL: {
 				$this->path .= 'global.txt';
 				break;
 			}

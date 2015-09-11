@@ -3,14 +3,14 @@
 namespace QW\FW\Math\Matrix\Mult;
 
 use QW\FW\Boot\IllegalArgumentException;
-use QW\FW\Math\Matrix\MathMatrix;
+use QW\FW\Math\Matrix\Matrix;
 
-class MathMatrixMultStandard extends AbstractMathMatrixMult {
-	public function __construct( MathMatrix $a = NULL, MathMatrix $b = NULL, $debug = FALSE ) {
+class MatrixMultStandard extends AbstractMatrixMult {
+	public function __construct( Matrix $a = NULL, Matrix $b = NULL, $debug = FALSE ) {
 		parent::__construct( $a, $b, $debug );
 	}
 
-	public function mult( MathMatrix $a = NULL, MathMatrix $b = NULL ) {
+	public function mult( Matrix $a = NULL, Matrix $b = NULL ) {
 		$newMatrix = [ ];
 
 		if ( $a->getMatrixSizeA() != $b->getMatrixSizeB() ) throw new IllegalArgumentException();
@@ -19,6 +19,6 @@ class MathMatrixMultStandard extends AbstractMathMatrixMult {
 			for ( $j = 0; $j < $b->getMatrixSizeB(); $j++ ) for ( $k = 0; $k < $a->getMatrixSizeB(); $k++ )
 				$newMatrix[ $i ][ $j ] += $a->getMatrix()[ $i ][ $k ] * $b->getMatrix()[ $k ][ $j ];
 
-		return new MathMatrix( $newMatrix );
+		return new Matrix( $newMatrix );
 	}
 }

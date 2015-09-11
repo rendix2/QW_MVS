@@ -6,7 +6,7 @@ use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Math\Math;
 
-final class MathMatrix extends Object {
+final class Matrix extends Object {
 	private $matrix, $matrixSizeA, $matrixSizeB;
 
 	public function __construct( array $matrix, $debug = FALSE ) {
@@ -29,15 +29,7 @@ final class MathMatrix extends Object {
 		return $this->matrixSizeB;
 	}
 
-	public function isSameSize( MathMatrix $matrix = NULL ) {
-		if ( $matrix == NULL ) throw new NullPointerException();
-		if ( $this->getMatrixSizeA() != $matrix->getMatrixSizeA() ) return FALSE;
-		if ( $this->getMatrixSizeB() != $matrix->getMatrixSizeB() ) return FALSE;
-
-		return TRUE;
-	}
-
-	public function isSameSizeBetter( MathMatrix $matrix = NULL ) {
+	public function isSameSize( Matrix $matrix = NULL ) {
 		if ( $matrix == NULL ) throw new NullPointerException();
 		if ( $this->getMatrixSizeA() != $matrix->getMatrixSizeA() ) return FALSE;
 		foreach ( $this->getMatrix() as $k => $v )
@@ -53,50 +45,53 @@ final class MathMatrix extends Object {
 	}
 
 	public function numberAdd( $number ) {
+		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
 			$newMatrix[ $i ][ $j ] = $this->getMatrix()[ $i ][ $j ] + $number;
 
-		return new MathMatrix( $newMatrix );
+		return new Matrix( $newMatrix );
 	}
 
 	public function numberDiv( $number ) {
-		if ( $number == 0 ) throw new IllegalArgumentException();
+		if ( $number == 0 || !is_numeric( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
 			$newMatrix[ $i ][ $j ] = $this->getMatrix()[ $i ][ $j ] / $number;
 
-		return new MathMatrix( $newMatrix );
+		return new Matrix( $newMatrix );
 	}
 
 	public function numberMult( $number ) {
+		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
 			$newMatrix[ $i ][ $j ] = $this->getMatrix()[ $i ][ $j ] * $number;
 
-		return new MathMatrix( $newMatrix );
+		return new Matrix( $newMatrix );
 	}
 
 	public function numberPower( $number ) {
+		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
 			$newMatrix[ $i ][ $j ] = Math::power( $this->getMatrix()[ $i ][ $j ], $number );
 
-		return new MathMatrix( $newMatrix );
+		return new Matrix( $newMatrix );
 	}
 
 	public function numberSub( $number ) {
-
+		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
 			$newMatrix[ $i ][ $j ] = $this->getMatrix()[ $i ][ $j ] / $number;
 
-		return new MathMatrix( $newMatrix );
+		return new Matrix( $newMatrix );
 	}
 
 	public function printMatrix() {
@@ -105,5 +100,14 @@ final class MathMatrix extends Object {
 
 			echo '<br>' . "\n";
 		}
+	}
+
+	public function transpose() {
+		$newMatrix = [ ];
+
+		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ )
+			for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ ) $newMatrix[ $i ][ $j ] = $this->getMatrix()[ $j ][ $i ];
+
+		return new Matrix( $newMatrix );
 	}
 }

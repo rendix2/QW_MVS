@@ -9,15 +9,15 @@
 namespace QW\FW\Math\Matrix\Mult;
 
 use QW\FW\Basic\Object;
-use QW\FW\Math\Matrix\MathMatrix;
+use QW\FW\Math\Matrix\Matrix;
 
-abstract class AbstractMathMatrixMult extends Object {
+abstract class AbstractMatrixMult extends Object {
 
 	protected $result;
 
-	abstract function mult( MathMatrix $a = NULL, MathMatrix $b = NULL );
+	abstract function mult( Matrix $a = NULL, Matrix $b = NULL );
 
-	public function __construct( MathMatrix $a = NULL, MathMatrix $b = NULL, $debug = FALSE ) {
+	public function __construct( Matrix $a = NULL, Matrix $b = NULL, $debug = FALSE ) {
 		parent::__construct( $debug );
 		$this->result = $this->mult( $a, $b );
 	}

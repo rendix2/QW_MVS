@@ -2,7 +2,7 @@
 
 namespace QW\FW\Math;
 
-use QW\FW\Basic\IllegalArgumentException;
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\PrivateConstructException;
 
 final class MathDiscreet {
@@ -38,7 +38,6 @@ final class MathDiscreet {
 		}
 
 		if ( $i * $i == $number ) $result -= $i;
-
 		return $result == $number;
 	}
 

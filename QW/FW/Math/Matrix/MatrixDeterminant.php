@@ -7,7 +7,7 @@ use QW\FW\Basic\Object;
 
 class MathMatrixDeterminant extends Object {
 
-	public function __construct( MathMatrix $matrix = NULL, $debug = FALSE ) {
+	public function __construct( Matrix $matrix = NULL, $debug = FALSE ) {
 		parent::__construct( $debug );
 	}
 

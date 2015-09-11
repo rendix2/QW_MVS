@@ -17,9 +17,7 @@ final class MathComb {
 
 	public static function factorial( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
-
 		if ( $x == 0 || $x == 1 ) return 1;
-
 		for ( $i = 2; $i <= $x; $i++ ) $i *= $i;
 
 		return $i;
@@ -28,7 +26,6 @@ final class MathComb {
 	public static function factorialRecurse( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
 		else if ( $x == 0 || $x == 1 ) return 1;
-
 		return $x * self::factorialRecurse( $x - 1 );
 	}
 
@@ -36,9 +33,7 @@ final class MathComb {
 
 	public static function fibonacci( $x ) {
 		if ( $x < 0 ) throw new IllegalArgumentException();
-
 		if ( $x == 0 ) return 0;
-
 		if ( $x == 1 ) return 1;
 
 		$a = 0;
@@ -61,7 +56,6 @@ final class MathComb {
 
 			if ( $k <= 2 ) $f = 1;
 			else $f = self::$fib[ $k - 1 ] + self::$fib[ $k ];
-
 			self::$fib[ $k ] = $f;
 		}
 

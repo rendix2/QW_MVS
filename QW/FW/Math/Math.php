@@ -9,6 +9,10 @@ final class Math {
 		throw new PrivateConstructException();
 	}
 
+	public function __toString() {
+		return '<br>Math is HELL!<br>' . "\n";
+	}
+
 	public static function absoluteValue( $x ) {
 		return abs( $x );
 	}

@@ -3,6 +3,7 @@ namespace QW\FW\Math\Matrix;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\NullPointerException;
 use QW\FW\Math\Math;
 
 final class MathMatrix extends Object {
@@ -16,19 +17,36 @@ final class MathMatrix extends Object {
 		$this->matrixSizeB = count( $this->matrix[ 0 ] );
 	}
 
-	final public function getMatrix() {
+	public function getMatrix() {
 		return $this->matrix;
 	}
 
-	final public function getMatrixSizeA() {
+	public function getMatrixSizeA() {
 		return $this->matrixSizeA;
 	}
 
-	final public function getMatrixSizeB() {
+	public function getMatrixSizeB() {
 		return $this->matrixSizeB;
 	}
 
-	final public function isSquare() {
+	public function isSameSize( MathMatrix $matrix = NULL ) {
+		if ( $matrix == NULL ) throw new NullPointerException();
+		if ( $this->getMatrixSizeA() != $matrix->getMatrixSizeA() ) return FALSE;
+		if ( $this->getMatrixSizeB() != $matrix->getMatrixSizeB() ) return FALSE;
+
+		return TRUE;
+	}
+
+	public function isSameSizeBetter( MathMatrix $matrix = NULL ) {
+		if ( $matrix == NULL ) throw new NullPointerException();
+		if ( $this->getMatrixSizeA() != $matrix->getMatrixSizeA() ) return FALSE;
+		foreach ( $this->getMatrix() as $k => $v )
+			if ( count( $matrix->getMatrix()[ $k ] ) != count( $this->getMatrix()[ $k ] ) ) return FALSE;
+
+		return TRUE;
+	}
+
+	public function isSquare() {
 		foreach ( $this->matrix as $v ) if ( count( $v ) != $this->getMatrixSizeA() ) return FALSE;
 
 		return TRUE;
@@ -72,6 +90,7 @@ final class MathMatrix extends Object {
 	}
 
 	public function numberSub( $number ) {
+
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )

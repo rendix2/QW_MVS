@@ -7,21 +7,16 @@ use QW\FW\Math\Matrix\MathMatrix;
 
 class MathMatrixMultiStrassen extends AbstractMathMatrixMult {
 
-	private $result;
-
 	public function __construct( MathMatrix $a = NULL, MathMatrix $b = NULL, $debug = FALSE ) {
 		parent::__construct( $debug );
-
-		$this->result = $this->mult( $a, $b );
 	}
 
 	public function add( MathMatrix $a = NULL, MathMatrix $b = NULL ) {
 		if ( $a == NULL || $b == NULL ) throw new NullPointerException();
 
-		$length = count( $a->getMatrix() );
 		$matrix = [ ];
 
-		for ( $i = 0; $i < $length; $i++ ) for ( $j = 0; $j < $length; $j++ )
+		for ( $i = 0; $i < $a->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $a->getMatrixSizeA(); $j++ )
 			$matrix[ $i ][ $j ] = $a->getMatrix()[ $i ][ $j ] + $b->getMatrix()[ $i ][ $j ];
 
 		return new MathMatrix( $matrix );
@@ -30,11 +25,11 @@ class MathMatrixMultiStrassen extends AbstractMathMatrixMult {
 	public function join( MathMatrix $p = NULL, MathMatrix $c = NULL, $ib, $jb ) {
 		if ( $c == NULL || $p == NULL ) throw new NullPointerException();
 
-		$Ccount = count( $c->getMatrix() );
-		$p      = $p->getMatrix();
+		$p = $p->getMatrix();
 
-		for ( $i1 = 0, $i2 = $ib; $i1 < $Ccount; $i1++, $i2++ )
-			for ( $j1 = 0, $j2 = $jb; $j1 < $Ccount; $j1++, $j2++ ) $p[ $i1 ][ $j1 ] = $c->getMatrix()[ $i2 ][ $j2 ];
+		for ( $i1 = 0, $i2 = $ib; $i1 < $c->getMatrixSizeA(); $i1++, $i2++ )
+			for ( $j1 = 0, $j2 = $jb; $j1 < $c->getMatrixSizeA(); $j1++, $j2++ )
+				$p[ $i1 ][ $j1 ] = $c->getMatrix()[ $i2 ][ $j2 ];
 
 		return new MathMatrix( $p );
 	}
@@ -55,7 +50,6 @@ class MathMatrixMultiStrassen extends AbstractMathMatrixMult {
 		$this->split( $A, new MathMatrix( $A12 ), 0, $n / 2 );
 		$this->split( $A, new MathMatrix( $A21 ), $n / 2, 0 );
 		$this->split( $A, new MathMatrix( $A22 ), $n / 2, $n / 2 );
-
 		$this->split( $B, new MathMatrix( $B11 ), 0, 0 );
 		$this->split( $B, new MathMatrix( $B12 ), 0, $n / 2 );
 		$this->split( $B, new MathMatrix( $B21 ), $n / 2, 0 );
@@ -88,22 +82,21 @@ class MathMatrixMultiStrassen extends AbstractMathMatrixMult {
 	public function split( MathMatrix $p = NULL, MathMatrix $c = NULL, $ib, $jb ) {
 		if ( $c == NULL || $p == NULL ) throw new NullPointerException();
 
-		$Ccount = count( $c->getMatrix() );
-		$c      = $c->getMatrix();
+		$c2 = $c->getMatrix();
 
-		for ( $i1 = 0, $i2 = $ib; $i1 < $Ccount; $i1++, $i2++ )
-			for ( $j1 = 0, $j2 = $jb; $j1 < $Ccount; $j1++, $j2++ ) $c[ $i1 ][ $j1 ] = $p->getMatrix()[ $i2 ][ $j2 ];
+		for ( $i1 = 0, $i2 = $ib; $i1 < $c->getMatrixSizeA(); $i1++, $i2++ )
+			for ( $j1 = 0, $j2 = $jb; $j1 < $c->getMatrixSizeA(); $j1++, $j2++ )
+				$c2[ $i1 ][ $j1 ] = $p->getMatrix()[ $i2 ][ $j2 ];
 
-		return new MathMatrix( $c );
+		return new MathMatrix( $c2 );
 	}
 
 	public function sub( MathMatrix $a = NULL, MathMatrix $b = NULL ) {
 		if ( $a == NULL || $b == NULL ) throw new NullPointerException();
 
-		$length = count( $a->getMatrix() );
 		$matrix = [ ];
 
-		for ( $i = 0; $i < $length; $i++ ) for ( $j = 0; $j < $length; $j++ )
+		for ( $i = 0; $i < $a->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $a->getMatrixSizeA(); $j++ )
 			$matrix[ $i ][ $j ] = $a->getMatrix()[ $i ][ $j ] - $b->getMatrix()[ $i ][ $j ];
 
 		return new MathMatrix( $matrix );

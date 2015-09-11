@@ -1,8 +1,9 @@
 <?php
 
-namespace QW\FW\Math\Matrix;
+namespace QW\FW\Math\Matrix\Mult;
 
 use QW\FW\Boot\NullPointerException;
+use QW\FW\Math\Matrix\MathMatrix;
 
 class MathMatrixMultiStrassen extends AbstractMathMatrixMult {
 
@@ -96,7 +97,7 @@ class MathMatrixMultiStrassen extends AbstractMathMatrixMult {
 		return new MathMatrix( $c );
 	}
 
-	public function  sub( MathMatrix $a = NULL, MathMatrix $b = NULL ) {
+	public function sub( MathMatrix $a = NULL, MathMatrix $b = NULL ) {
 		if ( $a == NULL || $b == NULL ) throw new NullPointerException();
 
 		$length = count( $a->getMatrix() );

@@ -6,9 +6,10 @@
  * Time: 13:16
  */
 
-namespace QW\FW\Math\Matrix;
+namespace QW\FW\Math\Matrix\Mult;
 
 use QW\FW\Basic\Object;
+use QW\FW\Math\Matrix\MathMatrix;
 
 abstract class AbstractMathMatrixMult extends Object {
 

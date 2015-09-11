@@ -1,8 +1,9 @@
 <?php
 
-namespace QW\FW\Math\Matrix;
+namespace QW\FW\Math\Matrix\Mult;
 
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Math\Matrix\MathMatrix;
 
 class MathMatrixMultStandard extends AbstractMathMatrixMult {
 	public function __construct( MathMatrix $a = NULL, MathMatrix $b = NULL, $debug = FALSE ) {
@@ -10,16 +11,12 @@ class MathMatrixMultStandard extends AbstractMathMatrixMult {
 	}
 
 	public function mult( MathMatrix $a = NULL, MathMatrix $b = NULL ) {
-		$matrixASize  = count( $a->getMatrix() );
-		$matrixASize2 = count( $a->getMatrix()[ 0 ] );
-		$matrixBSize  = count( $b->getMatrix() );
-		$matrixBSize2 = count( $b->getMatrix()[ 0 ] );
-		$newMatrix    = [ ];
+		$newMatrix = [ ];
 
-		if ( $matrixASize != $matrixBSize ) throw new IllegalArgumentException();
+		if ( $a->getMatrixSizeA() != $b->getMatrixSizeB() ) throw new IllegalArgumentException();
 
-		for ( $i = 0; $i < $matrixASize; $i++ ) for ( $j = 0; $j < $matrixBSize2; $j++ )
-			for ( $k = 0; $k < $matrixASize2; $k++ )
+		for ( $i = 0; $i < $a->getMatrixSizeA(); $i++ )
+			for ( $j = 0; $j < $b->getMatrixSizeB(); $j++ ) for ( $k = 0; $k < $a->getMatrixSizeB(); $k++ )
 				$newMatrix[ $i ][ $j ] += $a->getMatrix()[ $i ][ $k ] * $b->getMatrix()[ $k ][ $j ];
 
 		return new MathMatrix( $newMatrix );

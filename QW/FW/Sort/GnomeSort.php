@@ -21,7 +21,7 @@ class GnomeSort extends AbstractSort {
 				$j += 1;
 			}
 			else {
-				AbstractSort::swap( $this->data, $i - 1, $i );
+				self::swap( $this->data, $i - 1, $i );
 				$i -= 1;
 
 				if ( $i == 0 ) {

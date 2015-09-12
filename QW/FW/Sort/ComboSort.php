@@ -15,7 +15,7 @@ class ComboSort extends AbstractSort {
 			if ( $gap < 1 ) $gap = 1;
 
 			for ( $i = 0; $i + $gap < $this->length; $i++ ) if ( $this->data[ $i ] < $this->data[ $i + $gap ] ) {
-				AbstractSort::swap( $this->data, $i, $i + $gap );
+				self::swap( $this->data, $i, $i + $gap );
 				$swapped                 = TRUE;
 			}
 		}

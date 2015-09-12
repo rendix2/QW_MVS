@@ -13,13 +13,11 @@ class SelectionSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
 		for ( $i = 0; $i < $this->length - 1; $i++ ) {
-			$maxIndex = $i;
-			for ( $j = $i + 1; $j < $this->length; $j++ )
-				if ( $this->data[ $j ] > $this->data[ $maxIndex ] ) $maxIndex = $j;
+			$min = $i;
+			for ( $j = $i + 1; $j < $this->length; $j++ ) if ( $this->data[ $j ] > $this->data[ $min ] ) $min = $j;
 
-			$tmp                     = $this->data[ $i ];
-			$this->data[ $i ]        = $this->data[ $maxIndex ];
-			$this->data[ $maxIndex ] = $tmp;
+			if ( $min != $i ) // this may help
+				self::swap( $this->data, $i, $min );
 		}
 
 		return $this->data;

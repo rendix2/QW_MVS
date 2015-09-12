@@ -17,10 +17,10 @@ class QuickSort extends AbstractSort {
 
 		for ( $j = $lo; $lo < $hi - 1; $j++ ) {
 			if ( $data[ $j ] <= $pivot ) {
-				AbstractSort::swap( $data, $i, $j );
+				self::swap( $data, $i, $j );
 				$i = $i + 1;
 			}
-			AbstractSort::swap( $data, $i, $hi );
+			self::swap( $data, $i, $hi );
 
 			return $i;
 		}
@@ -38,7 +38,7 @@ class QuickSort extends AbstractSort {
 			do $i += 1;
 			while ( $data[ $i ] < $pivot );
 
-			if ( $i < $j ) AbstractSort::swap( $data, $i, $j );
+			if ( $i < $j ) self::swap( $data, $i, $j );
 			else return $j;
 		}
 	}

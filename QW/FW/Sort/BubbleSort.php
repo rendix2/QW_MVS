@@ -4,10 +4,18 @@ namespace QW\FW\Sort;
 
 class BubbleSort extends AbstractSort {
 
+	// better imlementation
 	protected function sort( AbstractSort $sort ) {
-		for ( $i = 0; $i < $this->length - 1; $i++ ) for ( $j = 0; $j < $this->length - $i - 1; $j++ )
-			if ( $this->data[ $j ] < $this->data[ $j + 1 ] ) AbstractSort::swap( $this->data, $j, $j + 1 );
+		$j       = $this->length - 2;
+		$swapped = TRUE;
 
-		return $this->data;
+		while ( $swapped ) {
+			$swapped = FALSE;
+
+			for ( $i = 0; $i <= $j; $i++ ) if ( $this->data[ $i ] > $this->data[ $i + 1 ] ) {
+				self::swap( $this->data, $i, $i + 1 );
+				$swapped = TRUE;
+			}
+		}
 	}
 }

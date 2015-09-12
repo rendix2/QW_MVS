@@ -11,7 +11,6 @@ namespace QW\FW\Sort;
 
 class HeapSort extends AbstractSort {
 
-
 	private function repairTop( array $array, $bottom, $topIndex ) {
 		$tmp  = $array[ $topIndex ];
 		$succ = $topIndex * 2 + 1;

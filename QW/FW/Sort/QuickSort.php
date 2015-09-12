@@ -11,21 +11,47 @@ namespace QW\FW\Sort;
 
 class QuickSort extends AbstractSort {
 
-	private function quickSort( array $array, $left, $right ) {
-		if ( $left < $right ) {
-			$boundary = $left;
-			for ( $i = $left + 1; $i < $right; $i++ )
-				if ( $array[ $i ] > $array[ $left ] ) self::swap( $array, $i, ++$boundary );
+	protected function partition( $data, $lo, $hi ) {
+		$pivot = $data[ $hi ];
+		$i     = $lo;
 
-			self::swap( $array, $left, $boundary );
-			$this->quickSort( $array, $left, $boundary );
-			$this->quickSort( $array, $boundary + 1, $right );
+		for ( $j = $lo; $lo < $hi - 1; $j++ ) {
+			if ( $data[ $j ] <= $pivot ) {
+				AbstractSort::swap( $data, $i, $j );
+				$i = $i + 1;
+			}
+			AbstractSort::swap( $data, $i, $hi );
+
+			return $i;
 		}
+	}
 
-		return $this->data;
+	protected function partition2( $data, $lo, $hi ) {
+		$pivot = $data[ $lo ];
+		$i     = $lo - 1;
+		$j     = $hi + 1;
+
+		while ( TRUE ) {
+			do $j -= 1;
+			while ( $data[ $j ] > $pivot );
+
+			do $i += 1;
+			while ( $data[ $i ] < $pivot );
+
+			if ( $i < $j ) AbstractSort::swap( $data, $i, $j );
+			else return $j;
+		}
+	}
+
+	private function quickSort( array $data, $lo, $hi ) {
+		if ( $lo < $hi ) {
+			$p = $this->partition( $data, $lo, $hi );
+			$this->quickSort( $data, $lo, $p - 1 );
+			$this->quickSort( $data, $p + 1, $hi );
+		}
 	}
 
 	protected function sort( AbstractSort $sort ) {
-		// TODO: Implement sort() method.
+		$this->quickSort( $this->data, 0, $this->length - 1 );
 	}
 }

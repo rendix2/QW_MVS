@@ -14,12 +14,11 @@ abstract class AbstractSort extends Object {
 
 		if ( $this->length <= 1 ) return $this->data;
 
-		foreach ( $data as $v ) $this->data[] = $v;
-
+		$this->data = array_values( $data );
 		$this->length = count( $this->data );
 	}
 
-	protected static function swap( array $array, $left, $right ) {
+	protected static function swap( array &$array, $left, $right ) {
 		$tmp             = $array[ $right ];
 		$array[ $right ] = $array[ $left ];
 		$array[ $left ]  = $tmp;

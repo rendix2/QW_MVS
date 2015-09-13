@@ -85,6 +85,12 @@ final class MathComb {
 		return $f;
 	}
 
+	public static function fibonacciBinet( $n ) {
+		$fi = ( 1 + Math::squareRoot( 5 ) ) / 2;
+
+		return ( Math::power( $fi, $n ) - Math::power( -$fi, -$n ) ) / Math::squareRoot( 5 );
+	}
+
 	public static function fibonacciRecourse( $n, $x ) {
 		if ( $n < 2 || $x < 0 ) throw new IllegalArgumentException();
 		else {

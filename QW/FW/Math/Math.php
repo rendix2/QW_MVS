@@ -102,14 +102,8 @@ final class Math {
 	}
 
 	public static function divide( $numerator, $divisor ) {
-		if ( $numerator == 0 ) {
-			return 0;
-		}
-
-		if ( $divisor == 0 ) {
-			return NAN;
-		}
-
+		if ( $numerator == 0 ) return 0;
+		if ( $divisor == 0 ) return NAN;
 		return $numerator / $divisor;
 	}
 
@@ -125,37 +119,32 @@ final class Math {
 		return base_convert( $x, 16, 8 );
 	}
 
-	public static function hypotenuse( $x, $y ) {
+	public static function hypot( $x, $y ) {
+		return Math::squareRoot( $x * x, $y * $y );
+	}
+
+	public static function hypotenuseSystem( $x, $y ) {
 		return hypot( $x, $y );
 	}
 
 	public static function integerDivision( $numerator, $divisor ) {
-		return (integer) ( $numerator / $divisor );
+		return (int) ( (int) $numerator / (int) $divisor );
 	}
 
-	public static function integerDivisionFunction( $numerator, $divisor ) {
+	public static function integerDivisionSystem( $numerator, $divisor ) {
 		return intdiv( $numerator, $divisor );
 	}
 
 	public static function inverseNumber( $x ) {
-		if ( $x == 0 ) {
-			return NAN;
-		}
-		if ( $x == 1 ) {
-			return 1;
-		}
+		if ( $x == 0 ) return NAN;
+		if ( $x == 1 ) return 1;
 
 		return 1 / $x;
 	}
 
 	public static function logarithm( $x, $base ) {
-		if ( $base == 10 ) {
-			return self::logarithmDecade( $x );
-		}
-
-		if ( $x < 1.0 ) {
-			return log1p( $x );
-		}
+		if ( $base == 10 ) return self::logarithmDecade( $x );
+		if ( $x < 1.0 ) return log1p( $x );
 
 		return log( $x, $base );
 	}
@@ -170,11 +159,7 @@ final class Math {
 
 	public static function max() {
 		$max = -999999999;
-		foreach ( func_get_args() as $v ) {
-			if ( $v >= $max ) {
-				$max = $v;
-			}
-		}
+		foreach ( func_get_args() as $v ) if ( $v >= $max ) $max = $v;
 
 		return $max;
 	}
@@ -185,11 +170,7 @@ final class Math {
 
 	public static function min() {
 		$min = 999999999;
-		foreach ( func_get_args() as $v ) {
-			if ( $v <= $min ) {
-				$min = $v;
-			}
-		}
+		foreach ( func_get_args() as $v ) if ( $v <= $min ) $min = $v;
 
 		return $min;
 	}
@@ -199,9 +180,7 @@ final class Math {
 	}
 
 	public static function minus( $a, $b ) {
-		if ( $a == $b ) {
-			return 0;
-		}
+		if ( $a == $b ) return 0;
 
 		return $a - $b;
 	}
@@ -227,9 +206,7 @@ final class Math {
 	}
 
 	public static function plus( $a, $b ) {
-		if ( $a == $b ) {
-			return 2 * $a;
-		}
+		if ( $a == $b ) return 2 * $a;
 
 		return $a + $b;
 	}
@@ -306,9 +283,7 @@ final class Math {
 
 	public static function sum() {
 		$sum = 0;
-		foreach ( func_get_args() as $v ) {
-			$sum += $v;
-		}
+		foreach ( func_get_args() as $v ) $sum += $v;
 
 		return $sum;
 	}
@@ -334,9 +309,7 @@ final class Math {
 	}
 
 	public static function times( $a, $b ) {
-		if ( $a == $b ) {
-			return self::squared( $a );
-		}
+		if ( $a == $b ) return self::squared( $a );
 
 		return $a * $b;
 	}

@@ -4,6 +4,8 @@ namespace QW\FW\Sort;
 
 use QW\FW\Boot\IllegalArgumentException;
 
+// NOT OK
+
 class BucketSort extends AbstractSort {
 
 	private $bucketCount;

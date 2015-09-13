@@ -12,7 +12,7 @@ abstract class AbstractSort extends Object {
 	public function __construct( array $data, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( $this->length <= 1 ) return $this->data;
+		if ( $this->length == 1 ) return $this->data;
 
 		$this->data = array_values( $data );
 		$this->length = count( $this->data );
@@ -22,6 +22,10 @@ abstract class AbstractSort extends Object {
 		$tmp             = $array[ $right ];
 		$array[ $right ] = $array[ $left ];
 		$array[ $left ]  = $tmp;
+	}
+
+	protected static function swapSystem( &$array, $left, $right ) {
+		list( $array[ $left ], $arr[ $right ] ) = [ $array[ $right ], $array[ $left ] ];
 	}
 
 	public function getArray() {

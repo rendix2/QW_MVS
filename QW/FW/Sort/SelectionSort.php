@@ -8,6 +8,7 @@
 
 namespace QW\FW\Sort;
 
+// OK
 
 class SelectionSort extends AbstractSort {
 

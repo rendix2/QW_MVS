@@ -8,42 +8,30 @@
 
 namespace QW\FW\Sort;
 
+// OK
+
 class MergeSort extends AbstractSort {
 
-	private function merge( array $array, array $aux, $left, $right ) {
-		$middle     = ( $left + $right ) / 2;
-		$leftIndex  = $left;
-		$rightIndex = (int) $middle + 1;
-		$auxIndex   = $left;
+	private function merge( array $data ) {
+		$left  = $this->merge( array_slice( $data, 0, $this->length / 2 ) );
+		$right = $this->merge( array_slice( $data, $this->length / 2, $this->length ) );
 
-		while ( $leftIndex <= $middle && $rightIndex <= $right ) {
-			if ( $array[ $leftIndex ] >= $array[ $rightIndex ] ) $aux[ $auxIndex ] = $array[ $leftIndex ];
-			else $aux[ $auxIndex ] = $array[ $rightIndex ];
+		return $this->mergeSort( $left, $right );
+	}
 
-			$auxIndex++;
-		}
+	private function mergeSort( array $left, array $right ) {
+		$result = [ ];
 
-		while ( $leftIndex <= $middle ) {
-			$aux[ $auxIndex ] = $array[ $leftIndex++ ];
-			$auxIndex++;
-		}
+		while ( count( $left ) && count( $right ) ) if ( $left[ 0 ] < $right[ 0 ] ) $result[] = array_shift( $left );
+		else
+			$result[] = array_shift( $right );
 
-		while ( $rightIndex <= $right ) {
-			$aux[ $auxIndex ] = $array[ $rightIndex++ ];
-			$auxIndex++;
-		}
+		return array_merge( $result, $left, $right );
+
 	}
 
 	protected function sort( AbstractSort $sort ) {
-		if ( $left == $right ) return;
-
-		$middle = ( $left + $right ) / 2;
-		$this->merge( $this->data, $aux, $left, $middle );
-		$this->merge( $this->data, $aux, $middle + 1, $right );
-		$this->merge( $this->data, $aux, $left, $right );
-
-		for ( $i = $left; $i <= $right; $i++ ) $array[ $i ] = $aux[ $i ];
-
-		return $$this->data;
+		return $this->merge( $this->data );
 	}
+
 }

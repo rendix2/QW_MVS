@@ -4,7 +4,7 @@ namespace QW\FW\Sort;
 
 class BubbleSort extends AbstractSort {
 
-	// better imlementation
+	// better then OK
 	protected function sort( AbstractSort $sort ) {
 		$j       = $this->length - 2;
 		$swapped = TRUE;

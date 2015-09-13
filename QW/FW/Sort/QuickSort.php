@@ -9,8 +9,27 @@
 namespace QW\FW\Sort;
 
 
-class QuickSort extends AbstractSort {
+// MAY BE OK
 
+class QuickSort extends AbstractSort {
+	private function quickSort( $array ) {
+		$left = $right = [ ];
+
+		$pivot_key = ( $array );
+		$pivot     = array_shift( $array );
+
+		foreach ( $array as $k => $v ) {
+			if ( $v < $pivot ) $left[ $k ] = $v;
+			else $right[ $k ] = $v;
+		}
+
+		return array_merge( $this->quickSort( $left ), [ $pivot_key => $pivot ], $this->quickSort( $right ) );
+	}
+
+	protected function sort( AbstractSort $sort ) {
+		return $this->quickSort( $this->data );
+	}
+	/*
 	protected function partition( $data, $lo, $hi ) {
 		$pivot = $data[ $hi ];
 		$i     = $lo;
@@ -54,4 +73,6 @@ class QuickSort extends AbstractSort {
 	protected function sort( AbstractSort $sort ) {
 		$this->quickSort( $this->data, 0, $this->length - 1 );
 	}
+
+	*/
 }

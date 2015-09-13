@@ -1,6 +1,8 @@
 <?php
 namespace QW\FW\Sort;
 
+// OK
+
 class ComboSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
@@ -16,7 +18,7 @@ class ComboSort extends AbstractSort {
 
 			for ( $i = 0; $i + $gap < $this->length; $i++ ) if ( $this->data[ $i ] < $this->data[ $i + $gap ] ) {
 				self::swap( $this->data, $i, $i + $gap );
-				$swapped                 = TRUE;
+				$swapped = TRUE;
 			}
 		}
 

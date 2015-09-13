@@ -11,6 +11,8 @@ namespace QW\FW\Sort;
 
 use QW\FW\Math\Math;
 
+// not checked
+
 class IntroSort extends QuickSort {
 
 	private function introsort( $data, $maxDepth ) {

@@ -7,15 +7,15 @@
  */
 
 namespace QW\FW\Sort;
-
+// OK
 
 class InsertionSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
-		for ( $i = 0; $i < $this->length - 1; $i++ ) {
-			$j   = $i + 1;
-			$tmp = $this->data[ $j ];
-			while ( $j > 0 && $tmp > $this->data[ $j - 1 ] ) {
+		for ( $i = 1; $i < $this->length; $i++ ) {
+			$tmp = $this->data[ $i ];
+			$j   = $i;
+			while ( $j >= 1 && $this->data[ $j - 1 ] > $tmp ) {
 				$this->data[ $j ] = $this->data[ $j - 1 ];
 				$j--;
 			}

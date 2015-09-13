@@ -2,6 +2,8 @@
 
 namespace QW\FW\Sort;
 
+// not checked
+
 class CountingSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {

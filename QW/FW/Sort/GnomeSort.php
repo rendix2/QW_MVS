@@ -8,27 +8,17 @@
 
 namespace QW\FW\Sort;
 
-
+// OK
 class GnomeSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
-		$i = 1;
-		$j = 2;
-
-		while ( $i < $this->length - 1 ) {
-			if ( $this->data[ $i - 1 ] <= $this->data[ $i ] ) {
-				$i = $j;
-				$j += 1;
-			}
-			else {
-				self::swap( $this->data, $i - 1, $i );
-				$i -= 1;
-
-				if ( $i == 0 ) {
-					$i = $j;
-					$j += 1;
-				}
-			}
+		for ( $i = 1; $i < $this->length; ) if ( $this->data[ $i - 1 ] <= $this->data[ $i ] ) $i++;
+		else {
+			self::swap( $this->data, $i, $i - 1 );
+			$i--;
+			if ( $i == 0 ) $i = 1;
 		}
+
+		return $this->data;
 	}
 }

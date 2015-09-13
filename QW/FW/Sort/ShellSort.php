@@ -8,6 +8,8 @@
 
 namespace QW\FW\Sort;
 
+// NOT OK
+
 class ShellSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {

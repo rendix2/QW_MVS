@@ -16,17 +16,13 @@ class ShakerSort extends AbstractSort {
 			$swapped = FALSE;
 
 			for ( $j = $i; $j < $this->length - $i - 1; $j++ ) if ( $this->data[ $j ] < $this->data[ $j + 1 ] ) {
-				$tmp                  = $this->data[ $j ];
-				$this->data[ $j ]     = $this->data[ $j + 1 ];
-				$this->data[ $j + 1 ] = $tmp;
-				$swapped              = TRUE;
+				self::swap( $this->data, $j, $j + 1 );
+				$swapped = TRUE;
 			}
 
 			for ( $j = $this->length - 2 - $i; $j > $i; $j-- ) if ( $this->data[ $j ] > $this->data[ $j - 1 ] ) {
-				$tmp                  = $this->data[ $j ];
-				$this->data[ $j ]     = $this->data[ $j - 1 ];
-				$this->data[ $j - 1 ] = $tmp;
-				$swapped              = TRUE;
+				self::swap( $this->data, $j, $j - 1 );
+				$swapped = TRUE;
 			}
 
 			if ( $swapped ) break;

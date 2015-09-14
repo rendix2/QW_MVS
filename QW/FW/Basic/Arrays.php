@@ -10,6 +10,7 @@ namespace QW\FW\Basic;
 
 
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\RuntimeException;
 use QW\FW\Sort\QuickSort;
 
 class Arrays extends Object implements \ArrayAccess {
@@ -17,16 +18,16 @@ class Arrays extends Object implements \ArrayAccess {
 	private $data;
 	private $size;
 
-	public function __construct( array $data, $debug = FALSE ) {
+	public function __construct( array $data = [ ], $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		$this->data = [ ];
 		$this->data = $data;
 		$this->size = count( $this->data );
 	}
 
 	public function __destruct() {
 		$this->data = NULL;
+		$this->size = NULL;
 	}
 
 	public function __toString() {
@@ -35,7 +36,6 @@ class Arrays extends Object implements \ArrayAccess {
 
 	public function contains( $value ) {
 		foreach ( $this->data as $v ) if ( $v == $value ) return TRUE;
-
 		return FALSE;
 	}
 
@@ -72,11 +72,13 @@ class Arrays extends Object implements \ArrayAccess {
 	public function offsetSet( $offset, $value ) {
 		if ( is_null( $offset ) ) $this->data[] = $value;
 		else $this->data[ $offset ] = $value;
-
 		$this->size++;
 	}
 
 	public function offsetUnset( $offset ) {
+		if ( $this->size == 0 ) throw new RuntimeException();
+
+
 		if ( $this->keyExists( $offset ) ) {
 			unset( $this->data[ $offset ] );
 			$this->size--;

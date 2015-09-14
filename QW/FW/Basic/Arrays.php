@@ -8,7 +8,6 @@
 
 namespace QW\FW\Basic;
 
-
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\RuntimeException;
 use QW\FW\Sort\QuickSort;
@@ -40,9 +39,7 @@ class Arrays extends Object implements \ArrayAccess {
 	}
 
 	public function fill( $value ) {
-		foreach ( $this->data as $k => $v ) {
-			$this->data[ $k ] = $value;
-		}
+		foreach ( $this->data as $k => $v ) $this->data[ $k ] = $value;
 	}
 
 	public function getSize() {
@@ -65,6 +62,7 @@ class Arrays extends Object implements \ArrayAccess {
 	}
 
 	public function offsetGet( $offset ) {
+		if ( $this->size == 0 ) throw new RuntimeException();
 		if ( $this->keyExists( $offset ) ) return $this->data[ $offset ];
 		throw new IllegalArgumentException();
 	}
@@ -77,8 +75,6 @@ class Arrays extends Object implements \ArrayAccess {
 
 	public function offsetUnset( $offset ) {
 		if ( $this->size == 0 ) throw new RuntimeException();
-
-
 		if ( $this->keyExists( $offset ) ) {
 			unset( $this->data[ $offset ] );
 			$this->size--;
@@ -93,7 +89,6 @@ class Arrays extends Object implements \ArrayAccess {
 
 	public function sort() {
 		$obj = new QuickSort( $this->data );
-
 		return $obj->getArray();
 	}
 }

@@ -12,7 +12,7 @@ namespace QW\FW\Basic;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Sort\QuickSort;
 
-class Arrays extends Object {
+class Arrays extends Object implements \ArrayAccess {
 
 	private $data;
 	private $size;
@@ -45,11 +45,6 @@ class Arrays extends Object {
 		}
 	}
 
-	public function get( $key ) {
-		if ( $this->keyExists( $key ) ) return $this->data[ $key ];
-		throw new IllegalArgumentException();
-	}
-
 	public function getSize() {
 		return $this->size;
 	}
@@ -65,16 +60,25 @@ class Arrays extends Object {
 		}
 	}
 
-	public function put( $data ) {
-		$this->data[] = $data;
-
-		if ( is_array( $data ) ) $this->size += count( $data );
-		else $this->size++;
+	public function offsetExists( $offset ) {
+		return isset( $this->data[ $offset ] );
 	}
 
-	public function remove( $key ) {
-		if ( $this->keyExists( $key ) ) {
-			unset( $this->data[ $key ] );
+	public function offsetGet( $offset ) {
+		if ( $this->keyExists( $offset ) ) return $this->data[ $offset ];
+		throw new IllegalArgumentException();
+	}
+
+	public function offsetSet( $offset, $value ) {
+		if ( is_null( $offset ) ) $this->data[] = $value;
+		else $this->data[ $offset ] = $value;
+
+		$this->size++;
+	}
+
+	public function offsetUnset( $offset ) {
+		if ( $this->keyExists( $offset ) ) {
+			unset( $this->data[ $offset ] );
 			$this->size--;
 		}
 		throw new IllegalArgumentException();

@@ -3,12 +3,13 @@ include( './autoLoader.php' );
 //include( './debug.php' );
 
 
-$img = new QW\FW\Images\ImageTextGenerate( 400, 80 );
+$img = new QW\FW\Images\ImageTextGenerate( 400, 200 );
 $img->setBackgroundColor( 255, 255, 255 );
-$img->setTextColor( 255, 15, 25 );
-//$img->setText( 7, 100, 30, 'FUCK YOU!' );
-$img->s
-//$img->setTextVertically(7, 100, 30, 'FUCK YOU!');
+$img->setTextColor( 205, 15, 25 );
+$img->setTextHorizontally( 7, 100, 29, 'FUCK YOU!' );
+$img->setTextHorizontally( 7, 100, 99, 'FUCK YOU!' );
+$img->setTextVertically( 7, 80, 109, 'FUCK YOU!' );
+$img->setTextVertically( 7, 180, 109, 'FUCK YOU!' );
 $img->toPNG();
 header( 'Content-Type: image/png' );
 

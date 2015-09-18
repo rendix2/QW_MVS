@@ -22,7 +22,7 @@ class EasyCaptcha extends Object {
 		$this->captcha->setTextColorO( new Color( 255, 255, 255 ) );
 		$string     = new String( Hash::r() );
 		$this->text = $string->subString( 0, Math::randomInterval( 6, 8 ) );
-		$this->captcha->setText( Math::randomInterval( 0, 6 ), 0, 0, $this->text );
+		$this->captcha->setTextHorizontally( Math::randomInterval( 0, 6 ), 0, 0, $this->text );
 	}
 
 	public function __destruct() {

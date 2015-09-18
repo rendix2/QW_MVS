@@ -6,7 +6,10 @@ use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Boot\RuntimeException;
+use QW\FW\Paint\BlueColorException;
 use QW\FW\Paint\Color;
+use QW\FW\Paint\GreenColorException;
+use QW\FW\Paint\RedColorException;
 
 final class ImageTextGenerate extends Object {
 	private $imageResource;
@@ -50,9 +53,9 @@ final class ImageTextGenerate extends Object {
 	}
 
 	public function setBackgroundColor( $red, $green, $blue ) {
-		if ( $red < 0 || $red > 255 ) throw new IllegalArgumentException( 'Červená je mimo rozsah.' );
-		if ( $green < 0 || $green > 255 ) throw new IllegalArgumentException( 'Zelená je mimo rozsah.' );
-		if ( $blue < 0 || $blue > 255 ) throw new IllegalArgumentException( 'Modrá je mimo rozsah.' );
+		if ( $red < 0 || $red > 255 ) throw new RedColorException();
+		if ( $green < 0 || $green > 255 ) throw new GreenColorException();
+		if ( $blue < 0 || $blue > 255 ) throw new BlueColorException();
 
 		imagecolorallocate( $this->imageResource, $red, $green, $blue );
 	}

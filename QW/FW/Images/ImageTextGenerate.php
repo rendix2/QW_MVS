@@ -36,12 +36,12 @@ final class ImageTextGenerate extends Object {
 		return FALSE;
 	}
 
-	private function prepaireColor( Color $color = NULL ) {
+	private function prepareColor( Color $color = NULL ) {
 		return ( $color == NULL ) ? $this->imageTextColor :
 			imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
 	}
 
-	private function prepaireFont( $fontPath ) {
+	private function prepareFont( $fontPath ) {
 		$fontPath = imageloadfont( $fontPath );
 
 		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
@@ -60,29 +60,31 @@ final class ImageTextGenerate extends Object {
 	}
 
 	public function setCharHorizontally( $fontSize, $x, $y, $char, Color $color = NULL ) {
-		imagechar( $this->imageResource, $fontSize, $x, $y, $char, $this->prepaireColor( $color ) );
+		imagechar( $this->imageResource, $fontSize, $x, $y, $char, $this->prepareColor( $color ) );
 	}
 
 	public function setCharVertically( $fontSize, $x, $y, $char, Color $color = NULL ) {
-		imagecharup( $this->imageResource, $fontSize, $x, $y, $char, $this->prepaireColor($color) );
+		imagecharup( $this->imageResource, $fontSize, $x, $y, $char, $this->prepareColor( $color ) );
 	}
 
 	public function setFontCharHorizontally( $fontPath, $x, $y, $char, Color $color = NULL ) {
-		imagechar( $this->imageResource, $this->prepaireFont($fontPath), $x, $y, $char, $this->prepaireColor($color) );
+		imagechar( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $char,
+			$this->prepareColor( $color ) );
 	}
 
 	public function setFontCharVertically( $fontPath, $x, $y, $char, Color $color = NULL ) {
-		imagecharup( $this->imageResource, $this->prepaireFont($fontPath), $x, $y, $char, $this->prepaireColor($color) );
+		imagecharup( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $char,
+			$this->prepareColor( $color ) );
 	}
 
 	public function setFontTextHorizontally( $fontPath, $x, $y, $string, Color $color = NULL ) {
-		imagestring( $this->imageResource, $this->prepaireFont( $fontPath ), $x, $y, $string,
-			$this->prepaireColor( $color ) );
+		imagestring( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $string,
+			$this->prepareColor( $color ) );
 	}
 
 	public function setFontTextVertically( $fontPath, $x, $y, $string, Color $color = NULL ) {
-		imagestringup( $this->imageResource, $this->prepaireFont( $fontPath ), $x, $y, $string,
-			$this->prepaireColor( $color ) );
+		imagestringup( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $string,
+			$this->prepareColor( $color ) );
 	}
 
 	public function setTextColor( $red, $green, $blue ) {
@@ -97,11 +99,11 @@ final class ImageTextGenerate extends Object {
 	}
 
 	public function setTextHorizontally( $fontSize, $x, $y, $string, Color $color = NULL ) {
-		imagestring( $this->imageResource, $fontSize, $x, $y, $string, $this->prepaireColor( $color ) );
+		imagestring( $this->imageResource, $fontSize, $x, $y, $string, $this->prepareColor( $color ) );
 	}
 
 	public function setTextVertically( $fontSize, $x, $y, $string, Color $color = NULL ) {
-		imagestringup( $this->imageResource, $fontSize, $x, $y, $string, $this->prepaireColor( $color ) );
+		imagestringup( $this->imageResource, $fontSize, $x, $y, $string, $this->prepareColor( $color ) );
 	}
 
 	public function toBMP() {

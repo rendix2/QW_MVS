@@ -36,6 +36,8 @@ final class Color extends Object {
 		if ( $red < 0 || $red > 255 ) throw new RedColorException();
 		if ( $green < 0 || $green > 255 ) throw new GreenColorException();
 		if ( $blue < 0 || $blue > 255 ) throw new BlueColorException();
+
+		return TRUE;
 	}
 
 	public function getBlue() {

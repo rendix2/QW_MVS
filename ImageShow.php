@@ -4,7 +4,7 @@ include( './autoLoader.php' );
 
 
 $img = new QW\FW\Images\ImageTextGenerate( 200, 40 );
-$img->setBackgroundColor( 235, 235, 235 );
+$img->setBackgroundColor( 235, 205, 235 );
 $img->setTextColor( 235, 4, 3 );
 $img->setText( 5, 0, 15, \QW\Libs\Config::EMAIL );
 $img->toPNG();

@@ -13,14 +13,5 @@ $img->setTextVertically( 7, 180, 109, 'FUCK YOU!' );
 
 for ( $i = 110; $i < 160; $i += 5 ) $img->setCharHorizontally( 7, $i, 70, '!' );
 
-
 $img->toPNG();
 header( 'Content-Type: image/png' );
-
-
-
-
-
-
-
-

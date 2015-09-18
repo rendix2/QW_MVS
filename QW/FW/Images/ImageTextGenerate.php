@@ -36,6 +36,19 @@ final class ImageTextGenerate extends Object {
 		return FALSE;
 	}
 
+	private function prepaireColor( Color $color = NULL ) {
+		return ( $color == NULL ) ? $this->imageTextColor :
+			imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
+	}
+
+	private function prepaireFont( $fontPath ) {
+		$fontPath = imageloadfont( $fontPath );
+
+		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
+
+		return $fontPath;
+	}
+
 	public function setBackgroundColor( $red, $green, $blue ) {
 		imagecolorallocate( $this->imageResource, $red, $green, $blue );
 	}
@@ -46,44 +59,30 @@ final class ImageTextGenerate extends Object {
 		imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
 	}
 
-	public function setCharHorizontally( $fontSize, $x, $y, $char ) {
-		imagechar( $this->imageResource, $fontSize, $x, $y, $char, $this->imageTextColor );
+	public function setCharHorizontally( $fontSize, $x, $y, $char, Color $color = NULL ) {
+		imagechar( $this->imageResource, $fontSize, $x, $y, $char, $this->prepaireColor( $color ) );
 	}
 
-	public function setCharVertically( $fontSize, $x, $y, $char ) {
-		imagecharup( $this->imageResource, $fontSize, $x, $y, $char, $this->imageTextColor );
+	public function setCharVertically( $fontSize, $x, $y, $char, Color $color = NULL ) {
+		imagecharup( $this->imageResource, $fontSize, $x, $y, $char, $this->prepaireColor($color) );
 	}
 
-	public function setFontCharHorizontally( $fontPath, $x, $y, $char ) {
-		$fontPath = imageloadfont( $fontPath );
-
-		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
-
-		imagechar( $this->imageResource, $fontPath, $x, $y, $char, $this->imageTextColor );
+	public function setFontCharHorizontally( $fontPath, $x, $y, $char, Color $color = NULL ) {
+		imagechar( $this->imageResource, $this->prepaireFont($fontPath), $x, $y, $char, $this->prepaireColor($color) );
 	}
 
-	public function setFontCharVertically( $fontPath, $x, $y, $char ) {
-		$fontPath = imageloadfont( $fontPath );
-
-		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
-
-		imagecharup( $this->imageResource, $fontPath, $x, $y, $char, $this->imageTextColor );
+	public function setFontCharVertically( $fontPath, $x, $y, $char, Color $color = NULL ) {
+		imagecharup( $this->imageResource, $this->prepaireFont($fontPath), $x, $y, $char, $this->prepaireColor($color) );
 	}
 
-	public function setFontTextHorizontally( $fontPath, $x, $y, $string ) {
-		$fontPath = imageloadfont( $fontPath );
-
-		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
-
-		imagestring( $this->imageResource, $fontPath, $x, $y, $string, $this->imageTextColor );
+	public function setFontTextHorizontally( $fontPath, $x, $y, $string, Color $color = NULL ) {
+		imagestring( $this->imageResource, $this->prepaireFont( $fontPath ), $x, $y, $string,
+			$this->prepaireColor( $color ) );
 	}
 
-	public function setFontTextVertically( $fontPath, $x, $y, $string ) {
-		$fontPath = imageloadfont( $fontPath );
-
-		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
-
-		imagestringup( $this->imageResource, $fontPath, $x, $y, $string, $this->imageTextColor );
+	public function setFontTextVertically( $fontPath, $x, $y, $string, Color $color = NULL ) {
+		imagestringup( $this->imageResource, $this->prepaireFont( $fontPath ), $x, $y, $string,
+			$this->prepaireColor( $color ) );
 	}
 
 	public function setTextColor( $red, $green, $blue ) {
@@ -97,12 +96,12 @@ final class ImageTextGenerate extends Object {
 			imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
 	}
 
-	public function setTextHorizontally( $fontSize, $x, $y, $string ) {
-		imagestring( $this->imageResource, $fontSize, $x, $y, $string, $this->imageTextColor );
+	public function setTextHorizontally( $fontSize, $x, $y, $string, Color $color = NULL ) {
+		imagestring( $this->imageResource, $fontSize, $x, $y, $string, $this->prepaireColor( $color ) );
 	}
 
-	public function setTextVertically( $fontSize, $x, $y, $string ) {
-		imagestringup( $this->imageResource, $fontSize, $x, $y, $string, $this->imageTextColor );
+	public function setTextVertically( $fontSize, $x, $y, $string, Color $color = NULL ) {
+		imagestringup( $this->imageResource, $fontSize, $x, $y, $string, $this->prepaireColor( $color ) );
 	}
 
 	public function toBMP() {

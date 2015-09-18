@@ -131,4 +131,6 @@ final class ImageTextGenerate extends Object {
 		imagepng( $this->imageResource );
 		imagedestroy( $this->imageResource );
 	}
+
+	//
 }

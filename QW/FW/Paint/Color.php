@@ -3,6 +3,7 @@
 namespace QW\FW\Paint;
 
 use QW\FW\Basic\Object;
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Math\Math;
 
 final class Color extends Object {
@@ -13,10 +14,7 @@ final class Color extends Object {
 
 	public function __construct( $red = 0, $green = 0, $blue = 0, $debug = FALSE ) {
 		parent::__construct( $debug );
-
-		if ( $red < 0 || $red > 255 ) throw new RedColorException();
-		if ( $green < 0 || $green > 255 ) throw new GreenColorException();
-		if ( $blue < 0 || $blue > 255 ) throw new BlueColorException();
+		self::checkColor( $red, $green, $blue );
 
 		$this->red   = $red;
 		$this->green = $green;
@@ -29,6 +27,15 @@ final class Color extends Object {
 		$this->blue  = NULL;
 
 		parent::__destruct();
+	}
+
+	public static function checkColor( $red = 0, $green = 0, $blue = 0 ) {
+		if ( !is_numeric( $red ) || !is_numeric( $green ) ||
+			!is_numeric( $blue )
+		) throw new IllegalArgumentException();
+		if ( $red < 0 || $red > 255 ) throw new RedColorException();
+		if ( $green < 0 || $green > 255 ) throw new GreenColorException();
+		if ( $blue < 0 || $blue > 255 ) throw new BlueColorException();
 	}
 
 	public function getBlue() {

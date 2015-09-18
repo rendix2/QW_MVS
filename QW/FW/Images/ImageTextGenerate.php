@@ -6,10 +6,7 @@ use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Boot\RuntimeException;
-use QW\FW\Paint\BlueColorException;
 use QW\FW\Paint\Color;
-use QW\FW\Paint\GreenColorException;
-use QW\FW\Paint\RedColorException;
 
 final class ImageTextGenerate extends Object {
 	private $imageResource;
@@ -52,17 +49,13 @@ final class ImageTextGenerate extends Object {
 		return $fontPath;
 	}
 
-	public function setBackgroundColor( $red, $green, $blue ) {
-		if ( $red < 0 || $red > 255 ) throw new RedColorException();
-		if ( $green < 0 || $green > 255 ) throw new GreenColorException();
-		if ( $blue < 0 || $blue > 255 ) throw new BlueColorException();
-
+	public function setBackgroundColor( $red = 0, $green = 0, $blue = 0 ) {
+		Color::checkColor( $red, $green, $blue );
 		imagecolorallocate( $this->imageResource, $red, $green, $blue );
 	}
 
 	public function setBackgroundColorO( Color $color = NULL ) {
 		if ( $color == NULL ) throw new NullPointerException();
-
 		imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
 	}
 

@@ -3,6 +3,7 @@
 namespace QW\FW\Images;
 
 use QW\FW\Basic\Object;
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Boot\RuntimeException;
 use QW\FW\Paint\Color;
@@ -45,12 +46,44 @@ final class ImageTextGenerate extends Object {
 		imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
 	}
 
+	public function setCharHorizontally( $fontSize, $x, $y, $char ) {
+		imagechar( $this->imageResource, $fontSize, $x, $y, $char, $this->imageTextColor );
+	}
+
+	public function setCharVertically( $fontSize, $x, $y, $char ) {
+		imagecharup( $this->imageResource, $fontSize, $x, $y, $char, $this->imageTextColor );
+	}
+
+	public function setFontCharHorizontally( $fontPath, $x, $y, $char ) {
+		$fontPath = imageloadfont( $fontPath );
+
+		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
+
+		imagechar( $this->imageResource, $fontPath, $x, $y, $char, $this->imageTextColor );
+	}
+
+	public function setFontCharVertically( $fontPath, $x, $y, $char ) {
+		$fontPath = imageloadfont( $fontPath );
+
+		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
+
+		imagecharup( $this->imageResource, $fontPath, $x, $y, $char, $this->imageTextColor );
+	}
+
 	public function setFontTextHorizontally( $fontPath, $x, $y, $string ) {
-		imagestring( $this->imageResource, imageloadfont( $fontPath ), $x, $y, $string, $this->imageTextColor );
+		$fontPath = imageloadfont( $fontPath );
+
+		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
+
+		imagestring( $this->imageResource, $fontPath, $x, $y, $string, $this->imageTextColor );
 	}
 
 	public function setFontTextVertically( $fontPath, $x, $y, $string ) {
-		imagestringup( $this->imageResource, imageloadfont( $fontPath ), $x, $y, $string, $this->imageTextColor );
+		$fontPath = imageloadfont( $fontPath );
+
+		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
+
+		imagestringup( $this->imageResource, $fontPath, $x, $y, $string, $this->imageTextColor );
 	}
 
 	public function setTextColor( $red, $green, $blue ) {

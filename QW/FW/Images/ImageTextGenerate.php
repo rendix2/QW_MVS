@@ -50,11 +50,11 @@ final class ImageTextGenerate extends Object {
 
 	public function setFontTextVertically( $fontPath, $x, $y, $string ) {
 		imagestringup( $this->imageResource, imageloadfont( $fontPath ), $x, $y, $string, $this->imageTextColor );
+	}
 
 
 	public function setText( $fontSize, $x, $y, $string ) {
 		imagestring( $this->imageResource, $fontSize, $x, $y, $string, $this->imageTextColor );
-		}
 	}
 
 	public function setTextColor( $red, $green, $blue ) {

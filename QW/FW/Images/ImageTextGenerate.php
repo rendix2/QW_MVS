@@ -11,10 +11,11 @@ final class ImageTextGenerate extends Object {
 	private $imageResource;
 	private $imageTextColor;
 
-	public function __construct( $width, $height, $debug = FALSE ) {
+	public function __construct( $width, $height, $trueColor = FALSE, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		$this->imageResource = imagecreate( $width, $height );
+		if ( $trueColor == TRUE ) $this->imageResource = imagecreatetruecolor( $width, $height );
+		else $this->imageResource = imagecreate( $width, $height );
 	}
 
 	public function __destruct() {

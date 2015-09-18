@@ -1,6 +1,6 @@
 <?php
 
-namespace QW\Libs;
+namespace QW\FW\Language;
 
 use QW\FW\Basic\IllegalArgumentException;
 use QW\FW\Basic\NullPointerException;

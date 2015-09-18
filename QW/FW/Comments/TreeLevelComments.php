@@ -2,9 +2,9 @@
 
 namespace QW\FW\Comments;
 
-class TreeLevelComments extends DatabseLevelComments {
+class TreeLevelComments extends DatabaseLevelComments {
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct( $debug = FALSE ) {
+		parent::__construct( $debug );
 	}
 }

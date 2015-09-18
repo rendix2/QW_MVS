@@ -6,7 +6,7 @@
  * Time: 1:40
  */
 
-namespace QW\FW\Interfaces;
+namespace QW\FW\Language;
 
 
 interface ILanguage {

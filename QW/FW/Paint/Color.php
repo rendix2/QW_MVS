@@ -15,11 +15,11 @@ final class Color extends Object {
 	public function __construct( $red = 0, $green = 0, $blue = 0, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( $red < -1 || $red >= 256 ) throw new IllegalArgumentException( 'Červená je mimo rozsah.' );
+		if ( $red < 0 || $red > 255 ) throw new IllegalArgumentException( 'Červená je mimo rozsah.' );
 
-		if ( $green < -1 || $green >= 256 ) throw new IllegalArgumentException( 'Zelená je mimo rozsah.' );
+		if ( $green < 0 || $green > 255 ) throw new IllegalArgumentException( 'Zelená je mimo rozsah.' );
 
-		if ( $blue < -1 || $blue >= 256 ) throw new IllegalArgumentException( 'modrá je mimo rozsah.' );
+		if ( $blue < 0 || $blue > 255 ) throw new IllegalArgumentException( 'Modrá je mimo rozsah.' );
 
 		$this->red   = $red;
 		$this->green = $green;

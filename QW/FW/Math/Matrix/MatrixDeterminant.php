@@ -1,6 +1,5 @@
 <?php
 
-
 namespace QW\FW\Math\Matrix;
 
 use QW\FW\Basic\Object;

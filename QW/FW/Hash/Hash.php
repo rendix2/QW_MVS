@@ -1,6 +1,6 @@
 <?php
 
-namespace QW\FW;
+namespace QW\FW\Hash;
 
 use QW\FW\Boot\PrivateConstructException;
 use QW\FW\Math\Math;

@@ -1,9 +1,8 @@
 <?php
-namespace QW\Libs;
+namespace QW\FW\Language;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
-use QW\FW\Interfaces\ILanguage;
 
 class Language extends Object implements ILanguage {
 	const EXT = '.ini';

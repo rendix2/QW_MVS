@@ -1,8 +1,9 @@
 <?php
-namespace QW\FW;
+namespace QW\FW\Mail;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Validator;
 
 final class Mail extends Object {
 

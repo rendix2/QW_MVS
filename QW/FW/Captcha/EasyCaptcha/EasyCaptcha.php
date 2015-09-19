@@ -6,7 +6,7 @@ use QW\FW\Basic\Object;
 use QW\FW\Basic\String;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Hash\Hash;
-use QW\FW\Images\ImageTextGenerate;
+use QW\FW\Images\Images;
 use QW\FW\Math\Math;
 use QW\FW\Paint\Color;
 
@@ -20,7 +20,7 @@ class EasyCaptcha extends Object {
 
 		if ( !is_numeric( $width ) || !is_numeric( $height ) ) throw new IllegalArgumentException();
 
-		$this->captcha = new ImageTextGenerate( $width, $height );
+		$this->captcha = new Images( $width, $height );
 		$this->captcha->setBackgroundColorO( new Color( 0, 0, 0 ) );
 		$this->captcha->setTextColorO( new Color( 255, 255, 255 ) );
 		$string     = new String( Hash::r() );

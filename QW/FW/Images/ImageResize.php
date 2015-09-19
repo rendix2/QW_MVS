@@ -30,7 +30,6 @@ final class ImageResize {
 		$imagesize = getimagesize( $file_in );
 
 		if ( ( !$width && !$height ) || !$imagesize[ 0 ] || !$imagesize[ 1 ] ) return FALSE;
-
 		if ( $imagesize[ 0 ] == $width && $imagesize[ 1 ] == $height ) return copy( $file_in, $file_out );
 
 		switch ( $imagesize[ 2 ] ) {

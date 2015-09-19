@@ -8,7 +8,7 @@ use QW\FW\Boot\NullPointerException;
 use QW\FW\Boot\RuntimeException;
 use QW\FW\Paint\Color;
 
-final class ImageTextGenerate extends Object {
+final class Images extends Object {
 	private $imageResource;
 	private $imageTextColor;
 

@@ -3,7 +3,7 @@ include( './autoLoader.php' );
 //include( './debug.php' );
 
 
-$img = new QW\FW\Images\ImageTextGenerate( 400, 200 );
+$img = new QW\FW\Images\Images( 400, 200 );
 $img->setBackgroundColor( 255, 255, 255 );
 $img->setTextColor( 0, 0, 0 );
 $img->setTextHorizontally( 7, 100, 29, 'FUCK YOU!' );

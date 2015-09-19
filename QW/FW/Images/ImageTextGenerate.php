@@ -12,6 +12,9 @@ final class ImageTextGenerate extends Object {
 	private $imageResource;
 	private $imageTextColor;
 
+	private $width;
+	private $height;
+
 	public function __construct( $width, $height, $trueColor = FALSE, $debug = FALSE ) {
 		parent::__construct( $debug );
 
@@ -19,6 +22,9 @@ final class ImageTextGenerate extends Object {
 
 		$this->imageResource =
 			$trueColor == TRUE ? imagecreatetruecolor( $width, $height ) : imagecreate( $width, $height );
+
+		$this->height = $height;
+		$this->width  = $width;
 	}
 
 	public function __destruct() {
@@ -26,6 +32,16 @@ final class ImageTextGenerate extends Object {
 
 		$this->imageTextColor = NULL;
 		$this->imageResource = NULL;
+	}
+
+	public function antialias( $enable = TRUE ) {
+		if ( !is_bool( $enable ) ) throw new IllegalArgumentException();
+
+		return imageantialias( $this->imageResource, $enable );
+	}
+
+	public function arc( $x, $y, $width, $height, $start, $end, Color $color = NULL ) {
+		imagearc( $this->imageResource, $x, $y, $width, $height, $start, $end, $this->prepareColor( $color ) );
 	}
 
 	public function destroyImage() {
@@ -36,6 +52,55 @@ final class ImageTextGenerate extends Object {
 		}
 
 		return FALSE;
+	}
+
+	public function ellipse( $x, $y, $width, $height, Color $color = NULL ) {
+		imageellipse( $this->imageResource, $x, $y, $width, $height, $this->prepareColor( $color ) );
+	}
+
+	public function filledArc( $x, $y, $width, $height, $start, $end, $style, Color $color = NULL ) {
+		imagefilledarc( $this->imageResource, $x, $y, $width, $height, $start, $end, $this->prepareColor( $color ),
+			$style );
+	}
+
+	public function filledEllipse( $x, $y, $width, $height, Color $color = NULL ) {
+		imagefilledellipse( $this->imageResource, $x, $y, $width, $height, $this->prepareColor( $color ) );
+	}
+
+	public function filledPolygon( $x0, $x1, $y0, $y1, $numPoints, Color $color = NULL ) {
+		imagefilledpolygon( $this->imageResource, [ $x0, $y0, $x1, $y1 ], $numPoints, $this->prepareColor( $color ) );
+	}
+
+	public function filledRectangle( $x1, $x2, $y1, $y2, Color $color = NULL ) {
+		imagefilledrectangle( $this->imageResource, $x1, $y1, $x2, $y2, $this->prepareColor( $color ) );
+	}
+
+	public function filter( $filterType, $arg1, $arg2, $arg3, $arg4 ) {
+		imagefilter( $this->imageResource, $filterType, $arg1, $arg2, $arg3, $arg4 );
+	}
+
+	public function getHeight() {
+		return $this->height;
+	}
+
+	public function getSupportedImagesTypes() {
+		return imagetypes();
+	}
+
+	public function getWidth() {
+		return $this->width;
+	}
+
+	public function interlace( $enable = FALSE ) {
+		imageinterlace( $this->imageResource, (int) $enable );
+	}
+
+	public function line( $x1, $x2, $y1, $y2, Color $color = NULL ) {
+		imageline( $this->imageResource, $x1, $y1, $x2, $y2, $this->prepareColor( $color ) );
+	}
+
+	public function polygon( $x0, $x1, $y0, $y1, $numPoints, Color $color = NULL ) {
+		imagepolygon( $this->imageResource, [ $x0, $y0, $x1, $y1 ], $numPoints, $this->prepareColor( $color ) );
 	}
 
 	private function prepareColor( Color $color = NULL ) {
@@ -49,6 +114,14 @@ final class ImageTextGenerate extends Object {
 		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
 
 		return $fontPath;
+	}
+
+	public function rectangle( $x1, $x2, $y1, $y2, Color $color = NULL ) {
+		imagerectangle( $this->imageResource, $x1, $y1, $x2, $y2, $this->prepareColor( $color ) );
+	}
+
+	public function rotate( $angle, $bgdColor, $ignoreTransparent ) {
+		imagerotate( $this->imageResource, $angle, $bgdColor, $ignoreTransparent );
 	}
 
 	public function setBackgroundColor( $red = 0, $green = 0, $blue = 0 ) {
@@ -87,6 +160,10 @@ final class ImageTextGenerate extends Object {
 	public function setFontTextVertically( $fontPath, $x, $y, $string, Color $color = NULL ) {
 		imagestringup( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $string,
 			$this->prepareColor( $color ) );
+	}
+
+	public function setPixel( $x, $y, Color $color ) {
+		imagesetpixel( $this->imageResource, $x, $y, $this->prepareColor( $color ) );
 	}
 
 	public function setTextColor( $red, $green, $blue ) {
@@ -135,6 +212,4 @@ final class ImageTextGenerate extends Object {
 		imagepng( $this->imageResource );
 		imagedestroy( $this->imageResource );
 	}
-
-	//
 }

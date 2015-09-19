@@ -29,6 +29,11 @@ final class UserController extends AbstractBasicController {
 			->render( $this->getViewName() . Config::SLASH . 'index' );
 	}
 
+	public function login() {
+		$this->getView()
+		     ->render( $this->getViewName() . Config::SLASH . 'index' );
+	}
+
 	public function logout() {
 		Session::end();
 	}

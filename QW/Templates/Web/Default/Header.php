@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="header">
-	<span><a href="Index">Home</a></span>
-	<span><a href="Help">Help</a></span>
+	<span><a href="./Index">Home</a></span>
+	<span><a href="./Help">Help</a></span>
 
 	<?php
 

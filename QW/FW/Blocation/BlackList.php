@@ -4,7 +4,7 @@ namespace QW\FW\Blocation;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\NullPointerException;
-use QW\FW\Interfaces\IP;
+use QW\FW\IP\IP;
 use QW\FW\IP\IPv4;
 use QW\FW\IP\IPv6;
 use QW\FW\IP\IPvU;

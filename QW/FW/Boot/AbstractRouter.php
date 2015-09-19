@@ -20,7 +20,7 @@ abstract class AbstractRouter extends Object {
 		self::$logger = new Logger( Logger::LOG_TYPE_GLOBAL, $debug );
 
 		$this->setAllDebug( $debug );
-		//require_once( './QW/FW/Boot/Exceptions.php' );
+		require_once( './QW/FW/Boot/Exceptions.php' );
 		require_once( './QW/Smarty/libs/Smarty.class.php' );
 		$this->route();
 	}
@@ -37,6 +37,8 @@ abstract class AbstractRouter extends Object {
 		mb_internal_encoding( "UTF-8" );
 
 		$load = function ( $class ) {
+
+			//echo $class.'<br>';
 
 			// don't load Controller or Model by this
 			//if ( preg_match( '#Controller|Model$#', $class ) ) return -2;

@@ -2,7 +2,6 @@
 
 namespace QW\FW\Images;
 
-
 use QW\FW\Basic\Object;
 
 final class ImageGallery extends Object {

@@ -5,7 +5,7 @@ namespace QW\FW\Forms\FormCreator;
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
-use QW\FW\Hash;
+use QW\FW\Hash\Hash;
 
 class FormCreatorHTML4 extends Object {
 	protected $formData;

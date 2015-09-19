@@ -2,7 +2,6 @@
 
 namespace QW\FW\Cache;
 
-
 final class ArrayCache extends AbstractCache implements ICache {
 	private $data;
 

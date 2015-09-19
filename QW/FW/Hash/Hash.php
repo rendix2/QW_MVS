@@ -10,20 +10,22 @@ final class Hash {
 		throw new PrivateConstructException();
 	}
 
-	public static function joaat_hash( array $key ) {
-		$hash = 0;
+	/*
+		public static function joaat_hash( array $key ) {
+			$hash = 0;
 
-		foreach ( $key as $b ) {
-			$hash += ( $b & 0xFF );
-			$hash += ( $hash << 10 );
-			$hash ^= ( $hash >>> 6 );
+			foreach ( $key as $b ) {
+				$hash += ( $b & 0xFF );
+				$hash += ( $hash << 10 );
+				$hash ^= ( $hash >>> 6 );
+			}
+			$hash += ( $hash << 3 );
+			$hash ^= ( $hash >>> 11 );
+			$hash += ( $hash << 15 );
+
+			return $hash;
 		}
-		$hash += ( $hash << 3 );
-		$hash ^= ( $hash >>> 11 );
-		$hash += ( $hash << 15 );
-
-		return $hash;
-	}
+	*/
 
 	public static function r() {
 		return md5( uniqid() );

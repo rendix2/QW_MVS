@@ -15,6 +15,8 @@ final class ImageTextGenerate extends Object {
 	public function __construct( $width, $height, $trueColor = FALSE, $debug = FALSE ) {
 		parent::__construct( $debug );
 
+		if ( !is_numeric( $width ) || !is_numeric( $height ) ) throw new IllegalArgumentException();
+
 		$this->imageResource =
 			$trueColor == TRUE ? imagecreatetruecolor( $width, $height ) : imagecreate( $width, $height );
 	}

@@ -154,11 +154,6 @@ final class Images extends Object {
 		imagerotate( $this->imageResource, $angle, $bgdColor, $ignoreTransparent );
 	}
 
-	public function setBackgroundColor( $red = 0, $green = 0, $blue = 0 ) {
-		Color::checkColor( $red, $green, $blue );
-		imagecolorallocate( $this->imageResource, $red, $green, $blue );
-	}
-
 	public function setBackgroundColorO( Color $color = NULL ) {
 		if ( $color == NULL ) throw new NullPointerException();
 		imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );

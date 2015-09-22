@@ -41,11 +41,15 @@ final class Images extends Object {
 	}
 
 	public function arc( Point $center, $width, $height, $start, $end, Color $color = NULL ) {
+		if ( !$center->isInImage( $this ) ) throw new IllegalArgumentException();
+
 		imagearc( $this->imageResource, $center->getX(), $center->getY(), $width, $height, $start, $end,
 			$this->prepareColor( $color ) );
 	}
 
 	public function arcFilled( Point $center, $width, $height, $start, $end, $style, Color $color = NULL ) {
+		if ( !$center->isInImage( $this ) ) throw new IllegalArgumentException();
+
 		imagefilledarc( $this->imageResource, $center->getX(), $center->getY(), $width, $height, $start, $end,
 			$this->prepareColor( $color ), $style );
 	}
@@ -61,11 +65,13 @@ final class Images extends Object {
 	}
 
 	public function ellipse( Point $center, $width, $height, Color $color = NULL ) {
+		if ( !$center->isInImage( $this ) ) throw new IllegalArgumentException();
 		imageellipse( $this->imageResource, $center->getX(), $center->getY(), $width, $height,
 			$this->prepareColor( $color ) );
 	}
 
 	public function ellipseFilled( Point $center, $width, $height, Color $color = NULL ) {
+		if ( !$center->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagefilledellipse( $this->imageResource, $center->getX(), $center->getY(), $width, $height,
 			$this->prepareColor( $color ) );
 	}
@@ -91,28 +97,19 @@ final class Images extends Object {
 	}
 
 	public function line( Point $start, Point $end, Color $color = NULL ) {
+		if ( !$start->isInImage( $this ) || $end->isInImage( $this ) ) throw new IllegalArgumentException();
 		imageline( $this->imageResource, $start->getX(), $start->getY(), $end->getX(), $end->getY(),
 			$this->prepareColor( $color ) );
 	}
 
 	public function polygon( array $points, $numPoints, Color $color = NULL ) {
-		imagepolygon( $this->imageResource, $this->polygonLogic( $points ), $numPoints, $this->prepareColor( $color ) );
-	}
-
-	public function polygonFilled( array $points, $numPoints, Color $color = NULL ) {
-		imagefilledpolygon( $this->imageResource, $this->polygonLogic( $points ), $numPoints,
+		imagepolygon( $this->imageResource, $this->preparePolygon( $points ), $numPoints,
 			$this->prepareColor( $color ) );
 	}
 
-	private function polygonLogic( array $points ) {
-		$pointsAll = [ ];
-
-		foreach ( $points as $point ) if ( $point instanceof Point ) {
-			$pointsAll[] = $point->getX();
-			$pointsAll[] = $point->getY();
-		}
-
-		return $pointsAll;
+	public function polygonFilled( array $points, $numPoints, Color $color = NULL ) {
+		imagefilledpolygon( $this->imageResource, $this->preparePolygon( $points ), $numPoints,
+			$this->prepareColor( $color ) );
 	}
 
 	private function prepareColor( Color $color = NULL ) {
@@ -124,16 +121,31 @@ final class Images extends Object {
 		$fontPath = imageloadfont( $fontPath );
 
 		if ( $fontPath == FALSE ) throw new IllegalArgumentException();
-
 		return $fontPath;
 	}
 
+	private function preparePolygon( array $points ) {
+		$pointsAll = [ ];
+
+		foreach ( $points as $point ) if ( $point instanceof Point ) {
+			if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
+
+			$pointsAll[] = $point->getX();
+			$pointsAll[] = $point->getY();
+		}
+
+		return $pointsAll;
+	}
+
 	public function rectangle( Point $leftUp, Point $rightDown, Color $color = NULL ) {
+		if ( !$leftUp->isInImage( $this ) || !$rightDown->isInImage( $this ) ) throw new IllegalArgumentException();
+
 		imagerectangle( $this->imageResource, $leftUp->getX(), $leftUp->getY(), $rightDown->getX(), $rightDown->getY(),
 			$this->prepareColor( $color ) );
 	}
 
 	public function rectangleFilled( Point $leftUp, Point $rightDown, Color $color = NULL ) {
+		if ( !$leftUp->isInImage( $this ) || !$rightDown->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagefilledrectangle( $this->imageResource, $leftUp->getX(), $leftUp->getY(), $rightDown->getX(),
 			$rightDown->getY(), $this->prepareColor( $color ) );
 	}
@@ -153,36 +165,44 @@ final class Images extends Object {
 	}
 
 	public function setCharHorizontally( $fontSize, Point $point, $char, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
+
 		imagechar( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
 	public function setCharVertically( $fontSize, Point $point, $char, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagecharup( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
 	public function setFontCharHorizontally( $fontPath, Point $point, $char, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagechar( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
 	public function setFontCharVertically( $fontPath, Point $point, $char, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagecharup( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
 	public function setFontTextHorizontally( $fontPath, Point $point, $string, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagestring( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $string,
 			$this->prepareColor( $color ) );
 	}
 
 	public function setFontTextVertically( $fontPath, Point $point, $string, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagestringup( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $string,
 			$this->prepareColor( $color ) );
 	}
 
 	public function setPixel( Point $point, Color $color ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagesetpixel( $this->imageResource, $point->getX(), $point->getY(), $this->prepareColor( $color ) );
 	}
 
@@ -194,11 +214,13 @@ final class Images extends Object {
 	}
 
 	public function setTextHorizontally( $fontSize, Point $point, $string, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagestring( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $string,
 			$this->prepareColor( $color ) );
 	}
 
 	public function setTextVertically( $fontSize, Point $point, $string, Color $color = NULL ) {
+		if ( !$point->isInImage( $this ) ) throw new IllegalArgumentException();
 		imagestringup( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $string,
 			$this->prepareColor( $color ) );
 	}
@@ -232,6 +254,10 @@ final class Images extends Object {
 	}
 
 	public function triangle( Point $point1, Point $point2, Point $point3, Color $color ) {
+		if ( !$point1->isInImage( $this ) || !$point2->isInImage( $this ) ||
+			!$point3->isInImage( $this )
+		) throw new IllegalArgumentException();
+
 		$this->line( $point1, $point2, $this->prepareColor( $color ) );
 		$this->line( $point2, $point3, $this->prepareColor( $color ) );
 		$this->line( $point3, $point1, $this->prepareColor( $color ) );

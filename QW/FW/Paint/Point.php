@@ -11,6 +11,7 @@ namespace QW\FW\Paint;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Images\Images;
 
 class Point extends Object {
 
@@ -36,6 +37,10 @@ class Point extends Object {
 
 	final public function getY() {
 		return $this->y;
+	}
+
+	final public function isInImage( Images $images ) {
+		return $this->getX() < $images->getWidth() && $this->getY() < $images->getHeight();
 	}
 
 }

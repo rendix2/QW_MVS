@@ -40,18 +40,16 @@ final class Images extends Object {
 		return imageantialias( $this->imageResource, $enable );
 	}
 
-	public function arc( Point $center, $width, $height, $start, $end, Color $color = NULL ) {
+	public function arc( Point $center, $width, $height, $start, $end, $style = NULL, $filled = FALSE, Color $color = NULL ) {
 		if ( !$center->isInImage( $this ) ) throw new IllegalArgumentException();
+		if ( $filled == TRUE && $style == NULL ) throw new IllegalArgumentException();
+
+		$filled == TRUE ?
+			imagefilledarc( $this->imageResource, $center->getX(), $center->getY(), $width, $height, $start, $end,
+				$this->prepareColor( $color ), $style ) :
 
 		imagearc( $this->imageResource, $center->getX(), $center->getY(), $width, $height, $start, $end,
 			$this->prepareColor( $color ) );
-	}
-
-	public function arcFilled( Point $center, $width, $height, $start, $end, $style, Color $color = NULL ) {
-		if ( !$center->isInImage( $this ) ) throw new IllegalArgumentException();
-
-		imagefilledarc( $this->imageResource, $center->getX(), $center->getY(), $width, $height, $start, $end,
-			$this->prepareColor( $color ), $style );
 	}
 
 	public function destroyImage() {

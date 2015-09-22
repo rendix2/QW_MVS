@@ -6,6 +6,7 @@ include( './autoLoader.php' );
 use QW\FW\Boot\Bootstrap;
 
 $quickWeb = new Bootstrap( FALSE );
+//$quickWeb->setAllDebug(TRUE);
 $quickWeb = NULL;
 
 ?>

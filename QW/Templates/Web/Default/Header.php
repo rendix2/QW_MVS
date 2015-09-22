@@ -9,17 +9,15 @@
 </head>
 <body>
 <div class="header">
-	<span><a href="./Index">Home</a></span>
-	<span><a href="./Help">Help</a></span>
-
+	<span><a href="<?= \QW\Libs\Config::URL ?>/Index">Home</a></span>
+	<span><a href="<?= \QW\Libs\Config::URL ?>/Help">Help</a></span>
 	<?php
-
 	use QW\FW\SuperGlobals\Session;
 
 	if ( Session::get( 'logged' ) == TRUE ): ?>
-		<span><a href="./User/logout">Logout</a></span>
+		<span><a href="<?= \QW\Libs\Config::URL ?> /User/logout">Logout</a></span>
 	<?php else : ?>
-		<span><a href="./User/login">Login</a></span>
+		<span><a href="<?= \QW\Libs\Config::URL ?>/User/login">Login</a></span>
 	<? endif; ?>
 
 </div>

@@ -31,6 +31,9 @@ final class UserController extends AbstractBasicController {
 
 	public function login() {
 		$this->getView()
+			->setPageName( "Přihlášení" );
+
+		$this->getView()
 		     ->render( $this->getViewName() . Config::SLASH . 'index' );
 	}
 

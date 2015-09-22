@@ -38,7 +38,7 @@ abstract class AbstractRouter extends Object {
 
 		$load = function ( $class ) {
 
-			//echo $class.'<br>';
+			if ( AbstractRouter::getAllDebug() ) echo 'Loading class: <b>' . $class . '</b><br>';
 
 			// don't load Controller or Model by this
 			//if ( preg_match( '#Controller|Model$#', $class ) ) return -2;

@@ -2,8 +2,6 @@
 
 namespace QW\FW;
 
-use QW\FW\Boot\PrivateConstructException;
-
 class Config {
 	const EMAIL = '';
 	const URL = '';
@@ -11,7 +9,7 @@ class Config {
 	public static $dbConfig = [ 'dbHost' => '', 'dbUser' => '', 'dbPassword' => '', 'dbName' => '' ];
 
 	public function __construct() {
-		throw new PrivateConstructException();
+		//	throw new PrivateConstructException();
 	}
 
 	public function __destruct() {

@@ -7,6 +7,7 @@ use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Boot\RuntimeException;
 use QW\FW\Paint\Color;
+use QW\FW\Paint\Point;
 
 final class Images extends Object {
 	private $imageResource;
@@ -29,7 +30,6 @@ final class Images extends Object {
 
 	public function __destruct() {
 		if ( is_resource( $this->imageResource ) ) imagedestroy( $this->imageResource );
-
 		$this->imageTextColor = NULL;
 		$this->imageResource = NULL;
 	}
@@ -40,8 +40,14 @@ final class Images extends Object {
 		return imageantialias( $this->imageResource, $enable );
 	}
 
-	public function arc( $x, $y, $width, $height, $start, $end, Color $color = NULL ) {
-		imagearc( $this->imageResource, $x, $y, $width, $height, $start, $end, $this->prepareColor( $color ) );
+	public function arc( Point $center, $width, $height, $start, $end, Color $color = NULL ) {
+		imagearc( $this->imageResource, $center->getX(), $center->getY(), $width, $height, $start, $end,
+			$this->prepareColor( $color ) );
+	}
+
+	public function arcFilled( Point $center, $width, $height, $start, $end, $style, Color $color = NULL ) {
+		imagefilledarc( $this->imageResource, $center->getX(), $center->getY(), $width, $height, $start, $end,
+			$this->prepareColor( $color ), $style );
 	}
 
 	public function destroyImage() {
@@ -54,25 +60,14 @@ final class Images extends Object {
 		return FALSE;
 	}
 
-	public function ellipse( $x, $y, $width, $height, Color $color = NULL ) {
-		imageellipse( $this->imageResource, $x, $y, $width, $height, $this->prepareColor( $color ) );
+	public function ellipse( Point $center, $width, $height, Color $color = NULL ) {
+		imageellipse( $this->imageResource, $center->getX(), $center->getY(), $width, $height,
+			$this->prepareColor( $color ) );
 	}
 
-	public function filledArc( $x, $y, $width, $height, $start, $end, $style, Color $color = NULL ) {
-		imagefilledarc( $this->imageResource, $x, $y, $width, $height, $start, $end, $this->prepareColor( $color ),
-			$style );
-	}
-
-	public function filledEllipse( $x, $y, $width, $height, Color $color = NULL ) {
-		imagefilledellipse( $this->imageResource, $x, $y, $width, $height, $this->prepareColor( $color ) );
-	}
-
-	public function filledPolygon( $x0, $x1, $y0, $y1, $numPoints, Color $color = NULL ) {
-		imagefilledpolygon( $this->imageResource, [ $x0, $y0, $x1, $y1 ], $numPoints, $this->prepareColor( $color ) );
-	}
-
-	public function filledRectangle( $x1, $x2, $y1, $y2, Color $color = NULL ) {
-		imagefilledrectangle( $this->imageResource, $x1, $y1, $x2, $y2, $this->prepareColor( $color ) );
+	public function ellipseFilled( Point $center, $width, $height, Color $color = NULL ) {
+		imagefilledellipse( $this->imageResource, $center->getX(), $center->getY(), $width, $height,
+			$this->prepareColor( $color ) );
 	}
 
 	public function filter( $filterType, $arg1, $arg2, $arg3, $arg4 ) {
@@ -95,12 +90,29 @@ final class Images extends Object {
 		imageinterlace( $this->imageResource, (int) $enable );
 	}
 
-	public function line( $x1, $x2, $y1, $y2, Color $color = NULL ) {
-		imageline( $this->imageResource, $x1, $y1, $x2, $y2, $this->prepareColor( $color ) );
+	public function line( Point $start, Point $end, Color $color = NULL ) {
+		imageline( $this->imageResource, $start->getX(), $start->getY(), $end->getX(), $end->getY(),
+			$this->prepareColor( $color ) );
 	}
 
-	public function polygon( $x0, $x1, $y0, $y1, $numPoints, Color $color = NULL ) {
-		imagepolygon( $this->imageResource, [ $x0, $y0, $x1, $y1 ], $numPoints, $this->prepareColor( $color ) );
+	public function polygon( array $points, $numPoints, Color $color = NULL ) {
+		imagepolygon( $this->imageResource, $this->polygonLogic( $points ), $numPoints, $this->prepareColor( $color ) );
+	}
+
+	public function polygonFilled( array $points, $numPoints, Color $color = NULL ) {
+		imagefilledpolygon( $this->imageResource, $this->polygonLogic( $points ), $numPoints,
+			$this->prepareColor( $color ) );
+	}
+
+	private function polygonLogic( array $points ) {
+		$pointsAll = [ ];
+
+		foreach ( $points as $point ) if ( $point instanceof Point ) {
+			$pointsAll[] = $point->getX();
+			$pointsAll[] = $point->getY();
+		}
+
+		return $pointsAll;
 	}
 
 	private function prepareColor( Color $color = NULL ) {
@@ -116,8 +128,14 @@ final class Images extends Object {
 		return $fontPath;
 	}
 
-	public function rectangle( $x1, $x2, $y1, $y2, Color $color = NULL ) {
-		imagerectangle( $this->imageResource, $x1, $y1, $x2, $y2, $this->prepareColor( $color ) );
+	public function rectangle( Point $leftUp, Point $rightDown, Color $color = NULL ) {
+		imagerectangle( $this->imageResource, $leftUp->getX(), $leftUp->getY(), $rightDown->getX(), $rightDown->getY(),
+			$this->prepareColor( $color ) );
+	}
+
+	public function rectangleFilled( Point $leftUp, Point $rightDown, Color $color = NULL ) {
+		imagefilledrectangle( $this->imageResource, $leftUp->getX(), $leftUp->getY(), $rightDown->getX(),
+			$rightDown->getY(), $this->prepareColor( $color ) );
 	}
 
 	public function rotate( $angle, $bgdColor, $ignoreTransparent ) {
@@ -134,40 +152,38 @@ final class Images extends Object {
 		imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
 	}
 
-	public function setCharHorizontally( $fontSize, $x, $y, $char, Color $color = NULL ) {
-		imagechar( $this->imageResource, $fontSize, $x, $y, $char, $this->prepareColor( $color ) );
-	}
-
-	public function setCharVertically( $fontSize, $x, $y, $char, Color $color = NULL ) {
-		imagecharup( $this->imageResource, $fontSize, $x, $y, $char, $this->prepareColor( $color ) );
-	}
-
-	public function setFontCharHorizontally( $fontPath, $x, $y, $char, Color $color = NULL ) {
-		imagechar( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $char,
+	public function setCharHorizontally( $fontSize, Point $point, $char, Color $color = NULL ) {
+		imagechar( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
-	public function setFontCharVertically( $fontPath, $x, $y, $char, Color $color = NULL ) {
-		imagecharup( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $char,
+	public function setCharVertically( $fontSize, Point $point, $char, Color $color = NULL ) {
+		imagecharup( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
-	public function setFontTextHorizontally( $fontPath, $x, $y, $string, Color $color = NULL ) {
-		imagestring( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $string,
+	public function setFontCharHorizontally( $fontPath, Point $point, $char, Color $color = NULL ) {
+		imagechar( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
-	public function setFontTextVertically( $fontPath, $x, $y, $string, Color $color = NULL ) {
-		imagestringup( $this->imageResource, $this->prepareFont( $fontPath ), $x, $y, $string,
+	public function setFontCharVertically( $fontPath, Point $point, $char, Color $color = NULL ) {
+		imagecharup( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $char,
 			$this->prepareColor( $color ) );
 	}
 
-	public function setPixel( $x, $y, Color $color ) {
-		imagesetpixel( $this->imageResource, $x, $y, $this->prepareColor( $color ) );
+	public function setFontTextHorizontally( $fontPath, Point $point, $string, Color $color = NULL ) {
+		imagestring( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $string,
+			$this->prepareColor( $color ) );
 	}
 
-	public function setTextColor( $red, $green, $blue ) {
-		$this->imageTextColor = imagecolorallocate( $this->imageResource, $red, $green, $blue );
+	public function setFontTextVertically( $fontPath, Point $point, $string, Color $color = NULL ) {
+		imagestringup( $this->imageResource, $this->prepareFont( $fontPath ), $point->getX(), $point->getY(), $string,
+			$this->prepareColor( $color ) );
+	}
+
+	public function setPixel( Point $point, Color $color ) {
+		imagesetpixel( $this->imageResource, $point->getX(), $point->getY(), $this->prepareColor( $color ) );
 	}
 
 	public function setTextColorO( Color $color = NULL ) {
@@ -177,12 +193,14 @@ final class Images extends Object {
 			imagecolorallocate( $this->imageResource, $color->getRed(), $color->getGreen(), $color->getBlue() );
 	}
 
-	public function setTextHorizontally( $fontSize, $x, $y, $string, Color $color = NULL ) {
-		imagestring( $this->imageResource, $fontSize, $x, $y, $string, $this->prepareColor( $color ) );
+	public function setTextHorizontally( $fontSize, Point $point, $string, Color $color = NULL ) {
+		imagestring( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $string,
+			$this->prepareColor( $color ) );
 	}
 
-	public function setTextVertically( $fontSize, $x, $y, $string, Color $color = NULL ) {
-		imagestringup( $this->imageResource, $fontSize, $x, $y, $string, $this->prepareColor( $color ) );
+	public function setTextVertically( $fontSize, Point $point, $string, Color $color = NULL ) {
+		imagestringup( $this->imageResource, $fontSize, $point->getX(), $point->getY(), $string,
+			$this->prepareColor( $color ) );
 	}
 
 	public function toBMP() {
@@ -211,5 +229,11 @@ final class Images extends Object {
 
 		imagepng( $this->imageResource );
 		imagedestroy( $this->imageResource );
+	}
+
+	public function triangle( Point $point1, Point $point2, Point $point3, Color $color ) {
+		$this->line( $point1, $point2, $this->prepareColor( $color ) );
+		$this->line( $point2, $point3, $this->prepareColor( $color ) );
+		$this->line( $point3, $point1, $this->prepareColor( $color ) );
 	}
 }

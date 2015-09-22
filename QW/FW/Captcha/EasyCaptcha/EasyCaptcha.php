@@ -21,8 +21,8 @@ class EasyCaptcha extends Object {
 		if ( !is_numeric( $width ) || !is_numeric( $height ) ) throw new IllegalArgumentException();
 
 		$this->captcha = new Images( $width, $height );
-		$this->captcha->setBackgroundColorO( new Color( 0, 0, 0 ) );
-		$this->captcha->setTextColorO( new Color( 255, 255, 255 ) );
+		$this->captcha->setBackgroundColor( new Color( 0, 0, 0 ) );
+		$this->captcha->setTextColor( new Color( 255, 255, 255 ) );
 		$string     = new String( Hash::r() );
 		$this->text = $string->subString( 0, Math::randomInterval( 6, 8 ) );
 		$this->captcha->setTextHorizontally( Math::randomInterval( 2, 6 ), 0, 0, $this->text );

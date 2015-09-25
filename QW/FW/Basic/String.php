@@ -55,10 +55,7 @@ class String extends Object {
 
 	private static function array2String( array &$array ) {
 		$string = "";
-		foreach ( $array as $v ) {
-			$string .= $v;
-		}
-
+		foreach ( $array as $v ) $string .= $v;
 		return $string;
 	}
 
@@ -233,7 +230,7 @@ class String extends Object {
 
 	public function isPalindrome() {
 		return $this->reverse()
-		            ->getString() == $this->getString();
+		            ->equals( $this );
 	}
 
 	public function ltrim( $chars = '\t\n\r\0\x0B' ) {

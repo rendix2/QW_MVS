@@ -11,8 +11,6 @@ final class IPv4 extends AbstractIP {
 
 		// IPv4
 		if ( $this->getIpCountPart() != 4 ) throw new IllegalArgumentException();
-
-		$this->ipCoded = ip2long( $ip );
 	}
 
 	public function __destruct() {
@@ -35,6 +33,6 @@ final class IPv4 extends AbstractIP {
 			$string = $string->concatPost( '.' );
 		}
 
-		return $string = $string->concatPost( 'XXX.XXX' );
+		return $string = $string->concatPost( 'xxx.xxx' );
 	}
 }

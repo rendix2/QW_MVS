@@ -13,8 +13,6 @@ final class IPv6 extends AbstractIP {
 
 		// IPv6
 		if ( $this->getIpCountPart() != 6 ) throw new IllegalArgumentException();
-
-		$this->ipCoded = ip2long( $ip );
 	}
 
 	public function __destruct() {

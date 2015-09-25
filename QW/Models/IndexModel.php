@@ -17,7 +17,7 @@ final class IndexModel extends AbstractBasicModel {
 	public function index() {
 
 		//$myIP = new IPv6("2001:4cfb:0000:0000:0000:0000:0123:4aab", TRUE);
-		$myIP = new IPv4( "4.4.4.4", TRUE );
+		$myIP = new IPv4( '1.2.3.4', TRUE );
 
 		echo 'MY IP:::::' . $myIP;
 

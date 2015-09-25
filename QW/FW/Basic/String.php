@@ -41,9 +41,9 @@ class String extends Object {
 			return $ret->toCharArray();
 		}
 		$cs2       = [ ];
-		$cs2Length = count( $cs );
+		$cs2Length = count( $cs ) * 2 + 1;
 
-		for ( $i = 0; $i < ( $cs2Length - 1 ); $i = $i + 2 ) {
+		for ( $i = 0; $i < ( $cs2Length - 1 ); $i += 2 ) {
 			$cs2[ $i ]     = '|';
 			$cs2[ $i + 1 ] = $cs[ (int) ( $i / 2 ) ];
 		}
@@ -70,7 +70,7 @@ class String extends Object {
 		}
 
 		$cs2       = [ ];
-		$cs2Length = count( $cs2 );
+		$cs2Length = count( $cs ) - 1 / 2;
 
 		for ( $i = 0; $i < $cs2Length; $i++ ) {
 			$cs2[ $i ] = $cs[ $i * 2 + 1 ];
@@ -185,7 +185,7 @@ class String extends Object {
 				$m--;
 				$n++;
 			}
-			if ( $i + $p[ $i ] > $r ) {
+			if ( ( $i + $p[ $i ] ) > $r ) {
 				$c = $i;
 				$r = $i + $p[ $i ];
 			}

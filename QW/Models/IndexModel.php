@@ -15,8 +15,8 @@ final class IndexModel extends AbstractBasicModel {
 
 	public function index() {
 
-		$z = new String( "awrkajakawda" );
-		echo $z->getLongestPalindromeManacher();
+		$z = new String( "wawadgrakajakawd" );
+		echo "----" . $z->getLongestPalindromeManacher() . '---';
 
 		$this->getDB()
 			->query( 'SELECT user_name FROM users LIMIT 50;', [ ] );

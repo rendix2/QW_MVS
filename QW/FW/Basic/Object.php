@@ -46,6 +46,7 @@ abstract class Object {
 	}
 
 	public function __construct( $debug = FALSE ) {
+		if ( !is_bool( $debug ) ) throw new IllegalArgumentException();
 		$this->debug = $debug;
 
 		if ( self::$staticDebug == TRUE || $this->debug == TRUE || $debug == TRUE ) {

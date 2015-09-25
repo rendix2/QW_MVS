@@ -15,6 +15,7 @@ class String extends Object {
 
 		$this->string     = (string) $string;
 		$this->matches    = NULL;
+		$this->debug = $debug;
 		self::$separators = [ "\n", "\r", "\r\n", "\n\r", chr( 30 ), chr( 155 ), PHP_EOL ];
 	}
 
@@ -77,7 +78,7 @@ class String extends Object {
 	}
 
 	public function addSlashes() {
-		return new String( addslashes( $this->string ) );
+		return new String( addslashes( $this->string ), $this->debug );
 	}
 
 	public function br2nl( $separator = PHP_EOL ) {
@@ -91,23 +92,23 @@ class String extends Object {
 			$x > ( mb_strlen( $this->string, 'UTF-8' ) - 1 )
 		) throw new IllegalArgumentException();
 
-		return $this->string{$x};
+		return new Character( $this->string{$x}, $this->debug );
 	}
 
 	public function concatPost( $string ) {
-		return new String( $this->string . (string) $string );
+		return new String( $this->string . (string) $string, $this->debug );
 	}
 
 	public function concatPostString( String $string ) {
-		return new String( $string->string . $string->string );
+		return new String( $string->string . $string->string, $this->debug );
 	}
 
 	public function concatPre( $string ) {
-		return new String( (string) $string . $this->string );
+		return new String( (string) $string . $this->string, $this->debug );
 	}
 
 	public function concatPreString( String $string ) {
-		return new String( $string->string . $string->string );
+		return new String( $string->string . $string->string, $this->debug );
 	}
 
 	public function contains( $string ) {
@@ -133,15 +134,15 @@ class String extends Object {
 	}
 
 	public function everyFirstCharInSentenceToUpper() {
-		return new String( ucwords( $this->string ) );
+		return new String( ucwords( $this->string ), $this->debug );
 	}
 
 	public function firstCharToLower() {
-		return new String( lcfirst( $this->string ) );
+		return new String( lcfirst( $this->string ), $this->debug );
 	}
 
 	public function firstCharToUpper() {
-		return new String( ucfirst( $this->string ) );
+		return new String( ucfirst( $this->string ), $this->debug );
 	}
 
 	public function getLength() {
@@ -236,23 +237,23 @@ class String extends Object {
 	}
 
 	public function ltrim( $chars = '\t\n\r\0\x0B' ) {
-		return new String( ltrim( $this->string, $chars ) );
+		return new String( ltrim( $this->string, $chars ), $this->debug );
 	}
 
 	public function nl2br( $is_xhtml = NULL ) {
 		if ( !is_null( $is_xhtml || !is_bool( $is_xhtml ) ) ) throw new IllegalArgumentException();
 
-		return new String( nl2br( $this->string, $is_xhtml ) );
+		return new String( nl2br( $this->string, $is_xhtml ), $this->debug );
 	}
 
 	public function printf( $args = NULL ) {
 		$args = new String( $args );
 
-		return new String( printf( $this->string, $args ) );
+		return new String( printf( $this->string, $args ), $this->debug );
 	}
 
 	public final function removeHTMLTags( $allowable_tags = NULL ) {
-		return new String( strip_tags( $this->string, $allowable_tags ) );
+		return new String( strip_tags( $this->string, $allowable_tags ), $this->debug );
 	}
 
 	public function removeSlashes() {
@@ -260,25 +261,26 @@ class String extends Object {
 	}
 
 	public function repeat( $multiplier ) {
-		return new String( str_repeat( $this->string, max( 0, $multiplier ) ) );
+		return new String( str_repeat( $this->string, max( 0, $multiplier ) ), $this->debug );
 	}
 
 	public function replace( $what, $to ) {
-		return new String( str_replace( (string) $what, (string) $to, $this->string ) );
+		return new String( str_replace( (string) $what, (string) $to, $this->string ), $this->debug );
 	}
 
 	public function replaceRE( $what, $to ) {
-		return new String( preg_replace( '#' . preg_quote( (string) $what, '#' ) . '#', (string) $to, $this->string ) );
+		return new String( preg_replace( '#' . preg_quote( (string) $what, '#' ) . '#', (string) $to, $this->string ),
+			$this->debug );
 	}
 
 	public function reverse() {
-		return new String( strrev( $this->string ) );
+		return new String( strrev( $this->string ), $this->debug );
 	}
 
 	// http://php.net/manual/en/function.nl2br.php
 
 	public function rtrim( $chars = '\t\n\r\0\x0B' ) {
-		return new String( rtrim( $this->string, $chars ) );
+		return new String( rtrim( $this->string, $chars ), $this->debug );
 	}
 
 	public function setStringFromArray( array &$array ) {
@@ -290,7 +292,7 @@ class String extends Object {
 	public function sprintf( $format ) {
 		$format = new String( $format );
 
-		return new String( sprintf( $this->string, $format ) );
+		return new String( sprintf( $this->string, $format ), $this->debug );
 	}
 
 	public function starts( $string ) {
@@ -302,7 +304,7 @@ class String extends Object {
 			( $end > mb_strlen( $this->string, 'UTF-8' ) && $end != NULL )
 		) throw new IllegalArgumentException();
 
-		return new String( mb_substr( $this->string, $start, $end, 'UTF-8' ) );
+		return new String( mb_substr( $this->string, $start, $end, 'UTF-8' ), $this->debug );
 	}
 
 	public function toCharArray() {
@@ -316,18 +318,18 @@ class String extends Object {
 	}
 
 	public function toLowerCase() {
-		return new String( mb_strtolower( $this->string ) );
+		return new String( mb_strtolower( $this->string ), $this->debug );
 	}
 
 	public function toUpperCase() {
-		return new String( mb_strtoupper( $this->string, 'UTF-8' ) );
+		return new String( mb_strtoupper( $this->string, 'UTF-8' ), $this->debug );
 	}
 
 	public function trim( $chars = '\t\n\r\0\x0B' ) {
-		return new String( trim( $this->string, $chars ) );
+		return new String( trim( $this->string, $chars ), $this->debug );
 	}
 
 	public function wordsCount() {
-		return new String( str_word_count( $this->string ) );
+		return new String( str_word_count( $this->string ), $this->debug );
 	}
 }

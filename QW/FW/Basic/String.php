@@ -252,9 +252,7 @@ class String extends Object {
 		return new String( printf( $this->string, $args ) );
 	}
 
-	public
-
-	final function removeHTMLTags( $allowable_tags = NULL ) {
+	public final function removeHTMLTags( $allowable_tags = NULL ) {
 		return new String( strip_tags( $this->string, $allowable_tags ) );
 	}
 

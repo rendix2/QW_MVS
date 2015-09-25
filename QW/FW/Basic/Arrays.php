@@ -132,7 +132,7 @@ class Arrays extends Object implements \ArrayAccess {
 	}
 
 	public function sort() {
-		$obj = new QuickSort( $this->data );
+		$obj = new QuickSort( $this->data, $this->debug );
 
 		return $obj->getArray();
 	}

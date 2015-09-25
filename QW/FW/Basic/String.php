@@ -72,7 +72,7 @@ class String extends Object {
 		$cs2       = [ ];
 		$cs2Length = count( $cs2 );
 
-		for ( $i = 0; $i < $cs2; $i++ ) {
+		for ( $i = 0; $i < $cs2Length; $i++ ) {
 			$cs2[ $i ] = $cs[ $i * 2 + 1 ];
 		}
 

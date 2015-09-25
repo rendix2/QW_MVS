@@ -2,6 +2,7 @@
 namespace QW\Models;
 
 use QW\FW\Architecture\MVC\AbstractBasicModel;
+use QW\FW\Basic\String;
 
 final class IndexModel extends AbstractBasicModel {
 	public function __construct( $debug = FALSE ) {
@@ -13,6 +14,10 @@ final class IndexModel extends AbstractBasicModel {
 	}
 
 	public function index() {
+
+		$z = new String( "awrkajakawda" );
+		echo $z->getLongestPalindromeManacher();
+
 		$this->getDB()
 			->query( 'SELECT user_name FROM users LIMIT 50;', [ ] );
 

@@ -23,10 +23,20 @@ abstract class AbstractIP extends Object implements IP {
 		if ( !Validator::validateIpUsingFilter( $ip ) ) throw new IllegalArgumentException();
 		if ( !is_bool( $safeMode ) ) throw new IllegalArgumentException();
 
-		$this->ipCoded  = ip2long( $ip );
-		$this->ipParted    = explode( '.', $ip );
+
+		if ( Validator::validateIPv4UsingFilter( $ip ) ) {
+			$this->ipCoded  = ip2long( $ip );
+			$this->ipParted = explode( '.', $ip );
+		}
+		else {
+			$this->ipCoded  = self::ip2long6( $ip );
+			$this->ipParted = explode( '.', $ip );
+		}
+
 		$this->ipCountPart = count( $this->ipParted );
 		$this->safeMode = $safeMode;
+
+		print_r( $this->ipParted );
 	}
 
 	public function __destruct() {
@@ -42,8 +52,41 @@ abstract class AbstractIP extends Object implements IP {
 			->getString() : $this->getIp();
 	}
 
+	public static function ip2long6( $ipv6 ) {
+		$ip_n = inet_pton( $ipv6 );
+		$bits = 15; // 16 x 8 bit = 128bit
+		while ( $bits >= 0 ) {
+			$bin      = sprintf( "%08b", ( ord( $ip_n[ $bits ] ) ) );
+			$ipv6long = $bin . $ipv6long;
+			$bits--;
+		}
+
+		return gmp_strval( gmp_init( $ipv6long, 2 ), 10 );
+	}
+
+	public static function long2ip6( $ipv6long ) {
+
+		$bin = gmp_strval( gmp_init( $ipv6long, 10 ), 2 );
+		if ( strlen( $bin ) < 128 ) {
+			$pad = 128 - strlen( $bin );
+			for ( $i = 1; $i <= $pad; $i++ ) {
+				$bin = "0" . $bin;
+			}
+		}
+		$bits = 0;
+		while ( $bits <= 7 ) {
+			$bin_part = substr( $bin, ( $bits * 16 ), 16 );
+			$ipv6 .= dechex( bindec( $bin_part ) ) . ":";
+			$bits++;
+		}
+
+		// compress
+
+		return inet_ntop( inet_pton( substr( $ipv6, 0, -1 ) ) );
+	}
+
 	final public function getIp() {
-		return long2ip( $this->ipCoded );
+		return $this->ipCountPart == 4 ? long2ip( $this->ipCoded ) : self::long2ip6( $this->ipCoded );
 	}
 
 	final protected function getIpCountPart() {
@@ -57,4 +100,6 @@ abstract class AbstractIP extends Object implements IP {
 	public function getPart( $part ) {
 		if ( !is_numeric( $part ) ) throw new IllegalArgumentException();
 	}
+
+
 }

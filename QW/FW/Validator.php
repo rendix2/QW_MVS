@@ -55,6 +55,16 @@ final class Validator {
 	// Jakub Vrana php.vrana.cz
 	// Looks very pretty and easy
 
+	public static function validateIPv4UsingFilter( $ip ) {
+		return filter_var( $ip, FILTER_VALIDATE_IP,
+			FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
+	}
+
+	public static function validateIPv6UsingFilter( $ip ) {
+		return filter_var( $ip, FILTER_VALIDATE_IP,
+			FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
+	}
+
 	public static function validateIpUsingFilter( $ip ) {
 		return filter_var( $ip, FILTER_VALIDATE_IP,
 			FILTER_FLAG_IPV6 | FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );

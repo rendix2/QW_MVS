@@ -2,6 +2,7 @@
 
 namespace QW\FW\IP;
 
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\UnsupportedOperationException;
 
 class IPvU extends AbstractIP {
@@ -11,16 +12,13 @@ class IPvU extends AbstractIP {
 		throw new UnsupportedOperationException();
 		parent::__construct( $ip );
 
-
 		// IPv4
 		if ( $this->getIpCountPart() == 4 ) $this->IPv = new IPv4( $ip, $safeMode, $debug );
-		else ;/*
 		// IPv6
-		else if ( $this->getIpCountPart() == 6 ) $this->IPv = new IPv6( $ip, $safeMode, $debug );
+		else if ( $this->getIpCountPart() == 8 ) $this->IPv = new IPv6( $ip, $safeMode, $debug );
 		else throw new IllegalArgumentException();
 
 		$this->ipCoded = ip2long( $ip );
-*/
 	}
 
 	public function __destruct() {

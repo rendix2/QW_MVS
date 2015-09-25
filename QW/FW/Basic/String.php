@@ -203,7 +203,7 @@ class String extends Object {
 
 		$ss = Arrays::copyOfRange( $s2, $c - $len, $c + $len + 1 );
 
-		return self::charArrayToString( self::removeBoundaries( $ss ) );
+		return self::arrayToString( self::removeBoundaries( $ss ) );
 	}
 
 	public function getMatches() {

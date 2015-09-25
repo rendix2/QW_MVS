@@ -34,7 +34,7 @@ class String extends Object {
 		return new String( self::array2String( $array ) );
 	}
 
-	private static function addBoundaries( $cs ) {
+	private static function addBoundaries( array $cs ) {
 		if ( $cs == NULL || count( $cs ) == 0 ) {
 			$ret = new String( '||' );
 
@@ -62,7 +62,7 @@ class String extends Object {
 		return $string;
 	}
 
-	private static function removeBoundaries( $cs ) {
+	private static function removeBoundaries( array $cs ) {
 		if ( $cs == NULL || count( $cs ) < 3 ) {
 			$ret = new String( "" );
 

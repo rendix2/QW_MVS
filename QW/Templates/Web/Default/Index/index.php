@@ -9,6 +9,7 @@ echo \QW\Libs\Config::URL ?>/ImageShow.php"/>
 
 <?php
 
+
 foreach ( $this->getTableData() as $row ) {
     echo $row[ 'user_name' ] . "<br>\n";
 }

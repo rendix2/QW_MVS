@@ -44,8 +44,16 @@ final class Color extends Object {
 		return $this->blue;
 	}
 
+	public function getBlueHexa() {
+		return Math::decimalToHexadecimal( $this->blue );
+	}
+
 	public function getGreen() {
 		return $this->green;
+	}
+
+	public function getGreenHexa() {
+		return Math::decimalToHexadecimal( $this->green );
 	}
 
 	public function getRGB() {
@@ -55,5 +63,9 @@ final class Color extends Object {
 
 	public function getRed() {
 		return $this->red;
+	}
+
+	public function getRedHexa() {
+		return Math::decimalToHexadecimal( $this->red );
 	}
 }

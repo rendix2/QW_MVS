@@ -35,7 +35,7 @@ class Logger extends Object {
 				throw new IllegalArgumentException();
 		}
 
-		$this->file = new File( $this->path, TRUE );
+		$this->file = new File( $this->path, TRUE, $debug );
 	}
 
 	public function __destruct() {

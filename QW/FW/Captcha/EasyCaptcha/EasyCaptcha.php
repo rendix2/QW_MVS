@@ -9,6 +9,7 @@ use QW\FW\Hash\Hash;
 use QW\FW\Images\Images;
 use QW\FW\Math\Math;
 use QW\FW\Paint\Color;
+use QW\FW\Paint\Point;
 
 class EasyCaptcha extends Object {
 
@@ -25,7 +26,7 @@ class EasyCaptcha extends Object {
 		$this->captcha->setTextColor( new Color( 255, 255, 255 ) );
 		$string     = new String( Hash::r() );
 		$this->text = $string->subString( 0, Math::randomInterval( 6, 8 ) );
-		$this->captcha->setTextHorizontally( Math::randomInterval( 2, 6 ), 0, 0, $this->text );
+		$this->captcha->setText( Math::randomInterval( 2, 6 ), new Point( 0, 0 ), $string, FALSE );
 	}
 
 	public function __destruct() {

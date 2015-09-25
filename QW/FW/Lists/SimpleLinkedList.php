@@ -10,7 +10,7 @@ class SimpleLinkedList extends AbstractList {
 
 	public function __construct( $data = NULL, $type = NULL, $debug = FALSE ) {
 		parent::__construct( $data, $debug );
-		$this->last = new Node( $data );
+		$this->last = new Node( $data, NULL, $debug );
 	}
 
 	public function __destruct() {
@@ -32,7 +32,7 @@ class SimpleLinkedList extends AbstractList {
 
 		while ( $current->getNextNode() != NULL ) $current = $current->getNextNode();
 
-		$current->setNextNode( new Node( $data ) );
+		$current->setNextNode( new Node( $data, NULL, $this->debug ) );
 		$this->size++;
 
 		return TRUE;

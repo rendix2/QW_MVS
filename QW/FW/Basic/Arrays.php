@@ -29,27 +29,52 @@ class Arrays extends Object implements \ArrayAccess {
 		$this->size = NULL;
 	}
 
+	function __isset( $name ) {
+		return isset( $this->data[ $name ] );
+	}
+
 	public function __toString() {
 		return '[ <b>' . implode( '</b>, <b>', $this->data ) . '</b> ]';
+	}
+
+	function __unset( $name ) {
+		unset ( $this->data[ $name ] );
+		$this->size--;
 	}
 
 	public static function copyOfRange( &$array, $start, $end ) {
 		$arrayNew = [ ];
 
-		for ( $i = $start; $i < $end; $i++ ) {
-			$arrayNew[] = $array[ $i ];
-		}
-
+		for ( $i = $start; $i < $end; $i++ ) $arrayNew[] = $array[ $i ];
 		return $arrayNew;
 	}
 
+	public function add( $data ) {
+		$this->data[] = $data;
+		$this->size++;
+	}
+
 	public function contains( $value ) {
+		if ( $this->size == 0 ) FALSE;
 		foreach ( $this->data as $v ) if ( $v == $value ) return TRUE;
+
 		return FALSE;
 	}
 
 	public function fill( $value ) {
 		foreach ( $this->data as $k => $v ) $this->data[ $k ] = $value;
+	}
+
+	public function getFirst() {
+		if ( $this->size == 0 ) throw new IllegalArgumentException();
+
+		return $this->data[ 0 ];
+	}
+
+	public function getLast() {
+		if ( $this->size == 0 ) throw new IllegalArgumentException();
+
+		return $this->data[ $this->size - 1 ];
 	}
 
 	public function getSize() {
@@ -72,7 +97,7 @@ class Arrays extends Object implements \ArrayAccess {
 	}
 
 	public function offsetGet( $offset ) {
-		if ( $this->size == 0 ) throw new RuntimeException();
+		if ( $this->size == 0 || $offset > $this->size ) throw new RuntimeException();
 		if ( $this->keyExists( $offset ) ) return $this->data[ $offset ];
 		throw new IllegalArgumentException();
 	}
@@ -84,12 +109,21 @@ class Arrays extends Object implements \ArrayAccess {
 	}
 
 	public function offsetUnset( $offset ) {
-		if ( $this->size == 0 ) throw new RuntimeException();
+		if ( $this->size == 0 || $offset > $this->size ) throw new RuntimeException();
 		if ( $this->keyExists( $offset ) ) {
 			unset( $this->data[ $offset ] );
 			$this->size--;
 		}
 		throw new IllegalArgumentException();
+	}
+
+	public function remove( $index ) {
+		if ( $index > $this->size ) throw new IllegalArgumentException();
+
+		for ( $i = $index + 1; $i < $this->size; $i++ ) $this->data[ $i - 1 ] = $this->data[ $i ];
+
+		unset( $this->data[ $this->size - 1 ] );
+		$this->size--;
 	}
 
 	public function removeAll() {
@@ -99,6 +133,7 @@ class Arrays extends Object implements \ArrayAccess {
 
 	public function sort() {
 		$obj = new QuickSort( $this->data );
+
 		return $obj->getArray();
 	}
 }

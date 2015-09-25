@@ -15,7 +15,7 @@ final class IndexModel extends AbstractBasicModel {
 
 	public function index() {
 
-		$z = new String( "wawadgrakajakawd" );
+		$z = new String( "akajak" );
 
 		echo 'Text:<b>' . $z . '</b><br>Longest palindrome using Manachers algorithm: <b>' .
 			$z->getLongestPalindromeManacher() . '</b>';

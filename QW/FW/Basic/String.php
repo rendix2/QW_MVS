@@ -149,6 +149,8 @@ class String extends Object {
 	}
 
 	public function getLongestPalindromeManacher() {
+		if ( $this->isPalindrome() ) return $this;
+
 		$s2       = self::addBoundaries( $this->toCharArray() );
 		$s2Length = count( $s2 );
 		$p        = [ ];

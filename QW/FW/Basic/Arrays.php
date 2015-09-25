@@ -33,6 +33,16 @@ class Arrays extends Object implements \ArrayAccess {
 		return '[ ' . implode( ', ', $this->data ) . ' ]';
 	}
 
+	public static function copyOfRange( &$array, $start, $end ) {
+		$arrayNew = [ ];
+
+		for ( $i = $start; $i < $end; $i++ ) {
+			$arrayNew[] = $array[ $i ];
+		}
+
+		return $arrayNew;
+	}
+
 	public function contains( $value ) {
 		foreach ( $this->data as $v ) if ( $v == $value ) return TRUE;
 		return FALSE;

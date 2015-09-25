@@ -127,6 +127,11 @@ class String extends Object {
 		return empty( $this->string );
 	}
 
+	public function isPalindrome() {
+		return $this->reverse()
+		            ->getString() == $this->getString();
+	}
+
 	public function ltrim( $chars = '\t\n\r\0\x0B' ) {
 		return new String( ltrim( $this->string, $chars ) );
 	}
@@ -155,13 +160,18 @@ class String extends Object {
 		return new String( str_repeat( $this->string, max( 0, $multiplier ) ) );
 	}
 
-	// http://php.net/manual/en/function.nl2br.php
 	public function replace( $what, $to ) {
 		return new String( str_replace( (string) $what, (string) $to, $this->string ) );
 	}
 
+	// http://php.net/manual/en/function.nl2br.php
+
 	public function replaceRE( $what, $to ) {
 		return new String( preg_replace( '#' . preg_quote( (string) $what, '#' ) . '#', (string) $to, $this->string ) );
+	}
+
+	public function reverse() {
+		return new String( strrev( $this->string ) );
 	}
 
 	public function rtrim( $chars = '\t\n\r\0\x0B' ) {

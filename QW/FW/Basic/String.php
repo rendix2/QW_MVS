@@ -30,9 +30,13 @@ class String extends Object {
 		return $this->string;
 	}
 
+	public static function ArrayToString( array &$array ) {
+		return new String( self::array2String( $array ) );
+	}
+
 	private static function addBoundaries( $cs ) {
 		if ( $cs == NULL || count( $cs ) == 0 ) {
-			$ret = new String( '||' )
+			$ret = new String( '||' );
 			return $ret->toCharArray();
 		}
 		$cs2       = [ ];
@@ -48,13 +52,13 @@ class String extends Object {
 		return $cs2;
 	}
 
-	public static function charArrayToString( array &$array ) {
+	private static function array2String( array &$array ) {
 		$string = "";
 		foreach ( $array as $v ) {
 			$string .= $v;
 		}
 
-		return new String( $string );
+		return $string;
 	}
 
 	private static function removeBoundaries( $cs ) {
@@ -269,14 +273,20 @@ class String extends Object {
 		return new String( preg_replace( '#' . preg_quote( (string) $what, '#' ) . '#', (string) $to, $this->string ) );
 	}
 
-	// http://php.net/manual/en/function.nl2br.php
-
 	public function reverse() {
 		return new String( strrev( $this->string ) );
 	}
 
+	// http://php.net/manual/en/function.nl2br.php
+
 	public function rtrim( $chars = '\t\n\r\0\x0B' ) {
 		return new String( rtrim( $this->string, $chars ) );
+	}
+
+	public function setStringFromArray( array &$array ) {
+		$this->string = self::array2String( $array );
+
+		return $this;
 	}
 
 	public function sprintf( $format ) {

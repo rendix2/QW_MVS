@@ -15,7 +15,7 @@ final class Server extends SuperGlobals implements ISG {
 		$k = strtoupper( $k );
 		if ( self::$magicQuotes ) $k = stripslashes( $k );
 
-		$result = isset( $_COOKIE[ $k ] ) ? $_COOKIE[ $k ] : FALSE;;
+		$result = isset( $_SERVER[ $k ] ) ? $_SERVER[ $k ] : FALSE;;
 
 		if ( self::$magicQuotes && !$result ) $result = stripslashes( $result );
 

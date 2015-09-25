@@ -4,8 +4,7 @@ namespace QW\FW\IP;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
-use QW\FW\Boot\NullPointerException;
-use QW\FW\Validator;
+use QW\FW\SuperGlobals\Server;
 
 abstract class AbstractIP extends Object implements IP {
 	protected $ipParted;
@@ -18,10 +17,10 @@ abstract class AbstractIP extends Object implements IP {
 	public function __construct( $ip, $safeMode = TRUE, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( $ip == NULL ) throw new NullPointerException();
+		if ( $ip == NULL ) echo $ip = Server::get( 'remote_addr' );
 		if ( is_numeric( $ip ) ) $ip = long2ip( $ip );
-		if ( !Validator::validateIpUsingFilter( $ip ) ) throw new IllegalArgumentException();
-		if ( !is_bool( $safeMode ) ) throw new IllegalArgumentException();
+//		if ( !Validator::validateIpUsingFilter( $ip ) ) throw new IllegalArgumentException();
+//		if ( !is_bool( $safeMode ) ) throw new IllegalArgumentException();
 
 		$this->ipParted    = explode( '.', $ip );
 		$this->ipCountPart = count( $this->ipParted );

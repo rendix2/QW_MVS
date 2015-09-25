@@ -3,6 +3,7 @@ namespace QW\Models;
 
 use QW\FW\Architecture\MVC\AbstractBasicModel;
 use QW\FW\Basic\String;
+use QW\FW\IP\IPv4;
 
 final class IndexModel extends AbstractBasicModel {
 	public function __construct( $debug = FALSE ) {
@@ -14,6 +15,11 @@ final class IndexModel extends AbstractBasicModel {
 	}
 
 	public function index() {
+
+		//$myIP = new IPv6("2001:4cfb:0000:0000:0000:0000:0123:4aab", TRUE);
+		$myIP = new IPv4( "1.2.3.4", TRUE );
+
+		echo 'MY IP:::::' . $myIP;
 
 		$z = new String( "aookkooa" );
 
@@ -31,4 +37,5 @@ final class IndexModel extends AbstractBasicModel {
 
 		return $res;
 	}
+
 }

@@ -37,7 +37,8 @@ abstract class AbstractIP extends Object implements IP {
 	}
 
 	public function __toString() {
-		return $this->safeMode == TRUE ? $this->getIp() : $this->getSecureIp();
+		return $this->safeMode == TRUE ? $this->getSecureIp()
+		                                      ->getString() : $this->getIp();
 	}
 
 	final public function getIp() {

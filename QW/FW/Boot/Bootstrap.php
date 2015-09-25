@@ -14,7 +14,6 @@ class Bootstrap extends AbstractRouter {
 		parent::__construct( $debug );
 
 		$this->setParams();
-
 		try {
 			if ( $this->noUrl() ) return FALSE;
 
@@ -54,6 +53,8 @@ class Bootstrap extends AbstractRouter {
 		$c = "\\QW\\Controllers\\" . $this->params[ 0 ] . 'Controller';
 
 		//require_once( './QW/Controllers/' . $this->params[ 0 ] . 'Controller.php' );
+
+		var_dump( $this->params[ 0 ] );
 
 		$this->controller = new $c( $this->params[ 0 ] );
 	}

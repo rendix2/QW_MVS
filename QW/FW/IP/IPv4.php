@@ -22,17 +22,19 @@ final class IPv4 extends AbstractIP {
 	public function getPart( $part ) {
 		parent::getPart( $part );
 
-		if ( $part < 1 || $part > 4 ) throw new IllegalArgumentException();
+		if ( $part < 0 || $part > 4 ) throw new IllegalArgumentException();
 
-		return $this->ipParted[ $part - 1 ];
+		return $this->ipParted[ $part ];
 	}
 
 	public function getSecureIp() {
-		$string = new String( '', $this->debug );
+		$string = new String( '' );
 
-		for ( $i = 1; $i <= 2; $i++ ) $string->concatPost( $this->getPart( $i ) );
-		$string->concatPost( 'XXX.YYY' );
+		for ( $i = 0; $i < 2; $i++ ) {
+			$string = $string->concatPost( (string) $this->getPart( $i ) );
+			$string = $string->concatPost( '.' );
+		}
 
-		return $string;
+		return $string = $string->concatPost( 'XXX.XXX' );
 	}
 }

@@ -19,6 +19,7 @@ abstract class AbstractBasicController extends Object {
 		$this->view     = new BasicView();
 		$this->model    = new $c();
 		$this->viewName = str_replace( 'Controller', '', $this->getClassName() );
+
 	}
 
 	public function __destruct() {

@@ -4,9 +4,11 @@ namespace QW\FW\IP;
 
 use QW\FW\Basic\String;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\UnsupportedOperationException;
 
 final class IPv6 extends AbstractIP {
 	public function __construct( $ip, $safeMode = TRUE, $debug = FALSE ) {
+		throw new UnsupportedOperationException();
 		parent::__construct( $ip, $safeMode, $debug );
 
 		// IPv6
@@ -22,17 +24,19 @@ final class IPv6 extends AbstractIP {
 	public function getPart( $part ) {
 		parent::getPart( $part );
 
-		if ( $part < 1 || $part > 6 ) throw new IllegalArgumentException();
+		if ( $part < 0 || $part > 6 ) throw new IllegalArgumentException();
 
-		return $this->ipParted[ $part - 1 ];
+		return $this->ipParted[ $part ];
 	}
 
 	public function getSecureIp() {
-		$string = new String( '', $this->debug );
+		$string = new String( '' );
 
-		for ( $i = 1; $i <= 4; $i++ ) $string->concatPost( $this->getPart( $i ) );
-		$string->concatPost( 'XXX.YYY' );
+		for ( $i = 0; $i < 4; $i++ ) {
+			$string = $string->concatPost( (string) $this->getPart( $i ) );
+			$string = $string->concatPost( '.' );
+		}
 
-		return $string;
+		return $string = $string->concatPost( 'XXX.XXX' );
 	}
 }

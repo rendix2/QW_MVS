@@ -10,7 +10,8 @@ final class IndexController extends AbstractBasicController {
 		parent::__construct( $name, $debug );
 
 		$this->getView()
-			->setPageName( "QW" );
+			->setPageName( "QWd" );
+
 	}
 
 	public function __destruct() {
@@ -18,6 +19,7 @@ final class IndexController extends AbstractBasicController {
 	}
 
 	public function index() {
+
 		$this->getView()
 			->setTableData( $this->getModel()
 			                     ->index() );

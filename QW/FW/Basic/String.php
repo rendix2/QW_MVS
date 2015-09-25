@@ -37,6 +37,7 @@ class String extends Object {
 	private static function addBoundaries( $cs ) {
 		if ( $cs == NULL || count( $cs ) == 0 ) {
 			$ret = new String( '||' );
+
 			return $ret->toCharArray();
 		}
 		$cs2       = [ ];

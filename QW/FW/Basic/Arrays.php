@@ -30,7 +30,7 @@ class Arrays extends Object implements \ArrayAccess {
 	}
 
 	public function __toString() {
-		return '[ ' . implode( ', ', $this->data ) . ' ]';
+		return '[ <b>' . implode( '</b>, <b>', $this->data ) . '</b> ]';
 	}
 
 	public static function copyOfRange( &$array, $start, $end ) {

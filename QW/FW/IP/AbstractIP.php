@@ -57,6 +57,18 @@ abstract class AbstractIP extends Object implements IP {
 		return inet_ntop( pack( "A16", $ip6 ) );
 	}
 
+	public static function isIP( $ip ) {
+		return Validator::validateIpUsingFilter( $ip );
+	}
+
+	public static function isIPv4( $ip ) {
+		return Validator::validateIPv4UsingFilter( $ip );
+	}
+
+	public static function isIPv6( $ip ) {
+		return Validator::validateIPv6UsingFilter( $ip );
+	}
+
 	public function getCoded() {
 		return $this->ipCoded;
 	}

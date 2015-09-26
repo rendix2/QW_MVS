@@ -18,11 +18,10 @@ abstract class AbstractIP extends Object implements IP {
 		parent::__construct( $debug );
 
 		if ( $ip == NULL ) $ip = Server::get( 'remote_addr' );
-		//if ( is_numeric( $ip ) ) $ip = long2ip( $ip );
-		if ( !Validator::validateIpUsingFilter( $ip ) ) throw new IllegalArgumentException();
+		if ( !self::isIP( $ip ) ) throw new IllegalArgumentException();
 		if ( !is_bool( $safeMode ) ) throw new IllegalArgumentException();
 
-		if ( Validator::validateIPv4UsingFilter( $ip ) ) {
+		if ( self::isIPv4( $ip ) ) {
 			$this->ipCoded  = ip2long( $ip );
 			$this->ipParted = explode( '.', $ip );
 		}
@@ -39,6 +38,7 @@ abstract class AbstractIP extends Object implements IP {
 		$this->ipParted    = NULL;
 		$this->ipCoded     = NULL;
 		$this->ipCountPart = NULL;
+		$this->safeMode = NULL;
 
 		parent::__destruct();
 	}
@@ -48,27 +48,27 @@ abstract class AbstractIP extends Object implements IP {
 			->getString() : (string) $this->getIp();
 	}
 
-	public static function ip6pack( $ip6 ) {
+	final public static function ip6pack( $ip6 ) {
 		return current( unpack( "A16", inet_pton( $ip6 ) ) );
 	}
 
-	public static function ip6unpack( $ip6 ) {
+	final public static function ip6unpack( $ip6 ) {
 		return inet_ntop( pack( "A16", $ip6 ) );
 	}
 
-	public static function isIP( $ip ) {
+	final public static function isIP( $ip ) {
 		return Validator::validateIpUsingFilter( $ip );
 	}
 
-	public static function isIPv4( $ip ) {
+	final public static function isIPv4( $ip ) {
 		return Validator::validateIPv4UsingFilter( $ip );
 	}
 
-	public static function isIPv6( $ip ) {
+	final public static function isIPv6( $ip ) {
 		return Validator::validateIPv6UsingFilter( $ip );
 	}
 
-	public function getCoded() {
+	final public function getCoded() {
 		return $this->ipCoded;
 	}
 

@@ -56,17 +56,17 @@ class BlackList extends Object {
 	public function deleteIp( IP $ip = NULL ) {
 		if ( $ip == NULL ) throw new NullPointerException();
 
-		foreach ( $this->longOfIP as $k => $v ) if ( $v->getLong() == $ip->getLong() ) unset( $this->longOfIP[ $k ] );
+		foreach ( $this->longOfIP as $k => $v ) if ( $v->getLong() == $ip->getCoded() ) unset( $this->longOfIP[ $k ] );
 	}
 
 	public function deleteLong( IP $ip = NULL ) {
 		if ( $ip == NULL ) throw new NullPointerException();
 
-		foreach ( $this->longOfIP as $k => $v ) if ( $v->getLong() == $ip->getLong() ) unset( $this->longOfIP[ $k ] );
+		foreach ( $this->longOfIP as $k => $v ) if ( $v->getLong() == $ip->getCoded() ) unset( $this->longOfIP[ $k ] );
 	}
 
 	public function run() {
 		foreach ( $this->longOfIP as $ip )
-			if ( $ip->getLong() == $this->myIp->getLong() ) die( 'Your IP as blacklisted.' );
+			if ( $ip->getLong() == $this->myIp->getCoded() ) die( 'Your IP as blacklisted.' );
 	}
 }

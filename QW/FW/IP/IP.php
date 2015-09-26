@@ -3,9 +3,9 @@
 namespace QW\FW\IP;
 
 interface IP {
-	public function getIP();
+	public function getCoded();
 
-	public function getLong();
+	public function getIP();
 
 	public function getPart( $part );
 

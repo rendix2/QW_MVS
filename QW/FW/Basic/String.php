@@ -81,6 +81,7 @@ class String extends Object {
 		return new String( addslashes( $this->string ), $this->debug );
 	}
 
+	// http://php.net/manual/en/function.nl2br.php
 	public function br2nl( $separator = PHP_EOL ) {
 		$separator = in_array( $separator, self::$separators ) ? $separator : PHP_EOL;
 
@@ -281,7 +282,6 @@ class String extends Object {
 		return new String( strrev( $this->string ), $this->debug );
 	}
 
-	// http://php.net/manual/en/function.nl2br.php
 
 	public function rtrim( $chars = '\t\n\r\0\x0B' ) {
 		return new String( rtrim( $this->string, $chars ), $this->debug );

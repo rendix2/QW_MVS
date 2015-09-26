@@ -14,10 +14,6 @@ abstract class AbstractIP extends Object implements IP {
 	protected $ipCountPart;
 	protected $safeMode;
 
-	abstract public function getNiceIp();
-
-	abstract public function getSecureIp();
-
 	public function __construct( $ip, $safeMode = TRUE, $debug = FALSE ) {
 		parent::__construct( $debug );
 

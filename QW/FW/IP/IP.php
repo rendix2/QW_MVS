@@ -7,6 +7,10 @@ interface IP {
 
 	public function getIP();
 
+	public function getNiceIp();
+
 	public function getPart( $part );
+
+	public function getSecureIp();
 
 }

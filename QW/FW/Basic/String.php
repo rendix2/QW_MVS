@@ -246,6 +246,10 @@ class String extends Object {
 		return new String( nl2br( $this->string, $is_xhtml ), $this->debug );
 	}
 
+	public function pad( $length, $padString, $padType ) {
+		return new String( str_pad( $this->string, $length, $padString, $padType ), $this->debug );
+	}
+
 	public function printf( $args = NULL ) {
 		$args = new String( $args );
 

@@ -15,6 +15,10 @@ final class IPv4 extends AbstractIP {
 		parent::__destruct();
 	}
 
+	public function getNiceIp() {
+		return $this->getIp();
+	}
+
 	public function getPart( $part ) {
 		if ( !is_numeric( $part ) || $part < 0 || $part > 4 ) throw new IllegalArgumentException();
 

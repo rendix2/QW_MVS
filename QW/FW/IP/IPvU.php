@@ -23,6 +23,10 @@ class IPvU extends AbstractIP {
 		return $this->IPv->getLong();
 	}
 
+	public function getNiceIp() {
+		return $this->IPv->getNiceIp();
+	}
+
 	public function getPart( $part ) {
 		return $this->IPv->getPart( $part );
 	}

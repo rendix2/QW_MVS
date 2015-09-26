@@ -17,12 +17,15 @@ final class IndexModel extends AbstractBasicModel {
 
 	public function index() {
 
+		$ipString = '2001:4cfb:bfc4:0000:0000:0000:0123:4aab';
+
 		$myIP = new IPv6( "2001:4cfb:0000:0000:0000:0000:0123:4aab", FALSE, $this->debug );
 		//$myIP = new IPv4( '1.2.3.4', TRUE, $this->debug );
-		$myIP = new IPvU( "2001:4cfb:0000:0000:0000:0000:0123:4aab", FALSE, $this->debug );
+		$myIP = new IPvU( $ipString, FALSE, $this->debug );
 		//$myIP = new IPvU( "1.2.3.4", FALSE, $this->debug );
 
-		echo 'MY IP=' . $myIP . '<br>';
+		echo ' IPString=' . $ipString . '<br>';
+		echo 'MY IP=' . $myIP->getNiceIP() . '<br>';
 
 		$z = new String( "aookkooa", $this->debug );
 

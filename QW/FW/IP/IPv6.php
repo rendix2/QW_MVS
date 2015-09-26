@@ -15,8 +15,26 @@ final class IPv6 extends AbstractIP {
 		parent::__destruct();
 	}
 
+	public function getNiceIp() {
+		$str = new String( '', $this->debug );
+
+		for ( $i = 0; $i < 8; $i++ ) {
+			$substr = new String( $this->getPart( $i ), $this->debug );
+			$substr = $substr->pad( 4, '0', STR_PAD_LEFT );
+
+			if ( $substr->getLength() != 4 ) $str = $str->concatPostString( $substr );
+			else $str = $str->concatPost( $substr->getString() )
+			                ->concatPost( ':' );
+		}
+
+		return $str->subString( 0, $str->getLength() - 1 )
+		           ->getString();
+
+	}
+
 	public function getPart( $part ) {
 		if ( !is_numeric( $part ) || $part < 0 || $part > 8 ) throw new IllegalArgumentException();
+
 		return $this->ipParted[ $part ];
 	}
 

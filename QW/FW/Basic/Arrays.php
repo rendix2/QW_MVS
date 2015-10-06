@@ -46,6 +46,7 @@ class Arrays extends Object implements \ArrayAccess {
 		$arrayNew = [ ];
 
 		for ( $i = $start; $i < $end; $i++ ) $arrayNew[] = $array[ $i ];
+
 		return $arrayNew;
 	}
 

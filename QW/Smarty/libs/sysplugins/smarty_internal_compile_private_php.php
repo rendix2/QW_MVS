@@ -178,7 +178,7 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase {
 					$body = FALSE;
 				}
 				else {
-					$start         = $pos + strlen( $value );
+					$start = $pos + strlen( $value );
 					$phpCommentStart = $value == '/*';
 					if ( $phpCommentStart ) {
 						$phpCommentEnd = preg_match( '~([*][/])~', $lex->data, $match, PREG_OFFSET_CAPTURE, $start );

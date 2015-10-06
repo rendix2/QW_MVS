@@ -57,6 +57,7 @@ class String extends Object {
 	private static function array2String( array &$array ) {
 		$string = "";
 		foreach ( $array as $v ) $string .= $v;
+
 		return $string;
 	}
 

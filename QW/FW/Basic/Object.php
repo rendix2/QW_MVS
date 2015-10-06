@@ -69,12 +69,10 @@ abstract class Object {
 		$this->debug = NULL;
 	}
 
-
 	final public function __get( $name ) {
 		if ( !$this->propertyExists( $name ) ) throw new MemberAccessException( 'Non-existing property: <b>' .
 			$this->getClassName() . '</b>::$<b>' . (string) $name . '</b><br>' );
 	}
-
 
 	public function __toString() {
 		return '<br>I am: <b>' . $this->getClassName() .
@@ -130,6 +128,15 @@ abstract class Object {
 		$wholeName = explode( '\\', $this->getWholeClassName() );
 
 		return $wholeName[ count( $wholeName ) - 1 ];
+	}
+
+	public function getDebug() {
+		return $this->debug;
+	}
+
+	final public function setDebug( $debug ) {
+		if ( !is_bool( $debug ) ) throw new IllegalArgumentException();
+		$this->debug = $debug;
 	}
 
 	final protected function getExceptionName() {

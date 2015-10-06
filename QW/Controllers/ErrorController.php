@@ -9,11 +9,11 @@ final class ErrorController extends AbstractBasicController {
 		parent::__construct( $name, $debug );
 
 		$this->getView()
-			->setPageName( "Chyba" );
+		     ->setPageName( "Chyba" );
 	}
 
 	public function index() {
 		return $this->getView()
-			->render( $this->getViewName() . Config::SLASH . 'index' );
+		            ->render( $this->getViewName() . Config::SLASH . 'index' );
 	}
 }

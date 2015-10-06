@@ -1,9 +1,7 @@
 <?php
 
-namespace QW\Libs;
+namespace QW\FW\Architecture\MVC;
 
-
-use QW\FW\Architecture\MVC\BasicView;
 use QW\FW\Boot\IllegalArgumentException;
 
 class SmartyView extends BasicView {

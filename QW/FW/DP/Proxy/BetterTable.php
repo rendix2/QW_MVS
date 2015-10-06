@@ -19,20 +19,13 @@ class BetterTable implements Table {
 	}
 
 	public function read( $key ) {
-		if ( $this->canRead() ) {
-			$this->easyTable->read( $key );
-		}
-		else {
-			throw new \Exception( 'Access denied' );
-		}
+		if ( $this->canRead() ) $this->easyTable->read( $key );
+		else throw new \Exception( 'Access denied' );
 	}
 
 	public function write( $key, $value ) {
-		if ( $this->canWrite() ) {
-			$this->easyTable->write( $key, $value );
-		}
-		else {
-			throw new \Exception( 'Access denied' );
-		}
+		if ( $this->canWrite() ) $this->easyTable->write( $key, $value );
+		else throw new \Exception( 'Access denied' );
 	}
+}
 }

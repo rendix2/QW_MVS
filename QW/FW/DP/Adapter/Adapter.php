@@ -17,7 +17,6 @@ class Adapter implements Target {
 		$this->oldClass = new OldClass();
 	}
 
-
 	public function newRequest() {
 		return $this->oldClass->oldRequest();
 	}

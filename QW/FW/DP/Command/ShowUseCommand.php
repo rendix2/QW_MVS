@@ -8,8 +8,7 @@
 
 namespace QW\FW\DP\Command;
 
-
-use QW\FW\Basic\UnsupportedOperationException;
+use QW\FW\Boot\UnsupportedOperationException;
 
 class ShowUseCommand {
 

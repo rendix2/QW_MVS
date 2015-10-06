@@ -3,8 +3,9 @@ namespace QW\Models;
 
 use QW\FW\Architecture\MVC\AbstractBasicModel;
 use QW\FW\Basic\String;
-use QW\FW\IP\IPv6;
-use QW\FW\IP\IPvU;
+use QW\FW\Utils\IP\IPv6;
+use QW\FW\Utils\IP\IPvU;
+
 
 final class IndexModel extends AbstractBasicModel {
 	public function __construct( $debug = FALSE ) {

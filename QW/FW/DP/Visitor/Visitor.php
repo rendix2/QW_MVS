@@ -9,5 +9,4 @@ interface Visitor {
 	public function visitCinema( Cinema $cinema );
 
 	public function visitMuseum( Museum $museum );
-
 }

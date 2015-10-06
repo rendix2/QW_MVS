@@ -1,8 +1,8 @@
 <?php
 namespace QW\FW\DP\Decorator;
 
-use QW\FW\Basic\NullPointerException;
 use QW\FW\Basic\String;
+use QW\FW\Boot\NullPointerException;
 
 class PrinterWrapper {
 

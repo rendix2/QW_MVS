@@ -10,7 +10,7 @@ namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\RuntimeException;
-use QW\FW\Sort\QuickSort;
+use QW\FW\DataWorking\Sort\QuickSort;
 
 class Arrays extends Object implements \ArrayAccess {
 

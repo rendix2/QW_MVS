@@ -9,7 +9,7 @@ final class HelpController extends AbstractBasicController {
 		parent::__construct( $name, $debug );
 
 		$this->getView()
-			->setPageName( "Nápověda" );
+		     ->setPageName( "Nápověda" );
 	}
 
 	public function __destruct() {
@@ -19,11 +19,11 @@ final class HelpController extends AbstractBasicController {
 
 	public function index() {
 		return $this->getView()
-			->render( $this->getViewName() . Config::SLASH . 'index' );
+		            ->render( $this->getViewName() . Config::SLASH . 'index' );
 	}
 
 	public function index2( $int ) {
 		return $this->getView()
-			->render( $this->getViewName() . Config::SLASH . 'index' );
+		            ->render( $this->getViewName() . Config::SLASH . 'index' );
 	}
 }

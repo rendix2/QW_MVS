@@ -10,6 +10,7 @@ class PlusStrategy implements Strategy {
 		$times = Math::absoluteValue( $b );
 
 		for ( $i = 0; $i < $times; $i++ ) $a += $a;
+
 		return $b > 0 ? $a : -$a;
 	}
 }

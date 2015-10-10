@@ -1,1 +1,1 @@
-Toto je velice zavažná chyba
+Toto je velice zavažná chyba :O :(

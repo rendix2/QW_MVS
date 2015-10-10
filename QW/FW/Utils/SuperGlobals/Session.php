@@ -3,7 +3,7 @@
 namespace QW\FW\Utils\SuperGlobals;
 
 use QW\FW\Boot\PrivateConstructException;
-use QW\FW\Math\Math;
+use QW\FW\Utils\Math\Math;
 
 final class Session extends SuperGlobals implements ISG {
 	public function __construct() {

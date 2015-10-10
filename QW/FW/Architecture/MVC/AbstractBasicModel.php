@@ -2,7 +2,7 @@
 namespace QW\FW\Architecture\MVC;
 
 use QW\FW\Basic\Object;
-use QW\FW\Database\DatabaseMySQL;
+use QW\FW\DataStructures\Database\DatabaseMySQL;
 use QW\Libs\Config;
 
 abstract class AbstractBasicModel extends Object {

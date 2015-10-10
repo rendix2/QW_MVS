@@ -1,6 +1,7 @@
 <?php
 
-use QW\FW\Forms\FormCreator\FormCreatorHTML4;
+use QW\FW\Utils\SuperGlobals\Post;
+use QW\FW\WebDesign\Forms\FormCreator\FormCreatorHTML4;
 
 $z = new FormCreatorHTML4( 'POST', '' );
 $z->addInputText( 'name', 'jmeno' )
@@ -10,4 +11,4 @@ $z->addInputText( 'name', 'jmeno' )
 echo $z;
 
 $z = NULL;
-echo \QW\FW\SuperGlobals\Post::get( 'password' );
+echo Post::get( 'password' );

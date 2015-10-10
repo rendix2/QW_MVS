@@ -143,7 +143,7 @@ abstract class Object {
 		return $this->hasException() ? $this->getClassName() . 'Exception' : FALSE;
 	}
 
-	final private function getExecutionStack() {
+	final protected function getExecutionStack() {
 		print_r( debug_backtrace() );
 	}
 

@@ -65,6 +65,8 @@ abstract class AbstractRouter extends Object {
 				//$logger = new Logger( Logger::LOG_TYPE_FILE );
 				//$logger->log( $message );
 
+				self::getExecutionStack();
+
 				die( $message );
 			}
 

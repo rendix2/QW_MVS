@@ -50,6 +50,10 @@ class Arrays extends Object implements \ArrayAccess {
 		return $arrayNew;
 	}
 
+	public static function count( &$array ) {
+		return count( $array );
+	}
+
 	public function add( $data ) {
 		$this->data[] = $data;
 		$this->size++;

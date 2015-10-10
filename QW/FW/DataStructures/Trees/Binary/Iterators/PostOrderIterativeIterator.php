@@ -8,9 +8,9 @@ use QW\FW\DataStructures\Trees\Binary\BinaryTree;
 class PostOrderIterativeIterator extends AbstractBinaryTreeIterator {
 	private $stack;
 
-	public function __construct( BinaryTree $root ) {
+	public function __construct( BinaryTree $root, $debug = FALSE ) {
 		$this->stack = new \SplStack();
-		parent::__construct( $root );
+		parent::__construct( $root, $debug );
 	}
 
 	public function __destruct() {

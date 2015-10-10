@@ -6,10 +6,10 @@ use QW\FW\DataStructures\Trees\Nary\NaryTree;
 
 abstract class AbstractNaryTreeIterator extends AbstractTreeIterator {
 
-	abstract protected function order( NaryTree $root );
+	abstract protected function order( NaryTree $root = NULL );
 
-	public function __construct( NaryTree $root ) {
-		parent::__construct();
+	public function __construct( NaryTree $root, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		$this->realRoot = $root;
 		$this->order( $root );

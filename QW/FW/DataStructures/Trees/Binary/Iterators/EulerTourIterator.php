@@ -7,8 +7,8 @@ use QW\FW\DataStructures\Trees\Binary\BinaryTree;
 
 final class EulerTourIterator extends AbstractBinaryTreeIterator {
 
-	public function __construct( BinaryTree $root ) {
-		parent::__construct( $root );
+	public function __construct( BinaryTree $root, $debug = FALSE ) {
+		parent::__construct( $root, $debug );
 	}
 
 	public function __destruct() {
@@ -19,11 +19,8 @@ final class EulerTourIterator extends AbstractBinaryTreeIterator {
 		$this->finalData[] = $root->getData();
 
 		if ( $root->getLeftChild() != NULL ) $this->order( $root->getLeftChild() );
-
 		$this->finalData[] = $root->getData();
-
 		if ( $root->getRightChild() != NULL ) $this->order( $root->getRightChild() );
-
 		$this->finalData[] = $root->getData();
 	}
 }

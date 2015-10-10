@@ -6,8 +6,8 @@ use QW\FW\DataStructures\Trees\AbstractIterators\AbstractNaryTreeIterator;
 use QW\FW\DataStructures\Trees\Nary\NaryTree;
 
 class InOrderIterator extends AbstractNaryTreeIterator {
-	public final function __construct( NaryTree $root ) {
-		parent::__construct( $root );
+	public final function __construct( NaryTree $root, $debug = FALSE ) {
+		parent::__construct( $root, $debug );
 	}
 
 	public function __destruct() {

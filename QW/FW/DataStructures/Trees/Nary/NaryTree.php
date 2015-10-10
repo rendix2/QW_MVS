@@ -3,6 +3,7 @@
 namespace QW\FW\DataStructures\Trees\Nary;
 
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Boot\UnsupportedOperationException;
 use QW\FW\DataStructures\Trees\AbstractTree;
 use QW\FW\DataStructures\Trees\Nary\Iterators\CountIterator;
 use QW\FW\DataStructures\Trees\Nary\Iterators\EulerTourIterator;
@@ -15,14 +16,14 @@ final class NaryTree extends AbstractTree {
 
 	private $children;
 
-	public function __construct( array $children, $data ) {
-		parent::__construct();
-
-		$this->directChildrenCount = count( $this->children );
+	public function __construct( array $children, $data, $debug = FALSE ) {
+		parent::__construct( $debug );
 
 		// simulating array object type hinting :((
-		if ( $this->directChildrenCount ) foreach ( $children as $v )
-			if ( !( $v instanceof NaryTree ) ) throw new IllegalArgumentException();
+		if ( count( $children ) ) foreach ( $children as $v )
+			if ( $v instanceof NaryTree ) $this->directChildrenCount++;
+			else  throw new IllegalArgumentException();
+		else $this->directChildrenCount = 0;
 
 		$this->children = $children;
 		$this->data     = $data;
@@ -38,6 +39,7 @@ final class NaryTree extends AbstractTree {
 		$this->children[] = $naryTree;
 
 		if ( $naryTree != NULL ) $this->childrenCount++;
+		else $this->childrenCount = NULL;
 	}
 
 	public function getChild( $id ) {
@@ -51,36 +53,52 @@ final class NaryTree extends AbstractTree {
 	}
 
 	public function setChildren( array $children ) {
-		foreach ( $children as $v ) if ( !( $v instanceof NaryTree ) ) throw new IllegalArgumentException();
+		if ( count( $children ) >= 1 ) foreach ( $children as $v )
+			if ( !( $v instanceof NaryTree ) ) throw new IllegalArgumentException();
+			else $this->childrenCount = NULL;
 
 		$this->children            = $children;
 		$this->directChildrenCount = count( $children );
 	}
 
 	public function getChildrenCount() {
-		$its = new CountIterator( $this );
-		$this->childrenCount = $its->getCountChildren();
+		if ( $this->childrenCount == NULL ) {
+			$its = new CountIterator( $this, $this->debug );
 
-		parent::getChildrenCount();
+			return $this->childrenCount = $its->getCountChildren();
+		}
+		else return $this->childrenCount;
 	}
 
 	public function iteratorEulerTour() {
-		return new EulerTourIterator( $this );
+		return new EulerTourIterator( $this, $this->debug );
 	}
 
 	public function iteratorInOrderIterative() {
-		return new InOrderIterator( $this );
+		return new InOrderIterator( $this, $this->debug );
+	}
+
+	public function iteratorInOrderRecourse() {
+		throw new UnsupportedOperationException();
 	}
 
 	public function iteratorLevelOrder() {
-		return new LevelOrderIterator( $this );
+		return new LevelOrderIterator( $this, $this->debug );
 	}
 
 	public function iteratorPostOrderIterative() {
-		return new PostOrderIterator( $this );
+		return new PostOrderIterator( $this, $this->debug );
+	}
+
+	public function iteratorPostOrderRecourse() {
+		throw new UnsupportedOperationException();
 	}
 
 	public function iteratorPreOrderIterative() {
-		return new PreOrderIterator( $this );
+		return new PreOrderIterator( $this, $this->debug );
+	}
+
+	public function iteratorPreOrderRecourse() {
+		throw new UnsupportedOperationException();
 	}
 }

@@ -8,15 +8,23 @@ abstract class AbstractTree extends Object {
 
 	protected $data, $directChildrenCount, $childrenCount;
 
+	abstract public function getChildrenCount();
+
 	abstract public function iteratorEulerTour();
 
 	abstract public function iteratorInOrderIterative();
+
+	abstract public function iteratorInOrderRecourse();
 
 	abstract public function iteratorLevelOrder();
 
 	abstract public function iteratorPostOrderIterative();
 
+	abstract public function iteratorPostOrderRecourse();
+
 	abstract public function iteratorPreOrderIterative();
+
+	abstract public function iteratorPreOrderRecourse();
 
 	public function __construct( $debug = FALSE ) {
 		parent::__construct( $debug );
@@ -24,14 +32,10 @@ abstract class AbstractTree extends Object {
 
 	public function __destruct() {
 		$this->data                = NULL;
-		$this->directChildrenCount = NULL;
+		$this->childrenCount = NULL;
 		$this->directChildrenCount = NULL;
 
 		parent::__destruct();
-	}
-
-	public function getChildrenCount() {
-		return $this->directChildrenCount;
 	}
 
 	public function getData() {

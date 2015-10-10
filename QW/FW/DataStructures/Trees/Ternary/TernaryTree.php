@@ -2,7 +2,14 @@
 
 namespace QW\FW\DataStructures\Trees\Ternary;
 
+use QW\FW\Boot\UnsupportedOperationException;
 use QW\FW\DataStructures\Trees\AbstractTree;
+use QW\FW\DataStructures\Trees\Ternary\Iterators\CountIterator;
+use QW\FW\DataStructures\Trees\Ternary\Iterators\EulerTourIterator;
+use QW\FW\DataStructures\Trees\Ternary\Iterators\InOrderRecourseIterator;
+use QW\FW\DataStructures\Trees\Ternary\Iterators\LevelOrderIterator;
+use QW\FW\DataStructures\Trees\Ternary\Iterators\PostOrderRecourseIterator;
+use QW\FW\DataStructures\Trees\Ternary\Iterators\PreOrderRecourseIterator;
 
 class TernaryTree extends AbstractTree {
 
@@ -15,6 +22,10 @@ class TernaryTree extends AbstractTree {
 		$this->middle = $middle;
 		$this->right  = $right;
 		$this->data   = $data;
+
+		if ( $this->left != NULL ) $this->directChildrenCount++;
+		if ( $this->middle != NULL ) $this->directChildrenCount++;
+		if ( $this->right != NULL ) $this->directChildrenCount++;
 	}
 
 	public function __destruct() {
@@ -22,6 +33,15 @@ class TernaryTree extends AbstractTree {
 		$this->middle = NULL;
 		$this->right  = NULL;
 		$this->data   = NULL;
+	}
+
+	public function getChildrenCount() {
+		if ( $this->childrenCount == NULL ) {
+			$its = new CountIterator( $this, $this->debug );
+
+			return $this->childrenCount = $its->getCountChildren();
+		}
+		else return $this->childrenCount;
 	}
 
 	public function getLeftChild() {
@@ -37,34 +57,49 @@ class TernaryTree extends AbstractTree {
 	}
 
 	public function iteratorEulerTour() {
-		// TODO: Implement iteratorEulerTour() method.
+		return new EulerTourIterator( $this, $this->debug );
 	}
 
 	public function iteratorInOrderIterative() {
-		// TODO: Implement iteratorInOrderIterative() method.
+		throw new UnsupportedOperationException();
+	}
+
+	public function iteratorInOrderRecourse() {
+		return new InOrderRecourseIterator( $this, $this->debug );
 	}
 
 	public function iteratorLevelOrder() {
-		// TODO: Implement iteratorLevelOrder() method.
+		return new LevelOrderIterator( $this, $this->debug );
 	}
 
 	public function iteratorPostOrderIterative() {
-		// TODO: Implement iteratorPostOrderIterative() method.
+		throw new UnsupportedOperationException();
+	}
+
+	public function iteratorPostOrderRecourse() {
+		return new PostOrderRecourseIterator( $this, $this->debug );
 	}
 
 	public function iteratorPreOrderIterative() {
-		// TODO: Implement iteratorPreOrderIterative() method.
+		throw new UnsupportedOperationException();
 	}
 
-	public function setLeftChild( TernaryTree $left ) {
+	public function iteratorPreOrderRecourse() {
+		return new PreOrderRecourseIterator( $this, $this->debug );
+	}
+
+	public function setLeftChild( TernaryTree $left = NULL ) {
+		if ( $left == NULL ) $this->childrenCount = NULL;
 		$this->left = $left;
 	}
 
-	public function setMiddleChild( TernaryTree $middle ) {
+	public function setMiddleChild( TernaryTree $middle = NULL ) {
+		if ( $middle == NULL ) $this->childrenCount = NULL;
 		$this->middle = $middle;
 	}
 
-	public function setRightChild( TernaryTree $right ) {
+	public function setRightChild( TernaryTree $right = NULL ) {
+		if ( $right == NULL ) $this->childrenCount = NULL;
 		$this->right = $right;
 	}
 }

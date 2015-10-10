@@ -10,10 +10,9 @@ final class CountIterator extends AbstractBinaryTreeIterator {
 
 	private $countChildren;
 
-	public function __construct( BinaryTree $root ) {
+	public function __construct( BinaryTree $root, $debug = FALSE ) {
 		$this->countChildren = 0;
-
-		parent::__construct( $root );
+		parent::__construct( $root, $debug );
 	}
 
 	public function __destruct() {

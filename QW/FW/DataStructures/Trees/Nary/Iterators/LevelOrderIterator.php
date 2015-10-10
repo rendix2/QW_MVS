@@ -9,9 +9,9 @@ class LevelOrderIterator extends AbstractNaryTreeIterator {
 
 	private $queue;
 
-	public function __construct( NaryTree $root ) {
+	public function __construct( NaryTree $root, $debug = FALSE ) {
 		$this->queue = new \SplQueue();
-		parent::__construct( $root );
+		parent::__construct( $root, $debug );
 	}
 
 	public function __destruct() {

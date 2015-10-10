@@ -3,12 +3,15 @@
 namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Utils\Math\Math;
 use QW\FW\Validator;
 
 class String extends Object {
+	const MANACHER_DELIMITER = '|';
 	protected static $separators;
 	protected $string;
 	protected $matches;
+	protected $length;
 
 	public function __construct( $string = "", $debug = FALSE ) {
 		parent::__construct( $debug );
@@ -16,6 +19,7 @@ class String extends Object {
 		$this->string     = (string) $string;
 		$this->matches    = NULL;
 		$this->debug = $debug;
+		$this->length = mb_strlen( $this->string, 'UTF-8' );
 		self::$separators = [ "\n", "\r", "\r\n", "\n\r", chr( 30 ), chr( 155 ), PHP_EOL ];
 	}
 
@@ -37,7 +41,7 @@ class String extends Object {
 
 	private static function addBoundaries( array $cs ) {
 		if ( $cs == NULL || count( $cs ) == 0 ) {
-			$ret = new String( '||' );
+			$ret = new String( self::MANACHER_DELIMITER . self::MANACHER_DELIMITER );
 
 			return $ret->toCharArray();
 		}
@@ -45,11 +49,11 @@ class String extends Object {
 		$cs2Length = count( $cs ) * 2 + 1;
 
 		for ( $i = 0; $i < ( $cs2Length - 1 ); $i += 2 ) {
-			$cs2[ $i ]     = '|';
+			$cs2[ $i ]     = self::MANACHER_DELIMITER;
 			$cs2[ $i + 1 ] = $cs[ (int) ( $i / 2 ) ];
 		}
 
-		$cs2[ $cs2Length - 1 ] = '|';
+		$cs2[ $cs2Length - 1 ] = self::MANACHER_DELIMITER;
 
 		return $cs2;
 	}
@@ -71,9 +75,7 @@ class String extends Object {
 		$cs2       = [ ];
 		$cs2Length = count( $cs ) - 1 / 2;
 
-		for ( $i = 0; $i < $cs2Length; $i++ ) {
-			$cs2[ $i ] = $cs[ $i * 2 + 1 ];
-		}
+		for ( $i = 0; $i < $cs2Length; $i++ ) $cs2[ $i ] = $cs[ $i * 2 + 1 ];
 
 		return $cs2;
 	}
@@ -82,7 +84,6 @@ class String extends Object {
 		return new String( addslashes( $this->string ), $this->debug );
 	}
 
-	// http://php.net/manual/en/function.nl2br.php
 	public function br2nl( $separator = PHP_EOL ) {
 		$separator = in_array( $separator, self::$separators ) ? $separator : PHP_EOL;
 
@@ -104,6 +105,8 @@ class String extends Object {
 	public function concatPostString( String $string ) {
 		return new String( $string->string . $string->string, $this->debug );
 	}
+
+	// http://php.net/manual/en/function.nl2br.php
 
 	public function concatPre( $string ) {
 		return new String( (string) $string . $this->string, $this->debug );
@@ -147,8 +150,16 @@ class String extends Object {
 		return new String( ucfirst( $this->string ), $this->debug );
 	}
 
+	public function getFirstChar() {
+		return $this->charAt( 0 );
+	}
+
+	public function getLastChar() {
+		return $this->charAt( $this->getLength() - 1 );
+	}
+
 	public function getLength() {
-		return mb_strlen( $this->string, 'UTF-8' );
+		return $this->length;
 	}
 
 	public function getLongestPalindromeManacher() {
@@ -196,11 +207,9 @@ class String extends Object {
 		$len = 0;
 		$c   = 0;
 
-		for ( $i = 1; $i < $s2Length; $i++ ) {
-			if ( $len < $p[ $i ] ) {
-				$len = $p[ $i ];
-				$c   = $i;
-			}
+		for ( $i = 1; $i < $s2Length; $i++ ) if ( $len < $p[ $i ] ) {
+			$len = $p[ $i ];
+			$c   = $i;
 		}
 
 		$ss = Arrays::copyOfRange( $s2, $c - $len, $c + $len + 1 );
@@ -214,19 +223,27 @@ class String extends Object {
 		return $this->matches;
 	}
 
+	public function getMiddleChar() {
+		return $this->getLength() % 2 == 0 ? $this->charAt( $this->getLength() / 2 ) : FALSE;
+	}
+
 	public function getString() {
 		return $this->string;
 	}
 
 	public function indexOf( $char, $start = 0 ) {
 		$strlen = $this->getLength();
-		$start = max( 0, $start );
+		$start = Math::max( 0, $start );
 
 		if ( mb_strlen( $char, 'UTF-8' ) != 1 || $start > $strlen || $start < 0 ) throw new IllegalArgumentException();
 
 		for ( $i = $start; $i < $strlen; $i++ ) if ( $this->string{$i} == $char ) return $i;
 
 		return FALSE;
+	}
+
+	public function isChar( $position, $char ) {
+		return $this->charAt( Math::max( 0, $position ) ) == $char;
 	}
 
 	public function isEmpty() {
@@ -258,7 +275,7 @@ class String extends Object {
 		return new String( printf( $this->string, $args ), $this->debug );
 	}
 
-	public final function removeHTMLTags( $allowable_tags = NULL ) {
+	public function removeHTMLTags( $allowable_tags = NULL ) {
 		return new String( strip_tags( $this->string, $allowable_tags ), $this->debug );
 	}
 
@@ -283,7 +300,6 @@ class String extends Object {
 		return new String( strrev( $this->string ), $this->debug );
 	}
 
-
 	public function rtrim( $chars = '\t\n\r\0\x0B' ) {
 		return new String( rtrim( $this->string, $chars ), $this->debug );
 	}
@@ -305,25 +321,20 @@ class String extends Object {
 	}
 
 	public function subString( $start, $end = NULL ) {
-		if ( $start < 0 ||
-			( $end > mb_strlen( $this->string, 'UTF-8' ) && $end != NULL )
-		) throw new IllegalArgumentException();
-
-		return new String( mb_substr( $this->string, $start, $end, 'UTF-8' ), $this->debug );
+		return new String( mb_substr( $this->string, Math::max( 0, $start ),
+			Math::max( 0, Math::min( Math::max( 0, $end ), $this->getLength() - 1 ) ), 'UTF-8' ), $this->debug );
 	}
 
 	public function toCharArray() {
 		$array = [ ];
 
-		for ( $i = 0; $i < $this->getLength(); $i++ ) {
-			$array[] = $this->charAt( $i );
-		}
+		for ( $i = 0; $i < $this->getLength(); $i++ ) $array[] = $this->charAt( $i );
 
 		return $array;
 	}
 
 	public function toLowerCase() {
-		return new String( mb_strtolower( $this->string ), $this->debug );
+		return new String( mb_strtolower( $this->string, 'UTF-8' ), $this->debug );
 	}
 
 	public function toUpperCase() {

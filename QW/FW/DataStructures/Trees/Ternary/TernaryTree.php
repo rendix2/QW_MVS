@@ -18,10 +18,10 @@ class TernaryTree extends AbstractTree {
 	}
 
 	public function __destruct() {
-		$this->left     = NULL;
-		$this->middle   = NULL;
-		$this->right = NULL;
-			$this->data = NULL;
+		$this->left   = NULL;
+		$this->middle = NULL;
+		$this->right  = NULL;
+		$this->data   = NULL;
 	}
 
 	public function getLeftChild() {

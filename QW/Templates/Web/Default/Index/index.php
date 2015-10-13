@@ -36,3 +36,16 @@ print_r( $root2->iteratorPostOrderRecourse()
 echo '<br><br>';
 
 $root2 = NULL;
+
+
+$arrray = [ 5, 6, 7, 5, 1, 85678, 567890, 567890, 67898761, 6, 8, 15, -2 ];
+
+print_r( $arrray );
+
+
+$ms = new \QW\FW\DataWorking\Sort\MergeSort( $arrray );
+
+echo '<br><br>UNSORTED:::<br><br>';
+print_r( $ms->getOriginalArray() );
+echo '<br><br>SORTED BY MERGE SORT:::<br><br>';
+print_r( $ms->getSortedArray() );

@@ -12,10 +12,12 @@ class BubbleSort extends AbstractSort {
 		while ( $swapped ) {
 			$swapped = FALSE;
 
-			for ( $i = 0; $i <= $j; $i++ ) if ( $this->data[ $i ] > $this->data[ $i + 1 ] ) {
-				self::swap( $this->data, $i, $i + 1 );
+			for ( $i = 0; $i <= $j; $i++ ) if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
+				self::swap( $this->originalData, $i, $i + 1 );
 				$swapped = TRUE;
 			}
 		}
+
+		$this->sortedData = $this->originalData;
 	}
 }

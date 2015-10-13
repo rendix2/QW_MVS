@@ -26,13 +26,14 @@ class HeapSort extends AbstractSort {
 	}
 
 	protected function sort( AbstractSort $sort ) {
-		for ( $i = $this->length / 2 - 1; $i >= 0; $i-- ) $this->repairTop( $this->data, $this->length - 1, $i );
+		for ( $i = $this->length / 2 - 1; $i >= 0; $i-- )
+			$this->repairTop( $this->originalData, $this->length - 1, $i );
 
 		for ( $i = $this->length - 1; $i > 0; $i-- ) {
-			$this->swap( $this->data, 0, $i );
-			$this->repairTop( $this->data, $i - 1, 0 );
+			$this->swap( $this->originalData, 0, $i );
+			$this->repairTop( $this->originalData, $i - 1, 0 );
 		}
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

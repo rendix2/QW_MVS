@@ -17,16 +17,18 @@ class OddEvenSort extends AbstractSort {
 		while ( !$sorted ) {
 			$sorted = TRUE;
 
-			for ( $i = 1; $i < $this->length - 1; $i += 2 ) if ( $this->data[ $i ] > $this->data[ $i + 1 ] ) {
-				self::swap( $this->data, $i, $i + 1 );
+			for ( $i = 1; $i < $this->length - 1; $i += 2 )
+				if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
+					self::swap( $this->originalData, $i, $i + 1 );
 				$sorted = FALSE;
 			}
 
-			for ( $i = 0; $i < $this->length - 1; $i += 2 ) if ( $this->data[ $i ] > $this->data[ $i + 1 ] ) {
-				self::swap( $this->data, $i, $i + 1 );
+			for ( $i = 0; $i < $this->length - 1; $i += 2 )
+				if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
+					self::swap( $this->originalData, $i, $i + 1 );
 				$sorted = FALSE;
 			}
 		}
-
+		$this->sortedData = $this->originalData;
 	}
 }

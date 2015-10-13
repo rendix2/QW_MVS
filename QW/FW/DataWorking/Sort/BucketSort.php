@@ -19,18 +19,20 @@ class BucketSort extends AbstractSort {
 	}
 
 	protected function sort( AbstractSort $sort ) {
-		$high = $this->data[ 0 ];
-		$low  = $this->data[ 0 ];
+		$high = $this->originalData[ 0 ];
+		$low  = $this->originalData[ 0 ];
 
 		for ( $i = 0; $i < $this->length; $i++ ) {
-			if ( $this->data[ $i ] > $high ) $high = $this->data[ $i ];
-			if ( $this->data[ $i ] < $low ) $low = $this->data[ $i ];
+			if ( $this->originalData[ $i ] > $high ) $high = $this->originalData[ $i ];
+			if ( $this->originalData[ $i ] < $low ) $low = $this->originalData[ $i ];
 		}
 
 		$interval = ( (float) ( $high - $low + 1 ) ) / $this->bucketCount;
 		$buckets = [ ];
 
 		for ( $i = 0; $i < $this->length; $i++ )
-			$buckets[ (int) ( ( $this->data[ $i ] - $low ) / $interval ) ] = $this->data[ $i ];
+			$buckets[ (int) ( ( $this->originalData[ $i ] - $low ) / $interval ) ] = $this->originalData[ $i ];
+
+		$this->sortedData = $this->originalData;
 	}
 }

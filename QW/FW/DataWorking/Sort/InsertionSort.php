@@ -13,15 +13,15 @@ class InsertionSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
 		for ( $i = 1; $i < $this->length; $i++ ) {
-			$tmp = $this->data[ $i ];
+			$tmp = $this->originalData[ $i ];
 			$j   = $i;
-			while ( $j >= 1 && $this->data[ $j - 1 ] > $tmp ) {
-				$this->data[ $j ] = $this->data[ $j - 1 ];
+			while ( $j >= 1 && $this->originalData[ $j - 1 ] > $tmp ) {
+				$this->originalData[ $j ] = $this->originalData[ $j - 1 ];
 				$j--;
 			}
-			$this->data[ $j ] = $tmp;
+			$this->originalData[ $j ] = $tmp;
 		}
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

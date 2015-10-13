@@ -3,7 +3,10 @@ namespace QW\FW\Utils\Mail;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Utils\Math\Geom\Point;
 use QW\FW\Validator;
+use QW\FW\WebDesign\Images\Images;
+use QW\FW\WebDesign\Paint\Color;
 
 final class Mail extends Object {
 
@@ -21,7 +24,13 @@ final class Mail extends Object {
 	// Jakub Vrána php.vrana.cz
 
 	private function createImageOfTextEmail() {
-		// fucking logic to create image :))
+		$image = new Images( 100, 50, FALSE, $this->debug );
+		$image->setText( 1, new Point( 50, 25, $this->debug ), $this->to, FALSE,
+			new Color( 255, 255, 255, $this->debug ) );
+		$image->setBackgroundColor( new Color( 0, 0, 0, $this->debug ) );
+		header( 'Content-Type: image/png' );
+
+		return $image->toPNG();
 	}
 
 	private function deleteImageOfTextEmail() {

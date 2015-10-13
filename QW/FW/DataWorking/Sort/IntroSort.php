@@ -24,7 +24,7 @@ class IntroSort extends QuickSort {
 	}
 
 	protected function sort( AbstractSort $sort ) {
-		$maxDepth = Math::logarithmDecade( count( $this->data ) ) * 2;
-		$this->introsort( $this->data, $maxDepth );
+		$maxDepth         = Math::logarithmDecade( count( $this->originalData ) ) * 2;
+		$this->sortedData = $this->introsort( $this->originalData, $maxDepth );
 	}
 }

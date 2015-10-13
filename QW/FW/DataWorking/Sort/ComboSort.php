@@ -16,12 +16,13 @@ class ComboSort extends AbstractSort {
 
 			if ( $gap < 1 ) $gap = 1;
 
-			for ( $i = 0; $i + $gap < $this->length; $i++ ) if ( $this->data[ $i ] < $this->data[ $i + $gap ] ) {
-				self::swap( $this->data, $i, $i + $gap );
+			for ( $i = 0; $i + $gap < $this->length; $i++ )
+				if ( $this->originalData[ $i ] < $this->originalData[ $i + $gap ] ) {
+					self::swap( $this->originalData, $i, $i + $gap );
 				$swapped = TRUE;
 			}
 		}
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

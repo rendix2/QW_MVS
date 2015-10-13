@@ -7,15 +7,16 @@ namespace QW\FW\DataWorking\Sort;
 class CountingSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
-		$min = $this->data[ 0 ];
-		$max = $this->data[ 0 ];
+		$min = $this->originalData[ 0 ];
+		$max = $this->originalData[ 0 ];
 
-		for ( $i = 1; $i < $this->length; $i++ ) if ( $this->data[ $i ] < $min ) $min = $this->data[ $i ];
-		elseif ( $this->data[ $i ] > $max ) $max = $this->data[ $i ];
+		for ( $i = 1; $i < $this->length; $i++ )
+			if ( $this->originalData[ $i ] < $min ) $min = $this->originalData[ $i ];
+			elseif ( $this->originalData[ $i ] > $max ) $max = $this->originalData[ $i ];
 
 		$count = [ ];
 
-		for ( $i = 0; $i < $this->length; $i++ ) $count[ $this->data[ $i ] - $min ]++;
+		for ( $i = 0; $i < $this->length; $i++ ) $count[ $this->originalData[ $i ] - $min ]++;
 
 		$count[ 0 ]--;
 
@@ -23,8 +24,9 @@ class CountingSort extends AbstractSort {
 
 		$aux = [ ];
 		// very dirty code :O
-		for ( $i = $this->length - 1; $i >= 0; $i-- ) $aux[ $count[ $this->data[ $i ] - $min ]-- ] = $this->data[ $i ];
+		for ( $i = $this->length - 1; $i >= 0; $i-- )
+			$aux[ $count[ $this->originalData[ $i ] - $min ]-- ] = $this->originalData[ $i ];
 
-		return $aux;
+		$this->sortedData = $this->originalData;
 	}
 }

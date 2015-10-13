@@ -8,19 +8,21 @@ class ShakerSort extends AbstractSort {
 		for ( $i = 0; $i < $this->length / 2; $i++ ) {
 			$swapped = FALSE;
 
-			for ( $j = $i; $j < $this->length - $i - 1; $j++ ) if ( $this->data[ $j ] < $this->data[ $j + 1 ] ) {
-				self::swap( $this->data, $j, $j + 1 );
+			for ( $j = $i; $j < $this->length - $i - 1; $j++ )
+				if ( $this->originalData[ $j ] < $this->originalData[ $j + 1 ] ) {
+					self::swap( $this->originalData, $j, $j + 1 );
 				$swapped = TRUE;
 			}
 
-			for ( $j = $this->length - 2 - $i; $j > $i; $j-- ) if ( $this->data[ $j ] > $this->data[ $j - 1 ] ) {
-				self::swap( $this->data, $j, $j - 1 );
+			for ( $j = $this->length - 2 - $i; $j > $i; $j-- )
+				if ( $this->originalData[ $j ] > $this->originalData[ $j - 1 ] ) {
+					self::swap( $this->originalData, $j, $j - 1 );
 				$swapped = TRUE;
 			}
 
 			if ( $swapped ) break;
 		}
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

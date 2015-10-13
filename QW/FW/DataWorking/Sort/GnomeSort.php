@@ -6,13 +6,13 @@ namespace QW\FW\DataWorking\Sort;
 class GnomeSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
-		for ( $i = 1; $i < $this->length; ) if ( $this->data[ $i - 1 ] <= $this->data[ $i ] ) $i++;
+		for ( $i = 1; $i < $this->length; ) if ( $this->originalData[ $i - 1 ] <= $this->originalData[ $i ] ) $i++;
 		else {
-			self::swap( $this->data, $i, $i - 1 );
+			self::swap( $this->originalData, $i, $i - 1 );
 			$i--;
 			if ( $i == 0 ) $i = 1;
 		}
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

@@ -20,7 +20,7 @@ class QuickSort extends AbstractSort {
 	}
 
 	protected function sort( AbstractSort $sort ) {
-		return $this->quickSort( $this->data );
+		$this->sortedData = $this->quickSort( $this->originalData );
 	}
 	/*
 	protected function partition( $data, $lo, $hi ) {

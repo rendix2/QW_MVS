@@ -12,18 +12,18 @@ class ShellSort extends AbstractSort {
 		while ( $gap > 0 ) {
 			for ( $i = 0; $i < $this->length - $gap; $i++ ) {
 				$j   = $i + $gap;
-				$tmp = $this->data[ $j ];
+				$tmp = $this->originalData[ $j ];
 
-				while ( $j >= $gap && $tmp > $this->data[ $j - $gap ] ) {
-					$this->data[ $j ] = $this->data[ $j - $gap ];
+				while ( $j >= $gap && $tmp > $this->originalData[ $j - $gap ] ) {
+					$this->originalData[ $j ] = $this->originalData[ $j - $gap ];
 					$j -= $gap;
 				}
-				$this->data[ $j ] = $tmp;
+				$this->originalData[ $j ] = $tmp;
 			}
 			if ( $gap == 2 ) $gap = 1;
 			else $gap /= 2.2;
 		}
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

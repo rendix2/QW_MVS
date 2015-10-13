@@ -5,9 +5,9 @@ namespace QW\FW\DataWorking\Sort;
 class PigeonSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
-		$min = $max = $this->data[ 0 ];
+		$min = $max = $this->originalData[ 0 ];
 
-		foreach ( $this->data as $num ) {
+		foreach ( $this->originalData as $num ) {
 			if ( $num < $min ) $min = $num;
 			if ( $num > $max ) $max = $num;
 		}
@@ -15,10 +15,10 @@ class PigeonSort extends AbstractSort {
 		$d   = [ ];
 		$res = [ ];
 
-		foreach ( $this->data as $num ) $d[ $num - $min ]++;
+		foreach ( $this->originalData as $num ) $d[ $num - $min ]++;
 
 		for ( $i = 0; $i < $max - $min; $i++ ) while ( $d[ $i + $min ]-- > 0 ) $res[] = $i + $min;
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

@@ -20,8 +20,8 @@ class CocktailSort extends AbstractSort {
 		while ( $i < $j && $swapped ) {
 			$swapped = FALSE;
 			for ( $k = i; $k < $j; $k++ ) {
-				if ( $this->data[ $k ] > $this->data[ $k + 1 ] ) {
-					self::swap( $this->data, $k, $k + 1 );
+				if ( $this->originalData[ $k ] > $this->originalData[ $k + 1 ] ) {
+					self::swap( $this->originalData, $k, $k + 1 );
 					$swapped = TRUE;
 				}
 			}
@@ -31,8 +31,8 @@ class CocktailSort extends AbstractSort {
 				$swapped = FALSE;
 
 				for ( $k = $j; $k > $i; $k-- ) {
-					if ( $this->data[ $k ] < $this->data[ $k - 1 ] ) {
-						self::swap( $this->data, $k, $k - 1 );
+					if ( $this->originalData[ $k ] < $this->originalData[ $k - 1 ] ) {
+						self::swap( $this->originalData, $k, $k - 1 );
 						$swapped = TRUE;
 					}
 				}
@@ -40,6 +40,6 @@ class CocktailSort extends AbstractSort {
 			$i++;
 		}
 
-		return $this->data;
+		$this->sortedData = $this->originalData;
 	}
 }

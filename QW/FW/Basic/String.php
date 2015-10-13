@@ -130,9 +130,9 @@ class String extends Object {
 			FALSE;
 	}
 
-	public function equals( $string ) {
-		return $this->string == (string) $string;
-	}
+//	public function equals( $string ) {
+//		return $this->string == (string) $string;
+	//}
 
 	public function equalsString( String $string ) {
 		return $this->string == $string->string;

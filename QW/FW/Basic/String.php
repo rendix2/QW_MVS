@@ -255,6 +255,15 @@ class String extends Object {
 		            ->equals( $this );
 	}
 
+	public function isPalindromeBetter( $ignoreCase, $ignoreWhiteSpace, $ignoreDiacritics ) {
+		$string = $this;
+		if ( $ignoreCase == TRUE ) $string = $string->toLowerCase();
+		if ( $ignoreWhiteSpace == TRUE ) $string = $string->replaceRE( '\\\\s', '' );
+		if ( $ignoreDiacritics == TRUE ) $string = $string->removeDiacritics();
+
+		return $string->isPalindrome();
+	}
+
 	public function ltrim( $chars = '\t\n\r\0\x0B' ) {
 		return new String( ltrim( $this->string, $chars ), $this->debug );
 	}
@@ -273,6 +282,13 @@ class String extends Object {
 		$args = new String( $args );
 
 		return new String( printf( $this->string, $args ), $this->debug );
+	}
+
+	public function removeDiacritics() {
+		static $diac = [ 'ľ', 'š', 'č', 'ť', 'ž', 'ý', 'á', 'í', 'é', 'Č', 'Á', 'Ž', 'Ý' ];
+		static $cor = [ 'l', 's', 'c', 't', 'z', 'y', 'a', 'i', 'e', 'C', 'A', 'Z', 'Y' ];
+
+		return $this->replace( $diac, $cor );
 	}
 
 	public function removeHTMLTags( $allowable_tags = NULL ) {

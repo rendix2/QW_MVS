@@ -338,6 +338,10 @@ class String extends Object {
 		return $this;
 	}
 
+	public function shuffle() {
+		return new String( str_shuffle( $this->string ), $this->debug );
+	}
+
 	public function sprintf( $format ) {
 		$format = new String( $format );
 
@@ -356,7 +360,7 @@ class String extends Object {
 	public function toCharArray() {
 		$array = [ ];
 
-		for ( $i = 0; $i < $this->getLength(); $i++ ) $array[] = $this->charAt( $i );
+		for ( $i = 0; $i < $this->getLength(); $i++ ) $array[ $i ] = $this->charAt( $i );
 
 		return $array;
 	}
@@ -374,6 +378,6 @@ class String extends Object {
 	}
 
 	public function wordsCount() {
-		return new String( str_word_count( $this->string ), $this->debug );
+		return str_word_count( $this->string );
 	}
 }

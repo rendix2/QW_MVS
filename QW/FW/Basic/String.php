@@ -9,8 +9,10 @@ use QW\FW\Validator;
 class String extends Object {
 	const MANACHER_DELIMITER = '|';
 	protected static $separators;
-	protected static $diac = [ 'ľ', 'š', 'č', 'ť', 'ž', 'ý', 'á', 'í', 'é', 'Č', 'Á', 'Ž', 'Ý' ];
-	protected static $cor = [ 'l', 's', 'c', 't', 'z', 'y', 'a', 'i', 'e', 'C', 'A', 'Z', 'Y' ];
+	protected static $diac = [ 'ľ', 'š', 'č', 'ť', 'ž', 'ý', 'á', 'í', 'é', 'Č', 'Á', 'Ž', 'Ý', 'ó', 'ů', 'ú', 'ě',
+	                           'ř' ];
+	protected static $cor = [ 'l', 's', 'c', 't', 'z', 'y', 'a', 'i', 'e', 'C', 'A', 'Z', 'Y', 'o', 'u', 'u', 'e',
+	                          'r' ];
 
 	protected $string;
 	protected $matches;
@@ -303,11 +305,22 @@ class String extends Object {
 	}
 
 	public function replace( $what, $to ) {
-		return new String( str_replace( (string) $what, (string) $to, $this->string ), $this->debug );
+		if ( !is_array( $what ) || !is_array( $to ) || !is_string( $what ) ||
+			!is_string( $to )
+		) throw new IllegalArgumentException();
+
+		return new String( str_replace( $what, $to, $this->string ), $this->debug );
 	}
 
 	public function replaceRE( $what, $to ) {
-		return new String( preg_replace( '#' . preg_quote( (string) $what, '#' ) . '#', (string) $to, $this->string ),
+		if ( !is_array( $what ) || !is_array( $to ) || !is_string( $what ) ||
+			!is_string( $to )
+		) throw new IllegalArgumentException();
+
+		if ( is_string( $what ) ) return new String( preg_replace( '#' . preg_quote( $what, '#' ) . '#', $to,
+			$this->string ), $this->debug );
+
+		return new String( preg_replace( $what, $to, $this->string ),
 			$this->debug );
 	}
 

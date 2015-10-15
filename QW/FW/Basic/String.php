@@ -8,10 +8,9 @@ use QW\FW\Validator;
 
 class String extends Object {
 	const MANACHER_DELIMITER = '|';
-	protected static $separators = [ "\n", "\r", "\r\n", "\n\r", chr( 30 ), chr( 155 ), PHP_EOL ]
+	protected static $separators = [ "\n", "\r", "\r\n", "\n\r", chr( 30 ), chr( 155 ), PHP_EOL ];
 	protected static $diac = [ 'ľ', 'š', 'č', 'ť', 'ž', 'ý', 'á', 'í', 'é', 'Č', 'Á', 'Ž', 'Ý' ];
 	protected static $cor = [ 'l', 's', 'c', 't', 'z', 'y', 'a', 'i', 'e', 'C', 'A', 'Z', 'Y' ];
-
 
 	protected $string;
 	protected $matches;
@@ -20,10 +19,10 @@ class String extends Object {
 	public function __construct( $string = "", $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		$this->string     = (string) $string;
-		$this->matches    = NULL;
-		$this->debug = $debug;
-		$this->length = mb_strlen( $this->string, 'UTF-8' );
+		$this->string  = (string) $string;
+		$this->matches = NULL;
+		$this->debug   = $debug;
+		$this->length  = mb_strlen( $this->string, 'UTF-8' );
 	}
 
 	function __destruct() {

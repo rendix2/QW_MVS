@@ -1,6 +1,7 @@
 <?php
 namespace QW\FW\Utils\Math;
 
+use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\PrivateConstructException;
 use QW\FW\Utils\Math\Matrix\Matrix;
 
@@ -19,6 +20,7 @@ final class Math {
 	}
 
 	public static function ackermann( $m, $n ) {
+		if ( $m >= 4 ) throw new IllegalArgumentException();
 		if ( $m == 0 ) return $n + 1;
 		else if ( $n == 0 ) return self::ackermann( $m - 1, 1 );
 		else return self::ackermann( $m - 1, self::ackermann( $m, $n - 1 ) );

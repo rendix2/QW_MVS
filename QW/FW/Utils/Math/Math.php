@@ -2,6 +2,7 @@
 namespace QW\FW\Utils\Math;
 
 use QW\FW\Boot\PrivateConstructException;
+use QW\FW\Utils\Math\Matrix\Matrix;
 
 final class Math {
 
@@ -15,6 +16,21 @@ final class Math {
 
 	public static function absoluteValue( $x ) {
 		return abs( $x );
+	}
+
+	public static function ackermann( $m, $n ) {
+		if ( $m == 0 ) return $n + 1;
+		else if ( $n == 0 ) return self::ackermann( $m - 1, 1 );
+		else return self::ackermann( $m - 1, self::ackermann( $m, $n - 1 ) );
+	}
+
+	public static function ackermannInv( $z ) {
+		$result = [ ];
+
+		for ( $x = 0; $x < $z; $x++ ) // maybe <x < 3 || $x < 4 || $x < $z
+			for ( $y = 0; $y < $z; $y++ ) if ( self::ackermann( $x, $y ) == $z ) $result[] = [ $x, $y ];
+
+		return new Matrix( $result );
 	}
 
 	public static function average() {

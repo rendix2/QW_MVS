@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 12. 6. 2015
- * Time: 16:17
- */
-
 namespace QW\FW\Utils\Math;
 
 use QW\FW\Boot\PrivateConstructException;

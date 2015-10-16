@@ -97,7 +97,6 @@ final class Matrix extends Object {
 	public function printMatrix() {
 		foreach ( $this->matrix as $v ) {
 			foreach ( $v as $v2 ) echo $v2 . ' ';
-
 			echo '<br>' . "\n";
 		}
 	}

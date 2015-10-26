@@ -3,9 +3,13 @@ namespace QW\FW\Utils\Math;
 
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\PrivateConstructException;
+use QW\FW\DataWorking\Sort\MergeSort;
 use QW\FW\Utils\Math\Matrix\Matrix;
 
 final class Math {
+
+	const INF = INF;
+	const NAN = NAN;
 
 	public function __construct() {
 		throw new PrivateConstructException();
@@ -15,7 +19,7 @@ final class Math {
 		return '<br>Math is HELL!<br>' . "\n";
 	}
 
-	public static function absoluteValue( $x ) {
+	public static function abs( $x ) {
 		return abs( $x );
 	}
 
@@ -35,8 +39,40 @@ final class Math {
 		return new Matrix( $result );
 	}
 
+	public static function arcCos( $x ) {
+		return acos( $x );
+	}
+
+	public static function arcCosH( $x ) {
+		return acosh( $x );
+	}
+
+	public static function arcCotg( $x ) {
+		return ( self::pi() / 2 ) - self::arcTg( $x );
+	}
+
+	public static function arcCotgH( $x ) {
+		return self::logarithmNatural( ( 1 + $x ) / ( 1 - $x ) ) / 2;
+	}
+
+	public static function arcSin( $x ) {
+		return asin( $x );
+	}
+
+	public static function arcSinH( $x ) {
+		return asinh( $x );
+	}
+
+	public static function arcTg( $x ) {
+		return atan( $x );
+	}
+
+	public static function arcTgH( $x ) {
+		return atanh( $x );
+	}
+
 	public static function average() {
-		return self::sum() / func_num_args();
+		return self::sum( func_get_args() ) / func_num_args();
 	}
 
 	public static function binaryToDecimal( $x ) {
@@ -51,44 +87,24 @@ final class Math {
 		return base_convert( $x, 2, 8 );
 	}
 
-	public static function cosecans( $x ) {
-		return 1 / self::sine( $x );
-	}
-
-	public static function cosine( $x ) {
+	public static function cos( $x ) {
 		return cos( $x );
 	}
 
-	public static function cosineArcus( $x ) {
-		return acos( $x );
-	}
-
-	public static function cosineArcusHyperbolic( $x ) {
-		return acosh( $x );
-	}
-
-	public static function cosineHyperbolic( $x ) {
+	public static function cosH( $x ) {
 		return cosh( $x );
 	}
 
-	/*
-		public static function cotangentArcusHyperbolic($x)
-		{
-			return self::logarithmNatural((1 + $x) / (1 - $x)) / 2;
-		}
-
-	*/
-
-	public static function cotangent( $x ) {
-		return 1 / self::tangent( $x );
+	public static function cosecans( $x ) {
+		return 1 / self::sin( $x );
 	}
 
-	public static function cotangentArcus( $x ) {
-		return ( self::pi() / 2 ) - self::tangentArcus( $x );
+	public static function cotg( $x ) {
+		return self::inverseNumber( self::tg( $x ) );
 	}
 
-	public static function cotangentHyperbolic( $x ) {
-		return ( self::cosineHyperbolic( ( $x ) / self::sineHyperbolic( $x ) ) );
+	public static function cotgH( $x ) {
+		return ( self::cosH( ( $x ) / self::sinH( $x ) ) );
 	}
 
 	public static function cubeRoot( $x ) {
@@ -96,10 +112,6 @@ final class Math {
 	}
 
 	public static function cubed( $x ) {
-		return $x * $x * $x;
-	}
-
-	public static function cubedFunction( $x ) {
 		return self::power( $x, 3 );
 	}
 
@@ -116,7 +128,7 @@ final class Math {
 	}
 
 	public static function degreesToRadians( $x ) {
-		return reg2rad( $x );
+		return deg2rad( $x );
 	}
 
 	public static function divide( $numerator, $divisor ) {
@@ -139,11 +151,15 @@ final class Math {
 	}
 
 	public static function hypot( $x, $y ) {
-		return Math::squareRoot( $x * x, $y * $y );
+		return self::squareRoot( $x * $x + $y * $y );
 	}
 
-	public static function hypotenuseSystem( $x, $y ) {
+	public static function hypotSystem( $x, $y ) {
 		return hypot( $x, $y );
+	}
+
+	public static function intdiv1( $a, $b ) {
+		return ( $a - $a % $b ) / $b;
 	}
 
 	public static function integerDivision( $numerator, $divisor ) {
@@ -187,8 +203,25 @@ final class Math {
 		return max( $x );
 	}
 
+	public static function mean( array $data ) {
+		$sum = 0;
+
+		foreach ( $data as $v ) $sum += $v;
+
+		return $sum / count( $data );
+	}
+
+	public static function median( array $data ) {
+		$data = new MergeSort( $data );
+		$data = $data->getSortedArray();
+		$len  = count( $data );
+
+		return ( $len % 2 == 0 ) ? ( $data[ (int) ( $len / 2 ) ] + $data[ (int) ( $len / 2 + 1 ) ] ) / 2 :
+			$data[ (int) ( $len / 2 ) ];
+	}
+
 	public static function min() {
-		$min = 999999999;
+		$min = INF;
 		foreach ( func_get_args() as $v ) if ( $v <= $min ) $min = $v;
 
 		return $min;
@@ -199,9 +232,28 @@ final class Math {
 	}
 
 	public static function minus( $a, $b ) {
-		if ( $a == $b ) return 0;
+		if ( $a == $b && $a > 0 ) return 0;
 
 		return $a - $b;
+	}
+
+	public static function mode( array $data ) {
+		$maxValue = 0;
+		$maxCount = 0;
+		$count    = count( $data );
+
+		foreach ( $data as $v ) {
+			$c = 0;
+
+			foreach ( $data as $v2 ) if ( $v == $v2 ) ++$c;
+
+			if ( $c > $maxCount ) {
+				$maxCount = $c;
+				$maxValue = $v;
+			}
+		}
+
+		return $maxValue;
 	}
 
 	public static function modulo( $numerator, $divisor ) {
@@ -236,12 +288,18 @@ final class Math {
 				return 1;
 			case 1:
 				return $base;
+			case 2:
+				return self::squared( $base );
+			case 3:
+				return self::cubed( $base );
 			case 1 / 2:
 				return self::squareRoot( $base );
 			case 1 / 3:
 				return self::cubeRoot( $base );
 			case -1:
 				return 1 / $base;
+			case -2:
+				return 1 / ( self::power( $base, 2 ) );
 			default:
 				//return (double)phpversion() >= 5.6 ? $base ** $exponent : pow($base, $exponent);
 				return pow( $base, $exponent );
@@ -268,27 +326,32 @@ final class Math {
 		return rand( $from, $to );
 	}
 
-	public static function secans( $x ) {
-		return 1 / self::cosine( $x );
+	public static function sec( $x ) {
+		return 1 / self::cos( $x );
 	}
 
-	public static function sine( $x ) {
+	public static function sin( $x ) {
 		return sin( $x );
 	}
 
-	public static function sineArcus( $x ) {
-		return asin( $x );
-	}
-
-	public static function sineArcusHyperbolic( $x ) {
-		return asinh( $x );
-	}
-
-	public static function sineHyperbolic( $x ) {
+	public static function sinH( $x ) {
 		return sinh( $x );
 	}
 
-	public static function squareRoot( $x ) {
+	public static function squareRoot( $number ) {
+		if ( $number < 0 ) return self::NAN;
+		if ( $number == 0 ) return (float) 0;
+		if ( $number == 1 ) return (float) 1;
+
+		$a  = $number;
+		$xk = $number;
+
+		for ( $i = 0; $i < self::logarithm( $number, 2 ) + 4; $i++ ) $xk = ( 0.5 ) * ( $xk + ( $a / $xk ) );
+
+		return (float) $xk;
+	}
+
+	public static function squareRootSystem( $x ) {
 		return sqrt( $x );
 	}
 
@@ -296,11 +359,28 @@ final class Math {
 		return $x * $x;
 	}
 
-	public static function squaredFunction( $x ) {
+	public static function squaredSystem( $x ) {
 		return self::power( $x, 2 );
 	}
 
-	public static function sum() {
+	public static function sum( array $data ) {
+		$data2 = $data;
+
+		foreach ( $data as $v ) $data2[] = $v;
+
+		$data = $data2;
+		unset( $data2 );
+		$c = count( $data );
+		$sum = 0;
+		for ( $i = 0; $i < $c; $i += 2 ) {
+			$sum += $data[ $i ];
+			$sum += $data[ $i + 1 ];
+		}
+
+		return $sum;
+	}
+
+	public static function sumArgs() {
 		$sum = 0;
 		foreach ( func_get_args() as $v ) $sum += $v;
 
@@ -311,19 +391,11 @@ final class Math {
 		return array_sum( $x );
 	}
 
-	public static function tangent( $x ) {
+	public static function tg( $x ) {
 		return tan( $x );
 	}
 
-	public static function tangentArcus( $x ) {
-		return atan( $x );
-	}
-
-	public static function tangentArcusHyperbolic( $x ) {
-		return atanh( $x );
-	}
-
-	public static function tangentHyperbolic( $x ) {
+	public static function tgH( $x ) {
 		return tanh( $x );
 	}
 

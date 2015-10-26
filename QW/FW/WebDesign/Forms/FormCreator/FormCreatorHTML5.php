@@ -2,7 +2,7 @@
 
 namespace QW\FW\WebDesign\Forms\FormCreator;
 
-class FormCreatorHTML4HTML5 extends FormCreatorHTML4 {
+class FormCreatorHTML5 extends FormCreatorHTML4 {
 	public function addInputColor( $name, $value = '' ) {
 		$this->formData[] = '<input type="color" name="' . $name . '" value="' . $value . '">';
 

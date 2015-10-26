@@ -7,7 +7,7 @@ use QW\FW\Utils\Math\Math;
 class PlusStrategy implements Strategy {
 
 	public function multiply( $a, $b ) {
-		$times = Math::absoluteValue( $b );
+		$times = Math::abs( $b );
 
 		for ( $i = 0; $i < $times; $i++ ) $a += $a;
 

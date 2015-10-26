@@ -10,7 +10,7 @@ final class IndexController extends AbstractBasicController {
 		parent::__construct( $name, $debug );
 
 		$this->getView()
-			->setPageName( "QWd" );
+			->setPageName( "QW" );
 
 	}
 

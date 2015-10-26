@@ -50,7 +50,7 @@ echo '<br><br>UNSORTED:::<br><br>';
 print_r( $ms->getOriginalArray() );
 echo '<br><br>SORTED BY MERGE SORT:::<br><br>';
 print_r( $ms->getSortedArray() );
-
+/*
 echo 'try Ackermann function:';
 echo Math::ackermann( 2, 5 );
 
@@ -58,4 +58,10 @@ echo '<br>Finding Ackermnann inv:<br>';
 
 Math::ackermannInv( 125 )
     ->printMatrix();
+*/
+echo '<br>';
+
+var_dump( Math::randomBoolean() );
+?>
+
 

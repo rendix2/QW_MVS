@@ -14,6 +14,7 @@ class FormCreatorHTML4 extends Object {
 	private $method;
 	private $action;
 	private $select;
+	private $submitName;
 
 	public function __construct( $method = 'post', $action = '', $name = '', $debug = FALSE ) {
 		parent::__construct( $debug );
@@ -38,7 +39,7 @@ class FormCreatorHTML4 extends Object {
 		parent::__destruct();
 	}
 
-	function __toString() {
+	public function __toString() {
 		$finalData = '';
 
 		foreach ( $this->formData as $v ) $finalData .= $v;
@@ -93,6 +94,7 @@ class FormCreatorHTML4 extends Object {
 	}
 
 	public function addInputSubmit( $name, $value = '' ) {
+		$this->submitName = $name;
 		$this->formData[] = '<input type="submit" name="' . $name . '" value="' . $value . '">';
 
 		return $this;
@@ -132,5 +134,9 @@ class FormCreatorHTML4 extends Object {
 
 	final public function getCsfrCheckValue() {
 		return $this->csfrCheckValue;
+	}
+
+	public function getSubmitName() {
+		return $this->submitName;
 	}
 }

@@ -22,7 +22,7 @@ final class MathEquation {
 		$d = $b * $b - 4 * $a * $c; // diskriminant
 
 		if ( $d < 0 ) return NULL;
-		else if ( $d == 0 ) return ( -$b / 2 * $a );
-		else return ( ( -$b + sqrt( $d ) ) / ( 2 * $a ) . ( -$b - sqrt( $d ) ) / ( 2 * $a ) );
+		else if ( $d == 0 || $a == 0 ) return ( -$b / 2 * $a );
+		else return ( ( -$b + Math::squareRoot( $d ) ) / ( 2 * $a ) . ( -$b - Math::squareRoot( $d ) ) / ( 2 * $a ) );
 	}
 }

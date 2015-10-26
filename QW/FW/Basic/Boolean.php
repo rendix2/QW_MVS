@@ -4,6 +4,7 @@ namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
+use QW\FW\Utils\Math\Math;
 
 final class Boolean extends Object {
 	const FALSE = FALSE;
@@ -38,6 +39,10 @@ final class Boolean extends Object {
 		if ( $x == NULL || $y == NULL ) throw new IllegalArgumentException();
 
 		return $x->boolean == $y->boolean;
+	}
+
+	public static function randomBoolean() {
+		return new Boolean( Math::randomBoolean(), self::getDebug() );
 	}
 
 	public function equals( $boolean ) {

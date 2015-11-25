@@ -81,7 +81,7 @@ final class Mail extends Object {
 		if ( Validator::isEmpty( $this->subject ) ) throw new MailException( 'Prázdný předmět E-mailu' );
 		if ( Validator::isEmpty( $this->to ) ) throw new MailException( 'Prázdný příjemce E-mailu' );
 
-		return mb_send_mail( $this->to, $this->subject, $this->mimeHeaderEncode( $this->text ), );
+		return mb_send_mail( $this->to, $this->subject, $this->mimeHeaderEncode( $this->text ) );
 	}
 
 	public function setSubject( $subject ) {

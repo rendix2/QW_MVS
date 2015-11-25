@@ -8,8 +8,10 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
 final class Folder extends File {
+
 	public function __construct( $dirName, $create = FALSE, $debug = FALSE ) {
 		//parent::__construct($debug = FALSE);
+		//Object::__construct($debug);
 
 		if ( ( !is_dir( $dirName ) || !file_exists( $dirName ) ) &&
 			$create == FALSE

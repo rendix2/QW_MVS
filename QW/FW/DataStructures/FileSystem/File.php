@@ -4,6 +4,7 @@ namespace QW\FW\DataStructures\FileSystem;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Validator;
 
 class File extends Object {
 	protected $filePath;
@@ -11,9 +12,9 @@ class File extends Object {
 	public function __construct( $filePath, $create = FALSE, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_file( $filePath ) ) throw new IllegalArgumentException();
-		if ( !file_exists( $filePath ) ) {
-			if ( $create == TRUE ) touch( $filePath );
+		if ( !Validator::isFile( $filePath ) ) throw new IllegalArgumentException();
+		if ( !self::fileExists( $filePath ) ) {
+			if ( $create == TRUE ) self::touch( $filePath );
 			else throw new IllegalArgumentException();
 		}
 
@@ -24,6 +25,26 @@ class File extends Object {
 		$this->filePath = NULL;
 
 		parent::__destruct();
+	}
+
+	public static function fileExists( $filePath ) {
+		return file_exists( $filePath );
+	}
+
+	public static function isReadable( $filePath ) {
+		if ( !Validator::isFile( $filePath ) ) throw new IllegalArgumentException();
+
+		return is_readable( $filePath );
+	}
+
+	public static function isWritable( $filePath ) {
+		if ( !Validator::isFile( $filePath ) ) throw new IllegalArgumentException();
+
+		return is_writable( $filePath );
+	}
+
+	public static function touch( $filePath ) {
+		return touch( $filePath );
 	}
 
 	final public function accessTime() {
@@ -50,6 +71,10 @@ class File extends Object {
 		return file_get_contents( $this->filePath );
 	}
 
+	final public function getPath() {
+		return $this->filePath;
+	}
+
 	final public function group() {
 		return filegroup( $this->filePath );
 	}
@@ -63,7 +88,7 @@ class File extends Object {
 	}
 
 	final public function moveUploaded( $to ) {
-		if ( !is_dir( $to ) ) throw new IllegalArgumentException();
+		if ( !Validator::isDir( $to ) ) throw new IllegalArgumentException();
 
 		return move_uploaded_file( $this->filePath, $to );
 	}
@@ -76,16 +101,12 @@ class File extends Object {
 		return parse_ini_file( $this->filePath );
 	}
 
-	final public function path() {
-		return $this->filePath;
-	}
-
 	public function permitions() {
 		return fileperms( $this->filePath );
 	}
 
 	final public function readable() {
-		return is_readable( $this->filePath );
+		return self::isReadable( $this->filePath );
 	}
 
 	final public function setContent( $content ) {
@@ -101,6 +122,6 @@ class File extends Object {
 	}
 
 	final public function writable() {
-		return is_writable( $this->filePath );
+		return self::isWritable( $this->filePath );
 	}
 }

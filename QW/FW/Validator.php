@@ -21,12 +21,20 @@ final class Validator {
 		return self::isString( $char ) && mb_strlen( $char, 'UTF-8' ) == 1;
 	}
 
+	public static function isDir( $dir ) {
+		return is_dir( $dir );
+	}
+
 	public static function isDouble( $double ) {
 		return is_double( $double );
 	}
 
 	public static function isEmpty( $string ) {
 		return empty( $string );
+	}
+
+	public static function isFile( $file ) {
+		return is_file( $file );
 	}
 
 	public static function isInt( $integer ) {

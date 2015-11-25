@@ -5,11 +5,12 @@ namespace QW\FW\WebDesign\Captcha\EasyCaptcha;
 use QW\FW\Basic\Object;
 use QW\FW\Basic\String;
 use QW\FW\Boot\IllegalArgumentException;
-use QW\FW\Hash\Hash;
-use QW\FW\Images\Images;
-use QW\FW\Math\Math;
-use QW\FW\Paint\Color;
-use QW\FW\Paint\Point;
+use QW\FW\Utils\Hash\Hash;
+use QW\FW\Utils\Math\Geom\Point;
+use QW\FW\Utils\Math\Math;
+use QW\FW\WebDesign\Images\Images;
+use QW\FW\WebDesign\Paint\Color;
+
 
 class EasyCaptcha extends Object {
 

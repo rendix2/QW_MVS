@@ -11,6 +11,7 @@ namespace QW\FW\Basic;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\RuntimeException;
 use QW\FW\DataWorking\Sort\QuickSort;
+use QW\FW\Utils\Math\Math;
 
 class Arrays extends Object implements \ArrayAccess {
 
@@ -27,6 +28,8 @@ class Arrays extends Object implements \ArrayAccess {
 	public function __destruct() {
 		$this->data = NULL;
 		$this->size = NULL;
+
+		parent::__destruct();
 	}
 
 	function __isset( $name ) {
@@ -54,6 +57,31 @@ class Arrays extends Object implements \ArrayAccess {
 		return count( $array );
 	}
 
+	public static function fisherYates( $data ) {
+		$size = count( $data );
+
+		foreach ( $data as $k => $v ) {
+			$index = Math::randomInterval( 0, $size );
+			self::swap( $data, $k, $index );
+		}
+
+		return $data;
+	}
+
+	public static function merge2( &$array1, &$array2 ) {
+		return array_merge( $array1, $array2 );
+	}
+
+	public static function swap( array &$array, $left, $right ) {
+		$tmp             = $array[ $right ];
+		$array[ $right ] = $array[ $left ];
+		$array[ $left ]  = $tmp;
+	}
+
+	public static function swapSystem( &$array, $left, $right ) {
+		list( $array[ $left ], $arr[ $right ] ) = [ $array[ $right ], $array[ $left ] ];
+	}
+
 	public function add( $data ) {
 		$this->data[] = $data;
 		$this->size++;
@@ -70,10 +98,18 @@ class Arrays extends Object implements \ArrayAccess {
 		foreach ( $this->data as $k => $v ) $this->data[ $k ] = $value;
 	}
 
+	public function getArray() {
+		return $this->data;
+	}
+
 	public function getFirst() {
 		if ( $this->size == 0 ) throw new IllegalArgumentException();
 
 		return $this->data[ 0 ];
+	}
+
+	public function getKeys() {
+		return array_keys( $this->data );
 	}
 
 	public function getLast() {
@@ -82,8 +118,18 @@ class Arrays extends Object implements \ArrayAccess {
 		return $this->data[ $this->size - 1 ];
 	}
 
+	public function getSearchedKeys( $pattern, $strict ) {
+		if ( !is_bool( $strict ) ) $strict = FALSE;
+
+		return array_keys( $this->data, $pattern, $strict );
+	}
+
 	public function getSize() {
 		return $this->size;
+	}
+
+	public function getValues() {
+		return array_values( $this->data );
 	}
 
 	public function keyExists( $key ) {
@@ -139,6 +185,6 @@ class Arrays extends Object implements \ArrayAccess {
 	public function sort() {
 		$obj = new QuickSort( $this->data, $this->debug );
 
-		return $obj->getArray();
+		return $obj->getSortedArray();
 	}
 }

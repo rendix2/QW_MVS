@@ -5,6 +5,7 @@ namespace QW\FW\Basic;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Utils\Math\Math;
+use QW\FW\Validator;
 
 final class Boolean extends Object {
 	const FALSE = FALSE;
@@ -14,7 +15,7 @@ final class Boolean extends Object {
 	public function __construct( $boolean, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_bool( $boolean ) ) throw new IllegalArgumentException();
+		if ( !Validator::isBool( $boolean ) ) throw new IllegalArgumentException();
 
 		$this->boolean = $boolean;
 	}

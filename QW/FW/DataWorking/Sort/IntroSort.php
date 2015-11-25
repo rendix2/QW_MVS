@@ -8,7 +8,8 @@
 
 namespace QW\FW\DataWorking\Sort;
 
-use QW\FW\Math\Math;
+
+use QW\FW\Utils\Math\Math;
 
 // not checked
 

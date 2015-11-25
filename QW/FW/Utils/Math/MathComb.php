@@ -135,7 +135,7 @@ final class MathComb {
 
 	public static function xFibonacci( $factor, $n ) {
 		$result = 0;
-		for ( $i = 0; $i < $factor; $i++ ) $result += self::xFibonacci( $factor - $i, $n );
+		for ( $i = 1; $i <= $factor; $i++ ) $result += self::xFibonacci( $factor - $i, $n );
 
 		return $result;
 	}

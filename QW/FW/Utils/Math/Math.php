@@ -193,6 +193,8 @@ final class Math {
 	}
 
 	public static function max() {
+		if ( func_num_args() == 1 ) return func_get_args()[ 0 ];
+
 		$max = -999999999;
 		foreach ( func_get_args() as $v ) if ( $v >= $max ) $max = $v;
 
@@ -221,6 +223,8 @@ final class Math {
 	}
 
 	public static function min() {
+		if ( func_num_args() == 1 ) return func_get_args()[ 0 ];
+
 		$min = INF;
 		foreach ( func_get_args() as $v ) if ( $v <= $min ) $min = $v;
 
@@ -311,7 +315,9 @@ final class Math {
 	}
 
 	public static function randLikeJava() {
-		return self::randomInterval( 0, 100 ) / 1000000;
+		$x = ( 1103515245 * $x + 12345 ) % 4294967296;
+
+		return $x / ( (double) 4294967296 );
 	}
 
 	public static function random() {
@@ -364,13 +370,11 @@ final class Math {
 	}
 
 	public static function sum( array $data ) {
-		$data2 = $data;
+		$data = array_values( $data );
+		$c    = count( $data );
 
-		foreach ( $data as $v ) $data2[] = $v;
+		if ( $c == 1 ) return $data[ 0 ];
 
-		$data = $data2;
-		unset( $data2 );
-		$c = count( $data );
 		$sum = 0;
 		for ( $i = 0; $i < $c; $i += 2 ) {
 			$sum += $data[ $i ];

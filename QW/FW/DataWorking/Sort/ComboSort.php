@@ -3,6 +3,8 @@
 namespace QW\FW\DataWorking\Sort;
 // OK
 
+use QW\FW\Basic\Arrays;
+
 class ComboSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
@@ -18,9 +20,9 @@ class ComboSort extends AbstractSort {
 
 			for ( $i = 0; $i + $gap < $this->length; $i++ )
 				if ( $this->originalData[ $i ] < $this->originalData[ $i + $gap ] ) {
-					self::swap( $this->originalData, $i, $i + $gap );
-				$swapped = TRUE;
-			}
+					Arrays::swap( $this->originalData, $i, $i + $gap );
+					$swapped = TRUE;
+				}
 		}
 
 		$this->sortedData = $this->originalData;

@@ -23,6 +23,20 @@ final class MathDiscreet {
 		return $a;
 	}
 
+	public static function gcdRecourse( $a, $b ) {
+		if ( $b == 0 ) return $a;
+
+		return self::gcdRecourse( $b, $a % $b );
+	}
+
+	public static function horner( $x, $koeficienty, $stupen ) {
+		$r = 0;
+
+		for ( $i = 0; $i < $stupen; $i++ ) $r = $r * $x + $koeficienty[ $i ];
+
+		return $r;
+	}
+
 	public static function isPerfect( $number ) {
 		if ( $number % 2 == 1 ) return FALSE;
 
@@ -58,17 +72,39 @@ final class MathDiscreet {
 		return TRUE;
 	}
 
+	public static function isPrimeBetter( $number ) {
+		if ( $number <= 1 ) return FALSE;
+		else if ( $number <= 3 ) return TRUE;
+		else if ( $number % 2 == 0 || $number % 3 == 0 ) return FALSE;
+
+		$i = 5;
+
+		while ( $i * $i <= $number ) {
+			if ( $number % $i == 0 || $number % ( $i + 2 ) == 0 ) return FALSE;
+			$i += 6;
+		}
+
+		return TRUE;
+	}
+
 	public static function lcm( $a, $b ) {
 		if ( $a == 0 || $b == 0 ) return 0;
 
 		return ( $a * $b ) / self::gcd( $a, $b );
 	}
 
+	public static function lcmRecourse( $a, $b ) {
+		if ( $a == 0 || $b == 0 ) return 0;
+
+		return ( $a * $b ) / self::gcdRecourse( $a, $b );
+	}
+
 	public static function sieveOfEratosthenes( $number ) {
 		$sieve      = [ ];
 		$sieve[ 0 ] = $sieve[ 1 ] = TRUE;
+		$squareRoot = Math::squareRoot( $number );
 
-		for ( $i = 2; $i <= Math::squareRoot( $number ); $i++ ) {
+		for ( $i = 2; $i <= $squareRoot; $i++ ) {
 			if ( $sieve[ $i ] == TRUE ) continue;
 
 			for ( $j = 2 * $i; $j < $number; $j += $i ) $sieve[ $j ] = TRUE;

@@ -4,6 +4,8 @@ namespace QW\FW\DataWorking\Sort;
 
 // OK
 
+use QW\FW\Basic\Arrays;
+
 class SelectionSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
@@ -13,7 +15,7 @@ class SelectionSort extends AbstractSort {
 				if ( $this->originalData[ $j ] > $this->originalData[ $min ] ) $min = $j;
 
 			if ( $min != $i ) // this may help
-				self::swap( $this->originalData, $i, $min );
+				Arrays::swap( $this->originalData, $i, $min );
 		}
 
 		$this->sortedData = $this->originalData;

@@ -3,7 +3,7 @@
 namespace QW\FW\Utils\Hash;
 
 use QW\FW\Boot\PrivateConstructException;
-use QW\FW\Math\Math;
+use QW\FW\Utils\Math\Math;
 
 final class Hash {
 	public function __construct() {
@@ -36,11 +36,11 @@ final class Hash {
 	}
 
 	public static function r3() {
-		return hash( 'sha_512', uniqid() );
+		return hash( 'sha512', uniqid() );
 	}
 
 	public static function rFromNum() {
-		return hash( 'sha_512', self::rNum() );
+		return hash( 'sha512', self::rNum() );
 	}
 
 	public static function rNum() {

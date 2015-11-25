@@ -2,10 +2,12 @@
 
 namespace QW\FW\DataWorking\Sort;
 
+use QW\FW\Basic\Arrays;
 use QW\FW\Basic\Object;
 
 abstract class AbstractSort extends Object {
-	protected $originalData, $length;
+	protected $originalData;
+	protected $length;
 	protected $sortedData;
 
 	abstract protected function sort( AbstractSort $sort );
@@ -22,14 +24,21 @@ abstract class AbstractSort extends Object {
 		$this->originalData = $data;
 	}
 
-	protected static function swap( array &$array, $left, $right ) {
-		$tmp             = $array[ $right ];
-		$array[ $right ] = $array[ $left ];
-		$array[ $left ]  = $tmp;
+	public function __destruct() {
+		$this->originalData = NULL;
+		$this->length       = NULL;
+		$this->sortedData   = NULL;
+		parent::__destruct();
 	}
 
-	protected static function swapSystem( &$array, $left, $right ) {
-		list( $array[ $left ], $arr[ $right ] ) = [ $array[ $right ], $array[ $left ] ];
+	public function __toString() {
+		$original = new Arrays( $this->originalData );
+		$sorted   = new Arrays( $this->sortedData );
+		$string   = 'Original array: ' . $original . '<br>Sorted array: ' . $sorted . '<br>';
+		$original = NULL;
+		$sorted   = NULL;
+
+		return $string;
 	}
 
 	public function getOriginalArray() {

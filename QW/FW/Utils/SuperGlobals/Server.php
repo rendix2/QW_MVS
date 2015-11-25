@@ -25,9 +25,7 @@ final class Server extends SuperGlobals implements ISG {
 	public static function getAll() {
 		if ( self::$magicQuotes ) {
 			$array = [ ];
-			foreach ( $_SERVER as $k => $v ) {
-				$array[ stripslashes( $k ) ] = stripslashes( $v );
-			}
+			foreach ( $_SERVER as $k => $v ) $array[ stripslashes( $k ) ] = stripslashes( $v );
 
 			return $array;
 		}

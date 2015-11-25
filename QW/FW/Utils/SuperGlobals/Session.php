@@ -38,10 +38,7 @@ final class Session extends SuperGlobals implements ISG {
 
 		if ( self::$magicQuotes ) {
 			$array = [ ];
-			foreach ( $_SESSION as $k => $v ) {
-				$array[ stripslashes( $k ) ] = stripslashes( $v );
-			}
-
+			foreach ( $_SESSION as $k => $v ) $array[ stripslashes( $k ) ] = stripslashes( $v );
 			return $array;
 		}
 

@@ -3,18 +3,21 @@
 namespace QW\FW\DataWorking\Search\StringSearch;
 
 use QW\FW\Basic\Object;
+use QW\FW\Basic\String;
 use QW\FW\Boot\IllegalArgumentException;
 
 abstract class AbstractStringSearch extends Object {
-	private $string;
+	protected $string;
+	protected $pattern;
 
 	abstract public function search();
 
-	public function __construct( $string, $debug = FALSE ) {
+	public function __construct( $string, $pattern, $debug = FALSE ) {
 		parent::__construct( $debug );
 
 		if ( !is_string( $string ) ) throw new IllegalArgumentException();
 
-		$this->string = (string) $string;
+		$this->string  = new String( $string );
+		$this->pattern = new String( $pattern );
 	}
 }

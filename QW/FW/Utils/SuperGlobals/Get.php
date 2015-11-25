@@ -25,10 +25,7 @@ class Get extends SuperGlobals implements ISG {
 		if ( self::$magicQuotes ) {
 			$array = [ ];
 
-			foreach ( $_GET as $k => $v ) {
-				$array[ stripslashes( $k ) ] = stripslashes( $v );
-			}
-
+			foreach ( $_GET as $k => $v ) $array[ stripslashes( $k ) ] = stripslashes( $v );
 			return $array;
 		}
 

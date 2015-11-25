@@ -9,8 +9,40 @@ final class Validator {
 		throw new PrivateConstructException();
 	}
 
+	public static function isArray( $array ) {
+		return is_array( $array );
+	}
+
+	public static function isBool( $bool ) {
+		return is_bool( $bool );
+	}
+
+	public static function isChar( $char ) {
+		return self::isString( $char ) && mb_strlen( $char, 'UTF-8' ) == 1;
+	}
+
+	public static function isDouble( $double ) {
+		return is_double( $double );
+	}
+
+	public static function isEmpty( $string ) {
+		return empty( $string );
+	}
+
+	public static function isInt( $integer ) {
+		return is_int( $integer );
+	}
+
 	public static function isNumber( $number ) {
 		return is_numeric( $number );
+	}
+
+	public static function isObject( $object ) {
+		return is_object( $object );
+	}
+
+	public static function isString( $string ) {
+		return is_string( $string );
 	}
 
 	public static function validateEmailIPv6( $email, $strict = TRUE ) {
@@ -39,11 +71,14 @@ final class Validator {
 			!isset( $matches[ 1 ][ 64 ] ) && !isset( $matches[ 0 ][ 254 ] ) );
 	}
 
+	// http://php.net/manual/en/function.filter-var.php
+
 	public static function validateEmailUsingFilter( $email ) {
 		return filter_var( $email, FILTER_VALIDATE_EMAIL );
 	}
 
-	// http://php.net/manual/en/function.filter-var.php
+	// Jakub Vrana php.vrana.cz
+	// Looks very pretty and easy
 
 	public static function validateEmailUsingJakubVrana( $email ) {
 		static $atom = '[-a-z0-9!#$%&\'*+/=?^_`{|}~]';
@@ -51,9 +86,6 @@ final class Validator {
 
 		return preg_match( ":^$atom+(\\.$atom+)*@($domain?\\.)+$domain\$:i", $email );
 	}
-
-	// Jakub Vrana php.vrana.cz
-	// Looks very pretty and easy
 
 	public static function validateIPv4UsingFilter( $ip ) {
 		return filter_var( $ip, FILTER_VALIDATE_IP,

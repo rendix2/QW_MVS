@@ -24,10 +24,7 @@ final class Cookie extends SuperGlobals implements ISG {
 	public static function getAll() {
 		if ( self::$magicQuotes ) {
 			$array = [ ];
-			foreach ( $_COOKIE as $k => $v ) {
-				$array[ stripslashes( $k ) ] = stripslashes( $v );
-			}
-
+			foreach ( $_COOKIE as $k => $v ) $array[ stripslashes( $k ) ] = stripslashes( $v );
 			return $array;
 		}
 

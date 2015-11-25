@@ -2,6 +2,8 @@
 
 namespace QW\FW\DataWorking\Sort;
 
+use QW\FW\Basic\Arrays;
+
 class ShakerSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
@@ -10,15 +12,15 @@ class ShakerSort extends AbstractSort {
 
 			for ( $j = $i; $j < $this->length - $i - 1; $j++ )
 				if ( $this->originalData[ $j ] < $this->originalData[ $j + 1 ] ) {
-					self::swap( $this->originalData, $j, $j + 1 );
-				$swapped = TRUE;
-			}
+					Arrays::swap( $this->originalData, $j, $j + 1 );
+					$swapped = TRUE;
+				}
 
 			for ( $j = $this->length - 2 - $i; $j > $i; $j-- )
 				if ( $this->originalData[ $j ] > $this->originalData[ $j - 1 ] ) {
-					self::swap( $this->originalData, $j, $j - 1 );
-				$swapped = TRUE;
-			}
+					Arrays::swap( $this->originalData, $j, $j - 1 );
+					$swapped = TRUE;
+				}
 
 			if ( $swapped ) break;
 		}

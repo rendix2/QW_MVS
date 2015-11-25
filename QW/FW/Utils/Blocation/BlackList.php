@@ -4,11 +4,11 @@ namespace QW\FW\Utils\Blocation;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\NullPointerException;
-use QW\FW\IP\IP;
-use QW\FW\IP\IPv4;
-use QW\FW\IP\IPv6;
-use QW\FW\IP\IPvU;
-use QW\FW\SuperGlobals\Server;
+use QW\FW\Utils\IP\IP;
+use QW\FW\Utils\IP\IPv4;
+use QW\FW\Utils\IP\IPv6;
+use QW\FW\Utils\IP\IPvU;
+use QW\FW\Utils\SuperGlobals\Server;
 
 class BlackList extends Object {
 	protected $longOfIP;

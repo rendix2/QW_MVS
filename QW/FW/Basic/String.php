@@ -21,6 +21,8 @@ class String extends Object {
 	public function __construct( $string = "", $debug = FALSE ) {
 		parent::__construct( $debug );
 
+		if ( !Validator::isString( $string ) ) throw new IllegalArgumentException();
+
 		$this->string  = (string) $string;
 		$this->matches = NULL;
 		$this->debug   = $debug;

@@ -5,17 +5,18 @@ namespace QW\FW\DataWorking\Search\ArraySearch;
 use QW\FW\Basic\Object;
 
 abstract class AbstractArraySearch extends Object {
-	private $data;
-	private $length;
+	protected $data;
+	protected $length;
+	protected $pattern;
 
 	abstract public function search();
 
-	public function __construct( array $data, $debug = FALSE ) {
+	public function __construct( array $data, $pattern, $debug = FALSE ) {
 		parent::__construct( $debug );
 
 		$this->data   = $data;
 		$this->length = count( $this->data );
-
+		$this->pattern = $pattern;
 		$this->search();
 	}
 }

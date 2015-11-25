@@ -9,6 +9,8 @@
 namespace QW\FW\DataWorking\Sort;
 // not checked
 
+use QW\FW\Basic\Arrays;
+
 class HeapSort extends AbstractSort {
 
 	private function repairTop( array $array, $bottom, $topIndex ) {
@@ -30,7 +32,7 @@ class HeapSort extends AbstractSort {
 			$this->repairTop( $this->originalData, $this->length - 1, $i );
 
 		for ( $i = $this->length - 1; $i > 0; $i-- ) {
-			$this->swap( $this->originalData, 0, $i );
+			Arrays::swap( $this->originalData, 0, $i );
 			$this->repairTop( $this->originalData, $i - 1, 0 );
 		}
 

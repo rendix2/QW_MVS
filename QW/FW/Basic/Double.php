@@ -4,6 +4,7 @@ namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
+use QW\FW\Validator;
 
 final class Double extends Object {
 	private $double;
@@ -11,7 +12,7 @@ final class Double extends Object {
 	public function __construct( $double = 0.0, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_double( $double ) ) throw new IllegalArgumentException();
+		if ( !Validator::isDouble( $double ) ) throw new IllegalArgumentException();
 
 		$this->double = $double;
 	}

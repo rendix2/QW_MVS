@@ -4,6 +4,7 @@ namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
+use QW\FW\Validator;
 
 final class Integer extends Object {
 	const MAX_VALUE = PHP_INT_MAX;
@@ -13,7 +14,7 @@ final class Integer extends Object {
 	public function __construct( $integer, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_integer( $integer ) ) throw new IllegalArgumentException();
+		if ( !Validator::isInt( $integer ) ) throw new IllegalArgumentException();
 
 		$this->integer = $integer;
 	}
@@ -26,6 +27,18 @@ final class Integer extends Object {
 
 	public function __toString() {
 		return (string) $this->integer;
+	}
+
+	public static function inPlaceSwap( Integer $a, Integer $b ) {
+		$a = $a->getInteger();
+		$b = $b->getInteger();
+
+		$a = $a + $b;
+		$b = $a - $b;
+		$a = $a - $b;
+
+		$a = new Integer( $a );
+		$b = new Integer( $b );
 	}
 
 	public function ceil() {

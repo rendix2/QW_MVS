@@ -24,10 +24,7 @@ final class Post extends SuperGlobals implements ISG {
 	public static function getAll() {
 		if ( self::$magicQuotes ) {
 			$array = [ ];
-			foreach ( $_POST as $k => $v ) {
-				$array[ stripslashes( $k ) ] = stripslashes( $v );
-			}
-
+			foreach ( $_POST as $k => $v ) $array[ stripslashes( $k ) ] = stripslashes( $v );
 			return $array;
 		}
 

@@ -3,6 +3,7 @@
 namespace QW\FW\Basic;
 
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Validator;
 
 class Character extends Object {
 
@@ -11,7 +12,7 @@ class Character extends Object {
 	public function __construct( $char = '', $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( mb_strlen( $char, 'UTF-8' ) != 1 ) throw new IllegalArgumentException();
+		if ( !Validator::isChar( $char ) ) throw new IllegalArgumentException();
 
 		$this->char = $char;
 	}

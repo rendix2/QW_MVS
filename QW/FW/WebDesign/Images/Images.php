@@ -33,6 +33,8 @@ final class Images extends Object {
 		if ( is_resource( $this->imageResource ) ) imagedestroy( $this->imageResource );
 		$this->imageTextColor = NULL;
 		$this->imageResource = NULL;
+		$this->width = NULL;
+		$this->height = NULL;
 	}
 
 	public function antialias( $enable = TRUE ) {

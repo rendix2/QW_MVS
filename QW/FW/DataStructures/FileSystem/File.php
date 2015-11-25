@@ -11,10 +11,11 @@ class File extends Object {
 	public function __construct( $filePath, $create = FALSE, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( $create == FALSE && !file_exists( $filePath ) ) throw new IllegalArgumentException();
-		else if ( $create == TRUE && !file_exists( $filePath ) ) touch( $filePath );
-
 		if ( !is_file( $filePath ) ) throw new IllegalArgumentException();
+		if ( !file_exists( $filePath ) ) {
+			if ( $create == TRUE ) touch( $filePath );
+			else throw new IllegalArgumentException();
+		}
 
 		$this->filePath = $filePath;
 	}

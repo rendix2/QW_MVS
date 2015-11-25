@@ -8,6 +8,8 @@
 
 namespace QW\FW\DataWorking\Sort;
 
+use QW\FW\Basic\Arrays;
+
 class OddEvenSort extends AbstractSort {
 
 	protected function sort( AbstractSort $sort ) {
@@ -19,15 +21,15 @@ class OddEvenSort extends AbstractSort {
 
 			for ( $i = 1; $i < $this->length - 1; $i += 2 )
 				if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
-					self::swap( $this->originalData, $i, $i + 1 );
-				$sorted = FALSE;
-			}
+					Arrays::swap( $this->originalData, $i, $i + 1 );
+					$sorted = FALSE;
+				}
 
 			for ( $i = 0; $i < $this->length - 1; $i += 2 )
 				if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
-					self::swap( $this->originalData, $i, $i + 1 );
-				$sorted = FALSE;
-			}
+					Arrays::swap( $this->originalData, $i, $i + 1 );
+					$sorted = FALSE;
+				}
 		}
 		$this->sortedData = $this->originalData;
 	}

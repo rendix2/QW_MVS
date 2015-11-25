@@ -10,6 +10,6 @@ final class Config extends \QW\FW\Config {
 	                            'dbName' => 'cvutblog' ];
 
 	public function __construct() {
-		//parent::__construct();
+		parent::__construct();
 	}
 }

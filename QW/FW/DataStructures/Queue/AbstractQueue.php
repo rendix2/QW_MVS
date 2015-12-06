@@ -11,6 +11,4 @@ class AbstractQueue extends Object {
 		parent::__construct( $debug );
 		$this->size = 0;
 	}
-
-
 }

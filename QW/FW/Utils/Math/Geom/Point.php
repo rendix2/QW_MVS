@@ -8,9 +8,9 @@
 
 namespace QW\FW\Utils\Math\Geom;
 
-
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Validator;
 use QW\FW\WebDesign\Images\Images;
 
 class Point extends Object {
@@ -21,7 +21,7 @@ class Point extends Object {
 	public function __construct( $x, $y, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_numeric( $x ) || !is_numeric( $y ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( $x ) || !Validator::isNumber( $y ) ) throw new IllegalArgumentException();
 		$this->x = $x;
 		$this->y = $y;
 	}
@@ -29,6 +29,8 @@ class Point extends Object {
 	public function __destruct() {
 		$this->x = NULL;
 		$this->y = NULL;
+
+		parent::__destruct();
 	}
 
 	final public function getX() {

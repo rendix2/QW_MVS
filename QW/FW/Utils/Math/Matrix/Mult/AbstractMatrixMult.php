@@ -9,7 +9,7 @@
 namespace QW\FW\Utils\Math\Matrix\Mult;
 
 use QW\FW\Basic\Object;
-use QW\FW\Math\Matrix\Matrix;
+use QW\FW\Utils\Math\Matrix\Matrix;
 
 abstract class AbstractMatrixMult extends Object {
 
@@ -20,6 +20,12 @@ abstract class AbstractMatrixMult extends Object {
 	public function __construct( Matrix $a = NULL, Matrix $b = NULL, $debug = FALSE ) {
 		parent::__construct( $debug );
 		$this->result = $this->mult( $a, $b );
+	}
+
+	public function __destruct() {
+		$this->result = NULL;
+
+		parent::__destruct();
 	}
 
 	final public function getResult() {

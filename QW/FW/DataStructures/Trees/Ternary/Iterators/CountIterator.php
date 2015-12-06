@@ -8,7 +8,6 @@
 
 namespace QW\FW\DataStructures\Trees\Ternary\Iterators;
 
-
 use QW\FW\DataStructures\Trees\AbstractIterators\AbstractTernaryTreeIterator;
 use QW\FW\DataStructures\Trees\Ternary\TernaryTree;
 

@@ -8,6 +8,7 @@ use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Utils\Hash\Hash;
 use QW\FW\Utils\Math\Geom\Point;
 use QW\FW\Utils\Math\Math;
+use QW\FW\Validator;
 use QW\FW\WebDesign\Images\Images;
 use QW\FW\WebDesign\Paint\Color;
 
@@ -20,7 +21,7 @@ class EasyCaptcha extends Object {
 	public function __construct( $width = 400, $height = 200, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_numeric( $width ) || !is_numeric( $height ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( $width ) || Validator::isNumber( $height ) ) throw new IllegalArgumentException();
 
 		$this->captcha = new Images( $width, $height );
 		$this->captcha->setBackgroundColor( new Color( 0, 0, 0 ) );

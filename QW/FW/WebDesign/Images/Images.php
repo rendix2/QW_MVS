@@ -8,6 +8,7 @@ use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Boot\RuntimeException;
 use QW\FW\Utils\Math\Geom\Point;
+use QW\FW\Validator;
 use QW\FW\WebDesign\Paint\Color;
 
 final class Images extends Object {
@@ -20,7 +21,8 @@ final class Images extends Object {
 	public function __construct( $width, $height, $trueColor = FALSE, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_numeric( $width ) || !is_numeric( $height ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( ( $width ) ||
+			!Validator::isNumber( ( $height ) ) throw new IllegalArgumentException();
 
 		$this->imageResource =
 			$trueColor == TRUE ? imagecreatetruecolor( $width, $height ) : imagecreate( $width, $height );
@@ -30,7 +32,7 @@ final class Images extends Object {
 	}
 
 	public function __destruct() {
-		if ( is_resource( $this->imageResource ) ) imagedestroy( $this->imageResource );
+		if ( Validator::isResource( $this->imageResource ) ) imagedestroy( $this->imageResource );
 		$this->imageTextColor = NULL;
 		$this->imageResource = NULL;
 		$this->width = NULL;
@@ -38,7 +40,7 @@ final class Images extends Object {
 	}
 
 	public function antialias( $enable = TRUE ) {
-		if ( !is_bool( $enable ) ) throw new IllegalArgumentException();
+		if ( !Validator::isBool( $enable ) ) throw new IllegalArgumentException();
 
 		return imageantialias( $this->imageResource, $enable );
 	}
@@ -207,28 +209,28 @@ final class Images extends Object {
 	}
 
 	public function toBMP() {
-		if ( !is_resource( $this->imageResource ) ) throw new RuntimeException();
+		if ( Validator::isResource( $this->imageResource ) ) throw new RuntimeException();
 
 		imagewbmp( $this->imageResource );
 		imagedestroy( $this->imageResource );
 	}
 
 	public function toGIF() {
-		if ( !is_resource( $this->imageResource ) ) throw new RuntimeException();
+		if ( Validator::isResource( $this->imageResource ) ) throw new RuntimeException();
 
 		imagegif( $this->imageResource );
 		imagedestroy( $this->imageResource );
 	}
 
 	public function toJPG() {
-		if ( !is_resource( $this->imageResource ) ) throw new RuntimeException();
+		if ( Validator::isResource( $this->imageResource ) ) throw new RuntimeException();
 
 		imagejpeg( $this->imageResource );
 		imagedestroy( $this->imageResource );
 	}
 
 	public function toPNG() {
-		if ( !is_resource( $this->imageResource ) ) throw new RuntimeException();
+		if ( Validator::isResource( $this->imageResource ) ) throw new RuntimeException();
 
 		imagepng( $this->imageResource );
 		imagedestroy( $this->imageResource );

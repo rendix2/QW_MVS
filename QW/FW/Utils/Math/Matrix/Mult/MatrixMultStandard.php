@@ -10,6 +10,10 @@ class MatrixMultStandard extends AbstractMatrixMult {
 		parent::__construct( $a, $b, $debug );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	public function mult( Matrix $a = NULL, Matrix $b = NULL ) {
 		$newMatrix = [ ];
 

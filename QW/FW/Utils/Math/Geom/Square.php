@@ -10,6 +10,7 @@ namespace QW\FW\Utils\Math\Geom;
 
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
+use QW\FW\Validator;
 
 class Square extends Object {
 
@@ -19,13 +20,23 @@ class Square extends Object {
 	public function __construct( Point $pointLefUp, $length, $debug = FALSE ) {
 		parent::__construct( $debug );
 
-		if ( !is_numeric( $length ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( $length ) ) throw new IllegalArgumentException();
 
 		$this->pointLeftUp    = $pointLefUp;
 		$this->pointLeftDown  = new Point( $this->pointLeftUp->getX(), $this->pointLeftUp->getY() - $length );
 		$this->pointRightDown = new Point( $this->pointLeftUp->getX() + $length, $this->pointLeftUp->getY() - $length );
 		$this->pointRightUp   = new Point( $this->pointLeftUp->getX(), $this->pointLeftUp->getY() + $length );
 		$this->length         = $length;
+	}
+
+	public function __destruct() {
+		$this->pointLeftDown  = NULL;
+		$this->pointLeftUp    = NULL;
+		$this->pointRightDown = NULL;
+		$this->pointRightUp   = NULL;
+		$this->length         = NULL;
+
+		parent::__destruct();
 	}
 
 	public function factorySetLeftUpPoint( Point $pointLeftUp ) {

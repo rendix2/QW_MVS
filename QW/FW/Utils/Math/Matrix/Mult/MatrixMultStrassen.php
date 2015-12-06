@@ -12,6 +12,10 @@ class MatrixMultiStrassen extends AbstractMatrixMult {
 		parent::__construct( $debug );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	public function add( Matrix $a = NULL, Matrix $b = NULL ) {
 		if ( $a == NULL || $b == NULL ) throw new NullPointerException();
 

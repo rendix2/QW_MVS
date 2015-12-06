@@ -5,6 +5,7 @@ namespace QW\FW\WebDesign\Paint;
 use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Utils\Math\Math;
+use QW\FW\Validator;
 
 final class Color extends Object {
 	const BLUE = 0x0000FF;
@@ -30,8 +31,7 @@ final class Color extends Object {
 	}
 
 	public static function checkColor( $red = 0, $green = 0, $blue = 0 ) {
-		if ( !is_numeric( $red ) || !is_numeric( $green ) ||
-			!is_numeric( $blue )
+		if ( !Validator::isNumber( $red ) || !Validator::isNumber( $green ) || !Validator::isNumber( $blue )
 		) throw new IllegalArgumentException();
 		if ( $red < 0 || $red > 255 ) throw new RedColorException();
 		if ( $green < 0 || $green > 255 ) throw new GreenColorException();

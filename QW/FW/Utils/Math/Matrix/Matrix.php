@@ -17,6 +17,14 @@ final class Matrix extends Object {
 		$this->matrixSizeB = count( $this->matrix[ 0 ] );
 	}
 
+	public function __destruct() {
+		$this->matrix      = NULL;
+		$this->matrixSizeA = NULL;
+		$this->matrixSizeB = NULL;
+
+		parent::__destruct();
+	}
+
 	public function getMatrix() {
 		return $this->matrix;
 	}
@@ -45,7 +53,7 @@ final class Matrix extends Object {
 	}
 
 	public function numberAdd( $number ) {
-		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
@@ -55,7 +63,7 @@ final class Matrix extends Object {
 	}
 
 	public function numberDiv( $number ) {
-		if ( $number == 0 || !is_numeric( $number ) ) throw new IllegalArgumentException();
+		if ( $number == 0 || !Validator::isNumber( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
@@ -65,7 +73,7 @@ final class Matrix extends Object {
 	}
 
 	public function numberMult( $number ) {
-		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
@@ -75,7 +83,7 @@ final class Matrix extends Object {
 	}
 
 	public function numberPower( $number ) {
-		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )
@@ -85,7 +93,7 @@ final class Matrix extends Object {
 	}
 
 	public function numberSub( $number ) {
-		if ( !is_numeric( $number ) ) throw new IllegalArgumentException();
+		if ( !Validator::isNumber( $number ) ) throw new IllegalArgumentException();
 		$newMatrix = [ ];
 
 		for ( $i = 0; $i < $this->getMatrixSizeA(); $i++ ) for ( $j = 0; $j < $this->getMatrixSizeB(); $j++ )

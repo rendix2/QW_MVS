@@ -20,4 +20,10 @@ class Circle extends Object {
 
 		$this->point = $point;
 	}
+
+	public function __destruct() {
+		$this->point = NULL;
+
+		parent::__destruct();
+	}
 }

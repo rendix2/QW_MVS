@@ -25,5 +25,4 @@ class AbstractHeap extends Object {
 	public function getSize() {
 		return $this->size;
 	}
-
 }

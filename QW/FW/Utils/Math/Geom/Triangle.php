@@ -20,6 +20,14 @@ class Triangle extends Object {
 		$this->pointC = $pointC;
 	}
 
+	public function __destruct() {
+		$this->pointA = NULL;
+		$this->pointB = NULL;
+		$this->pointC = NULL;
+
+		parent::__destruct();
+	}
+
 	public function factorySetPointA( Point $pointA ) {
 		return new Triangle( $pointA, $this->pointB, $this->pointC, $this->debug );
 	}

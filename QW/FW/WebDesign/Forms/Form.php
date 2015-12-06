@@ -19,6 +19,8 @@ class Form extends Object {
 
 	public function __destruct() {
 		$this->safeForm = NULL;
+		$this->form = NULL;
+
 		parent::__destruct();
 	}
 

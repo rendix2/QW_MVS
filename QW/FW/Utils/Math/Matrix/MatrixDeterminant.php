@@ -10,6 +10,10 @@ class MathMatrixDeterminant extends Object {
 		parent::__construct( $debug );
 	}
 
+	public function __destruct() {
+		parent::__destruct();
+	}
+
 	public function determinant( array $matrix ) {
 		$sum = 0;
 		$s   = 0;

@@ -49,6 +49,10 @@ final class Validator {
 		return is_object( $object );
 	}
 
+	public static function isResource( $res ) {
+		return is_resource( $res );
+	}
+
 	public static function isString( $string ) {
 		return is_string( $string );
 	}

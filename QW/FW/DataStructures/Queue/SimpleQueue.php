@@ -22,6 +22,4 @@ class SimpleQueue extends AbstractQueue {
 	public function addLast( $i ) {
 		$node = new Node( $i, NULL, $this->debug );
 	}
-
-
 }

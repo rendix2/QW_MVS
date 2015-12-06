@@ -7,7 +7,6 @@
  */
 
 namespace QW\FW\Utils\Protocols\FTP;
-;
 
 use QW\FW\Basic\Object;
 

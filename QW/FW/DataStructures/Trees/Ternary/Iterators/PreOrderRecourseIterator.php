@@ -16,4 +16,3 @@ class PreOrderRecourseIterator extends AbstractTernaryTreeIterator {
 		$this->order( $root->getRightChild() );
 	}
 }
-

@@ -39,6 +39,21 @@ final class Math {
 		return new Matrix( $result );
 	}
 
+	public static function ackermannLimitedRecoursion( $m, $n ) {
+		switch ( $m ) {
+			case 0:
+				return $n + 1;
+			case 1:
+				return $n + 2;
+			case 2:
+				return 2 * $n + 3;
+			case 3:
+				return self::power( 2, $n + 3 ) + 3;
+			case 4:
+				return self::power( 2, self::ackermannLimitedRecoursion( 4, $n - 1 ) + 3 ) - 3;
+		}
+	}
+
 	public static function arcCos( $x ) {
 		return acos( $x );
 	}

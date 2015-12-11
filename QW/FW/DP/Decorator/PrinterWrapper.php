@@ -1,7 +1,7 @@
 <?php
 namespace QW\FW\DP\Decorator;
 
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 use QW\FW\Boot\NullPointerException;
 
 class PrinterWrapper {
@@ -19,7 +19,7 @@ class PrinterWrapper {
 		return $this->charPerCurrentLine >= $this->charPerLine;
 	}
 
-	public function myPrint( String $s ) {
+	public function myPrint( StringW $s ) {
 		if ( $s == NULL ) {
 			throw new NullPointerException();
 		}

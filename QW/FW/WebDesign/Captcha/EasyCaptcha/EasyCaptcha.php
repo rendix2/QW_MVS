@@ -3,7 +3,7 @@
 namespace QW\FW\WebDesign\Captcha\EasyCaptcha;
 
 use QW\FW\Basic\Object;
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Utils\Hash\Hash;
 use QW\FW\Utils\Math\Geom\Point;
@@ -26,7 +26,7 @@ class EasyCaptcha extends Object {
 		$this->captcha = new Images( $width, $height );
 		$this->captcha->setBackgroundColor( new Color( 0, 0, 0 ) );
 		$this->captcha->setTextColor( new Color( 255, 255, 255 ) );
-		$string     = new String( Hash::r() );
+		$string     = new StringW( Hash::r() );
 		$this->text = $string->subString( 0, Math::randomInterval( 6, 8 ) );
 		$this->captcha->setText( Math::randomInterval( 2, 6 ), new Point( 0, 0 ), $string, FALSE );
 	}

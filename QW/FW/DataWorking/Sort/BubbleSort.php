@@ -2,7 +2,7 @@
 
 namespace QW\FW\DataWorking\Sort;
 
-use QW\FW\Basic\Arrays;
+use QW\FW\Basic\ArraysW;
 
 class BubbleSort extends AbstractSort {
 
@@ -15,7 +15,7 @@ class BubbleSort extends AbstractSort {
 			$swapped = FALSE;
 
 			for ( $i = 0; $i <= $j; $i++ ) if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
-				Arrays::swap( $this->originalData, $i, $i + 1 );
+				ArraysW::swap( $this->originalData, $i, $i + 1 );
 				$swapped = TRUE;
 			}
 		}

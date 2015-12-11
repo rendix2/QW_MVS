@@ -26,7 +26,7 @@ Internal Changes
   Full UTF-8 Compatibility
 
 The plugins shipped with Smarty 3.1 have been rewritten to fully
-support UTF-8 strings if Multibyte String is available. Without
+support UTF-8 strings if Multibyte StringW is available. Without
 MBString UTF-8 cannot be handled properly. For those rare cases where
 templates themselves have to juggle encodings, the new modifiers
 to_charset and from_charset may come in handy.

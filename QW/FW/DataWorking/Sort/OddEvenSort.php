@@ -8,7 +8,7 @@
 
 namespace QW\FW\DataWorking\Sort;
 
-use QW\FW\Basic\Arrays;
+use QW\FW\Basic\ArraysW;
 
 class OddEvenSort extends AbstractSort {
 
@@ -21,13 +21,13 @@ class OddEvenSort extends AbstractSort {
 
 			for ( $i = 1; $i < $this->length - 1; $i += 2 )
 				if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
-					Arrays::swap( $this->originalData, $i, $i + 1 );
+					ArraysW::swap( $this->originalData, $i, $i + 1 );
 					$sorted = FALSE;
 				}
 
 			for ( $i = 0; $i < $this->length - 1; $i += 2 )
 				if ( $this->originalData[ $i ] > $this->originalData[ $i + 1 ] ) {
-					Arrays::swap( $this->originalData, $i, $i + 1 );
+					ArraysW::swap( $this->originalData, $i, $i + 1 );
 					$sorted = FALSE;
 				}
 		}

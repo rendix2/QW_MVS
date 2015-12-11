@@ -3,7 +3,7 @@
 namespace QW\FW\DataWorking\Search\StringSearch;
 
 use QW\FW\Basic\Object;
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 use QW\FW\Boot\IllegalArgumentException;
 
 abstract class AbstractStringSearch extends Object {
@@ -17,7 +17,7 @@ abstract class AbstractStringSearch extends Object {
 
 		if ( !is_string( $string ) ) throw new IllegalArgumentException();
 
-		$this->string  = new String( $string );
-		$this->pattern = new String( $pattern );
+		$this->string  = new StringW( $string );
+		$this->pattern = new StringW( $pattern );
 	}
 }

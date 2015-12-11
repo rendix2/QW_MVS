@@ -10,6 +10,7 @@ final class Math {
 
 	const INF = INF;
 	const NAN = NAN;
+	static $ackMemo = [ ];
 
 	public function __construct() {
 		throw new PrivateConstructException();
@@ -36,21 +37,25 @@ final class Math {
 		for ( $x = 0; $x < $z; $x++ ) // maybe <x < 3 || $x < 4 || $x < $z
 			for ( $y = 0; $y < $z; $y++ ) if ( self::ackermann( $x, $y ) == $z ) $result[] = [ $x, $y ];
 
-		return new Matrix( $result );
+		return new Matrix( $result );//
 	}
 
 	public static function ackermannLimitedRecoursion( $m, $n ) {
+
+		if ( isset( self::$ackMemo[ $m ][ $n ] ) ) return self::$ackMemo[ $m ][ $n ];
+
 		switch ( $m ) {
 			case 0:
-				return $n + 1;
+				return self::$ackMemo[ $m ][ $n ] = $n + 1;
 			case 1:
-				return $n + 2;
+				return self::$ackMemo[ $m ][ $n ] = $n + 2;
 			case 2:
-				return 2 * $n + 3;
+				return self::$ackMemo[ $m ][ $n ] = 2 * $n + 3;
 			case 3:
-				return self::power( 2, $n + 3 ) + 3;
+				return self::$ackMemo[ $m ][ $n ] = self::power( 2, $n + 3 ) - 3;
 			case 4:
-				return self::power( 2, self::ackermannLimitedRecoursion( 4, $n - 1 ) + 3 ) - 3;
+				return self::$ackMemo[ $m ][ $n ] =
+					self::power( 2, ( self::ackermannLimitedRecoursion( 4, $n - 1 ) + 3 ) ) - 3;
 		}
 	}
 

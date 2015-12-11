@@ -2,9 +2,10 @@
 namespace QW\Models;
 
 use QW\FW\Architecture\MVC\AbstractBasicModel;
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 use QW\FW\Utils\IP\IPv6;
 use QW\FW\Utils\IP\IPvU;
+use QW\FW\Utils\Math\Math;
 
 
 final class IndexModel extends AbstractBasicModel {
@@ -28,7 +29,7 @@ final class IndexModel extends AbstractBasicModel {
 		echo ' IPString=' . $ipString . '<br>';
 		echo 'MY IP=' . $myIP->getNiceIP() . '<br>';
 
-		$z = new String( "aookkooa", $this->debug );
+		$z = new StringW( "aookkooa", $this->debug );
 
 		echo 'Text:<b>' . $z . '</b><br>Longest palindrome using Manachers algorithm: <b>' .
 			$z->getLongestPalindromeManacher() . '</b>';
@@ -42,7 +43,16 @@ final class IndexModel extends AbstractBasicModel {
 		$this->getDB()
 		     ->freeStatement();
 
+
+		echo 'ack:' . Math::ackermann( 3, 12 );
+
+		echo 'ack2:' . Math::ackermannLimitedRecoursion( 3, 12 );
+
+
+
+
 		return $res;
 	}
+//
 
 }

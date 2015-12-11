@@ -2,7 +2,7 @@
 
 namespace QW\FW\Utils\IP;
 
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 use QW\FW\Boot\IllegalArgumentException;
 
 final class IPv6 extends AbstractIP {
@@ -16,10 +16,10 @@ final class IPv6 extends AbstractIP {
 	}
 
 	public function getNiceIp() {
-		$str = new String( '', $this->debug );
+		$str = new StringW( '', $this->debug );
 
 		for ( $i = 0; $i < 8; $i++ ) {
-			$substr = new String( $this->getPart( $i ), $this->debug );
+			$substr = new StringW( $this->getPart( $i ), $this->debug );
 			$substr = $substr->pad( 4, '0', STR_PAD_LEFT );
 
 			if ( $substr->getLength() != 4 ) $str = $str->concatPostString( $substr );
@@ -39,7 +39,7 @@ final class IPv6 extends AbstractIP {
 	}
 
 	public function getSecureIp() {
-		$string = new String( '', $this->debug );
+		$string = new StringW( '', $this->debug );
 
 		for ( $i = 0; $i < 6; $i++ ) $string = $string->concatPost( (string) $this->getPart( $i ) )
 		                                              ->concatPost( ':' );

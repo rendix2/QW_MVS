@@ -1,6 +1,6 @@
 <?php
 /**
- * Smarty Internal Plugin Resource String
+ * Smarty Internal Plugin Resource StringW
  *
  * @package    Smarty
  * @subpackage TemplateResources
@@ -9,7 +9,7 @@
  */
 
 /**
- * Smarty Internal Plugin Resource String
+ * Smarty Internal Plugin Resource StringW
  * Implements the strings as resource for Smarty template
  * {@internal unlike eval-resources the compiled state of string-resources is saved for subsequent access}}
  *

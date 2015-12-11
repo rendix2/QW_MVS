@@ -41,7 +41,7 @@ class Smarty_Variable {
 	}
 
 	/**
-	 * <<magic>> String conversion
+	 * <<magic>> StringW conversion
 	 *
 	 * @return string
 	 */

@@ -6,7 +6,7 @@ use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Utils\Math\Math;
 use QW\FW\Validator;
 
-class String extends Object {
+class StringW extends Object {
 	const MANACHER_DELIMITER = '|';
 	protected static $separators;
 	protected static $diac = [ 'ľ', 'š', 'č', 'ť', 'ž', 'ý', 'á', 'í', 'é', 'Č', 'Á', 'Ž', 'Ý', 'ó', 'ů', 'ú', 'ě',
@@ -44,12 +44,12 @@ class String extends Object {
 	}
 
 	public static function ArrayToString( array &$array ) {
-		return new String( self::array2String( $array ) );
+		return new StringW( self::array2String( $array ) );
 	}
 
 	private static function addBoundaries( array $cs ) {
 		if ( $cs == NULL || count( $cs ) == 0 ) {
-			$ret = new String( self::MANACHER_DELIMITER . self::MANACHER_DELIMITER );
+			$ret = new StringW( self::MANACHER_DELIMITER . self::MANACHER_DELIMITER );
 
 			return $ret->toCharArray();
 		}
@@ -75,7 +75,7 @@ class String extends Object {
 
 	private static function removeBoundaries( array $cs ) {
 		if ( $cs == NULL || count( $cs ) < 3 ) {
-			$ret = new String( "" );
+			$ret = new StringW( "" );
 
 			return $ret->toCharArray();
 		}
@@ -89,7 +89,7 @@ class String extends Object {
 	}
 
 	public function addSlashes() {
-		return new String( addslashes( $this->string ), $this->debug );
+		return new StringW( addslashes( $this->string ), $this->debug );
 	}
 
 	public function br2nl( $separator = PHP_EOL ) {
@@ -107,19 +107,19 @@ class String extends Object {
 	}
 
 	public function concatPost( $string ) {
-		return new String( $this->string . (string) $string, $this->debug );
+		return new StringW( $this->string . (string) $string, $this->debug );
 	}
 
-	public function concatPostString( String $string ) {
-		return new String( $string->string . $string->string, $this->debug );
+	public function concatPostString( StringW $string ) {
+		return new StringW( $string->string . $string->string, $this->debug );
 	}
 
 	public function concatPre( $string ) {
-		return new String( (string) $string . $this->string, $this->debug );
+		return new StringW( (string) $string . $this->string, $this->debug );
 	}
 
-	public function concatPreString( String $string ) {
-		return new String( $string->string . $string->string, $this->debug );
+	public function concatPreString( StringW $string ) {
+		return new StringW( $string->string . $string->string, $this->debug );
 	}
 
 	public function contains( $string ) {
@@ -140,20 +140,20 @@ class String extends Object {
 //		return $this->string == (string) $string;
 	//}
 
-	public function equalsString( String $string ) {
+	public function equalsString( StringW $string ) {
 		return $this->string == $string->string;
 	}
 
 	public function everyFirstCharInSentenceToUpper() {
-		return new String( ucwords( $this->string ), $this->debug );
+		return new StringW( ucwords( $this->string ), $this->debug );
 	}
 
 	public function firstCharToLower() {
-		return new String( lcfirst( $this->string ), $this->debug );
+		return new StringW( lcfirst( $this->string ), $this->debug );
 	}
 
 	public function firstCharToUpper() {
-		return new String( ucfirst( $this->string ), $this->debug );
+		return new StringW( ucfirst( $this->string ), $this->debug );
 	}
 
 	public function getFirstChar() {
@@ -218,7 +218,7 @@ class String extends Object {
 			$c   = $i;
 		}
 
-		$ss = Arrays::copyOfRange( $s2, $c - $len, $c + $len + 1 );
+		$ss = ArraysW::copyOfRange( $s2, $c - $len, $c + $len + 1 );
 
 		return self::arrayToString( self::removeBoundaries( $ss ) );
 	}
@@ -271,23 +271,23 @@ class String extends Object {
 	}
 
 	public function ltrim( $chars = '\t\n\r\0\x0B' ) {
-		return new String( ltrim( $this->string, $chars ), $this->debug );
+		return new StringW( ltrim( $this->string, $chars ), $this->debug );
 	}
 
 	public function nl2br( $is_xhtml = NULL ) {
 		if ( !is_null( $is_xhtml || !is_bool( $is_xhtml ) ) ) throw new IllegalArgumentException();
 
-		return new String( nl2br( $this->string, $is_xhtml ), $this->debug );
+		return new StringW( nl2br( $this->string, $is_xhtml ), $this->debug );
 	}
 
 	public function pad( $length, $padString, $padType ) {
-		return new String( str_pad( $this->string, $length, $padString, $padType ), $this->debug );
+		return new StringW( str_pad( $this->string, $length, $padString, $padType ), $this->debug );
 	}
 
 	public function printf( $args = NULL ) {
-		$args = new String( $args );
+		$args = new StringW( $args );
 
-		return new String( printf( $this->string, $args ), $this->debug );
+		return new StringW( printf( $this->string, $args ), $this->debug );
 	}
 
 	public function removeDiacritics() {
@@ -295,15 +295,15 @@ class String extends Object {
 	}
 
 	public function removeHTMLTags( $allowable_tags = NULL ) {
-		return new String( strip_tags( $this->string, $allowable_tags ), $this->debug );
+		return new StringW( strip_tags( $this->string, $allowable_tags ), $this->debug );
 	}
 
 	public function removeSlashes() {
-		return new String( stripslashes( $this->string ) );
+		return new StringW( stripslashes( $this->string ) );
 	}
 
 	public function repeat( $multiplier ) {
-		return new String( str_repeat( $this->string, max( 0, $multiplier ) ), $this->debug );
+		return new StringW( str_repeat( $this->string, max( 0, $multiplier ) ), $this->debug );
 	}
 
 	public function replace( $what, $to ) {
@@ -311,7 +311,7 @@ class String extends Object {
 			!is_string( $to )
 		) throw new IllegalArgumentException();
 
-		return new String( str_replace( $what, $to, $this->string ), $this->debug );
+		return new StringW( str_replace( $what, $to, $this->string ), $this->debug );
 	}
 
 	public function replaceRE( $what, $to ) {
@@ -319,19 +319,19 @@ class String extends Object {
 			!is_string( $to )
 		) throw new IllegalArgumentException();
 
-		if ( is_string( $what ) ) return new String( preg_replace( '#' . preg_quote( $what, '#' ) . '#', $to,
+		if ( is_string( $what ) ) return new StringW( preg_replace( '#' . preg_quote( $what, '#' ) . '#', $to,
 			$this->string ), $this->debug );
 
-		return new String( preg_replace( $what, $to, $this->string ),
+		return new StringW( preg_replace( $what, $to, $this->string ),
 			$this->debug );
 	}
 
 	public function reverse() {
-		return new String( strrev( $this->string ), $this->debug );
+		return new StringW( strrev( $this->string ), $this->debug );
 	}
 
 	public function rtrim( $chars = '\t\n\r\0\x0B' ) {
-		return new String( rtrim( $this->string, $chars ), $this->debug );
+		return new StringW( rtrim( $this->string, $chars ), $this->debug );
 	}
 
 	public function setStringFromArray( array &$array ) {
@@ -341,13 +341,13 @@ class String extends Object {
 	}
 
 	public function shuffle() {
-		return new String( str_shuffle( $this->string ), $this->debug );
+		return new StringW( str_shuffle( $this->string ), $this->debug );
 	}
 
 	public function sprintf( $format ) {
-		$format = new String( $format );
+		$format = new StringW( $format );
 
-		return new String( sprintf( $this->string, $format ), $this->debug );
+		return new StringW( sprintf( $this->string, $format ), $this->debug );
 	}
 
 	public function starts( $string ) {
@@ -355,7 +355,7 @@ class String extends Object {
 	}
 
 	public function subString( $start, $end = NULL ) {
-		return new String( mb_substr( $this->string, Math::max( 0, $start ),
+		return new StringW( mb_substr( $this->string, Math::max( 0, $start ),
 			Math::max( 0, Math::min( Math::max( 0, $end ), $this->getLength() - 1 ) ), 'UTF-8' ), $this->debug );
 	}
 
@@ -368,15 +368,15 @@ class String extends Object {
 	}
 
 	public function toLowerCase() {
-		return new String( mb_strtolower( $this->string, 'UTF-8' ), $this->debug );
+		return new StringW( mb_strtolower( $this->string, 'UTF-8' ), $this->debug );
 	}
 
 	public function toUpperCase() {
-		return new String( mb_strtoupper( $this->string, 'UTF-8' ), $this->debug );
+		return new StringW( mb_strtoupper( $this->string, 'UTF-8' ), $this->debug );
 	}
 
 	public function trim( $chars = '\t\n\r\0\x0B' ) {
-		return new String( trim( $this->string, $chars ), $this->debug );
+		return new StringW( trim( $this->string, $chars ), $this->debug );
 	}
 
 	public function wordsCount() {

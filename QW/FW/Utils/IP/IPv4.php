@@ -2,7 +2,7 @@
 
 namespace QW\FW\Utils\IP;
 
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 use QW\FW\Boot\IllegalArgumentException;
 
 final class IPv4 extends AbstractIP {
@@ -26,7 +26,7 @@ final class IPv4 extends AbstractIP {
 	}
 
 	public function getSecureIp() {
-		$string = new String( '' );
+		$string = new StringW( '' );
 
 		for ( $i = 0; $i < 2; $i++ ) $string = $string->concatPost( (string) $this->getPart( $i ) )
 		                                              ->concatPost( '.' );

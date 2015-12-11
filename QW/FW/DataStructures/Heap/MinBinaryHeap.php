@@ -2,7 +2,7 @@
 
 namespace QW\FW\DataStructures\Heap;
 
-use QW\FW\Basic\Arrays;
+use QW\FW\Basic\ArraysW;
 
 class MinBinaryHeap extends BinaryHeap {
 
@@ -19,7 +19,7 @@ class MinBinaryHeap extends BinaryHeap {
 	}
 
 	public function merge( BinaryHeap $heap ) {
-		$this->heapify( Arrays::merge2( $this->array, $heap->array ) );
+		$this->heapify( ArraysW::merge2( $this->array, $heap->array ) );
 	}
 
 	private function repairTop( $bottom, $topIndex ) {

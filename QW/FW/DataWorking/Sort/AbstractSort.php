@@ -2,7 +2,7 @@
 
 namespace QW\FW\DataWorking\Sort;
 
-use QW\FW\Basic\Arrays;
+use QW\FW\Basic\ArraysW;
 use QW\FW\Basic\Object;
 
 abstract class AbstractSort extends Object {
@@ -32,8 +32,8 @@ abstract class AbstractSort extends Object {
 	}
 
 	public function __toString() {
-		$original = new Arrays( $this->originalData );
-		$sorted   = new Arrays( $this->sortedData );
+		$original = new ArraysW( $this->originalData );
+		$sorted   = new ArraysW( $this->sortedData );
 		$string   = 'Original array: ' . $original . '<br>Sorted array: ' . $sorted . '<br>';
 		$original = NULL;
 		$sorted   = NULL;

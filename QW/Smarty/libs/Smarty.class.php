@@ -182,7 +182,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public static $_muted_directories = [ './templates_c/' => NULL, './cache/' => NULL ];
 
 	/**
-	 * Flag denoting if Multibyte String functions are available
+	 * Flag denoting if Multibyte StringW functions are available
 	 */
 	public static $_MBSTRING = SMARTY_MBSTRING;
 

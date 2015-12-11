@@ -211,7 +211,7 @@ You can define arrays within templates.
 Examples:
 {assign var=foo value=[1,2,3]}
 {assign var=foo value=['y'=>'yellow','b'=>'blue']}
-Arrays can be nested.
+ArraysW can be nested.
 {assign var=foo value=[1,[9,8],3]}
 
 There is a new short syntax supported for assigning variables.

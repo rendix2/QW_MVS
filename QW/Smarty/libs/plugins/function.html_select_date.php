@@ -97,7 +97,7 @@ function smarty_function_html_select_date( $params ) {
 	/* Order in which to display the fields.
 	   "D" -> day, "M" -> month, "Y" -> year. */
 	$field_order = 'MDY';
-	/* String printed between the different fields. */
+	/* StringW printed between the different fields. */
 	$field_separator  = "\n";
 	$option_separator = "\n";
 	$time             = NULL;

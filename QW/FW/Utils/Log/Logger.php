@@ -10,7 +10,7 @@ class Logger extends Object {
 	const LOG_TYPE_DATABASE = 1;
 	const LOG_TYPE_FILE = 2;
 	const LOG_TYPE_GLOBAL = 0;
-	const PATH = './logs';
+	const PATH = './logs/';
 	const PATH_DATABASE = 'database.txt';
 	const PATH_FILE = 'global.txt';
 	const PATH_GLOBAL = 'global.txt';

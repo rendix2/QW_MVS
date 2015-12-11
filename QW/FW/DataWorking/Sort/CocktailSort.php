@@ -10,7 +10,7 @@ namespace QW\FW\DataWorking\Sort;
 
 
 // OK
-use QW\FW\Basic\Arrays;
+use QW\FW\Basic\ArraysW;
 
 class CocktailSort extends AbstractSort {
 
@@ -22,7 +22,7 @@ class CocktailSort extends AbstractSort {
 		while ( $i < $j && $swapped ) {
 			$swapped = FALSE;
 			for ( $k = i; $k < $j; $k++ ) if ( $this->originalData[ $k ] > $this->originalData[ $k + 1 ] ) {
-				Arrays::swap( $this->originalData, $k, $k + 1 );
+				ArraysW::swap( $this->originalData, $k, $k + 1 );
 				$swapped = TRUE;
 			}
 
@@ -32,7 +32,7 @@ class CocktailSort extends AbstractSort {
 				$swapped = FALSE;
 
 				for ( $k = $j; $k > $i; $k-- ) if ( $this->originalData[ $k ] < $this->originalData[ $k - 1 ] ) {
-					Arrays::swap( $this->originalData, $k, $k - 1 );
+					ArraysW::swap( $this->originalData, $k, $k - 1 );
 					$swapped = TRUE;
 				}
 			}

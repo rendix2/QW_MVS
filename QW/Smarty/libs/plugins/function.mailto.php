@@ -119,7 +119,8 @@ function smarty_function_mailto( $params ) {
 			$ord[] = ord( $string[ $x ] );
 		}
 
-		$_ret = "<script type=\"text/javascript\" language=\"javascript\">\n" . "{document.write(String.fromCharCode(" .
+		$_ret =
+			"<script type=\"text/javascript\" language=\"javascript\">\n" . "{document.write(StringW.fromCharCode(" .
 			implode( ',', $ord ) . "))" . "}\n" . "</script>\n";
 
 		return $_ret;

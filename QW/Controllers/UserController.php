@@ -2,7 +2,6 @@
 namespace QW\Controllers;
 
 use QW\FW\Architecture\MVC\AbstractBasicController;
-use QW\FW\Utils\SuperGlobals\Session;
 use QW\Libs\Config;
 
 final class UserController extends AbstractBasicController {
@@ -38,6 +37,6 @@ final class UserController extends AbstractBasicController {
 	}
 
 	public function logout() {
-		Session::end();
+		//Session::end();
 	}
 }

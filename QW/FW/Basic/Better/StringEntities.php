@@ -1,9 +1,9 @@
 <?php
 namespace QW\FW\Basic\Better;
 
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 
-class StringEntities extends String {
+class StringWEntities extends StringW {
 
 	public function __construct( $string = "", $debug = FALSE ) {
 		parent::__construct( $string, $debug );

@@ -23,6 +23,8 @@ use QW\Libs\Config;
 	<span><a href="<?= Config::URL ?>/Help">Help</a></span>
 	<?php
 
+	Session::start();
+
 	if ( Session::get( 'logged' ) == TRUE ): ?>
 		<span><a href="<?= Config::URL ?> /User/logout">Logout</a></span>
 	<?php else : ?>

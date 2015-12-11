@@ -3,7 +3,7 @@
 namespace QW\FW\Utils\IP;
 
 use QW\FW\Basic\Object;
-use QW\FW\Basic\String;
+use QW\FW\Basic\StringW;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Utils\SuperGlobals\Server;
 use QW\FW\Validator;
@@ -75,7 +75,7 @@ abstract class AbstractIP extends Object implements IP {
 	final public function getIp() {
 		if ( $this->ipCountPart == 4 ) return long2ip( $this->ipCoded );
 		else {
-			$str = new String( self::ip6unpack( $this->ipCoded ), $this->debug );
+			$str = new StringW( self::ip6unpack( $this->ipCoded ), $this->debug );
 
 			return $str->getString();
 		}

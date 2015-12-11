@@ -13,7 +13,7 @@ use QW\FW\Boot\RuntimeException;
 use QW\FW\DataWorking\Sort\QuickSort;
 use QW\FW\Utils\Math\Math;
 
-class Arrays extends Object implements \ArrayAccess {
+class ArraysW extends Object implements \ArrayAccess {
 
 	private $data;
 	private $size;

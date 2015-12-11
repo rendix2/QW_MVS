@@ -44,9 +44,11 @@ final class IndexModel extends AbstractBasicModel {
 		     ->freeStatement();
 
 
-		echo 'ack:' . Math::ackermann( 3, 12 );
+		echo 'ack2:' . Math::ackermannLimitedRecoursion( 3, 88 );
 
-		echo 'ack2:' . Math::ackermannLimitedRecoursion( 3, 12 );
+		//echo 'ack:' . Math::ackermann( 3, 17 );
+
+
 
 
 

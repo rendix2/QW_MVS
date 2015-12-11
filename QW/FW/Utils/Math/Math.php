@@ -1,7 +1,6 @@
 <?php
 namespace QW\FW\Utils\Math;
 
-use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\PrivateConstructException;
 use QW\FW\DataWorking\Sort\MergeSort;
 use QW\FW\Utils\Math\Matrix\Matrix;
@@ -25,10 +24,13 @@ final class Math {
 	}
 
 	public static function ackermann( $m, $n ) {
-		if ( $m >= 4 ) throw new IllegalArgumentException();
-		if ( $m == 0 ) return $n + 1;
-		else if ( $n == 0 ) return self::ackermann( $m - 1, 1 );
-		else return self::ackermann( $m - 1, self::ackermann( $m, $n - 1 ) );
+		//if ( $m >= 4 ) throw new IllegalArgumentException();
+		if ( isset( self::$ackMemo[ $m ][ $n ] ) ) return self::$ackMemo[ $m ][ $n ];
+
+		if ( $m == 0 ) return self::$ackMemo[ $m ][ $n ] = $n + 1;
+		else if ( $n == 0 ) return self::$ackMemo[ $m ][ $n ] = self::ackermann( $m - 1, 1 );
+		else return self::$ackMemo[ $m ][ $n ] = self::ackermann( $m - 1,
+			isset( self::$ackMemo[ $m ][ $n ] ) ? self::$ackMemo[ $m ][ $n ] : self::ackermann( $m, $n - 1 ) );
 	}
 
 	public static function ackermannInv( $z ) {
@@ -41,7 +43,6 @@ final class Math {
 	}
 
 	public static function ackermannLimitedRecoursion( $m, $n ) {
-
 		if ( isset( self::$ackMemo[ $m ][ $n ] ) ) return self::$ackMemo[ $m ][ $n ];
 
 		switch ( $m ) {

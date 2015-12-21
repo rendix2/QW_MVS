@@ -7,8 +7,10 @@ use QW\FW\Utils\Math\Matrix\Matrix;
 
 final class Math {
 
+	const E = 2.71828182846;
 	const INF = INF;
 	const NAN = NAN;
+	const PI = 3.14159265359;
 	static $ackMemo = [ ];
 
 	public function __construct() {
@@ -113,23 +115,31 @@ final class Math {
 	}
 
 	public static function cosH( $x ) {
+		return ( self::power( self::E, 2 * $x ) + 1 ) / ( 2 * self::power( self::E, $x ) );
+	}
+
+	public static function cosHSystem( $x ) {
 		return cosh( $x );
 	}
 
 	public static function cosecans( $x ) {
-		return 1 / self::sin( $x );
+		return self::inverseNumber( self::sin( $x ) );
 	}
 
 	public static function cotg( $x ) {
 		return self::inverseNumber( self::tg( $x ) );
 	}
 
-	public static function cotgH( $x ) {
-		return ( self::cosH( ( $x ) / self::sinH( $x ) ) );
+	public static function cotgHSystem( $x ) {
+		return ( self::cosHSystem( ( $x ) / self::sinH( $x ) ) );
+	}
+
+	public static function csch( $x ) {
+		return 2 / self::power( self::E, $x ) - self::power( self::E, -$x );
 	}
 
 	public static function cubeRoot( $x ) {
-		return self::power( $x, 1 / 3 );
+		return self::power( $x, self::inverseNumber( 3 ) );
 	}
 
 	public static function cubed( $x ) {
@@ -192,10 +202,20 @@ final class Math {
 	}
 
 	public static function inverseNumber( $x ) {
-		if ( $x == 0 ) return NAN;
-		if ( $x == 1 ) return 1;
-
-		return 1 / $x;
+		switch ( $x ) {
+			case 0:
+				return self::NAN;
+			case 1:
+				return 1;
+			case 2:
+				return 0.5;
+			case 4:
+				return 0.25;
+			case 5:
+				return 0.2;
+			default:
+				return 1 / $x;
+		}
 	}
 
 	public static function logarithm( $x, $base ) {
@@ -322,9 +342,9 @@ final class Math {
 			case 1 / 3:
 				return self::cubeRoot( $base );
 			case -1:
-				return 1 / $base;
+				return self::inverseNumber( $base );
 			case -2:
-				return 1 / ( self::power( $base, 2 ) );
+				return self::inverseNumber( self::power( $base, 2 ) );
 			default:
 				//return (double)phpversion() >= 5.6 ? $base ** $exponent : pow($base, $exponent);
 				return pow( $base, $exponent );
@@ -354,7 +374,11 @@ final class Math {
 	}
 
 	public static function sec( $x ) {
-		return 1 / self::cos( $x );
+		return self::inverseNumber( self::cos( $x ) );
+	}
+
+	public static function secH( $x ) {
+		return 2 / self::power( self::E, $x ) + self::power( self::E, -$x );
 	}
 
 	public static function sin( $x ) {
@@ -362,6 +386,10 @@ final class Math {
 	}
 
 	public static function sinH( $x ) {
+		return ( self::power( self::E, 2 * $x ) - 1 ) / ( 2 * self::power( self::E, $x ) );
+	}
+
+	public static function sinHSystem( $x ) {
 		return sinh( $x );
 	}
 
@@ -420,7 +448,7 @@ final class Math {
 		return tan( $x );
 	}
 
-	public static function tgH( $x ) {
+	public static function tgHSystem( $x ) {
 		return tanh( $x );
 	}
 
@@ -428,5 +456,13 @@ final class Math {
 		if ( $a == $b ) return self::squared( $a );
 
 		return $a * $b;
+	}
+
+	public function cotgH( $x ) {
+		return self::sinH( $x ) / self::cosH( $x );
+	}
+
+	public function tgH( $x ) {
+		return self::sinH( $x ) / self::cosH( $x );
 	}
 }

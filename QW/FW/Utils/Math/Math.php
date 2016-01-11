@@ -22,6 +22,11 @@ final class Math {
 	}
 
 	public static function abs( $x ) {
+		if ( self::isPositive( $x ) ) return $x;
+		else return $x + 2 * $x;
+	}
+
+	public static function absSystem( $x ) {
 		return abs( $x );
 	}
 
@@ -209,13 +214,31 @@ final class Math {
 				return 1;
 			case 2:
 				return 0.5;
+			case 3:
+				return 0.33333333333;
 			case 4:
 				return 0.25;
 			case 5:
 				return 0.2;
+			case 10:
+				return 0.1;
+			case 100:
+				return 0.01;
+			case 1000:
+				return 0.001;
+			case 10000:
+				return 0.0001;
 			default:
 				return 1 / $x;
 		}
+	}
+
+	public static function isNegative( $x ) {
+		return $x <= 1;
+	}
+
+	public static function isPositive( $x ) {
+		return $x >= 1;
 	}
 
 	public static function logarithm( $x, $base ) {
@@ -460,6 +483,10 @@ final class Math {
 
 	public function cotgH( $x ) {
 		return self::sinH( $x ) / self::cosH( $x );
+	}
+
+	public function isZero( $x ) {
+		return $x == 0;
 	}
 
 	public function tgH( $x ) {

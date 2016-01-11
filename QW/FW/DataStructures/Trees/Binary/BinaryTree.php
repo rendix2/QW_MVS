@@ -1,97 +1,16 @@
 <?php
 namespace QW\FW\DataStructures\Trees\Binary;
 
-use QW\FW\DataStructures\Trees\AbstractTree;
-use QW\FW\DataStructures\Trees\Binary\Iterators\CountIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\EulerTourIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\InOrderIterativeIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\InOrderRecourseIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\LevelOrderIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\PostOrderIterativeIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\PostOrderRecourseIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\PreOrderIterativeIterator;
-use QW\FW\DataStructures\Trees\Binary\Iterators\PreOrderRecourseIterator;
+final class BinaryTree extends AbstractBinaryTree {
 
-final class BinaryTree extends AbstractTree {
-	private $left, $right;
-
-	public function __construct( BinaryTree $left = NULL, BinaryTree $right = NULL, $data, $debug = FALSE ) {
-		parent::__construct( $debug );
-		$this->left  = $left;
-		$this->right = $right;
-		$this->data  = $data;
+	public function __construct( AbstractBinaryTree $left = NULL, AbstractBinaryTree $right = NULL, $data, $debug = FALSE ) {
+		parent::__construct( $left, $right, $data, $debug );
 
 		if ( $this->left != NULL ) $this->directChildrenCount++;
 		if ( $this->right != NULL ) $this->directChildrenCount++;
 	}
 
 	public function __destruct() {
-		$this->left  = NULL;
-		$this->right = NULL;
-
 		parent::__destruct();
-	}
-
-	public function getChildrenCount() {
-		if ( $this->childrenCount == NULL ) {
-			$itc = new CountIterator( $this, $this->debug );
-
-			return $this->childrenCount = $itc->getCountChildren();
-		}
-		else return $this->childrenCount;
-	}
-
-	public function getLeftChild() {
-		return $this->left;
-	}
-
-	public function getRightChild() {
-		return $this->right;
-	}
-
-	public function iteratorEulerTour() {
-		return new EulerTourIterator( $this, $this->debug );
-	}
-
-	public function iteratorInOrderIterative() {
-		return new InOrderIterativeIterator( $this, $this->debug );
-	}
-
-	public function iteratorInOrderRecourse() {
-		return new InOrderRecourseIterator( $this, $this->debug );
-	}
-
-	public function iteratorLevelOrder() {
-		return new LevelOrderIterator( $this, $this->debug );
-	}
-
-	public function iteratorPostOrderIterative() {
-		return new PostOrderIterativeIterator( $this, $this->debug );
-	}
-
-	public function iteratorPostOrderRecourse() {
-		return new PostOrderRecourseIterator( $this, $this->debug );
-	}
-
-	public function iteratorPreOrderIterative() {
-		return new PreOrderIterativeIterator( $this, $this->debug );
-	}
-
-	public function iteratorPreOrderRecourse() {
-		return new PreOrderRecourseIterator( $this, $this->debug );
-	}
-
-	public function setLeftChild( BinaryTree $left = NULL ) {
-		if ( $this->left == NULL && $left != NULL ) $this->directChildrenCount++;
-		if ( $left == NULL ) $this->childrenCount = NULL;
-
-		$this->left = $left;
-	}
-
-	public function setRightChild( BinaryTree $right = NULL ) {
-		if ( $this->right == NULL && $right != NULL ) $this->directChildrenCount++;
-		if ( $right == NULL ) $this->childrenCount = NULL;
-
-		$this->right = $right;
 	}
 }

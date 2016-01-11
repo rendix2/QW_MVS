@@ -45,7 +45,7 @@ final class MathEquation {
 
 	public static function solveQuadraticEquation( $a, $b, $c ) {
 		if ( $b == 0 && $c <= 0 ) {
-			$c = Math::abs( $c );
+			$c = Math::absSystem( $c );
 			$c /= $a;
 			$cSqrt = Math::squareRoot( $c );
 

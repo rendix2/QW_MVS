@@ -131,7 +131,7 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 	}
 
 	public function numRows() {
-		$this->statement->rowCount();
+		return $this->statement->rowCount();
 	}
 
 	public function query( $query, array $options ) {

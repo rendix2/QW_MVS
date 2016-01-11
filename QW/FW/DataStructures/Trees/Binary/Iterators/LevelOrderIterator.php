@@ -1,15 +1,14 @@
 <?php
 namespace QW\FW\DataStructures\Trees\Binary\Iterators;
 
-
 use QW\FW\DataStructures\Trees\AbstractIterators\AbstractBinaryTreeIterator;
-use QW\FW\DataStructures\Trees\Binary\BinaryTree;
+use QW\FW\DataStructures\Trees\Binary\AbstractBinaryTree;
 
 class LevelOrderIterator extends AbstractBinaryTreeIterator {
 
 	private $queue;
 
-	public function __construct( BinaryTree $root, $debug = FALSE ) {
+	public function __construct( AbstractBinaryTree $root = NULL, $debug = FALSE ) {
 		$this->queue = new \SplQueue();
 		parent::__construct( $root, $debug );
 	}
@@ -19,7 +18,7 @@ class LevelOrderIterator extends AbstractBinaryTreeIterator {
 		parent::__destruct();
 	}
 
-	protected function order( BinaryTree $root = NULL ) {
+	protected function order( AbstractBinaryTree $root = NULL ) {
 		if ( $root == NULL || $this->realRoot == $root ) return;
 
 		$this->queue->enqueue( $root );

@@ -14,14 +14,15 @@ use QW\FW\DataStructures\Trees\Ternary\Iterators\PreOrderRecourseIterator;
 class TernaryTree extends AbstractTree {
 
 	private $left, $middle, $right;
-	private $data;
+
+	//private $data;
 
 	public function __construct( TernaryTree $left = NULL, TernaryTree $middle = NULL, TernaryTree $right = NULL, $data, $debug = FALSE ) {
 		parent::__construct( $debug );
 		$this->left   = $left;
 		$this->middle = $middle;
 		$this->right  = $right;
-		$this->data   = $data;
+		//$this->data   = $data;
 
 		if ( $this->left != NULL ) $this->directChildrenCount++;
 		if ( $this->middle != NULL ) $this->directChildrenCount++;
@@ -33,6 +34,8 @@ class TernaryTree extends AbstractTree {
 		$this->middle = NULL;
 		$this->right  = NULL;
 		$this->data   = NULL;
+
+		parent::__destruct();
 	}
 
 	public function getChildrenCount() {

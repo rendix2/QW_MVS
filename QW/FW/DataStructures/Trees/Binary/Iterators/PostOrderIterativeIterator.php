@@ -3,12 +3,12 @@
 namespace QW\FW\DataStructures\Trees\Binary\Iterators;
 
 use QW\FW\DataStructures\Trees\AbstractIterators\AbstractBinaryTreeIterator;
-use QW\FW\DataStructures\Trees\Binary\BinaryTree;
+use QW\FW\DataStructures\Trees\Binary\AbstractBinaryTree;
 
 class PostOrderIterativeIterator extends AbstractBinaryTreeIterator {
 	private $stack;
 
-	public function __construct( BinaryTree $root, $debug = FALSE ) {
+	public function __construct( AbstractBinaryTree $root = NULL, $debug = FALSE ) {
 		$this->stack = new \SplStack();
 		parent::__construct( $root, $debug );
 	}
@@ -18,7 +18,7 @@ class PostOrderIterativeIterator extends AbstractBinaryTreeIterator {
 		parent::__destruct();
 	}
 
-	protected function order( BinaryTree $root = NULL ) {
+	protected function order( AbstractBinaryTree $root = NULL ) {
 		$lastVisited = NULL;
 
 		while ( !$this->stack->isEmpty() || $root != NULL ) {

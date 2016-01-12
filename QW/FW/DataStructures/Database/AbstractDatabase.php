@@ -32,14 +32,14 @@ abstract class AbstractDatabase extends Object implements IDatabase {
 		parent::__construct( $debug );
 		self::$AllQueryCount       = 0;
 		self::$AllConnectionsCount = 0;
-		$this->host = $host;
-		$this->userName = $userName;
-		$this->userPassword = $userPassword;
-		$this->dbName = $dbName;
-		$this->options = $options;
-		$this->queryCount = 0;
-		$this->statement = NULL;
-		$this->connection = NULL;
+		$this->host                = $host;
+		$this->userName            = $userName;
+		$this->userPassword        = $userPassword;
+		$this->dbName              = $dbName;
+		$this->options             = $options;
+		$this->queryCount          = 0;
+		$this->statement           = NULL;
+		$this->connection          = NULL;//
 
 		if ( !is_bool( $log ) ) $log = FALSE;
 		if ( !is_bool( $connectEveryQuery ) ) $this->connectEveryQuery = FALSE;

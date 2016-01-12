@@ -34,8 +34,8 @@ abstract class AbstractTree extends Object {
 
 	public function __destruct() {
 		$this->data                = NULL;
-		$this->childrenCount = NULL;
-		$this->directChildrenCount = NULL;
+		$this->childrenCount       = NULL;
+		$this->directChildrenCount = NULL;//
 
 		parent::__destruct();
 	}

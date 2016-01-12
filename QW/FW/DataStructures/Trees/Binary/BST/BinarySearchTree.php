@@ -15,7 +15,7 @@ class BinarySearchTree extends AbstractBinaryTree {
 
 	private $root;
 
-	public function __construct( BinarySearchTree $left = NULL, BinarySearchTree $right = NULL, $data, $debug ) {
+	public function __construct( AbstractBinaryTree $left = NULL, AbstractBinaryTree $right = NULL, $data, $debug ) {
 		parent::__construct( $left, $right, $data, $debug );
 		$this->root = $this;
 	}

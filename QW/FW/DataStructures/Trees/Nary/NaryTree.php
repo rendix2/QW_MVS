@@ -17,7 +17,7 @@ final class NaryTree extends AbstractTree {
 	private $children;
 
 	public function __construct( array $children, $data, $debug = FALSE ) {
-		parent::__construct( $debug );
+		parent::__construct( $data, $debug );
 
 		// simulating array object type hinting :((
 		if ( count( $children ) ) foreach ( $children as $v )
@@ -26,7 +26,6 @@ final class NaryTree extends AbstractTree {
 		else $this->directChildrenCount = 0;
 
 		$this->children = $children;
-		$this->data     = $data;
 	}
 
 	public function __destruct() {

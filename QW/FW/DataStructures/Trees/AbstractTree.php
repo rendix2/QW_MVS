@@ -26,8 +26,10 @@ abstract class AbstractTree extends Object {
 
 	abstract public function iteratorPreOrderRecourse();
 
-	public function __construct( $debug = FALSE ) {
+	public function __construct( $data, $debug = FALSE ) {
 		parent::__construct( $debug );
+
+		$this->data = $data;
 	}
 
 	public function __destruct() {

@@ -24,11 +24,13 @@ abstract class AbstractBinaryTree extends AbstractTree {
 	protected $left, $right;
 
 	public function __construct( AbstractBinaryTree $left = NULL, AbstractBinaryTree $right = NULL, $data, $debug = FALSE ) {
-		parent::__construct( $debug );
+		parent::__construct( $data, $debug );
 
 		$this->left  = $left;
 		$this->right = $right;
-		$this->data  = $data;
+
+		if ( $this->left != NULL ) $this->directChildrenCount++;
+		if ( $this->right != NULL ) $this->directChildrenCount++;
 	}
 
 	public function __destruct() {
@@ -37,7 +39,6 @@ abstract class AbstractBinaryTree extends AbstractTree {
 
 		parent::__destruct();
 	}
-
 
 	public function getChildrenCount() {
 		if ( $this->childrenCount == NULL ) {

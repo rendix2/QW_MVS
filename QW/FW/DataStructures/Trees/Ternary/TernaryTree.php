@@ -10,6 +10,7 @@ use QW\FW\DataStructures\Trees\Ternary\Iterators\InOrderRecourseIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\LevelOrderIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\PostOrderRecourseIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\PreOrderRecourseIterator;
+use QW\FW\Utils\Math\Math;
 
 class TernaryTree extends AbstractTree {
 
@@ -41,6 +42,16 @@ class TernaryTree extends AbstractTree {
 			return $this->childrenCount = $its->getCountChildren();
 		}
 		else return $this->childrenCount;
+	}
+
+	public function getHeight( TernaryTree $root = NULL ) {
+		$height = 0;
+
+		if ( $root == NULL ) $height = -1;
+		else $height = 1 + Math::max( $this->getHeight( $root->left ), $this->getHeight( $root->middle ),
+				$this->getHeight( $root->right ) );
+
+		return $height;
 	}
 
 	public function getLeftChild() {

@@ -18,6 +18,7 @@ use QW\FW\DataStructures\Trees\Binary\Iterators\PostOrderIterativeIterator;
 use QW\FW\DataStructures\Trees\Binary\Iterators\PostOrderRecourseIterator;
 use QW\FW\DataStructures\Trees\Binary\Iterators\PreOrderIterativeIterator;
 use QW\FW\DataStructures\Trees\Binary\Iterators\PreOrderRecourseIterator;
+use QW\FW\Utils\Math\Math;
 
 abstract class AbstractBinaryTree extends AbstractTree {
 
@@ -47,6 +48,15 @@ abstract class AbstractBinaryTree extends AbstractTree {
 			return $this->childrenCount = $itc->getCountChildren();
 		}
 		else return $this->childrenCount;
+	}
+
+	public function getHeight( AbstractBinaryTree $root = NULL ) {
+		$height = 0;
+
+		if ( $root == NULL ) $height = -1;
+		else $height = 1 + Math::max( $this->getHeight( $root->left ), $this->getHeight( $root->right ) );
+
+		return $height;
 	}
 
 	public function getLeftChild() {

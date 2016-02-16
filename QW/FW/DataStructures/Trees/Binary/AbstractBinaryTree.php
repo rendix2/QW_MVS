@@ -42,21 +42,19 @@ abstract class AbstractBinaryTree extends AbstractTree {
 	}
 
 	public function getChildrenCount() {
-		if ( $this->childrenCount == NULL ) {
-			$itc = new CountIterator( $this, $this->debug );
-
-			return $this->childrenCount = $itc->getCountChildren();
-		}
-		else return $this->childrenCount;
+		return $this->getCountRecourse( $this );
 	}
 
-	public function getHeight( AbstractBinaryTree $root = NULL ) {
-		$height = 0;
+	private function getCountRecourse( AbstractBinaryTree $root = NULL ) {
+		if ( $root == NULL ) return 0;
 
-		if ( $root == NULL ) $height = -1;
-		else $height = 1 + Math::max( $this->getHeight( $root->left ), $this->getHeight( $root->right ) );
+		return $this->getCountRecourse( $root->left ) + $this->getCountRecourse( $root->right ) + 1;
+	}
 
-		return $height;
+	public function getDepth( AbstractBinaryTree $root = NULL ) {
+		if ( $root == NULL ) return -1;
+
+		return Math::max( $this->getDepth( $root->left ), $this->getDepth( $root->right ) ) + 1;
 	}
 
 	public function getLeftChild() {

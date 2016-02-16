@@ -4,7 +4,6 @@ namespace QW\FW\DataStructures\Trees\Ternary;
 
 use QW\FW\Boot\UnsupportedOperationException;
 use QW\FW\DataStructures\Trees\AbstractTree;
-use QW\FW\DataStructures\Trees\Ternary\Iterators\CountIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\EulerTourIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\InOrderRecourseIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\LevelOrderIterator;
@@ -36,22 +35,21 @@ class TernaryTree extends AbstractTree {
 	}
 
 	public function getChildrenCount() {
-		if ( $this->childrenCount == NULL ) {
-			$its = new CountIterator( $this, $this->debug );
-
-			return $this->childrenCount = $its->getCountChildren();
-		}
-		else return $this->childrenCount;
+		return $this->getCountRecourse( $this );
 	}
 
-	public function getHeight( TernaryTree $root = NULL ) {
-		$height = 0;
+	private function getCountRecourse( TernaryTree $root = NULL ) {
+		if ( $root == NULL ) return 0;
 
-		if ( $root == NULL ) $height = -1;
-		else $height = 1 + Math::max( $this->getHeight( $root->left ), $this->getHeight( $root->middle ),
-				$this->getHeight( $root->right ) );
+		return $this->getCountRecourse( $root->left ) + $this->getCountRecourse( $root->middle ) +
+		$this->getCountRecourse( $root->right ) + 1;
+	}
 
-		return $height;
+	public function getDepth( TernaryTree $root = NULL ) {
+		if ( $root == NULL ) return -1;
+
+		return 1 +
+		Math::max( $this->getDepth( $root->left ), $this->getDepth( $root->middle ), $this->getDepth( $root->right ) );
 	}
 
 	public function getLeftChild() {

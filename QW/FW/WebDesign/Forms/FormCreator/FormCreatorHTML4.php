@@ -40,6 +40,8 @@ class FormCreatorHTML4 extends Object {
 	}
 
 	public function __toString() {
+		if ( !$this->submitName ) throw  new IllegalArgumentException();
+
 		$finalData = '';
 
 		foreach ( $this->formData as $v ) $finalData .= $v;
@@ -47,63 +49,76 @@ class FormCreatorHTML4 extends Object {
 		return $finalData . '</form>';
 	}
 
-	public function addButton( $name, $value = '' ) {
-		$this->formData[] = '<button name="' . $name . '">' . $value . '</button>';
+	public function addButton( $name, $value = '', array  $params = [ ] ) {
+		$this->formData[] =
+			'<button name="' . $name . '" ' . $this->otherAttributes( $params ) . '>' . $value . '</button>';
 
 		return $this;
 	}
 
-	public function addInputCheckbox( $name, $value = '' ) {
-		$this->formData[] = '<input type="checkbox" name="' . $name . '" value="' . $value . '">';
+	public function addInputCheckbox( $name, $value = '', array  $params = [ ] ) {
+		$this->formData[] =
+			'<input type="checkbox" name="' . $name . '" value="' . $value . '" ' . $this->otherAttributes( $params ) .
+			'>';
 
 		return $this;
 	}
 
-	public function addInputHidden( $name, $value = '' ) {
-		$this->formData[] = '<input type="hidden" name="' . $name . '" value="' . $value . '">';
+	public function addInputHidden( $name, $value = '', array  $params = [ ] ) {
+		$this->formData[] =
+			'<input type="hidden" name="' . $name . '" value="' . $value . '" ' . $this->otherAttributes( $params ) .
+			'>';
 
 		return $this;
 	}
 
-	public function addInputImage( $name, $src ) {
+	public function addInputImage( $name, $src, $alt, array  $params = [ ] ) {
 		if ( !file_exists( $src ) ) throw new IllegalArgumentException();
 
-		$this->formData[] = '<input type="image" name="' . $name . '" src="' . $src . '">';
+		$this->formData[] =
+			'<input type="image" name="' . $name . '" src="' . $src . '" alt="' . $alt . '" title="' . $alt . '" ' .
+			$this->otherAttributes( $params ) . '>';
 
 		return $this;
 	}
 
-	public function addInputPassword( $name, $size = '', $maxlength = '' ) {
-		$this->formData[] = '<input type="password" name="' . $name . '" value="" maxlength="' . $maxlength . '">';
+	public function addInputPassword( $name, $maxlength = '', array  $params = [ ] ) {
+		$this->formData[] = '<input type="password" name="' . $name . '" value="" maxlength="' . $maxlength . '" ' .
+			$this->otherAttributes( $params ) . '>';
 
 		return $this;
 	}
 
-	public function addInputRadio( $name, $value = '', $checked = '' ) {
+	public function addInputRadio( $name, $value = '', $checked = '', array  $params = [ ] ) {
 		$checked = $checked ? 'checked="checked' : '';
 
-		$this->formData[] = '<input type="radio" name="' . $name . '" value="' . $value . '" ' . $checked . '>';
+		$this->formData[] = '<input type="radio" name="' . $name . '" value="' . $value . '" ' . $checked . ' ' .
+			$this->otherAttributes( $params ) . '>';
 
 		return $this;
 	}
 
-	public function addInputReset( $name, $value = '' ) {
-		$this->formData[] = '<input type="reset" name="' . $name . '" value="' . $value . '">';
+	public function addInputReset( $name, $value = '', array  $params = [ ] ) {
+		$this->formData[] =
+			'<input type="reset" name="' . $name . '" value="' . $value . '" ' . $this->otherAttributes( $params ) .
+			'>';
 
 		return $this;
 	}
 
-	public function addInputSubmit( $name, $value = '' ) {
+	public function addInputSubmit( $name, $value = '', array  $params = [ ] ) {
 		$this->submitName = $name;
-		$this->formData[] = '<input type="submit" name="' . $name . '" value="' . $value . '">';
+		$this->formData[] =
+			'<input type="submit" name="' . $name . '" value="' . $value . '" ' . $this->otherAttributes( $params ) .
+			'>';
 
 		return $this;
 	}
 
-	public function addInputText( $name, $value = '', $size = '', $maxlength = '', $autocomplete = 'off' ) {
+	public function addInputText( $name, $value = '', $size = '', $maxlength = '', $autocomplete = 'off', array  $params = [ ] ) {
 		$this->formData[] =
 			'<input type="text" name="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' .
-			$maxlength . '" autocomplete="' . $autocomplete . '">';
+			$maxlength . '" autocomplete="' . $autocomplete . '" ' . $this->otherAttributes( $params ) . '>';
 
 		return $this;
 	}
@@ -117,14 +132,15 @@ class FormCreatorHTML4 extends Object {
 		return $this;
 	}
 
-	public function addTextArea( $name, $value = '' ) {
-		$this->formData[] = '<textarea name="' . $name . '">' . $value . '</textarea>';
+	public function addTextArea( $name, $value = '', array  $params = [ ] ) {
+		$this->formData[] =
+			'<textarea name="' . $name . '" ' . $this->otherAttributes( $params ) . '>' . $value . '</textarea>';
 
 		return $this;
 	}
 
 	public function createSelect( $name, $multiple = FALSE, $size = 5, $disabled = FALSE ) {
-		return ( $this->select == NULL ) ? new FormCreatorSelect( $this, $name, $multiple, $size, FALSE ) :
+		return ( $this->select == NULL ) ? new FormCreatorSelect( $this, $name, $multiple, $size, $disabled, FALSE ) :
 			$this->select;
 	}
 
@@ -138,5 +154,15 @@ class FormCreatorHTML4 extends Object {
 
 	public function getSubmitName() {
 		return $this->submitName;
+	}
+
+	protected function otherAttributes( array $array ) {
+		$res = '';
+
+		foreach ( $array as $k => $v ) {
+			$res .= " " . $k . '="' . $v . '" ';
+		}
+
+		return $res;
 	}
 }

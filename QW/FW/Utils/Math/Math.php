@@ -295,6 +295,22 @@ final class Math {
 		return $min;
 	}
 
+	public static function minMax( array $numbers ) {
+		$max    = $min = $numbers[ 0 ];
+		$length = count( $numbers );
+
+		for ( $i = 1; $i < $length - 1; $i = $i + 2 ) if ( $numbers[ $i ] < $numbers[ $i + 1 ] ) {
+			if ( $numbers[ $i ] < $min ) $min = $numbers[ $i ];
+			if ( $numbers[ $i + 1 ] > $max ) $max = $numbers[ $i + 1 ];
+		}
+		else {
+			if ( $numbers[ $i ] > $max ) $max = $numbers[ i ];
+			if ( $numbers[ $i + 1 ] < $min ) $min = $numbers[ $i + 1 ];
+		}
+
+		return [ 'min' => $min, 'max' => $max ];
+	}
+
 	public static function minimumFromArray( array $x ) {
 		return min( $x );
 	}

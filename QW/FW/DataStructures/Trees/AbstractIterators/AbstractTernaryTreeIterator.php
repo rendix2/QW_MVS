@@ -2,13 +2,13 @@
 
 namespace QW\FW\DataStructures\Trees\AbstractIterators;
 
-use QW\FW\DataStructures\Trees\Ternary\TernaryTree;
+use QW\FW\DataStructures\Trees\Binary\AbstractBinaryTree;
 
 abstract class AbstractTernaryTreeIterator extends AbstractTreeIterator {
 
-	abstract protected function order( TernaryTree $root = NULL );
+	abstract protected function order( AbstractBinaryTree $root = NULL );
 
-	public function __construct( TernaryTree $root, $debug = FALSE ) {
+	public function __construct( AbstractBinaryTree $root, $debug = FALSE ) {
 		parent::__construct( $debug );
 
 		$this->order( $root );
@@ -17,5 +17,4 @@ abstract class AbstractTernaryTreeIterator extends AbstractTreeIterator {
 	public function __destruct() {
 		parent::__destruct();
 	}
-
 }

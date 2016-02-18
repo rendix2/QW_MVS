@@ -3,7 +3,7 @@
 namespace QW\FW\DataStructures\Trees\Ternary;
 
 use QW\FW\Boot\UnsupportedOperationException;
-use QW\FW\DataStructures\Trees\AbstractTree;
+use QW\FW\DataStructures\Trees\Binary\AbstractBinaryTree;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\EulerTourIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\InOrderRecourseIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\LevelOrderIterator;
@@ -11,57 +11,52 @@ use QW\FW\DataStructures\Trees\Ternary\Iterators\PostOrderRecourseIterator;
 use QW\FW\DataStructures\Trees\Ternary\Iterators\PreOrderRecourseIterator;
 use QW\FW\Utils\Math\Math;
 
-class TernaryTree extends AbstractTree {
+class TernaryTree extends AbstractBinaryTree {
 
-	private $left, $middle, $right;
+	private $middle;
 
-	public function __construct( TernaryTree $left = NULL, TernaryTree $middle = NULL, TernaryTree $right = NULL, $data, $debug = FALSE ) {
-		parent::__construct( $data, $debug );
-		$this->left   = $left;
+	public function __construct( AbstractBinaryTree $left = NULL, AbstractBinaryTree $middle = NULL, AbstractBinaryTree $right = NULL, $data, $debug = FALSE ) {
+		parent::__construct( $left, $right, $data, $debug );
+
 		$this->middle = $middle;
-		$this->right  = $right;
 
-		if ( $this->left != NULL ) $this->directChildrenCount++;
 		if ( $this->middle != NULL ) $this->directChildrenCount++;
-		if ( $this->right != NULL ) $this->directChildrenCount++;
 	}
 
 	public function __destruct() {
-		$this->left   = NULL;
-		$this->middle = NULL;
-		$this->right  = NULL;
+		//$this->middle = NULL;
+
+		$this->postOrderDestruct( $this );
 
 		parent::__destruct();
+
+		echo 'Mažu ternární strom';
 	}
 
 	public function getChildrenCount() {
 		return $this->getCountRecourse( $this );
 	}
 
-	private function getCountRecourse( TernaryTree $root = NULL ) {
+	private function getCountRecourse( AbstractBinaryTree $root = NULL ) {
 		if ( $root == NULL ) return 0;
 
-		return $this->getCountRecourse( $root->left ) + $this->getCountRecourse( $root->middle ) +
-		$this->getCountRecourse( $root->right ) + 1;
+		if ( $root instanceof TernaryTree ) return $this->getCountRecourse( $root->left ) +
+		$this->getCountRecourse( $root->middle ) + $this->getCountRecourse( $root->right ) + 1;
+		else
+			return $this->getCountRecourse( $root->left ) + $this->getCountRecourse( $root->right ) + 1;
 	}
 
-	public function getDepth( TernaryTree $root = NULL ) {
+	final public function getDepth( AbstractBinaryTree $root = NULL ) {
 		if ( $root == NULL ) return -1;
 
-		return 1 +
+		if ( $root instanceof TernaryTree ) return 1 +
 		Math::max( $this->getDepth( $root->left ), $this->getDepth( $root->middle ), $this->getDepth( $root->right ) );
-	}
-
-	public function getLeftChild() {
-		return $this->left;
+		else
+			return 1 + Math::max( $this->getDepth( $root->left ), $this->getDepth( $root->right ) );
 	}
 
 	public function getMiddleChild() {
 		return $this->middle;
-	}
-
-	public function getRightChild() {
-		return $this->right;
 	}
 
 	public function iteratorEulerTour() {
@@ -96,18 +91,18 @@ class TernaryTree extends AbstractTree {
 		return new PreOrderRecourseIterator( $this, $this->debug );
 	}
 
-	public function setLeftChild( TernaryTree $left = NULL ) {
-		if ( $left == NULL ) $this->childrenCount = NULL;
-		$this->left = $left;
+	private function postOrderDestruct( AbstractBinaryTree $root = NULL ) {
+		if ( $root == NULL ) return;
+
+		$this->postOrderDestruct( $root->left );
+		if ( $root instanceof TernaryTree ) $this->postOrderDestruct( $root->middle );
+		$this->postOrderDestruct( $root->right );
+
+		$root = NULL;
 	}
 
-	public function setMiddleChild( TernaryTree $middle = NULL ) {
+	public function setMiddleChild( AbstractBinaryTree $middle = NULL ) {
 		if ( $middle == NULL ) $this->childrenCount = NULL;
 		$this->middle = $middle;
-	}
-
-	public function setRightChild( TernaryTree $right = NULL ) {
-		if ( $right == NULL ) $this->childrenCount = NULL;
-		$this->right = $right;
 	}
 }

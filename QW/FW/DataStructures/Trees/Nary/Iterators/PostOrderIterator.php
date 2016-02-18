@@ -16,7 +16,7 @@ class PostOrderIterator extends AbstractNaryTreeIterator {
 	}
 
 	protected function order( NaryTree $root = NULL ) {
-		if ( $root == NULL || $this->realRoot == $root ) return;
+		if ( $root == NULL ) return;
 
 		foreach ( $root->getChildren() as $child ) $this->order( $child );
 

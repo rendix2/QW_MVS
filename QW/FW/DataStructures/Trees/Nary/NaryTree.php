@@ -6,8 +6,6 @@ use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\UnsupportedOperationException;
 use QW\FW\DataStructures\Trees\AbstractTree;
 use QW\FW\DataStructures\Trees\Nary\Iterators\CountIterator;
-use QW\FW\DataStructures\Trees\Nary\Iterators\EulerTourIterator;
-use QW\FW\DataStructures\Trees\Nary\Iterators\InOrderIterator;
 use QW\FW\DataStructures\Trees\Nary\Iterators\LevelOrderIterator;
 use QW\FW\DataStructures\Trees\Nary\Iterators\PostOrderIterator;
 use QW\FW\DataStructures\Trees\Nary\Iterators\PreOrderIterator;
@@ -29,7 +27,11 @@ final class NaryTree extends AbstractTree {
 	}
 
 	public function __destruct() {
-		$this->children = NULL;
+
+
+		$this->postOrderDestruct( $this );
+
+		echo 'Mažu N-arní strom';
 
 		parent::__destruct();
 	}
@@ -70,11 +72,11 @@ final class NaryTree extends AbstractTree {
 	}
 
 	public function iteratorEulerTour() {
-		return new EulerTourIterator( $this, $this->debug );
+		throw new UnsupportedOperationException();
 	}
 
 	public function iteratorInOrderIterative() {
-		return new InOrderIterator( $this, $this->debug );
+		throw new UnsupportedOperationException();
 	}
 
 	public function iteratorInOrderRecourse() {
@@ -99,5 +101,13 @@ final class NaryTree extends AbstractTree {
 
 	public function iteratorPreOrderRecourse() {
 		throw new UnsupportedOperationException();
+	}
+
+	private function postOrderDestruct( NaryTree $root = NULL ) {
+		if ( $root == NULL ) return;
+
+		foreach ( $root->getChildren() as $child ) $this->postOrderDestruct( $child );
+
+		$root = NULL;
 	}
 }

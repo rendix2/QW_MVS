@@ -3,6 +3,7 @@ Hlavní stránka :P
 <img src="<?php
 
 use QW\FW\DataStructures\Trees\Binary\BinaryTree;
+use QW\FW\DataStructures\Trees\Ternary\TernaryTree;
 use QW\FW\Utils\Math\Math;
 
 echo \QW\Libs\Config::URL ?>/ImageShow.php"/>
@@ -34,6 +35,10 @@ print_r( $root2->iteratorPostOrderIterative()
                ->getFinalData() );
 print_r( $root2->iteratorPostOrderRecourse()
                ->getFinalData() );
+echo 'EULER:::';
+
+print_r( $root2->iteratorEulerTour()
+               ->getFinalData() );
 echo '<br><br>';
 
 $root2 = NULL;
@@ -62,6 +67,32 @@ Math::ackermannInv( 125 )
 echo '<br>';
 
 var_dump( Math::randomBoolean() );
+
+
+$root = new TernaryTree( new BinaryTree( NULL, NULL, 1, FALSE ), new BinaryTree( NULL, NULL, 2, FALSE ),
+    new BinaryTree( NULL, NULL, 3, FALSE ), 4, FALSE );
+echo 'Z------';
+print_r( $root->iteratorEulerTour()
+              ->getFinalData() );
+
+$root = NULL;
+
+$root3 = new TernaryTree( new TernaryTree( NULL, NULL, NULL, 2 ), new  TernaryTree( NULL, NULL, NULL, 3 ),
+    new TernaryTree( new TernaryTree( NULL, NULL, NULL, 5 ), new TernaryTree( NULL, NULL, NULL, 6 ), NULL, 4 ), 1 );
+
+echo 'Euler TERNARY:<br>';
+print_r( $root3->iteratorEulerTour()
+               ->getFinalData() );
+
+$root3 = NULL;
+$root4 = new \QW\FW\DataStructures\Trees\Nary\NaryTree( [ new \QW\FW\DataStructures\Trees\Nary\NaryTree( [ ], 3 ),
+                                                          new \QW\FW\DataStructures\Trees\Nary\NaryTree( [ ], 3 ),
+                                                          new \QW\FW\DataStructures\Trees\Nary\NaryTree( [ new \QW\FW\DataStructures\Trees\Nary\NaryTree( [ ],
+                                                              5 ), new \QW\FW\DataStructures\Trees\Nary\NaryTree( [ ],
+                                                              6 ) ], 4 ) ], 1 );
+$root4 = NULL;
+
+
 ?>
 
 

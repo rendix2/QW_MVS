@@ -10,18 +10,19 @@ namespace QW\FW\DataStructures\Trees\Ternary\Iterators;
 
 
 use QW\FW\DataStructures\Trees\AbstractIterators\AbstractTernaryTreeIterator;
+use QW\FW\DataStructures\Trees\Binary\AbstractBinaryTree;
 use QW\FW\DataStructures\Trees\Ternary\TernaryTree;
 
 class LevelOrderIterator extends AbstractTernaryTreeIterator {
 
 	private $queue;
 
-	public function __construct( TernaryTree $root = NULL, $debug = FALSE ) {
+	public function __construct( AbstractBinaryTree $root = NULL, $debug = FALSE ) {
 		$this->queue = new \SplQueue();
 		parent::__construct( $root, $debug );
 	}
 
-	protected function order( TernaryTree $root = NULL ) {
+	protected function order( AbstractBinaryTree $root = NULL ) {
 		if ( $root == NULL || $this->realRoot == $root ) return;
 
 		$this->queue->enqueue( $root );
@@ -31,7 +32,9 @@ class LevelOrderIterator extends AbstractTernaryTreeIterator {
 			$this->finalData[] = $current->getData();
 
 			if ( $current->getLeftChild() != NULL ) $this->queue->enqueue( $current->getLeftChild() );
-			if ( $current->getMiddleChild() != NULL ) $this->queue->enqueue( $current->getMiddleChild() );
+			if ( $current instanceof TernaryTree &&
+				$current->getMiddleChild() != NULL
+			) $this->queue->enqueue( $current->getMiddleChild() );
 			if ( $current->getRightChild() != NULL ) $this->queue->enqueue( $current->getRightChild() );
 		}
 	}

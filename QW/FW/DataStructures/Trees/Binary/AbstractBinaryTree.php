@@ -35,10 +35,19 @@ abstract class AbstractBinaryTree extends AbstractTree {
 	}
 
 	public function __destruct() {
-		$this->left  = NULL;
-		$this->right = NULL;
+		//$this->left  = NULL;
+		//$this->right = NULL;
+
+		$this->postOrderDestruct( $this );
+
+		echo 'Mažu strom';
 
 		parent::__destruct();
+
+	}
+
+	public function bal() {
+		return $this->getCountRecourse( $this->left ) - $this->getCountRecourse( $this->right );
 	}
 
 	public function getChildrenCount() {
@@ -95,6 +104,15 @@ abstract class AbstractBinaryTree extends AbstractTree {
 
 	public function iteratorPreOrderRecourse() {
 		return new PreOrderRecourseIterator( $this, $this->debug );
+	}
+
+	private function postOrderDestruct( AbstractBinaryTree $root = NULL ) {
+		if ( $root == NULL ) return;
+
+		$this->postOrderDestruct( $root->left );
+		$this->postOrderDestruct( $root->right );
+
+		$root = NULL;
 	}
 
 	public function setLeftChild( AbstractBinaryTree $left = NULL ) {

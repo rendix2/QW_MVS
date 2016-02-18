@@ -21,7 +21,6 @@ class BinarySearchTree extends AbstractBinaryTree {
 	}
 
 	public function __destruct() {
-		$this->root = NULL;
 		parent::__destruct();
 	}
 

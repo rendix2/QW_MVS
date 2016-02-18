@@ -35,12 +35,7 @@ abstract class AbstractBinaryTree extends AbstractTree {
 	}
 
 	public function __destruct() {
-		//$this->left  = NULL;
-		//$this->right = NULL;
-
 		$this->postOrderDestruct( $this );
-
-		echo 'Mažu strom';
 
 		parent::__destruct();
 

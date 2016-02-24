@@ -38,7 +38,6 @@ abstract class AbstractBinaryTree extends AbstractTree {
 		$this->postOrderDestruct( $this );
 
 		parent::__destruct();
-
 	}
 
 	public function bal() {

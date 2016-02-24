@@ -5,6 +5,8 @@ use QW\FW\Basic\Object;
 use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Utils\Math\Math;
+use QW\FW\Utils\Math\Matrix\Determinant\MathMatrixLaplaceExtensionDeterminant;
+use QW\FW\Validator;
 
 final class Matrix extends Object {
 	private $matrix, $matrixSizeA, $matrixSizeB;
@@ -23,6 +25,12 @@ final class Matrix extends Object {
 		$this->matrixSizeB = NULL;
 
 		parent::__destruct();
+	}
+
+	public function determinantLaplaceExtension() {
+		$det = new MathMatrixLaplaceExtensionDeterminant( $this, $this->debug );
+
+		return $det->getDeterminant();
 	}
 
 	public function getMatrix() {

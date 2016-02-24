@@ -9,4 +9,8 @@ abstract class SuperGlobals {
 	public function __construct() {
 		self::$magicQuotes = get_magic_quotes_gpc();
 	}
+
+	public function __destruct() {
+		self::$magicQuotes = NULL;
+	}
 }

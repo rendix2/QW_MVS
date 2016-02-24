@@ -57,7 +57,6 @@ final class MathDiscreet {
 	}
 
 	public static function isPrime( $number ) {
-
 		switch ( $number ) {
 			case 1:
 				return FALSE;

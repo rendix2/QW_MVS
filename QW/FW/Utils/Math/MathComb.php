@@ -63,7 +63,7 @@ final class MathComb {
 
 	public static function fibonacciBetterRecourse( $n, $x ) {
 		if ( $n < 2 || $x < 0 ) throw new IllegalArgumentException();
-		if ( in_array( $x, self::$fibNMemo ) ) return self::$$fibNMemo[ $x ];
+		if ( in_array( $x, self::$fibNMemo ) ) return self::$fibNMemo[ $x ];
 		else {
 			$result = 0;
 			for ( $i = 0; $i < $n; $i++ ) $result += self::fibonacciRecourse( $n, $i );
@@ -94,7 +94,7 @@ final class MathComb {
 		if ( $n < 2 || $x < 0 ) throw new IllegalArgumentException();
 		else {
 			$result = 0;
-			for ( $i = 0; $i < $n; $i++ ) $result += self::fibonacciRecourse( n, $i );
+			for ( $i = 0; $i < $n; $i++ ) $result += self::fibonacciRecourse( $n, $i );
 		}
 
 		return $result;
@@ -107,7 +107,7 @@ final class MathComb {
 	}
 
 	public static function getFibonacci( $x ) {
-		static $qro5;
+		static $gro5;
 		$gro5 = Math::squareRoot( 5 );
 
 		$fi = ( 1 + $gro5 ) / 2;

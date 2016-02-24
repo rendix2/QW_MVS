@@ -3,7 +3,6 @@ namespace QW\FW\Utils\Math;
 
 use QW\FW\Boot\PrivateConstructException;
 use QW\FW\DataWorking\Sort\MergeSort;
-use QW\FW\Utils\Math\Matrix\Matrix;
 
 final class Math {
 
@@ -40,15 +39,16 @@ final class Math {
 			isset( self::$ackMemo[ $m ][ $n ] ) ? self::$ackMemo[ $m ][ $n ] : self::ackermann( $m, $n - 1 ) );
 	}
 
-	public static function ackermannInv( $z ) {
-		$result = [ ];
+	/*
+		public static function ackermannInv( $z ) {
+			$result = [ ];
 
-		for ( $x = 0; $x < $z; $x++ ) // maybe <x < 3 || $x < 4 || $x < $z
-			for ( $y = 0; $y < $z; $y++ ) if ( self::ackermann( $x, $y ) == $z ) $result[] = [ $x, $y ];
+			for ( $x = 0; $x < $z; $x++ ) // maybe <x < 3 || $x < 4 || $x < $z
+				for ( $y = 0; $y < $z; $y++ ) if ( self::ackermann( $x, $y ) == $z ) $result[] = [ $x, $y ];
 
-		return new Matrix( $result );//
-	}
-
+			return new Matrix( $result );//
+		}
+	*/
 	public static function ackermannLimitedRecoursion( $m, $n ) {
 		if ( isset( self::$ackMemo[ $m ][ $n ] ) ) return self::$ackMemo[ $m ][ $n ];
 
@@ -304,7 +304,7 @@ final class Math {
 			if ( $numbers[ $i + 1 ] > $max ) $max = $numbers[ $i + 1 ];
 		}
 		else {
-			if ( $numbers[ $i ] > $max ) $max = $numbers[ i ];
+			if ( $numbers[ $i ] > $max ) $max = $numbers[ $i ];
 			if ( $numbers[ $i + 1 ] < $min ) $min = $numbers[ $i + 1 ];
 		}
 

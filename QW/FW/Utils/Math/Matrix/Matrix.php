@@ -6,6 +6,9 @@ use QW\FW\Boot\IllegalArgumentException;
 use QW\FW\Boot\NullPointerException;
 use QW\FW\Utils\Math\Math;
 use QW\FW\Utils\Math\Matrix\Determinant\MathMatrixLaplaceExtensionDeterminant;
+use QW\FW\Utils\Math\Matrix\Mult\MatrixMultiStrassen;
+use QW\FW\Utils\Math\Matrix\Mult\MatrixMultRecourse;
+use QW\FW\Utils\Math\Matrix\Mult\MatrixMultStandard;
 use QW\FW\Validator;
 
 final class Matrix extends Object {
@@ -58,6 +61,18 @@ final class Matrix extends Object {
 		foreach ( $this->matrix as $v ) if ( count( $v ) != $this->getMatrixSizeA() ) return FALSE;
 
 		return TRUE;
+	}
+
+	public function matrixMultiplyNormal( Matrix $matrixB ) {
+		return new MatrixMultStandard( $this, $matrixB, $this->debug );
+	}
+
+	public function matrixMultiplyRecourse( Matrix $matrixB ) {
+		return new MatrixMultRecourse( $this, $matrixB, $this->debug );
+	}
+
+	public function matrixMultiplyStrassen( Matrix $matrixB ) {
+		return new MatrixMultiStrassen( $this, $matrixB, $this->debug );
 	}
 
 	public function numberAdd( $number ) {

@@ -90,6 +90,4 @@ class MathComplexNumber extends Object {
 		return $this->sin()
 		            ->divide( $this->cos() );
 	}
-
-
 }

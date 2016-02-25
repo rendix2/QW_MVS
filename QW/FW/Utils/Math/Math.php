@@ -95,6 +95,10 @@ final class Math {
 		return atan( $x );
 	}
 
+	public static function arcTg2Var( $y, $x ) {
+		return atan2( $y, $x );
+	}
+
 	public static function arcTgH( $x ) {
 		return atanh( $x );
 	}

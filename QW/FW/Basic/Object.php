@@ -8,16 +8,20 @@
 
 	namespace QW\FW\Basic;
 
+	use QW\FW\Basic\Dependencies\Debug;
+	use QW\FW\Basic\Dependencies\Dependencies;
 	use QW\FW\Boot\IllegalArgumentException;
 	use QW\FW\Boot\MemberAccessException;
 
 	abstract class Object {
 		const BACKSLASH = "\\";
+		const SLASH     = "/";
 		private static $objectsCounter          = 0;
 		private static $methodCallCounter       = 0;
 		private static $methodStaticCallCounter = 0;
 		private static $staticDebug             = FALSE;
 		protected      $debug;
+		private        $dependencies;
 		private        $ds;
 
 		final public function __call ( $name, $arguments ) {
@@ -50,9 +54,10 @@
 		}
 
 		public function __construct () {
-			$this->debug = new Debug( FALSE );
+			$this->dependencies = new Dependencies();
+			$this->dependencies->addDepend ( new Debug( FALSE ) );
 
-			if ( $this->debug->getDebug () == TRUE || self::$staticDebug == TRUE ) {
+			if ( $this->dependencies->getDependById ( 0 )->getDebug () == TRUE || self::$staticDebug == TRUE ) {
 				self::$objectsCounter++;
 
 				echo 'Creating instance of: <b>' . $this->getClassName () . '</b><br>';

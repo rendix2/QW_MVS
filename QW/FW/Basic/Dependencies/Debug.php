@@ -6,16 +6,17 @@
 	 * Time: 22:26
 	 */
 
-	namespace QW\FW\Basic;
+	namespace QW\FW\Basic\Dependencies;
 
 	use QW\FW\Boot\IllegalArgumentException;
+	use QW\FW\Validator;
 
-	class Debug extends Object {
+	class Debug {
 
 		private $debug;
 
 		public function __construct ( $debug ) {
-			if ( !is_bool ( $debug ) ) throw new IllegalArgumentException();
+			if ( !Validator::isBool ( $debug ) ) throw new IllegalArgumentException();
 			$this->debug = $debug;
 		}
 

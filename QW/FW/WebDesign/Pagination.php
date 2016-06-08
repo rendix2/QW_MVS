@@ -1,12 +1,12 @@
 <?php
 
-namespace QW\FW\WebDesign;
+	namespace QW\FW\WebDesign;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-final class Pagination extends Object {
+	final class Pagination extends Object {
 
-	public function __construct() {
-		parent::__construct();
+		public function __construct () {
+			parent::__construct ();
+		}
 	}
-}

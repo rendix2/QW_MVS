@@ -1,14 +1,14 @@
 <?php
-namespace QW\FW\DataStructures\Queue;
+	namespace QW\FW\DataStructures\Queue;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-class AbstractQueue extends Object {
+	class AbstractQueue extends Object {
 
-	protected $size;
+		protected $size;
 
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
-		$this->size = 0;
+		public function __construct () {
+			parent::__construct ();
+			$this->size = 0;
+		}
 	}
-}

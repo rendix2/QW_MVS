@@ -1,14 +1,14 @@
 <?php
 
-include( './autoLoader.php' );
+	include ( './autoLoader.php' );
 //include( './debug.php' );
 
-use QW\FW\Boot\Bootstrap;
+	use QW\FW\Boot\Bootstrap;
 
 
-$quickWeb = new Bootstrap( FALSE );
+	$quickWeb = new Bootstrap();
 //$quickWeb->setAllDebug(TRUE);
-$quickWeb = NULL;
+	$quickWeb = NULL;
 
 
 ?>

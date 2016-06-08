@@ -1,9 +1,9 @@
 <?php
 
-namespace QW\FW\DataWorking\Search\ArraySearch;
+	namespace QW\FW\DataWorking\Search\ArraySearch;
 
-class BinarySearch extends AbstractArraySearch {
-	public function search() {
-		// TODO: Implement search() method.
+	class BinarySearch extends AbstractArraySearch {
+		public function search () {
+			// TODO: Implement search() method.
+		}
 	}
-}

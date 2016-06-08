@@ -1,26 +1,26 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 21. 6. 2015
- * Time: 18:33
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tom
+	 * Date: 21. 6. 2015
+	 * Time: 18:33
+	 */
 
-namespace QW\FW\DP\Builder;
+	namespace QW\FW\DP\Builder;
 
 
-class ShowOfUse {
+	class ShowOfUse {
 
-	private $director;
+		private $director;
 
-	public function __construct() {
-		$this->director = new Director();
+		public function __construct () {
+			$this->director = new Director();
 
-		echo $this->director->build( new CheapBuilder() );
-		echo $this->director->build( new LuxoryBuilder() );
+			echo $this->director->build ( new CheapBuilder() );
+			echo $this->director->build ( new LuxoryBuilder() );
+		}
+
+		public function __destruct () {
+			$this->director = NULL;
+		}
 	}
-
-	public function __destruct() {
-		$this->director = NULL;
-	}
-}

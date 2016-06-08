@@ -1,8 +1,8 @@
 <?php
 
-namespace QW\FW\DataStructures\Database;
+	namespace QW\FW\DataStructures\Database;
 
-use QW\FW\Boot\MyException;
+	use QW\FW\Boot\MyException;
 
-final class DatabaseException extends MyException {
-}
+	final class DatabaseException extends MyException {
+	}

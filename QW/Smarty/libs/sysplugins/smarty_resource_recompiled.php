@@ -1,38 +1,33 @@
 <?php
-/**
- * Smarty Resource Plugin
- *
- * @package    Smarty
- * @subpackage TemplateResources
- * @author     Rodney Rehm
- */
-
-/**
- * Smarty Resource Plugin
- * Base implementation for resource plugins that don't compile cache
- *
- * @package    Smarty
- * @subpackage TemplateResources
- */
-abstract class Smarty_Resource_Recompiled extends Smarty_Resource {
 	/**
-	 * Flag that it's an recompiled resource
-	 *
-	 * @var bool
+	 * Smarty Resource Plugin
+	 * @package    Smarty
+	 * @subpackage TemplateResources
+	 * @author     Rodney Rehm
 	 */
-	public $recompiled = TRUE;
 
 	/**
-	 * populate Compiled Object with compiled filepath
-	 *
-	 * @param  Smarty_Template_Compiled $compiled  compiled object
-	 * @param  Smarty_Internal_Template $_template template object
-	 *
-	 * @return void
+	 * Smarty Resource Plugin
+	 * Base implementation for resource plugins that don't compile cache
+	 * @package    Smarty
+	 * @subpackage TemplateResources
 	 */
-	public function populateCompiledFilepath( Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template ) {
-		$compiled->filepath  = FALSE;
-		$compiled->timestamp = FALSE;
-		$compiled->exists    = FALSE;
+	abstract class Smarty_Resource_Recompiled extends Smarty_Resource {
+		/**
+		 * Flag that it's an recompiled resource
+		 * @var bool
+		 */
+		public $recompiled = TRUE;
+
+		/**
+		 * populate Compiled Object with compiled filepath
+		 * @param  Smarty_Template_Compiled $compiled compiled object
+		 * @param  Smarty_Internal_Template $_template template object
+		 * @return void
+		 */
+		public function populateCompiledFilepath ( Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template ) {
+			$compiled->filepath  = FALSE;
+			$compiled->timestamp = FALSE;
+			$compiled->exists    = FALSE;
+		}
 	}
-}

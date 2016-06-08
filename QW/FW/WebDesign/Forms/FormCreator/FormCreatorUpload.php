@@ -1,16 +1,16 @@
 <?php
 
 
-namespace QW\FW\WebDesign\Forms\FormCreator;
+	namespace QW\FW\WebDesign\Forms\FormCreator;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-class FormCreatorUpload extends Object {
-	public function __construct( FormCreatorHTML4 $formCreatorHTML4, $debug = FALSE ) {
-		parent::__construct( $debug );
+	class FormCreatorUpload extends Object {
+		public function __construct ( FormCreatorHTML4 $formCreatorHTML4, $debug = FALSE ) {
+			parent::__construct ();
+		}
+
+		public function __destruct () {
+			parent::__destruct ();
+		}
 	}
-
-	public function __destruct() {
-		parent::__destruct();
-	}
-}

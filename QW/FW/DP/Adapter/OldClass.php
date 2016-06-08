@@ -1,20 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 19. 6. 2015
- * Time: 20:05
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tom
+	 * Date: 19. 6. 2015
+	 * Time: 20:05
+	 */
 
-namespace QW\FW\DP\Adapter;
+	namespace QW\FW\DP\Adapter;
 
 
-class OldClass {
+	class OldClass {
 
-	public function oldRequest() {
-		echo 'OLD REQUEST';
+		public function oldRequest () {
+			echo 'OLD REQUEST';
 
-		return TRUE;
+			return TRUE;
+		}
+
 	}
-
-}

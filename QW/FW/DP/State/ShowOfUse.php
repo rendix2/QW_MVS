@@ -1,18 +1,18 @@
 <?php
 
-namespace QW\FW\DP\State;
+	namespace QW\FW\DP\State;
 
-final class ShowOfUse {
+	final class ShowOfUse {
 
-	private $context;
+		private $context;
 
-	public function __construct() {
-		$this->context = new Context();
+		public function __construct () {
+			$this->context = new Context();
 
-		$this->context->beHappy();
-		$this->context->express();
+			$this->context->beHappy ();
+			$this->context->express ();
 
-		$this->context->beSad();
-		$this->context->express();
+			$this->context->beSad ();
+			$this->context->express ();
+		}
 	}
-}

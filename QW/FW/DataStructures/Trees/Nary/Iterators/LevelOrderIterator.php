@@ -1,34 +1,34 @@
 <?php
 
-namespace QW\FW\DataStructures\Trees\Nary\Iterators;
+	namespace QW\FW\DataStructures\Trees\Nary\Iterators;
 
-use QW\FW\DataStructures\Trees\AbstractIterators\AbstractNaryTreeIterator;
-use QW\FW\DataStructures\Trees\Nary\NaryTree;
+	use QW\FW\DataStructures\Trees\AbstractIterators\AbstractNaryTreeIterator;
+	use QW\FW\DataStructures\Trees\Nary\NaryTree;
 
-class LevelOrderIterator extends AbstractNaryTreeIterator {
+	class LevelOrderIterator extends AbstractNaryTreeIterator {
 
-	private $queue;
+		private $queue;
 
-	public function __construct( NaryTree $root, $debug = FALSE ) {
-		$this->queue = new \SplQueue();
-		parent::__construct( $root, $debug );
-	}
+		public function __construct ( NaryTree $root ) {
+			$this->queue = new \SplQueue();
+			parent::__construct ( $root );
+		}
 
-	public function __destruct() {
-		$this->queue = NULL;
-		parent::__destruct();
-	}
+		public function __destruct () {
+			$this->queue = NULL;
+			parent::__destruct ();
+		}
 
-	protected function order( NaryTree $root = NULL ) {
-		if ( $root == NULL ) return;
+		protected function order ( NaryTree $root = NULL ) {
+			if ( $root == NULL ) return;
 
-		$this->queue->enqueue( $root );
+			$this->queue->enqueue ( $root );
 
-		while ( !$this->queue->isEmpty() ) {
-			$current           = $this->queue->dequeue();
-			$this->finalData[] = $current->getData();
+			while ( !$this->queue->isEmpty () ) {
+				$current           = $this->queue->dequeue ();
+				$this->finalData[] = $current->getData ();
 
-			foreach ( $current->getChildren() as $child ) if ( $child != NULL ) $this->queue->enqueue( $child );
+				foreach ( $current->getChildren () as $child ) if ( $child != NULL ) $this->queue->enqueue ( $child );
+			}
 		}
 	}
-}

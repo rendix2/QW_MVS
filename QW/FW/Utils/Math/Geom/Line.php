@@ -26,8 +26,8 @@
 		 * @param Point $pointB
 		 * @param $debug
 		 */
-		public function __construct ( Point $pointA, Point $pointB, $debug ) {
-			parent::__construct ( $debug );
+		public function __construct ( Point $pointA, Point $pointB ) {
+			parent::__construct ();
 
 			$this->pointA = $pointA;
 			$this->pointB = $pointB;

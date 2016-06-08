@@ -1,11 +1,11 @@
 <?php
 
-namespace QW\FW\WebDesign\Language;
+	namespace QW\FW\WebDesign\Language;
 
-interface ILanguage {
-	public function languageGetAllPackages();
+	interface ILanguage {
+		public function languageGetAllPackages ();
 
-	public function languageGetMetaPack();
+		public function languageGetMetaPack ();
 
-	public function languageGetPack();
-}
+		public function languageGetPack ();
+	}

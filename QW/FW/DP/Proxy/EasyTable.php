@@ -1,16 +1,16 @@
 <?php
 
-namespace QW\FW\DP\Proxy;
+	namespace QW\FW\DP\Proxy;
 
-class EasyTable implements Table {
+	class EasyTable implements Table {
 
-	private $array = [ ];
+		private $array = [ ];
 
-	public function read( $key ) {
-		return $this->array[ $key ];
+		public function read ( $key ) {
+			return $this->array[ $key ];
+		}
+
+		public function write ( $key, $value ) {
+			$this->array[ $key ] = $value;
+		}
 	}
-
-	public function write( $key, $value ) {
-		$this->array[ $key ] = $value;
-	}
-}

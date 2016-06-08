@@ -1,9 +1,9 @@
 <?php
 
-namespace QW\FW\WebDesign;
+	namespace QW\FW\WebDesign;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-final class Smilies extends Object {
+	final class Smilies extends Object {
 
-}
+	}

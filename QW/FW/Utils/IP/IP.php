@@ -1,16 +1,16 @@
 <?php
 
-namespace QW\FW\Utils\IP;
+	namespace QW\FW\Utils\IP;
 
-interface IP {
-	public function getCoded();
+	interface IP {
+		public function getCoded ();
 
-	public function getIP();
+		public function getIP ();
 
-	public function getNiceIp();
+		public function getNiceIp ();
 
-	public function getPart( $part );
+		public function getPart ( $part );
 
-	public function getSecureIp();
+		public function getSecureIp ();
 
-}
+	}

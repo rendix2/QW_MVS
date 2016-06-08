@@ -1,22 +1,22 @@
 <?php
 
-namespace QW\FW\DataWorking\Search\ArraySearch;
+	namespace QW\FW\DataWorking\Search\ArraySearch;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-abstract class AbstractArraySearch extends Object {
-	protected $data;
-	protected $length;
-	protected $pattern;
+	abstract class AbstractArraySearch extends Object {
+		protected $data;
+		protected $length;
+		protected $pattern;
 
-	abstract public function search();
+		abstract public function search ();
 
-	public function __construct( array $data, $pattern, $debug = FALSE ) {
-		parent::__construct( $debug );
+		public function __construct ( array $data, $pattern, $debug = FALSE ) {
+			parent::__construct ();
 
-		$this->data   = $data;
-		$this->length = count( $this->data );
-		$this->pattern = $pattern;
-		$this->search();
+			$this->data    = $data;
+			$this->length  = count ( $this->data );
+			$this->pattern = $pattern;
+			$this->search ();
+		}
 	}
-}

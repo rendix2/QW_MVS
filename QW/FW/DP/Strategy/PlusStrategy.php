@@ -1,16 +1,16 @@
 <?php
 
-namespace QW\FW\DP\Strategy;
+	namespace QW\FW\DP\Strategy;
 
-use QW\FW\Utils\Math\Math;
+	use QW\FW\Utils\Math\Math;
 
-class PlusStrategy implements Strategy {
+	class PlusStrategy implements Strategy {
 
-	public function multiply( $a, $b ) {
-		$times = Math::absSystem( $b );
+		public function multiply ( $a, $b ) {
+			$times = Math::absSystem ( $b );
 
-		for ( $i = 0; $i < $times; $i++ ) $a += $a;
+			for ( $i = 0; $i < $times; $i++ ) $a += $a;
 
-		return $b > 0 ? $a : -$a;
+			return $b > 0 ? $a : -$a;
+		}
 	}
-}

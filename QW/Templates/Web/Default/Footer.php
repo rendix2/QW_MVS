@@ -4,5 +4,5 @@ Footer :P
 </html>
 
 <?php
-exit();
+    exit();
 ?>

@@ -1,7 +1,7 @@
 <?php
-namespace QW\FW\Utils\Mail;
+	namespace QW\FW\Utils\Mail;
 
-use QW\FW\Boot\MyException;
+	use QW\FW\Boot\MyException;
 
-class MailException extends MyException {
-}
+	class MailException extends MyException {
+	}

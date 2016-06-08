@@ -1,15 +1,15 @@
 <?php
 
-namespace QW\FW\WebDesign\Forms;
+	namespace QW\FW\WebDesign\Forms;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-final class UploadForm extends Object {
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
+	final class UploadForm extends Object {
+		public function __construct () {
+			parent::__construct ();
+		}
+
+		public function __destruct () {
+			parent::__destruct ();
+		}
 	}
-
-	public function __destruct() {
-		parent::__destruct();
-	}
-}

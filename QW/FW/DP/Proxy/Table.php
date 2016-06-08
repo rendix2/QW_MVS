@@ -1,18 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 20. 6. 2015
- * Time: 11:35
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tom
+	 * Date: 20. 6. 2015
+	 * Time: 11:35
+	 */
 
-namespace QW\FW\DP\Proxy;
+	namespace QW\FW\DP\Proxy;
 
 
-interface Table {
+	interface Table {
 
-	public function read( $key );
+		public function read ( $key );
 
-	public function write( $key, $value );
+		public function write ( $key, $value );
 
-}
+	}

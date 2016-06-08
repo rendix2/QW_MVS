@@ -1,11 +1,11 @@
 <?php
 
-namespace QW\FW\Boot;
+	namespace QW\FW\Boot;
 
-class LanguageBootstrap extends Bootstrap {
+	class LanguageBootstrap extends Bootstrap {
 
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
+		public function __construct () {
+			parent::__construct ();
+		}
+
 	}
-
-}

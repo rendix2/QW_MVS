@@ -1,9 +1,9 @@
 <?php
 
-namespace QW\FW\DataWorking\Sort;
+	namespace QW\FW\DataWorking\Sort;
 
-class RandomQuickSort extends QuickSort {
+	class RandomQuickSort extends QuickSort {
 
-	protected function sort( AbstractSort $sort ) {
+		protected function sort ( AbstractSort $sort ) {
+		}
 	}
-}

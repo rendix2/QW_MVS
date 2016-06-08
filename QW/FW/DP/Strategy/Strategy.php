@@ -1,16 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 20. 6. 2015
- * Time: 14:49
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tom
+	 * Date: 20. 6. 2015
+	 * Time: 14:49
+	 */
 
-namespace QW\FW\DP\Strategy;
+	namespace QW\FW\DP\Strategy;
 
 
-interface Strategy {
+	interface Strategy {
 
-	public function multiply( $a, $b );
+		public function multiply ( $a, $b );
 
-}
+	}

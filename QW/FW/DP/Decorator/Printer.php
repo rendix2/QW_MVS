@@ -1,14 +1,14 @@
 <?php
 
-namespace QW\FW\DP\Decorator;
+	namespace QW\FW\DP\Decorator;
 
-class Printer {
+	class Printer {
 
-	public function nextLine() {
-		echo "\n<br>";
+		public function nextLine () {
+			echo "\n<br>";
+		}
+
+		public function printChar ( $char ) {
+			echo $char;
+		}
 	}
-
-	public function printChar( $char ) {
-		echo $char;
-	}
-}

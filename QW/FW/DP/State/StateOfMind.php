@@ -1,9 +1,9 @@
 <?php
 
-namespace QW\FW\DP\State;
+	namespace QW\FW\DP\State;
 
-interface StateOfMind {
+	interface StateOfMind {
 
-	public function express();
+		public function express ();
 
-}
+	}

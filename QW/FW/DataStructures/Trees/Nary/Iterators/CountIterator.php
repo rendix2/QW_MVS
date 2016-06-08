@@ -1,35 +1,35 @@
 <?php
 
-namespace QW\FW\DataStructures\Trees\Nary\Iterators;
+	namespace QW\FW\DataStructures\Trees\Nary\Iterators;
 
 
-use QW\FW\DataStructures\Trees\AbstractIterators\AbstractNaryTreeIterator;
-use QW\FW\DataStructures\Trees\Nary\NaryTree;
+	use QW\FW\DataStructures\Trees\AbstractIterators\AbstractNaryTreeIterator;
+	use QW\FW\DataStructures\Trees\Nary\NaryTree;
 
-final class CountIterator extends AbstractNaryTreeIterator {
+	final class CountIterator extends AbstractNaryTreeIterator {
 
-	private $countChildren;
+		private $countChildren;
 
-	public function __construct( NaryTree $root, $debug = FALSE ) {
-		$this->countChildren = 0;
+		public function __construct ( NaryTree $root ) {
+			$this->countChildren = 0;
 
-		parent::__construct( $root, $debug );
+			parent::__construct ( $root );
+		}
+
+		public function __destruct () {
+			$this->countChildren = NULL;
+			parent::__destruct ();
+		}
+
+		protected function order ( NaryTree $root = NULL ) {
+			if ( $root == NULL || $this->realRoot == $root ) return;
+
+			foreach ( $root->getChildren () as $child ) $this->order ( $child );
+
+			$this->countChildren++;
+		}
+
+		public function getCountChildren () {
+			return $this->countChildren;
+		}
 	}
-
-	public function __destruct() {
-		$this->countChildren = NULL;
-		parent::__destruct();
-	}
-
-	public function getCountChildren() {
-		return $this->countChildren;
-	}
-
-	protected function order( NaryTree $root = NULL ) {
-		if ( $root == NULL || $this->realRoot == $root ) return;
-
-		foreach ( $root->getChildren() as $child ) $this->order( $child );
-
-		$this->countChildren++;
-	}
-}

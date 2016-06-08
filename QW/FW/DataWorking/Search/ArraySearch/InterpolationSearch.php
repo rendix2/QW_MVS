@@ -1,10 +1,10 @@
 <?php
 
-namespace QW\FW\DataWorking\Search\ArraySearch;
+	namespace QW\FW\DataWorking\Search\ArraySearch;
 
-class InterpolationSearch extends AbstractArraySearch {
+	class InterpolationSearch extends AbstractArraySearch {
 
-	public function search() {
-		// TODO: Implement search() method.
+		public function search () {
+			// TODO: Implement search() method.
+		}
 	}
-}

@@ -1,18 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 21. 6. 2015
- * Time: 18:55
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tom
+	 * Date: 21. 6. 2015
+	 * Time: 18:55
+	 */
 
-namespace QW\FW\DP\AbstractFactory;
+	namespace QW\FW\DP\AbstractFactory;
 
 
-interface VehicleFactory {
+	interface VehicleFactory {
 
-	public function createBigVehicle();
+		public function createBigVehicle ();
 
-	public function createSmallVehicle();
+		public function createSmallVehicle ();
 
-}
+	}

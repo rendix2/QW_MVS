@@ -1,27 +1,27 @@
 <?php
-namespace QW\FW\Architecture\MVC;
+	namespace QW\FW\Architecture\MVC;
 
-use QW\FW\Basic\Object;
-use QW\FW\DataStructures\Database\DatabaseMySQL;
-use QW\Libs\Config;
+	use QW\FW\Basic\Object;
+	use QW\FW\DataStructures\Database\DatabaseMySQL;
+	use QW\Libs\Config;
 
-abstract class AbstractBasicModel extends Object {
-	private $db; //, $language, $template;
+	abstract class AbstractBasicModel extends Object {
+		private $db; //, $language, $template;
 
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
-		$this->db = new DatabaseMySQL( Config::$dbConfig[ 'dbHost' ], Config::$dbConfig[ 'dbUser' ],
+		public function __construct () {
+			parent::__construct ();
+			$this->db = new DatabaseMySQL( Config::$dbConfig[ 'dbHost' ], Config::$dbConfig[ 'dbUser' ],
 			Config::$dbConfig[ 'dbPassword' ], Config::$dbConfig[ 'dbName' ], [ ] );
-	}
+		}
 
-	public function __destruct() {
-		$this->db->disconnect();
-		$this->db = NULL;
+		public function __destruct () {
+			$this->db->disconnect ();
+			$this->db = NULL;
 
-		parent::__destruct();
-	}
+			parent::__destruct ();
+		}
 
-	protected final function getDB() {
-		return $this->db;
+		protected final function getDB () {
+			return $this->db;
+		}
 	}
-}

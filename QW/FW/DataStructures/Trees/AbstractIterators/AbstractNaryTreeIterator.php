@@ -1,21 +1,21 @@
 <?php
 
-namespace QW\FW\DataStructures\Trees\AbstractIterators;
+	namespace QW\FW\DataStructures\Trees\AbstractIterators;
 
-use QW\FW\DataStructures\Trees\Nary\NaryTree;
+	use QW\FW\DataStructures\Trees\Nary\NaryTree;
 
-abstract class AbstractNaryTreeIterator extends AbstractTreeIterator {
+	abstract class AbstractNaryTreeIterator extends AbstractTreeIterator {
 
-	abstract protected function order( NaryTree $root = NULL );
+		abstract protected function order ( NaryTree $root = NULL );
 
-	public function __construct( NaryTree $root, $debug = FALSE ) {
-		parent::__construct( $debug );
+		public function __construct ( NaryTree $root ) {
+			parent::__construct ();
 
-		$this->realRoot = $root;
-		$this->order( $root );
+			$this->realRoot = $root;
+			$this->order ( $root );
+		}
+
+		public function __destruct () {
+			parent::__destruct ();
+		}
 	}
-
-	public function __destruct() {
-		parent::__destruct();
-	}
-}

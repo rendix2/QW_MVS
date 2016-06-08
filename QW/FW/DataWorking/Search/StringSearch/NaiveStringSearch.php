@@ -1,10 +1,10 @@
 <?php
 
-namespace QW\FW\DataWorking\Search\StringSearch;
+	namespace QW\FW\DataWorking\Search\StringSearch;
 
-class NaiveStringSearch extends AbstractStringSearch {
+	class NaiveStringSearch extends AbstractStringSearch {
 
-	public function search() {
-		// TODO: Implement search() method.
+		public function search () {
+			// TODO: Implement search() method.
+		}
 	}
-}

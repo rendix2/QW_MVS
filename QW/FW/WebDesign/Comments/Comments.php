@@ -1,12 +1,12 @@
 <?php
 
-namespace QW\FW\WebDesign\Commments;
+	namespace QW\FW\WebDesign\Commments;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-class Comments extends Object {
+	class Comments extends Object {
 
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
+		public function __construct () {
+			parent::__construct ();
+		}
 	}
-}

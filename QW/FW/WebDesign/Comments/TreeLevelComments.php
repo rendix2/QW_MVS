@@ -1,10 +1,10 @@
 <?php
 
-namespace QW\FW\WebDesign\Commments;
+	namespace QW\FW\WebDesign\Commments;
 
-class TreeLevelComments extends DatabaseLevelComments {
+	class TreeLevelComments extends DatabaseLevelComments {
 
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
+		public function __construct () {
+			parent::__construct ();
+		}
 	}
-}

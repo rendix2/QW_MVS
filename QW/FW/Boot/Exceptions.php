@@ -1,92 +1,93 @@
 <?php
 
-namespace QW\FW\Boot;
+	namespace QW\FW\Boot;
 
 // Main Exceptions
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-class LoggedException extends \Exception {
+	class LoggedException extends \Exception {
 
-	public function __construct( $message = '', $code = 0, \Exception $previous = NULL ) {
-		parent::__construct( $message, $code, $previous );
-		AbstractRouter::getGlobalLogger()
-		              ->log( $message );
+		public function __construct ( $message = '', $code = 0, \Exception $previous = NULL ) {
+			parent::__construct ( $message, $code, $previous );
+			AbstractRouter::getGlobalLogger ()
+			              ->log ( $message )
+			;
+		}
 	}
-}
 
-class MyException extends \Exception {
+	class MyException extends \Exception {
 
-	public function __construct( $message = '', $logged = FALSE, $code = 0, \Exception $previous = NULL ) {
-		parent::__construct( $message, $code, $previous );
+		public function __construct ( $message = '', $logged = FALSE, $code = 0, \Exception $previous = NULL ) {
+			parent::__construct ( $message, $code, $previous );
 
-		if ( $logged == TRUE || Object::getAllDebug() ) new LoggedException( $message, $code, $previous );
+			if ( $logged == TRUE || Object::getAllDebug () ) new LoggedException( $message, $code, $previous );
+		}
 	}
-}
 
-class ProgrammerExceptions extends MyException {
-}
+	class ProgrammerExceptions extends MyException {
+	}
 
-class ProgrammerLoggedException extends LoggedException {
-}
+	class ProgrammerLoggedException extends LoggedException {
+	}
 
-class UnsupportedOperationException extends ProgrammerExceptions {
-}
+	class UnsupportedOperationException extends ProgrammerExceptions {
+	}
 
-class MemberAccessException extends ProgrammerExceptions {
-}
+	class MemberAccessException extends ProgrammerExceptions {
+	}
 
-final class PrivateConstructException extends MemberAccessException {
-}
+	final class PrivateConstructException extends MemberAccessException {
+	}
 
-class RuntimeException extends MyException {
-}
+	class RuntimeException extends MyException {
+	}
 
-class IllegalArgumentException extends RuntimeException {
-}
+	class IllegalArgumentException extends RuntimeException {
+	}
 
-final class NotStringException extends IllegalArgumentException {
-}
+	final class NotStringException extends IllegalArgumentException {
+	}
 
-final class NotCharacterException extends IllegalArgumentException {
-}
+	final class NotCharacterException extends IllegalArgumentException {
+	}
 
-final class DivisionByZero extends IllegalArgumentException {
-}
+	final class DivisionByZero extends IllegalArgumentException {
+	}
 
-class NotNumberException extends IllegalArgumentException {
-}
+	class NotNumberException extends IllegalArgumentException {
+	}
 
-final class NotIntegerException extends NotNumberException {
-}
+	final class NotIntegerException extends NotNumberException {
+	}
 
-final class NotDoubleException extends NotNumberException {
-}
+	final class NotDoubleException extends NotNumberException {
+	}
 
-final class OverMaxException extends IllegalArgumentException {
-}
+	final class OverMaxException extends IllegalArgumentException {
+	}
 
-final class UnderMinException extends IllegalArgumentException {
-}
+	final class UnderMinException extends IllegalArgumentException {
+	}
 
 
-class IOException extends RuntimeException {
-}
+	class IOException extends RuntimeException {
+	}
 
-final class FileNotFoundException extends IOException {
-}
+	final class FileNotFoundException extends IOException {
+	}
 
-final class FileNotReadableException extends IOException {
-}
+	final class FileNotReadableException extends IOException {
+	}
 
-final class FileNotWritableException extends IOException {
-}
+	final class FileNotWritableException extends IOException {
+	}
 
-class NullPointerException extends RuntimeException {
-}
+	class NullPointerException extends RuntimeException {
+	}
 
 
 // Boot exception
-final class BootstrapException extends MyException {
-}
+	final class BootstrapException extends MyException {
+	}
 
-?>
+	?>

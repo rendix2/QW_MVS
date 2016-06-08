@@ -1,21 +1,21 @@
 <?php
 
-namespace QW\FW\WebDesign\Forms;
+	namespace QW\FW\WebDesign\Forms;
 
-use QW\FW\Basic\Object;
-use QW\FW\Utils\Hash\Hash;
+	use QW\FW\Basic\Object;
+	use QW\FW\Utils\Hash\Hash;
 
-final class SafeForm extends Object {
+	final class SafeForm extends Object {
 
-	private $hash;
+		private $hash;
 
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
-		$this->hash = Hash::r();
+		public function __construct () {
+			parent::__construct ();
+			$this->hash = Hash::r ();
+		}
+
+		public function __destruct () {
+			$this->hash = NULL;
+			parent::__destruct ();
+		}
 	}
-
-	public function __destruct() {
-		$this->hash = NULL;
-		parent::__destruct();
-	}
-}

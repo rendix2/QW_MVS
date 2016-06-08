@@ -1,24 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom
- * Date: 21. 6. 2015
- * Time: 18:24
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tom
+	 * Date: 21. 6. 2015
+	 * Time: 18:24
+	 */
 
-namespace QW\FW\DP\Builder;
+	namespace QW\FW\DP\Builder;
 
 
-interface Builder {
+	interface Builder {
 
-	public function buildFloor();
+		public function buildFloor ();
 
-	public function buildRoof();
+		public function buildRoof ();
 
-	public function buildWalls();
+		public function buildWalls ();
 
-	public function getResult();
+		public function getResult ();
 
-	public function __construct();
+		public function __construct ();
 
-}
+	}

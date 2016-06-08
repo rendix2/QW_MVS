@@ -1,12 +1,12 @@
 <?php
-namespace QW\FW\WebDesign\Smarty;
+	namespace QW\FW\WebDesign\Smarty;
 
-class TemplateUser extends \Smarty {
-	private $templateName;
+	class TemplateUser extends \Smarty {
+		private $templateName;
 
-	public function __construct( $templateName ) {
-		parent::__construct();
+		public function __construct ( $templateName ) {
+			parent::__construct ();
 
-		$this->templateName = $templateName;
+			$this->templateName = $templateName;
+		}
 	}
-}

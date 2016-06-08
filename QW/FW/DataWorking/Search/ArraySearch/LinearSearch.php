@@ -1,13 +1,13 @@
 <?php
 
-namespace QW\FW\DataWorking\Search\ArraySearch;
+	namespace QW\FW\DataWorking\Search\ArraySearch;
 
-class LinearSearch extends AbstractArraySearch {
-	public function search() {
-		$result = [ ];
+	class LinearSearch extends AbstractArraySearch {
+		public function search () {
+			$result = [ ];
 
-		foreach ( $this->data as $v ) if ( $v == $this->pattern ) $result[] = $v;
+			foreach ( $this->data as $v ) if ( $v == $this->pattern ) $result[] = $v;
 
-		return $result;
+			return $result;
+		}
 	}
-}

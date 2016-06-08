@@ -1,13 +1,13 @@
 <?php
 
-namespace QW\FW\DataStructures\Cache;
+	namespace QW\FW\DataStructures\Cache;
 
-interface ICache {
-	public function addCache( $data );
+	interface ICache {
+		public function addCache ( $data );
 
-	public function removeCache();
+		public function removeCache ();
 
-	public function updateCache( $data );
+		public function updateCache ( $data );
 
-	public function useCache();
-}
+		public function useCache ();
+	}

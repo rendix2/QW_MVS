@@ -1,15 +1,15 @@
 <?php
 
-namespace QW\FW\WebDesign\Images;
+	namespace QW\FW\WebDesign\Images;
 
-use QW\FW\Basic\Object;
+	use QW\FW\Basic\Object;
 
-final class ImageGallery extends Object {
-	public function __construct() {
-		parent::__construct();
+	final class ImageGallery extends Object {
+		public function __construct () {
+			parent::__construct ();
+		}
+
+		public function __destruct () {
+			parent::__destruct ();
+		}
 	}
-
-	public function __destruct() {
-		parent::__destruct();
-	}
-}

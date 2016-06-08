@@ -1,17 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tomáš
- * Date: 16. 11. 2015
- * Time: 15:06
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tomáš
+	 * Date: 16. 11. 2015
+	 * Time: 15:06
+	 */
 
-namespace QW\FW\DataStructures\Heap;
+	namespace QW\FW\DataStructures\Heap;
 
 
-class BinaryHeap extends AbstractHeap {
+	class BinaryHeap extends AbstractHeap {
 
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
+		public function __construct () {
+			parent::__construct ();
+		}
 	}
-}

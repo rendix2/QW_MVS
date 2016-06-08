@@ -1,21 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tomáš
- * Date: 7. 9. 2015
- * Time: 16:28
- */
+	/**
+	 * Created by PhpStorm.
+	 * User: Tomáš
+	 * Date: 7. 9. 2015
+	 * Time: 16:28
+	 */
 
-namespace QW\FW\WebDesign\Plural;
+	namespace QW\FW\WebDesign\Plural;
 
-final class SelectPlural extends AbstractPlural {
+	final class SelectPlural extends AbstractPlural {
 
-	public function __construct( $lang, $count, $words, $debug = FALSE ) {
-		parent::__construct( $debug );
+		public function __construct ( $lang, $count, $words ) {
+			parent::__construct ();
 
-		$lang = strtolower( $lang );
+			$lang = strtolower ( $lang );
 
-		if ( $lang = 'cz' ) $this->plural = new CzechPlural( $count, $words, $debug );
-		else $this->plural = new EnglishPlural( $count, $words, $debug );
+			if ( $lang = 'cz' ) $this->plural = new CzechPlural( $count, $words );
+			else $this->plural = new EnglishPlural( $count, $words );
+		}
 	}
-}

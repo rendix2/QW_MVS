@@ -1,18 +1,18 @@
 <?php
 
-namespace QW\Models;
+	namespace QW\Models;
 
-use QW\FW\Architecture\MVC\AbstractBasicModel;
+	use QW\FW\Architecture\MVC\AbstractBasicModel;
 
-final class UserModel extends AbstractBasicModel {
-	public function __construct( $debug = FALSE ) {
-		parent::__construct( $debug );
+	final class UserModel extends AbstractBasicModel {
+		public function __construct () {
+			parent::__construct ();
+		}
+
+		public function __destruct () {
+			parent::__destruct ();
+		}
+
+		public function index () {
+		}
 	}
-
-	public function __destruct() {
-		parent::__destruct();
-	}
-
-	public function index() {
-	}
-}

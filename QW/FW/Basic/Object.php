@@ -15,6 +15,7 @@
 
 	abstract class Object {
 		const BACKSLASH = "\\";
+		const DOT       = '.';
 		const SLASH     = "/";
 		private static $objectsCounter          = 0;
 		private static $methodCallCounter       = 0;

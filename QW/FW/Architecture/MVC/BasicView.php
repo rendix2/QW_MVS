@@ -4,10 +4,10 @@
 	use QW\FW\Basic\Object;
 
 	class BasicView extends Object {
-		const ADMIN_DIR_NAME    = 'Admin/';
-		const PATH_TO_TEMPLATES = './QW/Templates/';
-		const USER_DEFAULT_NAME = 'Default/';
-		const USER_DIR_NAME     = 'Web/';
+		const ADMIN_DIR_NAME    = 'Admin' . self::SLASH;
+		const PATH_TO_TEMPLATES = self::DOT . self::SLASH . 'QW' . self::SLASH . 'Templates' . self::SLASH;
+		const USER_DEFAULT_NAME = 'Default' . self::SLASH;
+		const USER_DIR_NAME     = 'Web' . self::SLASH;
 
 		protected $pathToTemplate;
 		protected $tableData;
@@ -16,7 +16,7 @@
 		public function __construct () {
 			parent::__construct ();
 
-			$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default/';
+			$this->pathToTemplate = self::PATH_TO_TEMPLATES . self::USER_DIR_NAME . 'Default' . self::SLASH;
 			$this->pageName       = "";
 		}
 

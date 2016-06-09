@@ -13,7 +13,7 @@
 		public function __construct ( $name ) {
 			parent::__construct ();
 
-			$c = '\\QW\\Models\\' . $name . 'Model';
+			$c = self::BACKSLASH . 'QW' . self::BACKSLASH . 'Models' . self::BACKSLASH . $name . 'Model';
 
 			//$this->view = new SmartyView();
 			$this->view     = new BasicView();

@@ -35,7 +35,7 @@
 		}
 
 		public function getPart ( $part ) {
-			if ( !is_numeric ( $part ) || $part < 0 || $part > 8 ) throw new IllegalArgumentException();
+			if ( !Validator::is_numeric ( $part ) || $part < 0 || $part > 8 ) throw new IllegalArgumentException();
 
 			return $this->ipParted[ $part ];
 		}

@@ -31,6 +31,8 @@
 		public function addDepend ( $depends ) {
 			self::addDepend ( $depends );
 			$this->depends[] = $depends;
+
+			return $this;
 		}
 
 		public function getDependByClass ( $name ) {
@@ -47,5 +49,7 @@
 		public function setDepend ( $depends ) {
 			self::validateDepend ( $depends );
 			$this->depends = $depends;
+
+			return $this;
 		}
 	}

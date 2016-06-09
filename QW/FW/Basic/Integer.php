@@ -29,6 +29,14 @@
 			return (string) $this->integer;
 		}
 
+		public function equals ( Object $object ) {
+			if ( $object instanceof Integer ) {
+				return $this->integer == $object->integer;
+			}
+
+			return FALSE;
+		}
+
 		public static function inPlaceSwap ( Integer &$a, Integer &$b ) {
 			$a = $a->getInteger ();
 			$b = $b->getInteger ();
@@ -85,6 +93,10 @@
 			if ( $number == 0 ) return new Integer( $this->integer );
 
 			return new Integer( $number->integer - $this->integer );
+		}
+
+		public function parseInt () {
+
 		}
 
 		public function plus ( $number ) {

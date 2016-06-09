@@ -30,10 +30,12 @@
 			return (string) $this->boolean;
 		}
 
-		public function equals ( $boolean ) {
-			if ( !is_bool ( $boolean ) ) throw new IllegalArgumentException();
+		public function equals ( Object $object ) {
+			if ( $object instanceof Boolean ) {
+				return $this->boolean == $object->boolean;
+			}
 
-			return $this->boolean == $boolean;
+			return FALSE;
 		}
 
 		public static function compare ( $x, $y ) {
@@ -50,12 +52,6 @@
 
 		public static function randomBoolean () {
 			return new Boolean( Math::randomBoolean () );
-		}
-
-		public function equalsToBoolean ( Boolean $boolean = NULL ) {
-			if ( $boolean == NULL ) throw new IllegalArgumentException();
-
-			return $this->boolean == $boolean->boolean;
 		}
 
 		public function logAndBoolean ( Boolean $bool = NULL ) {

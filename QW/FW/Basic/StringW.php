@@ -47,6 +47,14 @@
 			return $this->string;
 		}
 
+		public function equals ( Object $object ) {
+			if ( $object instanceof StringW ) {
+				return $this->string == $object->string;
+			}
+
+			return FALSE;
+		}
+
 		public static function ArrayToString ( array &$array ) {
 			return new StringW( self::array2String ( $array ) );
 		}
@@ -260,7 +268,7 @@
 
 		public function isPalindrome () {
 			return $this->reverse ()
-			            ->equals ( $this )
+			            ->equalsString ( $this )
 			;
 		}
 

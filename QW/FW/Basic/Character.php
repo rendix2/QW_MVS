@@ -27,8 +27,12 @@
 			return $this->char;
 		}
 
-		public function equals ( $char ) {
-			return $this->char == $char;
+		public function equals ( Object $object ) {
+			if ( $object instanceof Character ) {
+				return $this->char == $object->char;
+			}
+
+			return FALSE;
 		}
 
 		public function equalsCharacter ( Character $character = NULL ) {

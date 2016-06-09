@@ -19,7 +19,7 @@
 
 			if ( $ip == NULL ) $ip = Server::get ( 'remote_addr' );
 			if ( !self::isIP ( $ip ) ) throw new IllegalArgumentException();
-			if ( !is_bool ( $safeMode ) ) throw new IllegalArgumentException();
+			if ( !Validator::isBool ( $safeMode ) ) throw new IllegalArgumentException();
 
 			if ( self::isIPv4 ( $ip ) ) {
 				$this->ipCoded  = ip2long ( $ip );
